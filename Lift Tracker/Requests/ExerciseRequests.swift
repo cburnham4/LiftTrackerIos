@@ -10,12 +10,31 @@ import Foundation
 import Firebase
 
 class ExerciseRequest: Request {
-    func sendGetRequest(cycle: RequestCycle) {
-        let dbRef = self.getDatabaseReference()
+    
+    static let EXERCISE_KEY = "Exercises"
+    
+    static func sendGetRequest(cycle: RequestCycle) {
+        let dbRef = self.getUserDatabaseReference()
+        dbRef?.child(EXERCISE_KEY)?.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if(!snapshot.exists()){
+                cycle.failed()
+                return
+            }
+            
+            /* Get measure children */
+            let json = JSON(snapshot.value!)
+            
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     
-    func sendPostRequest(object: CoreRequestObject) {
-        <#code#>
+    static func sendPostRequest(object: CoreRequestObject) {
+        let dbRef = self.getUserDatabaseReference()
+        dbRef?.child(EXERCISE_KEY).setValue(object.createRequestObject())
     }
 }
