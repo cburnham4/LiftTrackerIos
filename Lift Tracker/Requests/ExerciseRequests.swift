@@ -34,11 +34,12 @@ class ExerciseRequest: Request {
                 exercises.append(Exercise(json: json))
             }
 
-            UserSession().setExercises(exercises: exercises)
+            UserSession.instance.setExercises(exercises: exercises)
             
-            // ...
+            cycle.success()
         }) { (error) in
             print(error.localizedDescription)
+            cycle.failed()
         }
     }
     

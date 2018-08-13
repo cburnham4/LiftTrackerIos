@@ -26,11 +26,17 @@ class ExcercisesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableViewCell", for: indexPath) as! ExerciseTableViewCell
+        
+        let exercise = self.exercises![indexPath.row]
+        
+        cell.setContent(exercise: exercise)
+        return cell
     }
     
 
     func success() {
+        self.exercises = UserSession.instance.getExercises()
         self.tableView.reloadData()
     }
     

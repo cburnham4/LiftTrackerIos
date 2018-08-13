@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,6 +38,41 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwE-Yr-RrB">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ExerciseTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseTableViewCell" id="Egg-Tg-HfO" customClass="ExerciseTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Egg-Tg-HfO" id="Rpv-Vp-xQ0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell_50" translatesAutoresizingMaskIntoConstraints="NO" id="Sen-hL-M1J">
+                                                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="I5T-FF-gcj"/>
+                                                        <constraint firstAttribute="width" constant="24" id="dK8-Yr-Uar"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oT-oD-c3E">
+                                                    <rect key="frame" x="40" y="11" width="312" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6oT-oD-c3E" secondAttribute="trailing" constant="8" id="GhB-8x-Z1y"/>
+                                                <constraint firstItem="Sen-hL-M1J" firstAttribute="leading" secondItem="Rpv-Vp-xQ0" secondAttribute="leading" constant="8" id="OFa-ao-l9f"/>
+                                                <constraint firstItem="Sen-hL-M1J" firstAttribute="centerY" secondItem="Rpv-Vp-xQ0" secondAttribute="centerY" id="b9b-rv-HIM"/>
+                                                <constraint firstItem="6oT-oD-c3E" firstAttribute="leading" secondItem="Sen-hL-M1J" secondAttribute="trailing" constant="8" id="qEd-a5-PtI"/>
+                                                <constraint firstItem="6oT-oD-c3E" firstAttribute="centerY" secondItem="Rpv-Vp-xQ0" secondAttribute="centerY" id="tXq-hs-d3S"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="6oT-oD-c3E" id="G3W-RZ-L7p"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="dua-tJ-KnL" id="eQR-zv-XV9"/>
                                     <outlet property="delegate" destination="dua-tJ-KnL" id="pbb-7P-xfE"/>
@@ -105,4 +141,7 @@
             <point key="canvasLocation" x="653.60000000000002" y="-509.59520239880067"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dumbbell_50" width="25" height="25"/>
+    </resources>
 </document>

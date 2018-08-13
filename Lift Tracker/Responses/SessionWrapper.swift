@@ -10,8 +10,6 @@ import Foundation
 
 class Session {
     
-    private static let session = Session()
-    
     private var sessionMap: [String: Any] = [String: Any]()
     
     init() {}
@@ -27,6 +25,8 @@ class Session {
 
 class UserSession: Session {
     
+    static let instance = UserSession()
+    
     private let exerciseKey = "exercises"
     
     override init() {}
@@ -38,5 +38,4 @@ class UserSession: Session {
     func setExercises(exercises: [Exercise]) {
         addSessionVariable(key: exerciseKey, object: exercises)
     }
-    
 }
