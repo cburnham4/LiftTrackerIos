@@ -64,7 +64,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="e64-XF-WTe">
             <objects>
-                <tabBarController id="gKm-ID-Ubq" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gKm-ID-Ubq" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FsO-Cl-13A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

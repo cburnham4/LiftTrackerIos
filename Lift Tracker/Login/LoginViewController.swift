@@ -31,6 +31,8 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
                 self.login()
                 return
             }
+            
+            self.goToHome(user: user!)
         }
     }
             
@@ -39,8 +41,17 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
         self.present(authViewController!, animated: true, completion: nil)
     }
     
+    private func goToHome(user: User) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let secondViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabViewController") as! UITabBarController
+        self.present(secondViewController, animated: true, completion: nil)
+    }
+    
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
-        guard let authError = error else { return }
+        guard let authError = error else {
+            self.goToHome(user: user!)
+            return
+        }
         
         let errorCode = UInt((authError as NSError).code)
         
