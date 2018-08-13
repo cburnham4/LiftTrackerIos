@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 class ExcercisesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RequestCycle {
 
@@ -37,4 +38,11 @@ class ExcercisesViewController: UIViewController, UITableViewDelegate, UITableVi
         // Do Nothing
     }
     
+    @IBAction func logout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch let error as NSError {
+            print (error.localizedDescription)
+        }
+    }
 }

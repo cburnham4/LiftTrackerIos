@@ -25,11 +25,10 @@ extension Request {
     static func getUserDatabaseReference() -> DatabaseReference? {
         let userId = Auth.auth().currentUser?.uid
         
-        if let uid = userId {
-            return  Database.database().reference()
+        if userId != nil {
+            return  Database.database().reference().child(userId!)
         }
         return nil
-    
     }
     
     static func getUserId() -> String? {

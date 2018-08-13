@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="316" y="157"/>
         </scene>
-        <!--Excercies-->
+        <!--Lift Tracker-->
         <scene sceneID="7NI-0B-LxY">
             <objects>
                 <viewController storyboardIdentifier="ExcercisesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dua-tJ-KnL" customClass="ExcercisesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwE-Yr-RrB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="dua-tJ-KnL" id="eQR-zv-XV9"/>
@@ -52,14 +52,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Excercies" id="L5f-Gz-08N"/>
+                    <navigationItem key="navigationItem" title="Lift Tracker" id="CSK-NR-ENc">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="REo-Pi-7xR">
+                            <connections>
+                                <action selector="logout:" destination="dua-tJ-KnL" id="HH4-ob-sSm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="vwE-Yr-RrB" id="2HF-wP-lRi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyJ-Su-Lgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="-508"/>
+            <point key="canvasLocation" x="1592.8" y="-509.59520239880067"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="e64-XF-WTe">
@@ -71,13 +77,32 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="dua-tJ-KnL" kind="relationship" relationship="viewControllers" id="qEP-3s-gOd"/>
+                        <segue destination="ykW-Sq-bZm" kind="relationship" relationship="viewControllers" id="qEP-3s-gOd"/>
                         <segue destination="IdP-8o-Wc3" kind="relationship" relationship="viewControllers" id="H75-no-gFP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3fe-mw-cQS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-636" y="-176"/>
+        </scene>
+        <!--Excercies-->
+        <scene sceneID="u6d-d5-RMc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ykW-Sq-bZm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Excercies" id="L5f-Gz-08N"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FOR-rn-8zj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dua-tJ-KnL" kind="relationship" relationship="rootViewController" id="Fd5-Hu-vsX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPf-H6-aPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653.60000000000002" y="-509.59520239880067"/>
         </scene>
     </scenes>
 </document>

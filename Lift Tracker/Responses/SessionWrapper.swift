@@ -14,7 +14,7 @@ class Session {
     
     private var sessionMap: [String: Any] = [String: Any]()
     
-    private init() {}
+    init() {}
     
     public func addSessionVariable(key: String, object: Any) {
         sessionMap[key] = object
@@ -28,6 +28,8 @@ class Session {
 class UserSession: Session {
     
     private let exerciseKey = "exercises"
+    
+    override init() {}
     
     func getExercises() -> [Exercise]? {
         return getSessionVariable(key: exerciseKey) as? [Exercise]

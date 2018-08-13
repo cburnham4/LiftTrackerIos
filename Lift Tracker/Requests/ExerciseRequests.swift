@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseDatabase
 import SwiftyJSON
 
 class ExerciseRequest: Request {
@@ -16,6 +17,9 @@ class ExerciseRequest: Request {
     
     static func sendGetRequest(cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
+        
+        var exercises = [Exercise]()
+        
         dbRef?.child(EXERCISE_KEY).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if(!snapshot.exists()){
@@ -23,9 +27,14 @@ class ExerciseRequest: Request {
                 return
             }
             
-            let json = JSON(snapshot.value!)
-            
-            
+            let children = snapshot.children
+            while let snapshotItem = children.nextObject() as? DataSnapshot {
+                let json = JSON(snapshotItem.value!)
+                
+                exercises.append(Exercise(json: json))
+            }
+
+            UserSession().setExercises(exercises: exercises)
             
             // ...
         }) { (error) in
