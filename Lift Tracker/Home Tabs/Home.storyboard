@@ -53,6 +53,9 @@
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Excercies" id="L5f-Gz-08N"/>
+                    <connections>
+                        <outlet property="tableView" destination="vwE-Yr-RrB" id="2HF-wP-lRi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyJ-Su-Lgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,10 +18,10 @@ class CoreResponse {
 }
 
 class Exercise: CoreResponse, CoreRequestObject {
-    var key: String
-    var name: String
-    var muscleKey: String
-    var pastSets: [DayLiftSets]
+    var key: String = ""
+    var name: String = ""
+    var muscleKey: String = ""
+    var pastSets: [DayLiftSets] = [DayLiftSets]()
     
     override init(json: JSON) {
         super.init(json: json)
@@ -51,9 +51,9 @@ class Exercise: CoreResponse, CoreRequestObject {
 }
 
 class Routine: CoreResponse {
-    var key: String
-    var name: String
-    var exerciseKeys: [String]
+    var key: String = ""
+    var name: String = ""
+    var exerciseKeys: [String] = [String]()
     
     override init(json: JSON) {
         super.init(json: json)
@@ -67,9 +67,9 @@ class Routine: CoreResponse {
 }
 
 class MuscleGroup: CoreResponse {
-    var key: String
-    var name: String
-    var exerciseKeys: [String]
+    var key: String = ""
+    var name: String = ""
+    var exerciseKeys: [String] = [String]()
     
     override init(json: JSON) {
         super.init(json: json)
@@ -83,9 +83,9 @@ class MuscleGroup: CoreResponse {
 }
 
 class DayLiftSets: CoreResponse, CoreRequestObject {
-    var date: String
-    var max: Double
-    var liftsets: [LiftSet]
+    var date: String = ""
+    var max: Double = 0.0
+    var liftsets: [LiftSet] = [LiftSet]()
     
     override init(json: JSON) {
         super.init(json: json)
@@ -112,10 +112,10 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
 }
 
 class LiftSet: CoreResponse, CoreRequestObject {
-    var key: String
-    var date: String
-    var reps: Int
-    var weight: Double
+    var key: String = ""
+    var date: String = ""
+    var reps: Int = 0
+    var weight: Double = 0.0
     
     override init(json: JSON) {
         super.init(json: json)

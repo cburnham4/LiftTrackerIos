@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Firebase
+import FirebaseDatabase
 
 protocol Request {
     static func sendPostRequest(object: CoreRequestObject) -> Void
@@ -21,7 +22,7 @@ protocol RequestCycle {
 }
 
 extension Request {
-    func getUserDatabaseReference() -> DatabaseReference? {
+    static func getUserDatabaseReference() -> DatabaseReference? {
         let userId = Auth.auth().currentUser?.uid
         
         if let uid = userId {
@@ -31,7 +32,7 @@ extension Request {
     
     }
     
-    func getUserId() -> String? {
+    static func getUserId() -> String? {
         return Auth.auth().currentUser?.uid
     }
 }
