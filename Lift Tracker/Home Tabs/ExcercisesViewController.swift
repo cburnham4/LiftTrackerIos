@@ -44,6 +44,10 @@ class ExcercisesViewController: UIViewController, UITableViewDelegate, UITableVi
         // Do Nothing
     }
     
+    @IBAction func addExerciseClick(_ sender: UIBarButtonItem) {
+        // TODO add action 
+    }
+    
     @IBAction func logout(_ sender: Any) {
         do {
             try Auth.auth().signOut()
