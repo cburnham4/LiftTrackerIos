@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import SwiftyJSON
 
 class RoutineProvider: Request {
     
-    static let ROTUINE_KEY = "Routines"
+    static let ROUTINE_KEY = "Routines"
     
     static func sendGetRequest(cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
-        var exercises = [Exercise]()
+        var routines = [Routine]()
         
-        dbRef?.child(ROTUINE_KEY).observeSingleEvent(of: .value, with: { (snapshot) in
+        dbRef?.child(ROUTINE_KEY).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if(!snapshot.exists()){
                 cycle.failed()
@@ -28,10 +30,10 @@ class RoutineProvider: Request {
             while let snapshotItem = children.nextObject() as? DataSnapshot {
                 let json = JSON(snapshotItem.value!)
                 
-                exercises.append(Exercise(json: json))
+                routines.append(Routine(json: json))
             }
             
-            UserSession.instance.setExercises(exercises: exercises)
+            UserSession.instance.setRoutines(routines: routines)
             
             cycle.success()
         }) { (error) in
@@ -40,9 +42,7 @@ class RoutineProvider: Request {
         }
     }
     
-    
     static func sendPostRequest(object: CoreRequestObject) {
-        let dbRef = self.getUserDatabaseReference()
-        dbRef?.child(ROTUINE_KEY).setValue(object.createRequestObject())
+        sendPostRequest(object: object, typeKey: ROUTINE_KEY)
     }
 }

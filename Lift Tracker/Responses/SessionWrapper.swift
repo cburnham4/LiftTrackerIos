@@ -29,6 +29,10 @@ class UserSession: Session {
     
     private let exerciseKey = "exercises"
     
+    private let routinesKey = "routines"
+    
+    private let musclesKey = "muscles"
+    
     override init() {}
     
     func getExercises() -> [Exercise]? {
@@ -37,5 +41,21 @@ class UserSession: Session {
     
     func setExercises(exercises: [Exercise]) {
         addSessionVariable(key: exerciseKey, object: exercises)
+    }
+
+    func getRoutines() -> [Routine]? {
+        return getSessionVariable(key: routinesKey) as? [Routine]
+    }
+    
+    func setRoutines(routines: [Routine]) {
+        addSessionVariable(key: routinesKey, object: routines)
+    }
+    
+    func getMuscleGroups() -> [MuscleGroup]? {
+        return getSessionVariable(key: musclesKey) as? [MuscleGroup]
+    }
+    
+    func setMuscleGroups(muscles: [MuscleGroup]) {
+        addSessionVariable(key: musclesKey, object: muscles)
     }
 }

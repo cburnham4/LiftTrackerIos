@@ -43,9 +43,7 @@ class ExerciseRequest: Request {
         }
     }
     
-    
     static func sendPostRequest(object: CoreRequestObject) {
-        let dbRef = self.getUserDatabaseReference()
-        dbRef?.child(EXERCISE_KEY).setValue(object.createRequestObject())
+        sendPostRequest(object: object, typeKey: EXERCISE_KEY)
     }
 }

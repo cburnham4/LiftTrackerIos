@@ -10,15 +10,17 @@
 		283DDBF8ADFD4A6ED04416ED /* Pods_Lift_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E1A0F6B8DCF6BA75330139 /* Pods_Lift_TrackerTests.framework */; };
 		BE23C5389069419F16A6385F /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3964716651CC6ED4887D4EDB /* Pods_Lift_Tracker.framework */; };
 		BF2B5D42487C0716328CDF05 /* Pods_Lift_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */; };
+		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
+		E03853232121F80E009CE727 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E03853222121F80E009CE727 /* GoogleService-Info.plist */; };
+		E03853262122106A009CE727 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* ExerciseTableViewCell.swift */; };
+		E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038532721221DED009CE727 /* RoutinesProvider.swift */; };
 		E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */; };
 		E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */; };
-		E04D7C532106B2FA00E79A5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C512106B2FA00E79A5A /* Main.storyboard */; };
 		E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C542106B2FC00E79A5A /* Assets.xcassets */; };
 		E04D7C582106B2FC00E79A5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */; };
 		E04D7C632106B2FC00E79A5A /* Lift_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C622106B2FC00E79A5A /* Lift_TrackerTests.swift */; };
 		E04D7C6E2106B2FC00E79A5A /* Lift_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C6D2106B2FC00E79A5A /* Lift_TrackerUITests.swift */; };
 		E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C7B2106B58700E79A5A /* Login.storyboard */; };
-		E04D7C7E2106CE2B00E79A5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C7D2106CE2B00E79A5A /* GoogleService-Info.plist */; };
 		E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
@@ -54,10 +56,14 @@
 		6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA7A6A6F98A6C1026E59C0 /* Pods-Lift Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		D16F2134F715DD2118FEFC9E /* Pods-Lift TrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift TrackerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift TrackerUITests/Pods-Lift TrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
+		E03853222121F80E009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E03853242121F818009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E03853252122106A009CE727 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		E038532721221DED009CE727 /* RoutinesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesProvider.swift; sourceTree = "<group>"; };
 		E04D7C482106B2FA00E79A5A /* Lift Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		E04D7C522106B2FA00E79A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E04D7C542106B2FC00E79A5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E04D7C572106B2FC00E79A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E04D7C592106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,7 +74,6 @@
 		E04D7C6D2106B2FC00E79A5A /* Lift_TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift_TrackerUITests.swift; sourceTree = "<group>"; };
 		E04D7C6F2106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E04D7C7B2106B58700E79A5A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		E04D7C7D2106CE2B00E79A5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
@@ -157,10 +162,9 @@
 				E09E78F22114FCC500031F19 /* Requests */,
 				E09E78ED2114FBD600031F19 /* Home Tabs */,
 				E04D7C812106CF7C00E79A5A /* Login */,
-				E04D7C7D2106CE2B00E79A5A /* GoogleService-Info.plist */,
 				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
 				E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */,
-				E04D7C512106B2FA00E79A5A /* Main.storyboard */,
+				E03853242121F818009CE727 /* GoogleService-Info.plist */,
 				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
 				E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */,
 				E04D7C592106B2FC00E79A5A /* Info.plist */,
@@ -189,6 +193,7 @@
 		E04D7C812106CF7C00E79A5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				E03853222121F80E009CE727 /* GoogleService-Info.plist */,
 				E04D7C7B2106B58700E79A5A /* Login.storyboard */,
 				E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */,
 			);
@@ -200,6 +205,7 @@
 			children = (
 				E09E78EE2114FBF100031F19 /* Home.storyboard */,
 				E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */,
+				E03853252122106A009CE727 /* ExerciseTableViewCell.swift */,
 			);
 			path = "Home Tabs";
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 			children = (
 				E09E78F62115133500031F19 /* Request.swift */,
 				E09E78F82115138F00031F19 /* ExerciseRequests.swift */,
+				E038532721221DED009CE727 /* RoutinesProvider.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				E09E78F42114FD9B00031F19 /* Exercise.swift */,
+				E038531E2121E4F5009CE727 /* SessionWrapper.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -332,10 +340,9 @@
 			files = (
 				E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */,
 				E04D7C582106B2FC00E79A5A /* LaunchScreen.storyboard in Resources */,
-				E04D7C7E2106CE2B00E79A5A /* GoogleService-Info.plist in Resources */,
 				E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */,
 				E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */,
-				E04D7C532106B2FA00E79A5A /* Main.storyboard in Resources */,
+				E03853232121F80E009CE727 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,9 +480,12 @@
 				E09E78F92115138F00031F19 /* ExerciseRequests.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
+				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */,
+				E03853262122106A009CE727 /* ExerciseTableViewCell.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
+				E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,14 +521,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E04D7C512106B2FA00E79A5A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E04D7C522106B2FA00E79A5A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

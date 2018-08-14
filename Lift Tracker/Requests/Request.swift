@@ -34,6 +34,11 @@ extension Request {
     static func getUserId() -> String? {
         return Auth.auth().currentUser?.uid
     }
+    
+    static func sendPostRequest(object: CoreRequestObject, typeKey: String) {
+        let dbRef = self.getUserDatabaseReference()
+        dbRef?.child(typeKey).setValue(object.createRequestObject())
+    }
 }
 
 protocol CoreRequestObject {

@@ -5,6 +5,7 @@
 ## Build generated
 build/
 DerivedData/
+Lift\ Tracker/GoogleService-Info.plist
 
 ## Various settings
 *.pbxuser
