@@ -1,15 +1,14 @@
 //
-//  ExcercisesViewController.swift
+//  MuscleGroupsViewController.swift
 //  Lift Tracker
 //
-//  Created by Carl Burnham on 8/3/18.
+//  Created by Carl Burnham on 9/8/18.
 //  Copyright © 2018 Carl Burnham. All rights reserved.
 //
 
 import UIKit
-import FirebaseUI
 
-class ExcercisesViewController: SingleItemListViewController {
+class MuscleGroupsViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
@@ -20,10 +19,10 @@ class ExcercisesViewController: SingleItemListViewController {
     }
 }
 
-extension ExcercisesViewController: SingleItemListViewControllerProtocol {
-    
+extension MuscleGroupsViewController: SingleItemListViewControllerProtocol {
+
     @IBAction func addItemClicked(_ sender: UIBarButtonItem) {
-        
+        // TODO open add dialog
     }
     
     func sendItemRequest() {
@@ -37,11 +36,12 @@ extension ExcercisesViewController: SingleItemListViewControllerProtocol {
     @IBAction func logout(_ sender: Any) {
         super.logout()
     }
+
 }
 
-extension ExcercisesViewController: RequestCycle {
+extension MuscleGroupsViewController: RequestCycle {
     func requestSuccess() {
-        self.singleListItems = UserSession.instance.getExercises()
+        self.singleListItems = UserSession.instance.getMuscleGroups()
         self.tableView.reloadData()
     }
     

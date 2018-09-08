@@ -12,7 +12,7 @@
 		BF2B5D42487C0716328CDF05 /* Pods_Lift_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */; };
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
 		E03853232121F80E009CE727 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E03853222121F80E009CE727 /* GoogleService-Info.plist */; };
-		E03853262122106A009CE727 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* ExerciseTableViewCell.swift */; };
+		E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* SingleItemTableViewCell.swift */; };
 		E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038532721221DED009CE727 /* RoutinesProvider.swift */; };
 		E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */; };
 		E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */; };
@@ -22,6 +22,8 @@
 		E04D7C6E2106B2FC00E79A5A /* Lift_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C6D2106B2FC00E79A5A /* Lift_TrackerUITests.swift */; };
 		E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C7B2106B58700E79A5A /* Login.storyboard */; };
 		E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */; };
+		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
+		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
@@ -59,7 +61,7 @@
 		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
 		E03853222121F80E009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E03853242121F818009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E03853252122106A009CE727 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		E03853252122106A009CE727 /* SingleItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemTableViewCell.swift; sourceTree = "<group>"; };
 		E038532721221DED009CE727 /* RoutinesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesProvider.swift; sourceTree = "<group>"; };
 		E04D7C482106B2FA00E79A5A /* Lift Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,8 @@
 		E04D7C6F2106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E04D7C7B2106B58700E79A5A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
+		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -205,7 +209,9 @@
 			children = (
 				E09E78EE2114FBF100031F19 /* Home.storyboard */,
 				E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */,
-				E03853252122106A009CE727 /* ExerciseTableViewCell.swift */,
+				E03853252122106A009CE727 /* SingleItemTableViewCell.swift */,
+				E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */,
+				E07330692144347400D26E15 /* SingleItemListViewController.swift */,
 			);
 			path = "Home Tabs";
 			sourceTree = "<group>";
@@ -477,12 +483,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */,
+				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
 				E09E78F92115138F00031F19 /* ExerciseRequests.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
+				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */,
-				E03853262122106A009CE727 /* ExerciseTableViewCell.swift in Sources */,
+				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
 				E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */,

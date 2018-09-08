@@ -17,7 +17,12 @@ class CoreResponse {
     func setFields(json: JSON) -> Void {}
 }
 
-class Exercise: CoreResponse, CoreRequestObject {
+protocol SimpleListRowItem {
+    var key: String { get }
+    var name: String { get set }
+}
+
+class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem {
     var key: String = ""
     var name: String = ""
     var muscleKey: String = ""
@@ -50,7 +55,7 @@ class Exercise: CoreResponse, CoreRequestObject {
     }
 }
 
-class Routine: CoreResponse {
+class Routine: CoreResponse, SimpleListRowItem {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()
@@ -66,7 +71,7 @@ class Routine: CoreResponse {
     }
 }
 
-class MuscleGroup: CoreResponse {
+class MuscleGroup: CoreResponse, SimpleListRowItem {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()

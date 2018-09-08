@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExerciseTableViewCell: UITableViewCell {
+class SingleItemTableViewCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!
     
@@ -17,7 +17,7 @@ class ExerciseTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func setContent(exercise: Exercise) {
-        nameLabel.text = exercise.name
+    func setContent(listRowItem: SimpleListRowItem) {
+        nameLabel.text = listRowItem.name
     }
 }

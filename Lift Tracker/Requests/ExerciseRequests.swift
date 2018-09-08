@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 import SwiftyJSON
 
-class ExerciseRequest: Request {
+class ExerciseProvider: Request {
     
     static let EXERCISE_KEY = "Exercises"
     
