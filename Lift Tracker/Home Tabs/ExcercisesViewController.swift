@@ -35,12 +35,12 @@ class ExcercisesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
 
-    func success() {
+    func requestSuccess() {
         self.exercises = UserSession.instance.getExercises()
         self.tableView.reloadData()
     }
     
-    func failed() {
+    func requestFailed() {
         // Do Nothing
     }
     

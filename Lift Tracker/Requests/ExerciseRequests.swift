@@ -23,7 +23,7 @@ class ExerciseRequest: Request {
         dbRef?.child(EXERCISE_KEY).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if(!snapshot.exists()){
-                cycle.failed()
+                cycle.requestFailed()
                 return
             }
             
@@ -36,10 +36,10 @@ class ExerciseRequest: Request {
 
             UserSession.instance.setExercises(exercises: exercises)
             
-            cycle.success()
+            cycle.requestSuccess()
         }) { (error) in
             print(error.localizedDescription)
-            cycle.failed()
+            cycle.requestFailed()
         }
     }
     

@@ -17,8 +17,8 @@ protocol Request {
 }
 
 protocol RequestCycle {
-    func success()
-    func failed()
+    func requestSuccess()
+    func requestFailed()
 }
 
 extension Request {

@@ -22,7 +22,7 @@ class RoutineProvider: Request {
         dbRef?.child(ROUTINE_KEY).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if(!snapshot.exists()){
-                cycle.failed()
+                cycle.requestFailed()
                 return
             }
             
@@ -35,10 +35,10 @@ class RoutineProvider: Request {
             
             UserSession.instance.setRoutines(routines: routines)
             
-            cycle.success()
+            cycle.requestSuccess()
         }) { (error) in
             print(error.localizedDescription)
-            cycle.failed()
+            cycle.requestFailed()
         }
     }
     
