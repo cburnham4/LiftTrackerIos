@@ -13,7 +13,6 @@
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
 		E03853232121F80E009CE727 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E03853222121F80E009CE727 /* GoogleService-Info.plist */; };
 		E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* SingleItemTableViewCell.swift */; };
-		E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038532721221DED009CE727 /* RoutinesProvider.swift */; };
 		E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */; };
 		E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */; };
 		E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C542106B2FC00E79A5A /* Assets.xcassets */; };
@@ -24,11 +23,12 @@
 		E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */; };
 		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
+		E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E073306C214581DB00D26E15 /* AlertUtils.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
 		E09E78F72115133500031F19 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F62115133500031F19 /* Request.swift */; };
-		E09E78F92115138F00031F19 /* ExerciseRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* ExerciseRequests.swift */; };
+		E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* BaseItemsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,6 @@
 		E03853222121F80E009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E03853242121F818009CE727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E03853252122106A009CE727 /* SingleItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemTableViewCell.swift; sourceTree = "<group>"; };
-		E038532721221DED009CE727 /* RoutinesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesProvider.swift; sourceTree = "<group>"; };
 		E04D7C482106B2FA00E79A5A /* Lift Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -79,11 +78,12 @@
 		E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
+		E073306C214581DB00D26E15 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		E09E78F62115133500031F19 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		E09E78F82115138F00031F19 /* ExerciseRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRequests.swift; sourceTree = "<group>"; };
+		E09E78F82115138F00031F19 /* BaseItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseItemsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +162,7 @@
 		E04D7C4A2106B2FA00E79A5A /* Lift Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				E073306B214581CD00D26E15 /* Utils */,
 				E09E78F32114FD8800031F19 /* Responses */,
 				E09E78F22114FCC500031F19 /* Requests */,
 				E09E78ED2114FBD600031F19 /* Home Tabs */,
@@ -204,6 +205,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		E073306B214581CD00D26E15 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E073306C214581DB00D26E15 /* AlertUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E09E78ED2114FBD600031F19 /* Home Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,8 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				E09E78F62115133500031F19 /* Request.swift */,
-				E09E78F82115138F00031F19 /* ExerciseRequests.swift */,
-				E038532721221DED009CE727 /* RoutinesProvider.swift */,
+				E09E78F82115138F00031F19 /* BaseItemsProvider.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -484,16 +492,16 @@
 			files = (
 				E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */,
 				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
-				E09E78F92115138F00031F19 /* ExerciseRequests.swift in Sources */,
+				E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */,
+				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
 				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
-				E038532821221DED009CE727 /* RoutinesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

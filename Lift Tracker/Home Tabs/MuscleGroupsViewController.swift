@@ -26,7 +26,7 @@ extension MuscleGroupsViewController: SingleItemListViewControllerProtocol {
     }
     
     func sendItemRequest() {
-        ExerciseProvider.sendGetRequest(cycle: self)
+        BaseItemsProvider.sendGetMuscleGroupsRequest(cycle: self)
     }
     
     func goToItemPage(key: String) {
@@ -46,6 +46,6 @@ extension MuscleGroupsViewController: RequestCycle {
     }
     
     func requestFailed() {
-        // Do Nothing
+        super.requestFailedAlert()
     }
 }

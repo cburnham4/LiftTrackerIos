@@ -11,17 +11,18 @@ import SwiftyJSON
 import Firebase
 import FirebaseDatabase
 
-protocol Request {
-    static func sendPostRequest(object: CoreRequestObject) -> Void
-    static func sendGetRequest(cycle: RequestCycle)
-}
-
 protocol RequestCycle {
     func requestSuccess()
     func requestFailed()
 }
 
+protocol Request {}
+
 extension Request {
+    // Optional Request functions
+    static func sendGetRequest(cycle: RequestCycle) {}
+    static func sendGetRequest(requestKey: String, cycle: RequestCycle) {}
+    
     static func getUserDatabaseReference() -> DatabaseReference? {
         let userId = Auth.auth().currentUser?.uid
         
@@ -35,12 +36,18 @@ extension Request {
         return Auth.auth().currentUser?.uid
     }
     
-    static func sendPostRequest(object: CoreRequestObject, typeKey: String) {
+    static func sendPostRequest(object: inout CoreRequestObject, typeKey: String) {
         let dbRef = self.getUserDatabaseReference()
-        dbRef?.child(typeKey).setValue(object.createRequestObject())
+        
+        if(object.key.isEmpty) {
+            object.key = dbRef?.childByAutoId().key ?? ""
+        }
+        
+        dbRef?.child(typeKey).child(object.key).setValue(object.createRequestObject())
     }
 }
 
 protocol CoreRequestObject {
+    var key: String { get set }
     func createRequestObject() -> [String: Any]
 }

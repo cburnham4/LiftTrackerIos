@@ -32,6 +32,10 @@ class SingleItemListViewController: UIViewController {
             print (error.localizedDescription)
         }
     }
+    
+    func requestFailedAlert() {
+        AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")
+    }
 }
 
 /**

@@ -32,6 +32,11 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem {
         super.init(json: json)
     }
     
+    init (name: String) {
+        super.init(json: JSON(""))
+        self.name = name
+    }
+    
     override func setFields(json: JSON) {
         self.key = json["exerciseKey"].string ?? ""
         self.name = json["exerciseName"].string ?? ""
@@ -88,6 +93,7 @@ class MuscleGroup: CoreResponse, SimpleListRowItem {
 }
 
 class DayLiftSets: CoreResponse, CoreRequestObject {
+    var key: String = ""
     var date: String = ""
     var max: Double = 0.0
     var liftsets: [LiftSet] = [LiftSet]()
