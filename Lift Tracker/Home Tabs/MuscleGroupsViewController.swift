@@ -11,29 +11,20 @@ import UIKit
 class MuscleGroupsViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
-    
-    override func viewDidLoad() {
-        // Set this as the child view controller before calling super
-        super.childViewController = self
-        super.viewDidLoad()
-    }
-}
 
-extension MuscleGroupsViewController: SingleItemListViewControllerProtocol {
-
-    @IBAction func addItemClicked(_ sender: UIBarButtonItem) {
+    @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
         // TODO open add dialog
     }
     
-    func sendItemRequest() {
+    override func sendItemRequest() {
         BaseItemsProvider.sendGetMuscleGroupsRequest(cycle: self)
     }
     
-    func goToItemPage(key: String) {
+    override func goToItemPage(key: String) {
         // TODO
     }
     
-    @IBAction func logout(_ sender: Any) {
+    @IBAction override func logout(_ sender: Any) {
         super.logout()
     }
 

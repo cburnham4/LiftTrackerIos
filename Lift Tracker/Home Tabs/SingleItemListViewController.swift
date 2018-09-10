@@ -9,6 +9,8 @@ import UIKit
 import FirebaseUI
 
 protocol SingleItemListViewControllerProtocol {
+    var singleListItems: [SimpleListRowItem]? { get set }
+    
     func addItemClicked(_ sender: UIBarButtonItem)
     func sendItemRequest()
     func logout(_ sender: Any)
@@ -17,12 +19,14 @@ protocol SingleItemListViewControllerProtocol {
 
 class SingleItemListViewController: UIViewController {
     var singleListItems: [SimpleListRowItem]?
-    var childViewController: SingleItemListViewControllerProtocol?
+    
+    func addItemClicked(_ sender: UIBarButtonItem) { fatalError("Must Override") }
+    func sendItemRequest() { fatalError("Must Override") }
+    func logout(_ sender: Any) { fatalError("Must Override") }
+    func goToItemPage(key: String) { fatalError("Must Override") }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        childViewController?.sendItemRequest()
+        self.sendItemRequest()
     }
     
     func logout() {
@@ -44,7 +48,7 @@ class SingleItemListViewController: UIViewController {
 extension SingleItemListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let singleItem = self.singleListItems?[indexPath.row] {
-            self.childViewController?.goToItemPage(key: singleItem.key)
+            self.goToItemPage(key: singleItem.key)
         }
     }
 }
