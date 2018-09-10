@@ -15,8 +15,8 @@ class ExcercisesViewController: SingleItemListViewController {
     
     @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Exercise", placeholder: "Exercise", callback: { exerciseName in
-            let exercise = Exercise(name: exerciseName)
-            BaseItemsProvider.sendPostRequest(typeKey: BaseItemsProvider.EXERCISE_KEY, object: exercise)
+            var exercise = Exercise(name: exerciseName) as CoreRequestObject
+            BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: BaseItemsProvider.EXERCISE_KEY)
         })
     }
     

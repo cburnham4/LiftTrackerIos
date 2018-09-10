@@ -87,8 +87,4 @@ class BaseItemsProvider: Request {
             cycle.requestFailed()
         }
     }
-    
-    static func sendPostRequest(typeKey: String, itemKey: String? = nil, object: CoreRequestObject) {
-        sendPostRequest(typeKey: typeKey, object: object)
-    }
 }
