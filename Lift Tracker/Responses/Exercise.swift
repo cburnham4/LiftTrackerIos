@@ -76,7 +76,7 @@ class Routine: CoreResponse, SimpleListRowItem {
     }
 }
 
-class MuscleGroup: CoreResponse, SimpleListRowItem {
+class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()
@@ -89,6 +89,15 @@ class MuscleGroup: CoreResponse, SimpleListRowItem {
         self.key = json["muscleGroupId"].string ?? ""
         self.name = json["muscleGroupName"].string ?? ""
         self.exerciseKeys = json["exercises"].arrayObject as? [String] ?? [String]()
+    }
+    
+    func createRequestObject() -> [String: Any] {
+        let post = ["muscleGroupId" : self.key,
+                    "muscleGroupName": self.name,
+                    "exercises" : self.exerciseKeys]
+            as [String : Any]
+        
+        return post
     }
 }
 

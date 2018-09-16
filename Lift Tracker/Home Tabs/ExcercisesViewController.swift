@@ -45,12 +45,16 @@ class ExcercisesViewController: SingleItemListViewController {
 
 extension ExcercisesViewController: RequestCycle {
     func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let object = object, object is Exercise, requestKey == BaseItemsProvider.POST_EXERCISE_KEY {
-            UserSession.instance.addExercise(exercise: object as! Exercise)
+        if let exercise = object as! Exercise?, requestKey == BaseItemsProvider.POST_EXERCISE_KEY {
+            self.singleListItems?.append(exercise)
+            UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
         } else if let object = object, requestKey == BaseItemsProvider.DELETE_EXERCISE_KEY {
-            UserSession.instance.deleteExercise(exercise: object as! Exercise)
+            self.singleListItems = self.singleListItems?.filter({$0.key != object.key})
+            UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
+        } else if requestKey == BaseItemsProvider.GET_EXERCISE_KEY {
+            self.singleListItems = UserSession.instance.getExercises()
         }
-        self.singleListItems = UserSession.instance.getExercises()
+        
         self.tableView.reloadData()
     }
     

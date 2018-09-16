@@ -24,6 +24,16 @@ class MuscleGroupsViewController: SingleItemListViewController {
         // TODO
     }
     
+    override func deleteItem(item: SimpleListRowItem) {
+        if item is MuscleGroup {
+            BaseItemsProvider.deleteItem(object: item as! MuscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.DELETE_MUSCLE_KEY, cycle: self)
+        }
+    }
+    
+    override func updateItem(item: SimpleListRowItem) {
+        
+    }
+    
     @IBAction override func logout(_ sender: Any) {
         super.logout()
     }
@@ -31,8 +41,17 @@ class MuscleGroupsViewController: SingleItemListViewController {
 }
 
 extension MuscleGroupsViewController: RequestCycle {
-    func requestSuccess(requestKey: Int) {
-        self.singleListItems = UserSession.instance.getMuscleGroups()
+    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
+        if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.POST_EXERCISE_KEY {
+            singleListItems?.append(object)
+            UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
+        } else if let object = object, object is MuscleGroup, requestKey == BaseItemsProvider.DELETE_EXERCISE_KEY {
+            self.singleListItems = singleListItems?.filter({ $0.key != object.key})
+            UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
+        } else if requestKey == BaseItemsProvider.GET_EXERCISE_KEY {
+            self.singleListItems = UserSession.instance.getMuscleGroups()
+        }
+        
         self.tableView.reloadData()
     }
     

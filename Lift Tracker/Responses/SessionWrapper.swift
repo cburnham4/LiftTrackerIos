@@ -43,13 +43,6 @@ class UserSession: Session {
         addSessionVariable(key: exerciseKey, object: exercises)
     }
     
-    func addExercise(exercise: Exercise) {
-        if var exercises = getExercises() {
-            exercises.append(exercise)
-            addSessionVariable(key: exerciseKey, object: exercises)
-        }
-    }
-    
     func deleteExercise(exercise: Exercise) {
         if let exercises = getExercises() {
             addSessionVariable(key: exerciseKey, object: exercises.filter({ $0.key != exercise.key }))
