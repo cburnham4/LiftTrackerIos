@@ -24,6 +24,8 @@ class SingleItemListViewController: UIViewController {
     func sendItemRequest() { fatalError("Must Override") }
     func logout(_ sender: Any) { fatalError("Must Override") }
     func goToItemPage(key: String) { fatalError("Must Override") }
+    func deleteItem(item: SimpleListRowItem) { fatalError("Must Override") }
+    func updateItem(item: SimpleListRowItem) { fatalError("Must Override") }
     
     override func viewDidLoad() {
         self.sendItemRequest()
@@ -50,6 +52,24 @@ extension SingleItemListViewController: UITableViewDelegate {
         if let singleItem = self.singleListItems?[indexPath.row] {
             self.goToItemPage(key: singleItem.key)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = singleListItems![indexPath.row]
+        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
+            self?.updateItem(item: item)
+        })
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
+            guard let strongSelf = self else {
+                return
+            }
+            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
+                strongSelf.deleteItem(item: item)
+            })
+        })
+        editAction.backgroundColor = .blue
+        deleteAction.backgroundColor = .red
+        return [deleteAction, editAction]
     }
 }
 

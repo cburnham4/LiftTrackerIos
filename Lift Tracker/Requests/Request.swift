@@ -12,17 +12,19 @@ import Firebase
 import FirebaseDatabase
 
 protocol RequestCycle {
-    func requestSuccess()
-    func requestFailed()
+    func requestSuccess(requestKey: Int, object: CoreRequestObject?)
+    func requestFailed(requestKey: Int)
+}
+
+extension RequestCycle {
+    func requestSuccess(requestKey: Int, object: CoreRequestObject? = nil) {
+        requestSuccess(requestKey: requestKey, object: object)
+    }
 }
 
 protocol Request {}
 
 extension Request {
-    // Optional Request functions
-    static func sendGetRequest(cycle: RequestCycle) {}
-    static func sendGetRequest(requestKey: String, cycle: RequestCycle) {}
-    
     static func getUserDatabaseReference() -> DatabaseReference? {
         let userId = Auth.auth().currentUser?.uid
         
@@ -36,14 +38,33 @@ extension Request {
         return Auth.auth().currentUser?.uid
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, typeKey: String) {
+    static func sendPostRequest(object: inout CoreRequestObject, typeKey: String, requestKey: Int, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
         if(object.key.isEmpty) {
             object.key = dbRef?.childByAutoId().key ?? ""
         }
         
-        dbRef?.child(typeKey).child(object.key).setValue(object.createRequestObject())
+        let returnObject = object
+        dbRef?.child(typeKey).child(object.key).setValue(object.createRequestObject()) { error, _ in
+            if error != nil {
+                cycle.requestFailed(requestKey: requestKey)
+            } else {
+                cycle.requestSuccess(requestKey: requestKey, object: returnObject)
+            }
+        }
+    }
+    
+    static func deleteItem(object: CoreRequestObject, typeKey: String, requestKey: Int, cycle: RequestCycle) {
+        let dbRef = self.getUserDatabaseReference()
+        
+        dbRef?.child(typeKey).child(object.key).removeValue() {error, _ in
+            if error != nil {
+                cycle.requestFailed(requestKey: requestKey)
+            } else {
+                cycle.requestSuccess(requestKey: requestKey, object: object)
+            }
+        }
     }
 }
 

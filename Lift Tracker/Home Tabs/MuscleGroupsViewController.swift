@@ -31,12 +31,12 @@ class MuscleGroupsViewController: SingleItemListViewController {
 }
 
 extension MuscleGroupsViewController: RequestCycle {
-    func requestSuccess() {
+    func requestSuccess(requestKey: Int) {
         self.singleListItems = UserSession.instance.getMuscleGroups()
         self.tableView.reloadData()
     }
     
-    func requestFailed() {
+    func requestFailed(requestKey: Int) {
         super.requestFailedAlert()
     }
 }

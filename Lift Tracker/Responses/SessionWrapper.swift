@@ -42,6 +42,19 @@ class UserSession: Session {
     func setExercises(exercises: [Exercise]) {
         addSessionVariable(key: exerciseKey, object: exercises)
     }
+    
+    func addExercise(exercise: Exercise) {
+        if var exercises = getExercises() {
+            exercises.append(exercise)
+            addSessionVariable(key: exerciseKey, object: exercises)
+        }
+    }
+    
+    func deleteExercise(exercise: Exercise) {
+        if let exercises = getExercises() {
+            addSessionVariable(key: exerciseKey, object: exercises.filter({ $0.key != exercise.key }))
+        }
+    }
 
     func getRoutines() -> [Routine]? {
         return getSessionVariable(key: routinesKey) as? [Routine]

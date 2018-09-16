@@ -24,27 +24,38 @@ class BaseItemsProvider: Request {
     
     static let MUSCLE_GROUPS_KEY = "MuscleGroups"
     
+    static let POST_EXERCISE_KEY = 1000;
+    static let GET_EXERCISE_KEY = 1001;
+    static let DELETE_EXERCISE_KEY = 1002;
+    
+    static let POST_MUSCLE_KEY = 2000;
+    static let GET_MUSCLE_KEY = 2001;
+    static let DELETE_MUSCLE_KEY = 2002;
+    
+    static let POST_ROTUINE_KEY = 3000;
+    static let GET_ROUTINE_KEY = 3001;
+    static let DELETE_ROUTINE_KEY = 3002;
+    
     static func sendGetExerciseRequest(cycle: RequestCycle) {
-        sendGetRequest(requestKey: EXERCISE_KEY, cycle: cycle)
+        sendGetRequest(listKey: EXERCISE_KEY, requestKey: GET_EXERCISE_KEY, cycle: cycle)
     }
     
     static func sendGetRoutinesRequest(cycle: RequestCycle) {
-        sendGetRequest(requestKey: ROUTINE_KEY, cycle: cycle)
+        sendGetRequest(listKey: ROUTINE_KEY, requestKey: GET_MUSCLE_KEY, cycle: cycle)
     }
     
     static func sendGetMuscleGroupsRequest(cycle: RequestCycle) {
-        sendGetRequest(requestKey: MUSCLE_GROUPS_KEY, cycle: cycle)
+        self.sendGetRequest(listKey: MUSCLE_GROUPS_KEY, requestKey: GET_ROUTINE_KEY, cycle: cycle)
     }
     
-    static func sendGetRequest(requestKey: String, cycle: RequestCycle) {
+    static func sendGetRequest(listKey: String, requestKey: Int, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
         var responseObjects = [CoreResponse]()
         
-        dbRef?.child(requestKey).observeSingleEvent(of: .value, with: { (snapshot) in
-            
+        dbRef?.child(listKey).observeSingleEvent(of: .value, with: { (snapshot) in
             if(!snapshot.exists()){
-                cycle.requestFailed()
+                cycle.requestFailed(requestKey: requestKey)
                 return
             }
             
@@ -52,7 +63,7 @@ class BaseItemsProvider: Request {
             while let snapshotItem = children.nextObject() as? DataSnapshot {
                 let json = JSON(snapshotItem.value!)
                 
-                switch requestKey {
+                switch listKey {
                 case EXERCISE_KEY:
                     responseObjects.append(Exercise(json: json))
                     break
@@ -63,11 +74,11 @@ class BaseItemsProvider: Request {
                     responseObjects.append(MuscleGroup(json: json))
                     break
                 default:
-                    cycle.requestFailed()
+                    cycle.requestFailed(requestKey: requestKey)
                 }
             }
 
-            switch requestKey {
+            switch listKey {
             case EXERCISE_KEY:
                 UserSession.instance.setExercises(exercises: responseObjects as! [Exercise])
                 break
@@ -78,13 +89,13 @@ class BaseItemsProvider: Request {
                 UserSession.instance.setMuscleGroups(muscles: responseObjects as! [MuscleGroup])
                 break
             default:
-                cycle.requestFailed()
+                cycle.requestFailed(requestKey: requestKey)
             }
             
-            cycle.requestSuccess()
+            cycle.requestSuccess(requestKey: requestKey)
         }) { (error) in
             print(error.localizedDescription)
-            cycle.requestFailed()
+            cycle.requestFailed(requestKey: requestKey)
         }
     }
 }
