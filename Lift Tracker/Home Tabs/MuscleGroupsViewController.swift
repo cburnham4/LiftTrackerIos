@@ -13,7 +13,10 @@ class MuscleGroupsViewController: SingleItemListViewController {
     @IBOutlet var tableView: UITableView!
 
     @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
-        // TODO open add dialog
+        AlertUtils.createAlertTextCallback(view: self, title: "Add Muscle Group", placeholder: "Muscle Group", callback: { name in
+            var muscleGroup = MuscleGroup(name: name) as CoreRequestObject
+            BaseItemsProvider.sendPostRequest(object: &muscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.POST_MUSCLE_KEY, cycle: self)
+        })
     }
     
     override func sendItemRequest() {

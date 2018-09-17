@@ -25,13 +25,19 @@ class ExcercisesViewController: SingleItemListViewController {
     }
     
     override func deleteItem(item: SimpleListRowItem) {
-        if item is Exercise {
-            BaseItemsProvider.deleteItem(object: item as! Exercise, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.DELETE_EXERCISE_KEY, cycle: self)
+        if let exercise = item as? Exercise {
+            BaseItemsProvider.deleteItem(object: exercise, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.DELETE_EXERCISE_KEY, cycle: self)
         }
     }
     
     override func updateItem(item: SimpleListRowItem) {
-        
+        if let exercise = item as? Exercise {
+            AlertUtils.createAlertTextCallback(view: self, title: "Update Exercise Name", placeholder: "Exercise", callback: { exerciseName in
+                exercise.name = exerciseName
+                var requestObject = exercise as CoreRequestObject
+                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.UPDATE_EXERCISE_KEY, cycle: self)
+            })
+        }
     }
     
     override func goToItemPage(key: String) {
@@ -50,6 +56,10 @@ extension ExcercisesViewController: RequestCycle {
             UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
         } else if let object = object, requestKey == BaseItemsProvider.DELETE_EXERCISE_KEY {
             self.singleListItems = self.singleListItems?.filter({$0.key != object.key})
+            UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
+        } else if let object = object as! Exercise?, requestKey == BaseItemsProvider.UPDATE_EXERCISE_KEY {
+            var exercise = self.singleListItems?.filter{ $0.key == object.key }.first
+            exercise?.name = object.name
             UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
         } else if requestKey == BaseItemsProvider.GET_EXERCISE_KEY {
             self.singleListItems = UserSession.instance.getExercises()

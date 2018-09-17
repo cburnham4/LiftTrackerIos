@@ -27,14 +27,17 @@ class BaseItemsProvider: Request {
     static let POST_EXERCISE_KEY = 1000;
     static let GET_EXERCISE_KEY = 1001;
     static let DELETE_EXERCISE_KEY = 1002;
+    static let UPDATE_EXERCISE_KEY = 1003;
     
     static let POST_MUSCLE_KEY = 2000;
     static let GET_MUSCLE_KEY = 2001;
     static let DELETE_MUSCLE_KEY = 2002;
+    static let UPDATE_MUSCLE_KEY = 2003;
     
     static let POST_ROTUINE_KEY = 3000;
     static let GET_ROUTINE_KEY = 3001;
     static let DELETE_ROUTINE_KEY = 3002;
+    static let UPDATE_ROUTINE_KEY = 3003;
     
     static func sendGetExerciseRequest(cycle: RequestCycle) {
         sendGetRequest(listKey: EXERCISE_KEY, requestKey: GET_EXERCISE_KEY, cycle: cycle)

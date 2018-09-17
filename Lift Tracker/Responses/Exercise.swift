@@ -69,6 +69,11 @@ class Routine: CoreResponse, SimpleListRowItem {
         super.init(json: json)
     }
     
+    init (name: String) {
+        super.init(json: JSON(""))
+        self.name = name
+    }
+    
     override func setFields(json: JSON) {
         self.key = json["routineId"].string ?? ""
         self.name = json["routineName"].string ?? ""
@@ -83,6 +88,11 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
     
     override init(json: JSON) {
         super.init(json: json)
+    }
+    
+    init (name: String) {
+        super.init(json: JSON(""))
+        self.name = name
     }
     
     override func setFields(json: JSON) {
