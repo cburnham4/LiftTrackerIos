@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     
     private func goToHome(user: User) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let secondViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabViewController") as! UITabBarController
+        let secondViewController = storyboard.instantiateViewController(withIdentifier: "HomePagerViewController") as! UIPageViewController
         self.present(secondViewController, animated: true, completion: nil)
     }
     

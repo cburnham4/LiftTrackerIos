@@ -12,6 +12,7 @@ target 'Lift Tracker' do
   pod 'Firebase/Database'
   pod 'FirebaseUI/Auth'
 
+  pod 'Tabman', '~> 1.10'
   pod 'FirebaseUI/Google'
 
   target 'Lift TrackerTests' do
