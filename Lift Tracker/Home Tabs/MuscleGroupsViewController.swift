@@ -28,8 +28,8 @@ class MuscleGroupsViewController: SingleItemListViewController {
     }
     
     override func deleteItem(item: SimpleListRowItem) {
-        if item is MuscleGroup {
-            BaseItemsProvider.deleteItem(object: item as! MuscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.DELETE_MUSCLE_KEY, cycle: self)
+        if let muscleGroup = item as? MuscleGroup {
+            BaseItemsProvider.deleteItem(object: muscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.DELETE_MUSCLE_KEY, cycle: self)
         }
     }
     
@@ -45,13 +45,13 @@ class MuscleGroupsViewController: SingleItemListViewController {
 
 extension MuscleGroupsViewController: RequestCycle {
     func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.POST_EXERCISE_KEY {
+        if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.POST_MUSCLE_KEY {
             singleListItems?.append(object)
             UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if let object = object, object is MuscleGroup, requestKey == BaseItemsProvider.DELETE_EXERCISE_KEY {
+        } else if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.DELETE_MUSCLE_KEY {
             self.singleListItems = singleListItems?.filter({ $0.key != object.key})
             UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if requestKey == BaseItemsProvider.GET_EXERCISE_KEY {
+        } else if requestKey == BaseItemsProvider.GET_MUSCLE_KEY {
             self.singleListItems = UserSession.instance.getMuscleGroups()
         }
         

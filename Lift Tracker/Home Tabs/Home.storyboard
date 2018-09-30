@@ -145,7 +145,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>

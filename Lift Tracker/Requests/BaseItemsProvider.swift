@@ -43,12 +43,12 @@ class BaseItemsProvider: Request {
         sendGetRequest(listKey: EXERCISE_KEY, requestKey: GET_EXERCISE_KEY, cycle: cycle)
     }
     
-    static func sendGetRoutinesRequest(cycle: RequestCycle) {
-        sendGetRequest(listKey: ROUTINE_KEY, requestKey: GET_MUSCLE_KEY, cycle: cycle)
+    static func sendGetMuscleGroupsRequest(cycle: RequestCycle) {
+        sendGetRequest(listKey: MUSCLE_GROUPS_KEY, requestKey: GET_MUSCLE_KEY, cycle: cycle)
     }
     
-    static func sendGetMuscleGroupsRequest(cycle: RequestCycle) {
-        self.sendGetRequest(listKey: MUSCLE_GROUPS_KEY, requestKey: GET_ROUTINE_KEY, cycle: cycle)
+    static func sendGetRoutinesRequest(cycle: RequestCycle) {
+        self.sendGetRequest(listKey: ROUTINE_KEY, requestKey: GET_ROUTINE_KEY, cycle: cycle)
     }
     
     static func sendGetRequest(listKey: String, requestKey: Int, cycle: RequestCycle) {
