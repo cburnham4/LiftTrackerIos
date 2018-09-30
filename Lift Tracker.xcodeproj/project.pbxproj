@@ -20,7 +20,7 @@
 		E04D7C6E2106B2FC00E79A5A /* Lift_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C6D2106B2FC00E79A5A /* Lift_TrackerUITests.swift */; };
 		E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C7B2106B58700E79A5A /* Login.storyboard */; };
 		E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */; };
-		E06D82E02159A38D002F3ED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D82DF2159A38D002F3ED0 /* ViewController.swift */; };
+		E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */; };
 		E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */; };
 		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
@@ -75,7 +75,7 @@
 		E04D7C6F2106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E04D7C7B2106B58700E79A5A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E06D82DF2159A38D002F3ED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 				E03853252122106A009CE727 /* SingleItemTableViewCell.swift */,
 				E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */,
 				E07330692144347400D26E15 /* SingleItemListViewController.swift */,
-				E06D82DF2159A38D002F3ED0 /* ViewController.swift */,
+				E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */,
 			);
 			path = "Home Tabs";
 			sourceTree = "<group>";
@@ -505,7 +505,7 @@
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */,
-				E06D82E02159A38D002F3ED0 /* ViewController.swift in Sources */,
+				E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */,
 				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
 				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
@@ -613,6 +613,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -666,6 +667,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

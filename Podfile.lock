@@ -99,6 +99,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseUI/Auth
   - FirebaseUI/Google
+  - Pageboy (~> 2.6)
   - SwiftyJSON
   - Tabman (~> 1.10)
 
@@ -147,6 +148,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 24c640a7efddd0483905b22e631f205e8b1b516f
+PODFILE CHECKSUM: fd3f8295f91ec4f0ed73ddb6911caa5a4f721549
 
 COCOAPODS: 1.5.3

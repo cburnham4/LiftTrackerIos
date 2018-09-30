@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import Tabman
+import Pageboy
 
 class LoginViewController: UIViewController, FUIAuthDelegate {
  
@@ -43,7 +45,7 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     
     private func goToHome(user: User) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let secondViewController = storyboard.instantiateViewController(withIdentifier: "HomePagerViewController") as! UIPageViewController
+        let secondViewController = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! UIViewController
         self.present(secondViewController, animated: true, completion: nil)
     }
     

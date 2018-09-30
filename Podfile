@@ -13,6 +13,7 @@ target 'Lift Tracker' do
   pod 'FirebaseUI/Auth'
 
   pod 'Tabman', '~> 1.10'
+  pod 'Pageboy', '~> 2.6'
   pod 'FirebaseUI/Google'
 
   target 'Lift TrackerTests' do
