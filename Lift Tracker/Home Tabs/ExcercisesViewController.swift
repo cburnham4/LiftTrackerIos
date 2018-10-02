@@ -43,7 +43,7 @@ class ExcercisesViewController: SingleItemListViewController {
     override func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
-            self.navigationController?.present(exerciseTabsVc, animated: true)
+            self.navigationController?.pushViewController(exerciseTabsVc, animated: true)
         }
     }
     

@@ -55,6 +55,7 @@ class ExerciseTabViewController: TabmanViewController {
         var viewControllers = [UIViewController]()
         var barItems = [Item]()
         
+        // THESE will crash it
         // TODO: Append view controllers to list
         //EX: viewControllers.append(getViewController(withIdentifier: "ExcercisesNavViewController"))
         
