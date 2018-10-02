@@ -23,7 +23,7 @@ class SingleItemListViewController: UIViewController {
     func addItemClicked(_ sender: UIBarButtonItem) { fatalError("Must Override") }
     func sendItemRequest() { fatalError("Must Override") }
     func logout(_ sender: Any) { fatalError("Must Override") }
-    func goToItemPage(key: String) { fatalError("Must Override") }
+    func goToItemPage(item: SimpleListRowItem) { fatalError("Must Override") }
     func deleteItem(item: SimpleListRowItem) { fatalError("Must Override") }
     func updateItem(item: SimpleListRowItem) { fatalError("Must Override") }
     
@@ -50,7 +50,7 @@ class SingleItemListViewController: UIViewController {
 extension SingleItemListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let singleItem = self.singleListItems?[indexPath.row] {
-            self.goToItemPage(key: singleItem.key)
+            self.goToItemPage(item: singleItem)
         }
     }
     

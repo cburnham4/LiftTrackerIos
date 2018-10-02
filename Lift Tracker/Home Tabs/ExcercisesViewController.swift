@@ -40,8 +40,11 @@ class ExcercisesViewController: SingleItemListViewController {
         }
     }
     
-    override func goToItemPage(key: String) {
-        // TODO
+    override func goToItemPage(item: SimpleListRowItem) {
+        if let exercise = item as? Exercise {
+            let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
+            self.navigationController?.present(exerciseTabsVc, animated: true)
+        }
     }
     
     @IBAction override func logout(_ sender: Any) {

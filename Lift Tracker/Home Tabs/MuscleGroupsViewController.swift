@@ -23,8 +23,10 @@ class MuscleGroupsViewController: SingleItemListViewController {
         BaseItemsProvider.sendGetMuscleGroupsRequest(cycle: self)
     }
     
-    override func goToItemPage(key: String) {
-        // TODO
+    override func goToItemPage(item: SimpleListRowItem) {
+        if let muscleGroup = item as? MuscleGroup {
+            // TODO: Go to VC
+        }
     }
     
     override func deleteItem(item: SimpleListRowItem) {
