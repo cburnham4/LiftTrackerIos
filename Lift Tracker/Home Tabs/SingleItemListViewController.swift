@@ -20,7 +20,7 @@ protocol SingleItemListViewControllerProtocol {
 class SingleItemListViewController: UIViewController {
     var singleListItems: [SimpleListRowItem]?
     
-    func addItemClicked(_ sender: UIBarButtonItem) { fatalError("Must Override") }
+    func addItemClicked(_ sender: UIButton) { fatalError("Must Override") }
     func sendItemRequest() { fatalError("Must Override") }
     func logout(_ sender: Any) { fatalError("Must Override") }
     func goToItemPage(item: SimpleListRowItem) { fatalError("Must Override") }

@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Muscle Group-->
         <scene sceneID="ZTY-Qj-EL6">
@@ -144,12 +149,26 @@
                                     <outlet property="delegate" destination="dua-tJ-KnL" id="pbb-7P-xfE"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WES-eB-eZm">
+                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
+                                <color key="backgroundColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="Add Exercise">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addItemClicked:" destination="dua-tJ-KnL" eventType="touchUpInside" id="bHn-jj-ORd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
+                            <constraint firstItem="WES-eB-eZm" firstAttribute="trailing" secondItem="7yU-zi-XoZ" secondAttribute="trailing" id="7Hp-iv-f0o"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="top" secondItem="7yU-zi-XoZ" secondAttribute="top" id="TvO-Ps-vRU"/>
+                            <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="WES-eB-eZm" secondAttribute="bottom" id="XPO-Ym-6CI"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="vwE-Yr-RrB" secondAttribute="trailing" id="cvE-3i-abE"/>
+                            <constraint firstItem="WES-eB-eZm" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="qpe-kk-fZg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
