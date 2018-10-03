@@ -27,7 +27,7 @@ class SingleItemListViewController: UIViewController {
     func deleteItem(item: SimpleListRowItem) { fatalError("Must Override") }
     func updateItem(item: SimpleListRowItem) { fatalError("Must Override") }
     
-    var homeVc: HomePageViewController?
+    weak var homeVc: HomePageViewController?
     
     override func viewDidLoad() {
         self.sendItemRequest()
