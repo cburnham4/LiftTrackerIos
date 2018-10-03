@@ -11,6 +11,8 @@ import FirebaseUI
 
 class ExcercisesViewController: SingleItemListViewController {
     
+    var homeVc: HomePageViewController?
+    
     @IBOutlet var tableView: UITableView!
     
     @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
@@ -43,7 +45,7 @@ class ExcercisesViewController: SingleItemListViewController {
     override func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
-            self.navigationController?.pushViewController(exerciseTabsVc, animated: true)
+            homeVc?.navigationController?.pushViewController(exerciseTabsVc, animated: true)
         }
     }
     

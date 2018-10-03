@@ -57,10 +57,14 @@ class ExerciseTabViewController: TabmanViewController {
         
         // THESE will crash it
         // TODO: Append view controllers to list
-        //EX: viewControllers.append(getViewController(withIdentifier: "ExcercisesNavViewController"))
+        viewControllers.append(UIViewController())
+        viewControllers.append(UIViewController())
+        viewControllers.append(UIViewController())
         
         // TODO: Add Titles for VCs
-        //EX :  barItems.append(Item(title: "Exercises"))
+        barItems.append(Item(title: "Add Set"))
+        barItems.append(Item(title: "Past Lifts"))
+        barItems.append(Item(title: "GRAPH"))
         
         bar.items = barItems
         self.viewControllers = viewControllers

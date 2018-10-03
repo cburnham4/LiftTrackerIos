@@ -44,8 +44,10 @@ class HomePageViewController: TabmanViewController {
         var viewControllers = [UIViewController]()
         var barItems = [Item]()
         
-        viewControllers.append(getViewController(withIdentifier: "ExcercisesNavViewController"))
-        viewControllers.append(getViewController(withIdentifier: "MusclesNavViewController"))
+        let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController") as! ExcercisesViewController
+        exercisesVc.homeVc = self
+        viewControllers.append(exercisesVc)
+        viewControllers.append(getViewController(withIdentifier: "MuscleGroupsViewController"))
         barItems.append(Item(title: "Exercises"))
         barItems.append(Item(title: "Muscle Groups"))
         

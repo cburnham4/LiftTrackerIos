@@ -91,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHO-9L-vjx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="159"/>
+            <point key="canvasLocation" x="2532" y="158.77061469265368"/>
         </scene>
         <!--Lift Tracker-->
         <scene sceneID="7NI-0B-LxY">
@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwE-Yr-RrB">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="Egg-Tg-HfO" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
@@ -173,66 +173,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyJ-Su-Lgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592.8" y="-509.59520239880067"/>
+            <point key="canvasLocation" x="2532" y="-509.59520239880067"/>
         </scene>
         <!--Home Page View Controller-->
         <scene sceneID="cNR-9d-god">
             <objects>
                 <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ccn-sC-1Xu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0e-xk-bGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-423" y="-227"/>
+            <point key="canvasLocation" x="516" y="-227.13643178410797"/>
         </scene>
-        <!--Excercies-->
-        <scene sceneID="u6d-d5-RMc">
+        <!--Navigation Controller-->
+        <scene sceneID="f1d-1R-lzr">
             <objects>
-                <navigationController storyboardIdentifier="ExcercisesNavViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ykW-Sq-bZm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Excercies" id="L5f-Gz-08N"/>
+                <navigationController storyboardIdentifier="NavHomePageViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="Psu-nm-9ZE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FOR-rn-8zj">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8wz-72-1Ve">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="dua-tJ-KnL" kind="relationship" relationship="rootViewController" id="Fd5-Hu-vsX"/>
+                        <segue destination="jGW-3O-x0P" kind="relationship" relationship="rootViewController" id="lKk-iz-rw3"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MPf-H6-aPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LZV-yM-8Kz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653.60000000000002" y="-509.59520239880067"/>
-        </scene>
-        <!--Muscle Groups-->
-        <scene sceneID="fDq-3r-Mk1">
-            <objects>
-                <navigationController storyboardIdentifier="MusclesNavViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rFz-jV-etp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Muscle Groups" id="WDd-1f-nBw"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JLV-dh-bLL">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.73333333329999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IdP-8o-Wc3" kind="relationship" relationship="rootViewController" id="YM9-k9-0uI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GQu-4O-pnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="654" y="159"/>
+            <point key="canvasLocation" x="-423.19999999999999" y="-227.13643178410797"/>
         </scene>
     </scenes>
     <resources>
