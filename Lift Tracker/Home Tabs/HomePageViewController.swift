@@ -14,9 +14,9 @@ class HomePageViewController: TabmanViewController {
     
     var viewControllers: [UIViewController] = [UIViewController]()
     
-    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController
+    fileprivate func getViewController(withIdentifier identifier: String) -> SingleItemListViewController
     {
-        return UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier)
+        return UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewController
     }
 
     override func viewDidLoad() {
@@ -44,10 +44,13 @@ class HomePageViewController: TabmanViewController {
         var viewControllers = [UIViewController]()
         var barItems = [Item]()
         
-        let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController") as! ExcercisesViewController
+        let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController")
         exercisesVc.homeVc = self
         viewControllers.append(exercisesVc)
-        viewControllers.append(getViewController(withIdentifier: "MuscleGroupsViewController"))
+        
+        let musclesVc = getViewController(withIdentifier: "MuscleGroupsViewController")
+        musclesVc.homeVc = self
+        viewControllers.append(musclesVc)
         barItems.append(Item(title: "Exercises"))
         barItems.append(Item(title: "Muscle Groups"))
         
