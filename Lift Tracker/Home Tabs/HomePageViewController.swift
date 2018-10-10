@@ -32,7 +32,8 @@ class HomePageViewController: TabmanViewController {
         self.bar.appearance = TabmanBar.Appearance({ (appearance) in
             
             // customize appearance here
-            appearance.style.background = .solid(color: UIColor.blue)
+            let color = UIColor(rgb: 0x125688)
+            appearance.style.background = .solid(color: color)
             appearance.text.font = .systemFont(ofSize: 16.0)
             appearance.state.color = UIColor.white
             appearance.state.selectedColor = UIColor.white

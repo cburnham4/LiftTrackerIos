@@ -32,6 +32,7 @@
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
 		E09E78F72115133500031F19 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F62115133500031F19 /* Request.swift */; };
 		E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* BaseItemsProvider.swift */; };
+		E0D864F2216E2BBE0003800A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D864F1216E2BBE0003800A /* ColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		E09E78F62115133500031F19 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		E09E78F82115138F00031F19 /* BaseItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseItemsProvider.swift; sourceTree = "<group>"; };
+		E0D864F1216E2BBE0003800A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				E073306C214581DB00D26E15 /* AlertUtils.swift */,
+				E0D864F1216E2BBE0003800A /* ColorExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */,
 				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
 				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
+				E0D864F2216E2BBE0003800A /* ColorExtensions.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,

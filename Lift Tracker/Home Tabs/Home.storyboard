@@ -161,6 +161,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
@@ -194,11 +195,11 @@
             </objects>
             <point key="canvasLocation" x="2532" y="-509.59520239880067"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Lift Tracker-->
         <scene sceneID="cNR-9d-god">
             <objects>
                 <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="ccn-sC-1Xu"/>
+                    <navigationItem key="navigationItem" title="Lift Tracker" id="ccn-sC-1Xu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0e-xk-bGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,6 +214,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8wz-72-1Ve">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.070588235294117646" green="0.33725490196078434" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
