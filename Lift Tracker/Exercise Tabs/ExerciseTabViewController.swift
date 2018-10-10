@@ -37,17 +37,22 @@ class ExerciseTabViewController: TabmanViewController {
         
         self.automaticallyAdjustsChildScrollViewInsets = true
         
+        setupTabs()
+    }
+    
+    private func setupTabs() {
+        self.title = exercise?.name
         // configure the bar
         initializeViewControllers()
         self.bar.style = .buttonBar
         self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            
-            // customize appearance here
-            appearance.style.background = .solid(color: UIColor.blue)
-            appearance.text.font = .systemFont(ofSize: 16.0)
-            appearance.state.color = UIColor.white
-            appearance.state.selectedColor = UIColor.white
-            appearance.indicator.isProgressive = true
+    
+        // customize appearance here
+        appearance.style.background = .solid(color: UIColor.blue)
+        appearance.text.font = .systemFont(ofSize: 16.0)
+        appearance.state.color = UIColor.white
+        appearance.state.selectedColor = UIColor.white
+        appearance.indicator.isProgressive = true
         })
     }
     
