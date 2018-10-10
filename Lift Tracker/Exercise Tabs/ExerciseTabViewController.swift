@@ -35,7 +35,7 @@ class ExerciseTabViewController: TabmanViewController {
         
         self.dataSource = self
         
-        self.automaticallyAdjustsChildScrollViewInsets = true
+        self.automaticallyAdjustsChildViewInsets = true
         
         setupTabs()
     }
@@ -52,7 +52,6 @@ class ExerciseTabViewController: TabmanViewController {
         appearance.text.font = .systemFont(ofSize: 16.0)
         appearance.state.color = UIColor.white
         appearance.state.selectedColor = UIColor.white
-        appearance.indicator.isProgressive = true
         })
     }
     

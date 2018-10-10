@@ -37,7 +37,6 @@ class HomePageViewController: TabmanViewController {
             appearance.text.font = .systemFont(ofSize: 16.0)
             appearance.state.color = UIColor.white
             appearance.state.selectedColor = UIColor.white
-            appearance.indicator.isProgressive = true
         })
     }
     
