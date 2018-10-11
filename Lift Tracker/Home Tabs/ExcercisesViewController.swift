@@ -13,7 +13,7 @@ class ExcercisesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    @IBAction override func addItemClicked(_ sender: UIButton) {
+    @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Exercise", placeholder: "Exercise", callback: { exerciseName in
             var exercise = Exercise(name: exerciseName) as CoreRequestObject
             BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.POST_EXERCISE_KEY, cycle: self)

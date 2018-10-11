@@ -58,6 +58,17 @@ class HomePageViewController: TabmanViewController {
         self.viewControllers = viewControllers
         self.reloadPages()
     }
+    
+    @IBAction func addItemAction(_ sender: UIBarButtonItem) {
+        switch currentIndex {
+        case 0:
+            (viewControllers[0] as! ExcercisesViewController).addItemClicked(sender)
+        default:
+            print("Unrecognized index")
+            //Do Nothing
+        }
+    }
+    
 }
 
 extension HomePageViewController: PageboyViewControllerDataSource
