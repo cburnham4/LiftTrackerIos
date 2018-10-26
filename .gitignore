@@ -6,6 +6,8 @@
 build/
 DerivedData/
 Lift\ Tracker/GoogleService-Info.plist
+.DS_Store
+Lift\ Tracker.xcworkspace/xcuserdata
 
 ## Various settings
 *.pbxuser
