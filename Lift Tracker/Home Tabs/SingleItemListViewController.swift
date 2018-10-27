@@ -29,6 +29,7 @@ class SingleItemListViewController: UIViewController {
     weak var homeVc: HomePageViewController?
     
     override func viewDidLoad() {
+        self.singleListItems = [SimpleListRowItem]()
         self.sendItemRequest()
     }
     

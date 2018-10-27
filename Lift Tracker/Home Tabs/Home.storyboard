@@ -160,20 +160,18 @@
             <objects>
                 <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" userLabel="Home View Controller" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Lift Tracker" id="ccn-sC-1Xu">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Logout" id="le5-eU-bc5">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="logout:" destination="jGW-3O-x0P" id="Mga-FB-8Bb"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" id="Fdq-k1-Sno">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="addItemAction:" destination="jGW-3O-x0P" id="L8A-Nr-JlH"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="le5-eU-bc5">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="logout:" destination="jGW-3O-x0P" id="Mga-FB-8Bb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fdq-k1-Sno">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addItemAction:" destination="jGW-3O-x0P" id="L8A-Nr-JlH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </pageViewController>
@@ -192,6 +190,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.070588235294117646" green="0.33725490196078434" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>

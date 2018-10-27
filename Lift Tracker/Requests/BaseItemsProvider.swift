@@ -58,7 +58,7 @@ class BaseItemsProvider: Request {
         
         dbRef?.child(listKey).observeSingleEvent(of: .value, with: { (snapshot) in
             if(!snapshot.exists()){
-                cycle.requestFailed(requestKey: requestKey)
+                cycle.requestSuccess(requestKey: requestKey)
                 return
             }
             
