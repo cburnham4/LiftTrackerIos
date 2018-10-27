@@ -16,7 +16,9 @@ class HomePageViewController: TabmanViewController {
     
     fileprivate func getViewController(withIdentifier identifier: String) -> SingleItemListViewController
     {
-        return UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewController
+        let singleItemVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewController
+        singleItemVC.homeVc = self
+        return singleItemVC
     }
 
     override func viewDidLoad() {
@@ -45,14 +47,17 @@ class HomePageViewController: TabmanViewController {
         var barItems = [Item]()
         
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController")
-        exercisesVc.homeVc = self
         viewControllers.append(exercisesVc)
         
         let musclesVc = getViewController(withIdentifier: "MuscleGroupsViewController")
-        musclesVc.homeVc = self
         viewControllers.append(musclesVc)
+        
+        let routinesVC = getViewController(withIdentifier: "RoutinesViewController")
+        viewControllers.append(routinesVC)
+        
         barItems.append(Item(title: "Exercises"))
         barItems.append(Item(title: "Muscle Groups"))
+        barItems.append(Item(title: "Routines"))
         
         bar.items = barItems
         self.viewControllers = viewControllers
@@ -61,6 +66,10 @@ class HomePageViewController: TabmanViewController {
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
         viewControllers[self.currentIndex ?? 0].addItemClicked(sender)
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        print("logout")
     }
 }
 

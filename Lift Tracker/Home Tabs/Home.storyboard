@@ -83,12 +83,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHO-9L-vjx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2532" y="158.77061469265368"/>
+            <point key="canvasLocation" x="2625" y="-78"/>
         </scene>
-        <!--Lift Tracker-->
+        <!--ExcercisesViewController-->
         <scene sceneID="7NI-0B-LxY">
             <objects>
-                <viewController storyboardIdentifier="ExcercisesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dua-tJ-KnL" customClass="ExcercisesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExcercisesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dua-tJ-KnL" userLabel="ExcercisesViewController" customClass="ExcercisesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zbn-Xn-u95">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,19 +153,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyJ-Su-Lgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2532" y="-509.59520239880067"/>
+            <point key="canvasLocation" x="2625" y="-752"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="cNR-9d-god">
             <objects>
                 <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" userLabel="Home View Controller" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Lift Tracker" id="ccn-sC-1Xu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fdq-k1-Sno">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addItemAction:" destination="jGW-3O-x0P" id="L8A-Nr-JlH"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Logout" id="le5-eU-bc5">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="logout:" destination="jGW-3O-x0P" id="Mga-FB-8Bb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="Fdq-k1-Sno">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addItemAction:" destination="jGW-3O-x0P" id="L8A-Nr-JlH"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </pageViewController>
@@ -195,6 +203,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LZV-yM-8Kz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="738" y="-214"/>
+        </scene>
+        <!--RoutinesViewController-->
+        <scene sceneID="1Y2-Ds-7NV">
+            <objects>
+                <viewController storyboardIdentifier="RoutinesViewController" title="Routines" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2bh-Xw-PPj" userLabel="RoutinesViewController" customClass="RoutinesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fFX-Uh-cz5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nnm-4y-YMC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="gze-9a-QNh" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gze-9a-QNh" id="wvh-Lz-ql0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell_50" translatesAutoresizingMaskIntoConstraints="NO" id="OMd-3r-Ooi">
+                                                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="6Gp-9X-JSt"/>
+                                                        <constraint firstAttribute="height" constant="24" id="uCW-T9-bwB"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knc-gN-s7w">
+                                                    <rect key="frame" x="40" y="12" width="312" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="knc-gN-s7w" secondAttribute="trailing" constant="8" id="aGk-Av-0ic"/>
+                                                <constraint firstItem="knc-gN-s7w" firstAttribute="leading" secondItem="OMd-3r-Ooi" secondAttribute="trailing" constant="8" id="bl7-ZM-dzc"/>
+                                                <constraint firstItem="OMd-3r-Ooi" firstAttribute="leading" secondItem="wvh-Lz-ql0" secondAttribute="leading" constant="8" id="qkk-Y4-8kX"/>
+                                                <constraint firstItem="OMd-3r-Ooi" firstAttribute="centerY" secondItem="wvh-Lz-ql0" secondAttribute="centerY" id="rWL-mD-klz"/>
+                                                <constraint firstItem="knc-gN-s7w" firstAttribute="centerY" secondItem="wvh-Lz-ql0" secondAttribute="centerY" id="tek-GL-7Kj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="knc-gN-s7w" id="hfI-hj-Fyn"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2bh-Xw-PPj" id="VPg-8c-mg1"/>
+                                    <outlet property="delegate" destination="2bh-Xw-PPj" id="Dmn-zz-sSV"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nnm-4y-YMC" firstAttribute="leading" secondItem="HyB-1k-KfY" secondAttribute="leading" id="KAp-C5-ieb"/>
+                            <constraint firstItem="Nnm-4y-YMC" firstAttribute="top" secondItem="fFX-Uh-cz5" secondAttribute="top" id="TBT-LZ-tiV"/>
+                            <constraint firstItem="HyB-1k-KfY" firstAttribute="bottom" secondItem="Nnm-4y-YMC" secondAttribute="bottom" id="ixX-VI-CsW"/>
+                            <constraint firstItem="Nnm-4y-YMC" firstAttribute="trailing" secondItem="HyB-1k-KfY" secondAttribute="trailing" id="wOp-i9-SZ3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HyB-1k-KfY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Muscle Groups" id="E3L-Wv-o0y"/>
+                    <connections>
+                        <outlet property="tableView" destination="Nnm-4y-YMC" id="tIc-io-fEh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H7n-mL-yq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3329" y="-79"/>
         </scene>
     </scenes>
     <resources>
