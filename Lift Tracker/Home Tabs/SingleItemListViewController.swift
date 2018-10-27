@@ -22,7 +22,6 @@ class SingleItemListViewController: UIViewController {
     
     func addItemClicked(_ sender: UIBarButtonItem) { fatalError("Must Override") }
     func sendItemRequest() { fatalError("Must Override") }
-    func logout(_ sender: Any) { fatalError("Must Override") }
     func goToItemPage(item: SimpleListRowItem) { fatalError("Must Override") }
     func deleteItem(item: SimpleListRowItem) { fatalError("Must Override") }
     func updateItem(item: SimpleListRowItem) { fatalError("Must Override") }

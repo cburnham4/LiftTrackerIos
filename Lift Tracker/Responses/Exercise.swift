@@ -60,7 +60,7 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem {
     }
 }
 
-class Routine: CoreResponse, SimpleListRowItem {
+class Routine: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()
@@ -78,6 +78,15 @@ class Routine: CoreResponse, SimpleListRowItem {
         self.key = json["routineId"].string ?? ""
         self.name = json["routineName"].string ?? ""
         self.exerciseKeys = json["exercises"].arrayObject as? [String] ?? [String]()
+    }
+    
+    func createRequestObject() -> [String : Any] {
+        let post = ["routineId" : self.key,
+                    "routineName": self.name,
+                    "exercises" : self.exerciseKeys]
+            as [String : Any]
+        
+        return post
     }
 }
 

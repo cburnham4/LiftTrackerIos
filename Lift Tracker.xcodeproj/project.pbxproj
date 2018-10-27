@@ -10,6 +10,7 @@
 		283DDBF8ADFD4A6ED04416ED /* Pods_Lift_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E1A0F6B8DCF6BA75330139 /* Pods_Lift_TrackerTests.framework */; };
 		BE23C5389069419F16A6385F /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3964716651CC6ED4887D4EDB /* Pods_Lift_Tracker.framework */; };
 		BF2B5D42487C0716328CDF05 /* Pods_Lift_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */; };
+		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
 		E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* SingleItemTableViewCell.swift */; };
 		E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F33922162EDD2005043FF /* ExerciseTabViewController.swift */; };
@@ -62,6 +63,7 @@
 		6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA7A6A6F98A6C1026E59C0 /* Pods-Lift Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		D16F2134F715DD2118FEFC9E /* Pods-Lift TrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift TrackerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift TrackerUITests/Pods-Lift TrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
 		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
 		E03853252122106A009CE727 /* SingleItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemTableViewCell.swift; sourceTree = "<group>"; };
 		E03F33922162EDD2005043FF /* ExerciseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTabViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */,
 				E07330692144347400D26E15 /* SingleItemListViewController.swift */,
 				E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */,
+				E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */,
 			);
 			path = "Home Tabs";
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
+				E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

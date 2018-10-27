@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import UIKit
 
 class MuscleGroupsViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
 
-    @IBAction override func addItemClicked(_ sender: UIBarButtonItem) {
+    override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Muscle Group", placeholder: "Muscle Group", callback: { name in
             var muscleGroup = MuscleGroup(name: name) as CoreRequestObject
             BaseItemsProvider.sendPostRequest(object: &muscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.POST_MUSCLE_KEY, cycle: self)
@@ -38,11 +39,6 @@ class MuscleGroupsViewController: SingleItemListViewController {
     override func updateItem(item: SimpleListRowItem) {
         
     }
-    
-    @IBAction override func logout(_ sender: Any) {
-        super.logout()
-    }
-
 }
 
 extension MuscleGroupsViewController: RequestCycle {

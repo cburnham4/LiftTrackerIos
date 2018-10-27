@@ -12,7 +12,7 @@ import Pageboy
 
 class HomePageViewController: TabmanViewController {
     
-    var viewControllers: [UIViewController] = [UIViewController]()
+    var viewControllers: [SingleItemListViewController] = [SingleItemListViewController]()
     
     fileprivate func getViewController(withIdentifier identifier: String) -> SingleItemListViewController
     {
@@ -24,7 +24,7 @@ class HomePageViewController: TabmanViewController {
 
         self.dataSource = self
         
-        self.automaticallyAdjustsChildScrollViewInsets = true
+        self.automaticallyAdjustsChildViewInsets = true
         
         // configure the bar
         initializeViewControllers()
@@ -41,7 +41,7 @@ class HomePageViewController: TabmanViewController {
     }
     
     private func initializeViewControllers() {
-        var viewControllers = [UIViewController]()
+        var viewControllers = [SingleItemListViewController]()
         var barItems = [Item]()
         
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController")
@@ -60,15 +60,8 @@ class HomePageViewController: TabmanViewController {
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
-        switch currentIndex {
-        case 0:
-            (viewControllers[0] as! ExcercisesViewController).addItemClicked(sender)
-        default:
-            print("Unrecognized index")
-            //Do Nothing
-        }
+        viewControllers[self.currentIndex ?? 0].addItemClicked(sender)
     }
-    
 }
 
 extension HomePageViewController: PageboyViewControllerDataSource

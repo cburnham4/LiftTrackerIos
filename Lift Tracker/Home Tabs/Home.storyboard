@@ -76,20 +76,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xvl-ID-T3b"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Muscle Groups" id="hYc-Yg-GQA">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="KcA-oT-KtI">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="logout:" destination="IdP-8o-Wc3" id="sxZ-xh-U92"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FNs-Fw-Nvt">
-                            <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                            <connections>
-                                <action selector="addItemClicked:" destination="IdP-8o-Wc3" id="eS5-eB-fEy"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Muscle Groups" id="hYc-Yg-GQA"/>
                     <connections>
                         <outlet property="tableView" destination="7hY-sq-V7b" id="fc3-np-xwJ"/>
                     </connections>
@@ -149,44 +136,17 @@
                                     <outlet property="delegate" destination="dua-tJ-KnL" id="pbb-7P-xfE"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WES-eB-eZm">
-                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <color key="backgroundColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                <state key="normal" title="Add Exercise">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="addItemClicked:" destination="dua-tJ-KnL" eventType="touchUpInside" id="bHn-jj-ORd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
-                            <constraint firstItem="WES-eB-eZm" firstAttribute="trailing" secondItem="7yU-zi-XoZ" secondAttribute="trailing" id="7Hp-iv-f0o"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="top" secondItem="7yU-zi-XoZ" secondAttribute="top" id="TvO-Ps-vRU"/>
-                            <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="WES-eB-eZm" secondAttribute="bottom" id="XPO-Ym-6CI"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="vwE-Yr-RrB" secondAttribute="trailing" id="cvE-3i-abE"/>
-                            <constraint firstItem="WES-eB-eZm" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="qpe-kk-fZg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Lift Tracker" id="CSK-NR-ENc">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="REo-Pi-7xR">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="logout:" destination="dua-tJ-KnL" id="HH4-ob-sSm"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zcW-ky-87n">
-                            <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                            <connections>
-                                <action selector="addItemClicked:" destination="dua-tJ-KnL" id="3hf-aO-NmL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Lift Tracker" id="CSK-NR-ENc"/>
                     <connections>
                         <outlet property="tableView" destination="vwE-Yr-RrB" id="2HF-wP-lRi"/>
                     </connections>
@@ -195,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="2532" y="-509.59520239880067"/>
         </scene>
-        <!--Lift Tracker-->
+        <!--Home View Controller-->
         <scene sceneID="cNR-9d-god">
             <objects>
-                <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="HomePageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jGW-3O-x0P" userLabel="Home View Controller" customClass="HomePageViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Lift Tracker" id="ccn-sC-1Xu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fdq-k1-Sno">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -211,7 +171,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0e-xk-bGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="-227"/>
+            <point key="canvasLocation" x="1575" y="-320"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f1d-1R-lzr">
@@ -238,6 +198,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dumbbell_50" width="25" height="25"/>
+        <image name="dumbbell_50" width="50" height="50"/>
     </resources>
 </document>
