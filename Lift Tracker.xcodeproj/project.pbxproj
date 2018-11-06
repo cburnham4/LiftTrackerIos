@@ -10,6 +10,7 @@
 		283DDBF8ADFD4A6ED04416ED /* Pods_Lift_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E1A0F6B8DCF6BA75330139 /* Pods_Lift_TrackerTests.framework */; };
 		BE23C5389069419F16A6385F /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3964716651CC6ED4887D4EDB /* Pods_Lift_Tracker.framework */; };
 		BF2B5D42487C0716328CDF05 /* Pods_Lift_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */; };
+		E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */; };
 		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
 		E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* SingleItemTableViewCell.swift */; };
@@ -28,6 +29,7 @@
 		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
 		E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E073306C214581DB00D26E15 /* AlertUtils.swift */; };
+		E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0783BE6218945920080C80D /* RoutineExercise.storyboard */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
@@ -63,6 +65,7 @@
 		6828F0DAA29120CF79D2E07D /* Pods_Lift_TrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA7A6A6F98A6C1026E59C0 /* Pods-Lift Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		D16F2134F715DD2118FEFC9E /* Pods-Lift TrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift TrackerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift TrackerUITests/Pods-Lift TrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesViewController.swift; sourceTree = "<group>"; };
 		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
 		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
 		E03853252122106A009CE727 /* SingleItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
 		E073306C214581DB00D26E15 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
+		E0783BE6218945920080C80D /* RoutineExercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoutineExercise.storyboard; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -146,6 +150,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */ = {
+			isa = PBXGroup;
+			children = (
+				E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */,
+				E0783BE6218945920080C80D /* RoutineExercise.storyboard */,
+			);
+			path = MuscleGroupsRoutines;
+			sourceTree = "<group>";
+		};
 		E03F33912162ECDF005043FF /* Exercise Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +193,7 @@
 		E04D7C4A2106B2FA00E79A5A /* Lift Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
 				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
 				E073306B214581CD00D26E15 /* Utils */,
@@ -379,6 +393,7 @@
 				E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */,
 				E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */,
 				E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */,
+				E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +549,7 @@
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
 				E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */,
+				E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

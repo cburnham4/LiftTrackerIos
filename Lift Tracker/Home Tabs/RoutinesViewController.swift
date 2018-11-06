@@ -42,7 +42,10 @@ class RoutinesViewController: SingleItemListViewController {
     }
     
     override func goToItemPage(item: SimpleListRowItem) {
-
+        if let routine = item as? Routine {
+            let vc = RoutineExercisesViewController.getInstance(routine: routine)
+            super.homeVc?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

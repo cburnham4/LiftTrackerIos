@@ -22,7 +22,8 @@ protocol SimpleListRowItem {
     var name: String { get set }
 }
 
-class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem {
+class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
+    
     var key: String = ""
     var name: String = ""
     var muscleKey: String = ""
@@ -57,6 +58,10 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem {
             as [String : Any]
         
         return post
+    }
+    
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.key == rhs.key
     }
 }
 
