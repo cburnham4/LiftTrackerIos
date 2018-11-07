@@ -15,6 +15,7 @@ target 'Lift Tracker' do
   pod 'Tabman', '~> 1.10'
   pod 'Pageboy', '~> 2.6'
   pod 'FirebaseUI/Google'
+  pod 'ScrollableGraphView'
 
   target 'Lift TrackerTests' do
     inherit! :search_paths
