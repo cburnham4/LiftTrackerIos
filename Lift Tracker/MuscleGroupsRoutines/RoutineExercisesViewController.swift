@@ -16,7 +16,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
     
     var exercises: [Exercise]?
     
-    var selectedExerciseIndex: Int?
+    var selectedExerciseIndex: Int = 0
     
     public static func getInstance(routine: Routine) -> RoutineExercisesViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "RoutineExercise", bundle: nil)
@@ -39,16 +39,18 @@ class RoutineExercisesViewController: SingleItemListViewController {
     
     @objc override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertPicker(viewController: self, title: "Add Exercise to Routine", completion: { [weak self] _ in
-            if let index = self?.selectedExerciseIndex {
-                let selectedExercise = self?.exercises[index]
-            }
+            self?.exercisePicked()
         })
     }
     
     override func sendItemRequest() {
         if let exercises = UserSession.instance.getExercises(), let routine = routine {
             for exerciseKey in routine.exerciseKeys {
-                singleListItems?.append(exercises.filter({ $0.key == exerciseKey}) as! SimpleListRowItem)
+                let exercisesList = exercises.filter({ $0.key == exerciseKey})
+                
+                if (exercisesList.count > 0) {
+                    singleListItems?.append(exercisesList[0] as SimpleListRowItem)
+                }
             }
         }
         tableView.reloadData()
@@ -64,7 +66,19 @@ class RoutineExercisesViewController: SingleItemListViewController {
     override func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
-            super.homeVc?.navigationController?.pushViewController(exerciseTabsVc, animated: true)
+            self.navigationController?.pushViewController(exerciseTabsVc, animated: true)
+        }
+    }
+    
+    func exercisePicked() {
+        let index = self.selectedExerciseIndex
+        if let selectedExercise = self.exercises?[index], var routine = routine {
+            singleListItems?.append(selectedExercise)
+            tableView.reloadData()
+            
+            routine.exerciseKeys.append(selectedExercise.key)
+            var routineObject = routine as CoreRequestObject
+            BaseItemsProvider.sendPostRequest(object: &routineObject, typeKey: BaseItemsProvider.ROUTINE_KEY, requestKey: BaseItemsProvider.UPDATE_ROUTINE_KEY, cycle: self)
         }
     }
 }
@@ -85,5 +99,21 @@ extension RoutineExercisesViewController: UIPickerViewDelegate, UIPickerViewData
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedExerciseIndex = row
+    }
+}
+
+
+extension RoutineExercisesViewController: RequestCycle {
+
+    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
+        if let object = object as! Routine?, requestKey == BaseItemsProvider.UPDATE_ROUTINE_KEY {
+            // TODO make sure routine is updated on device
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    func requestFailed(requestKey: Int) {
+        super.requestFailedAlert()
     }
 }

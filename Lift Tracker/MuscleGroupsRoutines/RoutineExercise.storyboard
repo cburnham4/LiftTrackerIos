@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Routine Exercises View Controller-->
         <scene sceneID="VJm-Ye-3av">
@@ -21,6 +26,41 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AcX-eL-EiS">
                                 <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="q2j-CW-ggc" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q2j-CW-ggc" id="jTR-bl-eAm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell_50" translatesAutoresizingMaskIntoConstraints="NO" id="H9k-ql-QbT">
+                                                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="Qfz-qH-EMt"/>
+                                                        <constraint firstAttribute="height" constant="24" id="cZo-gU-anO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmX-bV-pUd">
+                                                    <rect key="frame" x="40" y="12" width="312" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="H9k-ql-QbT" firstAttribute="leading" secondItem="jTR-bl-eAm" secondAttribute="leading" constant="8" id="2dI-Nd-ann"/>
+                                                <constraint firstItem="GmX-bV-pUd" firstAttribute="leading" secondItem="H9k-ql-QbT" secondAttribute="trailing" constant="8" id="CSj-tQ-uh6"/>
+                                                <constraint firstItem="H9k-ql-QbT" firstAttribute="centerY" secondItem="jTR-bl-eAm" secondAttribute="centerY" id="Mfx-MV-9sT"/>
+                                                <constraint firstItem="GmX-bV-pUd" firstAttribute="centerY" secondItem="jTR-bl-eAm" secondAttribute="centerY" id="QoG-Pd-fzI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GmX-bV-pUd" secondAttribute="trailing" constant="8" id="awm-1S-ZUC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="GmX-bV-pUd" id="14y-oM-WF0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="meB-yT-td4" id="bzi-QQ-Kpn"/>
                                     <outlet property="delegate" destination="meB-yT-td4" id="Lap-le-Lwt"/>
@@ -47,4 +87,7 @@
             <point key="canvasLocation" x="-340" y="-88"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dumbbell_50" width="50" height="50"/>
+    </resources>
 </document>

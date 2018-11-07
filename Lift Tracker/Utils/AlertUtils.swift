@@ -55,7 +55,8 @@ class AlertUtils {
         pickerFrame.delegate = viewController as? UIPickerViewDelegate
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion)
-        viewController.present(alert, animated: true, completion: nil )
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
+            
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
