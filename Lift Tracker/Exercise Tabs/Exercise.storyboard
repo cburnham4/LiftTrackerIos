@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,6 +24,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLM-xh-cKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-327" y="-275"/>
+        </scene>
+        <!--Maxes Graph View Controller-->
+        <scene sceneID="RWZ-IC-Jr5">
+            <objects>
+                <viewController storyboardIdentifier="MaxesGraphViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gns-qs-gLr" customClass="MaxesGraphViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UMW-JA-KzW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6X-OX-Kix" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                <rect key="frame" x="16" y="28" width="343" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="zSf-KQ-VLq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="J6X-OX-Kix" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" constant="16" id="QMO-am-A2G"/>
+                            <constraint firstItem="J6X-OX-Kix" firstAttribute="top" secondItem="y0z-BS-rUM" secondAttribute="top" constant="8" id="eZ5-3Y-5US"/>
+                            <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="J6X-OX-Kix" secondAttribute="trailing" constant="16" id="qOZ-Ww-RyO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y0z-BS-rUM"/>
+                    </view>
+                    <connections>
+                        <outlet property="graphView" destination="J6X-OX-Kix" id="gbE-7n-Po0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3LB-lp-jds" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="394" y="-277"/>
         </scene>
     </scenes>
 </document>

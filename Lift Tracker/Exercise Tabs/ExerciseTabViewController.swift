@@ -10,6 +10,14 @@ import Foundation
 import Tabman
 import Pageboy
 
+protocol ExerciseTabVC {
+    var exercise: Exercise? { get set }
+}
+
+class ExerciseBaseTabViewController: UIViewController, ExerciseTabVC {
+    var exercise: Exercise?
+}
+
 class ExerciseTabViewController: TabmanViewController {
     
     var viewControllers: [UIViewController] = [UIViewController]()
@@ -25,9 +33,13 @@ class ExerciseTabViewController: TabmanViewController {
         return exerciseTabVC
     }
     
-    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController
+    fileprivate func getViewController(withIdentifier identifier: String) -> ExerciseBaseTabViewController
     {
-        return UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: identifier)
+        let viewController = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: identifier) as! ExerciseBaseTabViewController
+        
+        viewController.exercise = exercise
+        
+        return viewController
     }
     
     override func viewDidLoad() {
@@ -65,7 +77,7 @@ class ExerciseTabViewController: TabmanViewController {
         // TODO: Append view controllers to list
         viewControllers.append(UIViewController())
         viewControllers.append(UIViewController())
-        viewControllers.append(UIViewController())
+        viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
         
         // TODO: Add Titles for VCs
         barItems.append(Item(title: "Add Set"))
