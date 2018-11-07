@@ -72,7 +72,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
     
     func exercisePicked() {
         let index = self.selectedExerciseIndex
-        if let selectedExercise = self.exercises?[index], var routine = routine {
+        if let selectedExercise = self.exercises?[index], let routine = routine {
             singleListItems?.append(selectedExercise)
             tableView.reloadData()
             
@@ -106,11 +106,8 @@ extension RoutineExercisesViewController: UIPickerViewDelegate, UIPickerViewData
 extension RoutineExercisesViewController: RequestCycle {
 
     func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let object = object as! Routine?, requestKey == BaseItemsProvider.UPDATE_ROUTINE_KEY {
-            // TODO make sure routine is updated on device
-        }
-        
-        self.tableView.reloadData()
+    
+        // TODO remove spinner
     }
     
     func requestFailed(requestKey: Int) {

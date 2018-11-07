@@ -50,6 +50,7 @@ class RoutinesViewController: SingleItemListViewController {
 }
 
 extension RoutinesViewController: RequestCycle {
+    
     func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
         if let routine = object as! Routine?, requestKey == BaseItemsProvider.POST_ROTUINE_KEY {
             self.singleListItems?.append(routine)

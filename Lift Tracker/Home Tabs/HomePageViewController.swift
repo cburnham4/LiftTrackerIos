@@ -39,6 +39,7 @@ class HomePageViewController: TabmanViewController {
             appearance.text.font = .systemFont(ofSize: 16.0)
             appearance.state.color = UIColor.white
             appearance.state.selectedColor = UIColor.white
+            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
         })
     }
     
@@ -49,14 +50,14 @@ class HomePageViewController: TabmanViewController {
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController")
         viewControllers.append(exercisesVc)
         
-        let musclesVc = getViewController(withIdentifier: "MuscleGroupsViewController")
-        viewControllers.append(musclesVc)
+//        let musclesVc = getViewController(withIdentifier: "MuscleGroupsViewController")
+//        viewControllers.append(musclesVc)
         
         let routinesVC = getViewController(withIdentifier: "RoutinesViewController")
         viewControllers.append(routinesVC)
         
         barItems.append(Item(title: "Exercises"))
-        barItems.append(Item(title: "Muscle Groups"))
+        // barItems.append(Item(title: "Muscle Groups"))
         barItems.append(Item(title: "Routines"))
         
         bar.items = barItems
