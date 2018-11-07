@@ -70,7 +70,7 @@ class ExerciseTabViewController: TabmanViewController {
         // TODO: Add Titles for VCs
         barItems.append(Item(title: "Add Set"))
         barItems.append(Item(title: "Past Lifts"))
-        barItems.append(Item(title: "GRAPH"))
+        barItems.append(Item(title: "Graph"))
         
         bar.items = barItems
         self.viewControllers = viewControllers
