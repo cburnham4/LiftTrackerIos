@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A72F1A9139237BA1418BCF01A455E6C"
+               BlueprintIdentifier = "454037099FC6CF84878BEF30EEEC101C"
                BuildableName = "Pods_Lift_Tracker.framework"
                BlueprintName = "Pods-Lift Tracker"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A72F1A9139237BA1418BCF01A455E6C"
+            BlueprintIdentifier = "454037099FC6CF84878BEF30EEEC101C"
             BuildableName = "Pods_Lift_Tracker.framework"
             BlueprintName = "Pods-Lift Tracker"
             ReferencedContainer = "container:Pods.xcodeproj">

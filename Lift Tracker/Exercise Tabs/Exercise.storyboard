@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,6 +24,110 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLM-xh-cKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-327" y="-275"/>
+        </scene>
+        <!--Maxes Graph View Controller-->
+        <scene sceneID="RWZ-IC-Jr5">
+            <objects>
+                <viewController storyboardIdentifier="MaxesGraphViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gns-qs-gLr" customClass="MaxesGraphViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UMW-JA-KzW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tX1-oA-NuQ">
+                                <rect key="frame" x="16" y="48" width="343" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSu-dV-3BB">
+                                        <rect key="frame" x="0.0" y="1" width="68.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="1m">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeSectionSelected:" destination="Gns-qs-gLr" eventType="touchUpInside" id="viG-R9-Uml"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmn-tT-BLi">
+                                        <rect key="frame" x="68.5" y="1" width="68.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="3m">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeSectionSelected:" destination="Gns-qs-gLr" eventType="touchUpInside" id="jJP-Un-RnQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58g-31-VRy">
+                                        <rect key="frame" x="137" y="1" width="69" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="6m">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeSectionSelected:" destination="Gns-qs-gLr" eventType="touchUpInside" id="RIY-ER-QJD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Suk-ga-TbL">
+                                        <rect key="frame" x="206" y="1" width="68.5" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="1y">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeSectionSelected:" destination="Gns-qs-gLr" eventType="touchUpInside" id="4Vo-rv-3Jf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cB-HM-dzA">
+                                        <rect key="frame" x="274.5" y="1" width="68.5" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="All">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeSectionSelected:" destination="Gns-qs-gLr" eventType="touchUpInside" id="SU2-vF-Xay"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Jp1-48-hUw"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6X-OX-Kix" customClass="ScrollableGraphView" customModule="ScrollableGraphView">
+                                <rect key="frame" x="16" y="90" width="343" height="300"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="zSf-KQ-VLq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topMargin">
+                                        <real key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAdaptRange" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tX1-oA-NuQ" firstAttribute="top" secondItem="UMW-JA-KzW" secondAttribute="top" constant="48" id="ACp-yV-77a"/>
+                            <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="tX1-oA-NuQ" secondAttribute="trailing" constant="16" id="CAd-c0-wrv"/>
+                            <constraint firstItem="J6X-OX-Kix" firstAttribute="top" secondItem="tX1-oA-NuQ" secondAttribute="bottom" constant="10" id="DXz-mP-Cyd"/>
+                            <constraint firstItem="J6X-OX-Kix" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" constant="16" id="QMO-am-A2G"/>
+                            <constraint firstItem="tX1-oA-NuQ" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" constant="16" id="oL5-ou-WzA"/>
+                            <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="J6X-OX-Kix" secondAttribute="trailing" constant="16" id="qOZ-Ww-RyO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y0z-BS-rUM"/>
+                    </view>
+                    <connections>
+                        <outlet property="allTimeBtn" destination="4cB-HM-dzA" id="42c-eO-7Rh"/>
+                        <outlet property="graphView" destination="J6X-OX-Kix" id="gbE-7n-Po0"/>
+                        <outlet property="oneMonthBtn" destination="eSu-dV-3BB" id="ZtS-GL-fFg"/>
+                        <outlet property="oneYearBtn" destination="Suk-ga-TbL" id="hza-Q9-wtO"/>
+                        <outlet property="sixMonthBtn" destination="58g-31-VRy" id="RXB-zB-XlZ"/>
+                        <outlet property="threeMonthBtn" destination="Lmn-tT-BLi" id="2Kj-Nn-Gu6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3LB-lp-jds" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="394" y="-277"/>
         </scene>
     </scenes>
 </document>

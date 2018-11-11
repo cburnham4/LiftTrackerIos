@@ -9,6 +9,8 @@
 import Foundation
 import SwiftyJSON
 
+let DATE_FORMAT = "dd-MM-yyyy"
+
 class CoreResponse {
     init(json: JSON) {
         setFields(json: json)
@@ -22,6 +24,7 @@ protocol SimpleListRowItem {
     var name: String { get set }
 }
 
+// TODO make sure all string are correct
 class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
     
     var key: String = ""
@@ -45,8 +48,8 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
         
         self.pastSets = [DayLiftSets]()
         
-        for pastSetObject in json["pastSets"].array ?? [JSON]() {
-            self.pastSets.append(DayLiftSets(json: pastSetObject))
+        for pastSetObject in json["LiftSets"].dictionary ?? [String: JSON]() {
+            self.pastSets.append(DayLiftSets(dateString: pastSetObject.key, json: pastSetObject.value))
         }
     }
     
@@ -54,7 +57,7 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
         let post = ["exerciseKey" : self.key,
                     "exerciseName": self.name,
                     "muscleId": self.muscleKey,
-                    "pastSets" : self.pastSets.map { $0.createRequestObject() }]
+                    "LiftSets" : self.pastSets.map { $0.createRequestObject() }]
             as [String : Any]
         
         return post
@@ -119,7 +122,7 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
         let post = ["muscleGroupId" : self.key,
                     "muscleGroupName": self.name,
                     "exercises" : self.exerciseKeys]
-            as [String : Any]
+         as [String : Any]
         
         return post
     }
@@ -127,26 +130,31 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
 
 class DayLiftSets: CoreResponse, CoreRequestObject {
     var key: String = ""
-    var date: String = ""
+    var dateString: String = ""
+    var date: Date = Date()
     var max: Double = 0.0
     var liftsets: [LiftSet] = [LiftSet]()
     
-    override init(json: JSON) {
+    init(dateString: String, json: JSON) {
+        self.dateString = dateString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DATE_FORMAT
+        self.date = dateFormatter.date(from: dateString) ?? Date()
         super.init(json: json)
     }
     
     override func setFields(json: JSON) {
-        self.date = json["date"].string ?? ""
-        self.max = json["Max"].double ?? 0.0
-        self.liftsets = [LiftSet]()
-        
-        for liftSetObject in json["liftSets"].array ?? [JSON]() {
-            liftsets.append(LiftSet(json: liftSetObject))
+        for dict in json.dictionaryValue {
+            if (dict.key == "Max") {
+                self.max = dict.value.doubleValue
+            } else {
+                liftsets.append(LiftSet(json: dict.value))
+            }
         }
     }
     
     func createRequestObject() -> [String : Any] {
-        let post = ["date" : self.date,
+        let post = ["date" : self.dateString,
                     "Max": self.max,
                     "liftSets": self.liftsets.map { $0.createRequestObject() } ]
         as [String: Any]
