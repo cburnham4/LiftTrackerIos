@@ -112,6 +112,8 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
                 selectedMaxDates.append(maxDatePoint)
             }
         }
+
+        graphView.layoutSubviews()
         graphView.reload()
     }
 }
