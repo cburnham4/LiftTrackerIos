@@ -9,6 +9,8 @@
 import Foundation
 import SwiftyJSON
 
+let DATE_FORMAT = "dd-MM-yyyy"
+
 class CoreResponse {
     init(json: JSON) {
         setFields(json: json)
@@ -47,7 +49,7 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
         self.pastSets = [DayLiftSets]()
         
         for pastSetObject in json["LiftSets"].dictionary ?? [String: JSON]() {
-            self.pastSets.append(DayLiftSets(date: pastSetObject.key, json: pastSetObject.value))
+            self.pastSets.append(DayLiftSets(dateString: pastSetObject.key, json: pastSetObject.value))
         }
     }
     
@@ -128,12 +130,16 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
 
 class DayLiftSets: CoreResponse, CoreRequestObject {
     var key: String = ""
-    var date: String = ""
+    var dateString: String = ""
+    var date: Date = Date()
     var max: Double = 0.0
     var liftsets: [LiftSet] = [LiftSet]()
     
-    init(date: String, json: JSON) {
-        self.date = date
+    init(dateString: String, json: JSON) {
+        self.dateString = dateString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DATE_FORMAT
+        self.date = dateFormatter.date(from: dateString) ?? Date()
         super.init(json: json)
     }
     
@@ -145,17 +151,10 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
                 liftsets.append(LiftSet(json: dict.value))
             }
         }
-       // for field in json.
-//        self.max = json["Max"].double ?? 0.0
-//        self.liftsets = [LiftSet]()
-//
-//        for liftSetObject in json["liftSets"].array ?? [JSON]() {
-//            liftsets.append(LiftSet(json: liftSetObject))
-//        }
     }
     
     func createRequestObject() -> [String : Any] {
-        let post = ["date" : self.date,
+        let post = ["date" : self.dateString,
                     "Max": self.max,
                     "liftSets": self.liftsets.map { $0.createRequestObject() } ]
         as [String: Any]
