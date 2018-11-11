@@ -72,7 +72,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     @IBAction func timeSectionSelected(_ sender: UIButton) {
         wipeButtonBackground()
         sender.backgroundColor = UIColor.lightGray
-        if (sender == oneYearBtn) {
+        if (sender == oneMonthBtn) {
             parseDatesData(timeLimit: timeInMonth!)
         } else if (sender == threeMonthBtn!) {
             parseDatesData(timeLimit: timeIn3Month!)
@@ -94,7 +94,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     }
     
     func getDateTimes () {
-        timeInDay = 24 * 60 * 60 * 1000.0
+        timeInDay = 24 * 60 * 60
         timeInMonth = timeInDay! * 30.5
         timeIn3Month = timeInMonth! * 3
         timeIn6Month = timeIn3Month! * 2
@@ -119,7 +119,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
 extension MaxesGraphViewController: ScrollableGraphViewDataSource {
     
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
-        if(selectedMaxDates.isEmpty) { return 0 }
+        if(pointIndex >= selectedMaxDates.count) { return 0 }
         // Return the data for each plot.
         switch(plot.identifier) { 
         case "line":
