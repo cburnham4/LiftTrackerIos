@@ -20,6 +20,24 @@ class ExerciseBaseTabViewController: UIViewController, ExerciseTabVC {
 
 class ExerciseTabViewController: TabmanViewController {
     
+    
+    @IBOutlet weak var minusWeightButton: UIButton!
+    @IBOutlet weak var addWeightButton: UIButton!
+    @IBOutlet weak var minusRepsButton: UIButton!
+    @IBOutlet weak var addRepsButton: UIButton!
+    
+    @IBOutlet weak var addExerciseButton: UIButton!
+    @IBOutlet weak var clearExerciseButton: UIButton!
+    
+    @IBOutlet weak var exerciseTableView: UITableView!
+    
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var repTextField: UITextField!
+    
+    
+    
+    
+    
     var viewControllers: [UIViewController] = [UIViewController]()
     
     var exercise: Exercise?
@@ -50,6 +68,7 @@ class ExerciseTabViewController: TabmanViewController {
         self.automaticallyAdjustsChildViewInsets = true
         
         setupTabs()
+        didLoadViewSetup()
     }
     
     private func setupTabs() {
@@ -75,6 +94,8 @@ class ExerciseTabViewController: TabmanViewController {
         
         // THESE will crash it
         // TODO: Append view controllers to list
+        //TODO: How do I append my Controller without causing it to crash? Right now it is the base controller, should it be the base controller?
+        
         viewControllers.append(UIViewController())
         viewControllers.append(UIViewController())
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
@@ -88,6 +109,7 @@ class ExerciseTabViewController: TabmanViewController {
         self.viewControllers = viewControllers
         self.reloadPages()
     }
+    @IBOutlet weak var repsTableView: UITableView!
 }
 
 extension ExerciseTabViewController: PageboyViewControllerDataSource
@@ -104,4 +126,79 @@ extension ExerciseTabViewController: PageboyViewControllerDataSource
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil
     }
+}
+
+//Textfield Setup
+extension ExerciseTabViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //TODO: Add Functionality to Prevent Unwanted Characters
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        //Store Info in Variable 
+    }
+    
+    
+}
+
+// Weight Functionality
+extension ExerciseTabViewController {
+    
+    @IBAction func  didTapSubtractWeight(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to use?
+    
+    }
+    
+    @IBAction func didTapAddWeight(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to use?
+    }
+    
+    @IBAction func didTapAddExercise(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to add it to?
+
+    }
+    
+    @IBAction func didTapClearExercise(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to use?
+        resetState()
+    }
+    
+}
+
+//Reps Functionality
+extension ExerciseTabViewController {
+    @IBAction func  didTapSubtractRep(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to use?
+        
+    }
+    
+    @IBAction func didTapAddRep(_ sender: UIButton) {
+        //TODO: Create a new set? Or is there an Existing Set for us to use?
+    }
+    
+}
+
+extension ExerciseTabViewController: UITableViewDelegate {
+    
+}
+
+
+//Helper Methods
+extension ExerciseTabViewController {
+    func didLoadViewSetup() {
+        if weightTextField.text!.isEmpty {
+            addWeightButton.isEnabled = false
+            minusWeightButton.isEnabled = false
+        }
+    }
+    func resetState() {
+        weightTextField.text = nil
+        repTextField.text = nil
+        didLoadViewSetup()
+    }
+
+
 }
