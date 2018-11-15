@@ -11,18 +11,18 @@ import Tabman
 import Pageboy
 
 protocol ExerciseTabVC {
-    var exercise: Exercise? { get set }
+    var exercise: Exercise! { get set }
 }
 
 class ExerciseBaseTabViewController: UIViewController, ExerciseTabVC {
-    var exercise: Exercise?
+    var exercise: Exercise!
 }
 
 class ExerciseTabViewController: TabmanViewController {
     
     var viewControllers: [UIViewController] = [UIViewController]()
     
-    var exercise: Exercise?
+    var exercise: Exercise!
     
     public static func getInstance(exercise: Exercise) -> ExerciseTabViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Exercise", bundle: nil)
@@ -76,7 +76,7 @@ class ExerciseTabViewController: TabmanViewController {
         // THESE will crash it
         // TODO: Append view controllers to list
         viewControllers.append(UIViewController())
-        viewControllers.append(UIViewController())
+        viewControllers.append(getViewController(withIdentifier: "PastSetsViewController"))
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
         
         // TODO: Add Titles for VCs
