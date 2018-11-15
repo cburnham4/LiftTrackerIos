@@ -12,6 +12,8 @@ class PastSetsViewController: ExerciseBaseTabViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var pastDates: [DayLiftSets]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,24 +22,23 @@ class PastSetsViewController: ExerciseBaseTabViewController {
         
         //Add table view footer to avoid extra lines at the bottom
         tableView.tableFooterView = UIView()
+        
+        pastDates = exercise.pastSets.filter({ $0.liftsets.count != 0 })
     }
-}
-
-extension PastSetsViewController: UITableViewDelegate {
-    
 }
 
 extension PastSetsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercise.pastSets.count
+        return pastDates?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PastSetsTableViewCell", for: indexPath) as! PastSetsTableViewCell
         
-        let item = exercise.pastSets[indexPath.row]
+        let item = pastDates?[indexPath.row]
         
-        cell.setContent(content: item)
+        //unwrapped allowed here since if pastdates is null, this code will not be ran
+        cell.setContent(content: item!)
         return cell
     }
 }
@@ -49,7 +50,7 @@ class PastSetsTableViewCell: UITableViewCell {
     @IBOutlet weak var liftsLabel: UILabel!
     
     func setContent(content: DayLiftSets) {
-        dateLabel.text = content.dateString
+        dateLabel.text = content.getPresentableDateString()
         
         var liftString: String = ""
         for liftset in content.liftsets {
