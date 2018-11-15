@@ -164,6 +164,12 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         
         return post
     }
+    
+    func getPresentableDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: self.date)
+    }
 }
 
 class LiftSet: CoreResponse, CoreRequestObject {
