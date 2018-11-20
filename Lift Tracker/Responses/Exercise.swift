@@ -51,6 +51,8 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
         for pastSetObject in json["LiftSets"].dictionary ?? [String: JSON]() {
             self.pastSets.append(DayLiftSets(dateString: pastSetObject.key, json: pastSetObject.value))
         }
+        
+        pastSets.sort(by: { $0.date > $1.date })
     }
     
     func createRequestObject() -> [String: Any] {
@@ -142,6 +144,7 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         self.date = dateFormatter.date(from: dateString) ?? Date()
         super.init(json: json)
     }
+
     
     override func setFields(json: JSON) {
         for dict in json.dictionaryValue {
@@ -160,6 +163,12 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         as [String: Any]
         
         return post
+    }
+    
+    func getPresentableDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: self.date)
     }
 }
 
