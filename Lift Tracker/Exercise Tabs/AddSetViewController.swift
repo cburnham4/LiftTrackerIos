@@ -22,13 +22,31 @@ class AddSetViewController: ExerciseBaseTabViewController {
     
     //MARK: Actions
     @IBAction func addFiveWeight(_ sender: Any) {
+        var value = Double(weightTextField.text ?? "0") ?? 0.0
+        value = value + 5.0
+        weightTextField.text = value.format(decimals: ".1")
     }
+    
     @IBAction func subtractFiveWeight(_ sender: Any) {
+        var value = Double(weightTextField.text ?? "0") ?? 0.0
+        if(value > 5) {
+            value = value - 5.0
+            weightTextField.text = value.format(decimals: ".1")
+        }
     }
     
     @IBAction func subtractRep(_ sender: Any) {
+        var value = Int(repTextField.text ?? "0") ?? 0
+        if(value > 1) {
+            value = value - 1
+            repTextField.text = String(value)
+        }
     }
+    
     @IBAction func addRep(_ sender: UIButton) {
+        var value = Int(repTextField.text ?? "0") ?? 0
+        value = value + 1
+        repTextField.text = String(value)
     }
 
     @IBAction func addExercise(_ sender: UIButton) {
