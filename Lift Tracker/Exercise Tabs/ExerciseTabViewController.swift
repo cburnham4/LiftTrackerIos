@@ -86,7 +86,6 @@ class ExerciseTabViewController: TabmanViewController {
         self.viewControllers = viewControllers
         self.reloadPages()
     }
-    @IBOutlet weak var repsTableView: UITableView!
 }
 
 extension ExerciseTabViewController: PageboyViewControllerDataSource
