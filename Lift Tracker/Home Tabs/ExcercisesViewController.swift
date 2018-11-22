@@ -16,7 +16,7 @@ class ExcercisesViewController: SingleItemListViewController {
     override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Exercise", placeholder: "Exercise", callback: { exerciseName in
             var exercise = Exercise(name: exerciseName) as CoreRequestObject
-            BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.POST_EXERCISE_KEY, cycle: self)
+            BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: .exercises, requestKey: .post, cycle: self)
         })
     }
     
@@ -26,7 +26,7 @@ class ExcercisesViewController: SingleItemListViewController {
     
     override func deleteItem(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
-            BaseItemsProvider.deleteItem(object: exercise, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.DELETE_EXERCISE_KEY, cycle: self)
+            BaseItemsProvider.deleteItem(object: exercise, typeKey: .exercises, requestKey: .delete, cycle: self)
         }
     }
     
@@ -35,7 +35,7 @@ class ExcercisesViewController: SingleItemListViewController {
             AlertUtils.createAlertTextCallback(view: self, title: "Update Exercise Name", placeholder: "Exercise", callback: { exerciseName in
                 exercise.name = exerciseName
                 var requestObject = exercise as CoreRequestObject
-                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: BaseItemsProvider.EXERCISE_KEY, requestKey: BaseItemsProvider.UPDATE_EXERCISE_KEY, cycle: self)
+                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: self)
             })
         }
     }
@@ -49,25 +49,25 @@ class ExcercisesViewController: SingleItemListViewController {
 }
 
 extension ExcercisesViewController: RequestCycle {
-    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let exercise = object as! Exercise?, requestKey == BaseItemsProvider.POST_EXERCISE_KEY {
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
+        if let exercise = object as! Exercise?, requestKey == .post {
             self.singleListItems?.append(exercise)
             UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
-        } else if let object = object, requestKey == BaseItemsProvider.DELETE_EXERCISE_KEY {
+        } else if let object = object, requestKey == .delete {
             self.singleListItems = self.singleListItems?.filter({$0.key != object.key})
             UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
-        } else if let object = object as! Exercise?, requestKey == BaseItemsProvider.UPDATE_EXERCISE_KEY {
+        } else if let object = object as! Exercise?, requestKey == .update {
             var exercise = self.singleListItems?.filter{ $0.key == object.key }.first
             exercise?.name = object.name
             UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
-        } else if requestKey == BaseItemsProvider.GET_EXERCISE_KEY {
+        } else if requestKey == .get {
             self.singleListItems = UserSession.instance.getExercises()
         }
         
         self.tableView.reloadData()
     }
     
-    func requestFailed(requestKey: Int) {
+    func requestFailed(requestKey: RequestType) {
         super.requestFailedAlert()
     }
 }

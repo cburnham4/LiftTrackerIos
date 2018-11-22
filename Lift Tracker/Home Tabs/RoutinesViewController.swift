@@ -16,7 +16,7 @@ class RoutinesViewController: SingleItemListViewController {
     override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Routine", placeholder: "Routine", callback: { name in
             var routine = Routine(name: name) as CoreRequestObject
-            BaseItemsProvider.sendPostRequest(object: &routine, typeKey: BaseItemsProvider.ROUTINE_KEY, requestKey: BaseItemsProvider.POST_ROTUINE_KEY, cycle: self)
+            BaseItemsProvider.sendPostRequest(object: &routine, typeKey: .routines, requestKey: .post, cycle: self)
         })
     }
     
@@ -26,7 +26,7 @@ class RoutinesViewController: SingleItemListViewController {
     
     override func deleteItem(item: SimpleListRowItem) {
         if let routine = item as? Routine {
-            BaseItemsProvider.deleteItem(object: routine, typeKey: BaseItemsProvider.ROUTINE_KEY, requestKey: BaseItemsProvider.DELETE_ROUTINE_KEY, cycle: self)
+            BaseItemsProvider.deleteItem(object: routine, typeKey: .routines, requestKey: .delete, cycle: self)
         }
     }
     
@@ -36,7 +36,7 @@ class RoutinesViewController: SingleItemListViewController {
                 guard let strongSelf = self else { return }
                 routine.name = name
                 var requestObject = routine as CoreRequestObject
-                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: BaseItemsProvider.ROUTINE_KEY, requestKey: BaseItemsProvider.UPDATE_ROUTINE_KEY, cycle: strongSelf)
+                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .routines, requestKey: .update, cycle: strongSelf)
             })
         }
     }
@@ -51,25 +51,25 @@ class RoutinesViewController: SingleItemListViewController {
 
 extension RoutinesViewController: RequestCycle {
     
-    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let routine = object as! Routine?, requestKey == BaseItemsProvider.POST_ROTUINE_KEY {
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
+        if let routine = object as! Routine?, requestKey == .post {
             self.singleListItems?.append(routine)
             UserSession.instance.setRoutines(routines: singleListItems as! [Routine])
-        } else if let object = object, requestKey == BaseItemsProvider.DELETE_ROUTINE_KEY {
+        } else if let object = object, requestKey == .delete {
             self.singleListItems = self.singleListItems?.filter({$0.key != object.key})
             UserSession.instance.setRoutines(routines: singleListItems as! [Routine])
-        } else if let object = object as! Routine?, requestKey == BaseItemsProvider.UPDATE_ROUTINE_KEY {
+        } else if let object = object as! Routine?, requestKey == .update {
             var routine = self.singleListItems?.filter{ $0.key == object.key }.first
             routine?.name = object.name
             UserSession.instance.setRoutines(routines: singleListItems as! [Routine])
-        } else if requestKey == BaseItemsProvider.GET_ROUTINE_KEY {
+        } else if requestKey == .get {
             self.singleListItems = UserSession.instance.getRoutines()
         }
         
         self.tableView.reloadData()
     }
     
-    func requestFailed(requestKey: Int) {
+    func requestFailed(requestKey: RequestType) {
         super.requestFailedAlert()
     }
 }

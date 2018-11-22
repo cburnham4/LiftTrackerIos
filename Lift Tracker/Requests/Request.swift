@@ -12,12 +12,12 @@ import Firebase
 import FirebaseDatabase
 
 protocol RequestCycle {
-    func requestSuccess(requestKey: Int, object: CoreRequestObject?)
-    func requestFailed(requestKey: Int)
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?)
+    func requestFailed(requestKey: RequestType)
 }
 
 extension RequestCycle {
-    func requestSuccess(requestKey: Int, object: CoreRequestObject? = nil) {
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject? = nil) {
         requestSuccess(requestKey: requestKey, object: object)
     }
 }
@@ -38,15 +38,14 @@ extension Request {
         return Auth.auth().currentUser?.uid
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, typeKey: String, requestKey: Int, cycle: RequestCycle) {
-        let dbRef = self.getUserDatabaseReference()
+    static func sendPostRequest(object: inout CoreRequestObject, requestKey: RequestType, dbRef: DatabaseReference?, cycle: RequestCycle) {
         
         if(object.key.isEmpty) {
             object.key = dbRef?.childByAutoId().key ?? ""
         }
         
         let returnObject = object
-        dbRef?.child(typeKey).child(object.key).setValue(object.createRequestObject()) { error, _ in
+        dbRef?.child(object.key).setValue(object.createRequestObject()) { error, _ in
             if error != nil {
                 cycle.requestFailed(requestKey: requestKey)
             } else {
@@ -55,10 +54,16 @@ extension Request {
         }
     }
     
-    static func deleteItem(object: CoreRequestObject, typeKey: String, requestKey: Int, cycle: RequestCycle) {
+    static func sendPostRequest(object: inout CoreRequestObject, typeKey: RequestItemType, requestKey: RequestType, cycle: RequestCycle) {
+        let dbRef = self.getUserDatabaseReference()?.child(typeKey.rawValue)
+        
+        sendPostRequest(object: &object, requestKey: requestKey, dbRef: dbRef, cycle: cycle)
+    }
+    
+    static func deleteItem(object: CoreRequestObject, typeKey: RequestItemType, requestKey: RequestType, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
-        dbRef?.child(typeKey).child(object.key).removeValue() {error, _ in
+        dbRef?.child(typeKey.rawValue).child(object.key).removeValue() {error, _ in
             if error != nil {
                 cycle.requestFailed(requestKey: requestKey)
             } else {

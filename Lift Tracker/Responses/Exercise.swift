@@ -47,14 +47,13 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
             self.pastSets.append(DayLiftSets(dateString: pastSetObject.key, json: pastSetObject.value))
         }
         
-        pastSets.sort(by: { $0.date > $1.date })
+        //pastSets.sort(by: { $0.date > $1.date })
     }
     
     func createRequestObject() -> [String: Any] {
         let post = ["exerciseKey" : self.key,
                     "exerciseName": self.name,
-                    "muscleId": self.muscleKey,
-                    "LiftSets" : self.pastSets.map { $0.createRequestObject() }]
+                    "muscleId": self.muscleKey]
             as [String : Any]
         
         return post
@@ -132,6 +131,7 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
     
     init(dateString: String, json: JSON) {
         self.dateString = dateString
+        self.key = dateString
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DATE_FORMAT
         self.date = dateFormatter.date(from: dateString) ?? Date()
@@ -139,7 +139,8 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
     }
 
     init() {
-        self.dateString = date.getStringDate()
+        self.dateString = date.getServerDateString()
+        self.key = dateString
     }
     
     func setFields(json: JSON) {
@@ -154,17 +155,10 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
     
     func createRequestObject() -> [String : Any] {
         let post = ["date" : self.dateString,
-                    "Max": self.max,
-                    "liftSets": self.liftsets.map { $0.createRequestObject() } ]
+                    "Max": self.max]
         as [String: Any]
         
         return post
-    }
-    
-    func getPresentableDateString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        return dateFormatter.string(from: self.date)
     }
 }
 

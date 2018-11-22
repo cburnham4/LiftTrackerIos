@@ -78,7 +78,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
             
             routine.exerciseKeys.append(selectedExercise.key)
             var routineObject = routine as CoreRequestObject
-            BaseItemsProvider.sendPostRequest(object: &routineObject, typeKey: BaseItemsProvider.ROUTINE_KEY, requestKey: BaseItemsProvider.UPDATE_ROUTINE_KEY, cycle: self)
+            BaseItemsProvider.sendPostRequest(object: &routineObject, typeKey: .routines, requestKey: .update, cycle: self)
         }
     }
 }
@@ -105,12 +105,12 @@ extension RoutineExercisesViewController: UIPickerViewDelegate, UIPickerViewData
 
 extension RoutineExercisesViewController: RequestCycle {
 
-    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
     
         // TODO remove spinner
     }
     
-    func requestFailed(requestKey: Int) {
+    func requestFailed(requestKey: RequestType) {
         super.requestFailedAlert()
     }
 }

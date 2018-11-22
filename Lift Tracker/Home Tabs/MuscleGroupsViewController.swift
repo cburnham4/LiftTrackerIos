@@ -16,7 +16,7 @@ class MuscleGroupsViewController: SingleItemListViewController {
     override func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertTextCallback(view: self, title: "Add Muscle Group", placeholder: "Muscle Group", callback: { name in
             var muscleGroup = MuscleGroup(name: name) as CoreRequestObject
-            BaseItemsProvider.sendPostRequest(object: &muscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.POST_MUSCLE_KEY, cycle: self)
+            BaseItemsProvider.sendPostRequest(object: &muscleGroup, typeKey: .muscles, requestKey: .post, cycle: self)
         })
     }
     
@@ -32,7 +32,7 @@ class MuscleGroupsViewController: SingleItemListViewController {
     
     override func deleteItem(item: SimpleListRowItem) {
         if let muscleGroup = item as? MuscleGroup {
-            BaseItemsProvider.deleteItem(object: muscleGroup, typeKey: BaseItemsProvider.MUSCLE_GROUPS_KEY, requestKey: BaseItemsProvider.DELETE_MUSCLE_KEY, cycle: self)
+            BaseItemsProvider.deleteItem(object: muscleGroup, typeKey: .muscles, requestKey: .delete, cycle: self)
         }
     }
     
@@ -42,21 +42,21 @@ class MuscleGroupsViewController: SingleItemListViewController {
 }
 
 extension MuscleGroupsViewController: RequestCycle {
-    func requestSuccess(requestKey: Int, object: CoreRequestObject?) {
-        if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.POST_MUSCLE_KEY {
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
+        if let object = object as! MuscleGroup?, requestKey == .post {
             singleListItems?.append(object)
             UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if let object = object as! MuscleGroup?, requestKey == BaseItemsProvider.DELETE_MUSCLE_KEY {
+        } else if let object = object as! MuscleGroup?, requestKey == .delete {
             self.singleListItems = singleListItems?.filter({ $0.key != object.key})
             UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if requestKey == BaseItemsProvider.GET_MUSCLE_KEY {
+        } else if requestKey == .get {
             self.singleListItems = UserSession.instance.getMuscleGroups()
         }
         
         self.tableView.reloadData()
     }
     
-    func requestFailed(requestKey: Int) {
+    func requestFailed(requestKey: RequestType) {
         super.requestFailedAlert()
     }
 }

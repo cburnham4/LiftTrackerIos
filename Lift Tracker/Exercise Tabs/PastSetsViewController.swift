@@ -50,7 +50,7 @@ class PastSetsTableViewCell: UITableViewCell {
     @IBOutlet weak var liftsLabel: UILabel!
     
     func setContent(content: DayLiftSets) {
-        dateLabel.text = content.getPresentableDateString()
+        dateLabel.text = content.date.getDisplayString()
         
         var liftString: String = ""
         for liftset in content.liftsets {

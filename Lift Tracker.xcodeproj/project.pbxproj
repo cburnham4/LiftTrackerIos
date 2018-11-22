@@ -26,6 +26,7 @@
 		E05AD6A521A6097C008B6957 /* AddSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A421A6097C008B6957 /* AddSetViewController.swift */; };
 		E05AD6A721A62238008B6957 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A621A62238008B6957 /* NumberExtensions.swift */; };
 		E05AD6A921A62AD3008B6957 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A821A62AD3008B6957 /* DateUtils.swift */; };
+		E05AD6AB21A711C6008B6957 /* ExerciseSetsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */; };
 		E061F55D219DFDA500FBAF2D /* PastSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061F55C219DFDA500FBAF2D /* PastSetsViewController.swift */; };
 		E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */; };
 		E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */; };
@@ -88,6 +89,7 @@
 		E05AD6A421A6097C008B6957 /* AddSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetViewController.swift; sourceTree = "<group>"; };
 		E05AD6A621A62238008B6957 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 		E05AD6A821A62AD3008B6957 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetsRequest.swift; sourceTree = "<group>"; };
 		E061F55C219DFDA500FBAF2D /* PastSetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSetsViewController.swift; sourceTree = "<group>"; };
 		E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				E09E78F62115133500031F19 /* Request.swift */,
 				E09E78F82115138F00031F19 /* BaseItemsProvider.swift */,
+				E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
 				E05AD6A921A62AD3008B6957 /* DateUtils.swift in Sources */,
 				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
+				E05AD6AB21A711C6008B6957 /* ExerciseSetsRequest.swift in Sources */,
 				E0D864F2216E2BBE0003800A /* ColorExtensions.swift in Sources */,
 				E05AD6A721A62238008B6957 /* NumberExtensions.swift in Sources */,
 				E05AD6A521A6097C008B6957 /* AddSetViewController.swift in Sources */,
