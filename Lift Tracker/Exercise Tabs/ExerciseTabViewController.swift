@@ -86,6 +86,10 @@ class ExerciseTabViewController: TabmanViewController {
         self.viewControllers = viewControllers
         self.reloadPages()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //Save the exercise on the viewWillDisappear
+    }
 }
 
 extension ExerciseTabViewController: PageboyViewControllerDataSource
