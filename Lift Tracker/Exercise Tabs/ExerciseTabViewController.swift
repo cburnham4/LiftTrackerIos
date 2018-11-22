@@ -72,10 +72,8 @@ class ExerciseTabViewController: TabmanViewController {
     private func initializeViewControllers() {
         var viewControllers = [UIViewController]()
         var barItems = [Item]()
-        
-        // THESE will crash it
-        // TODO: Append view controllers to list
-        viewControllers.append(UIViewController())
+
+        viewControllers.append(getViewController(withIdentifier: "AddSetViewController"))
         viewControllers.append(getViewController(withIdentifier: "PastSetsViewController"))
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
         
