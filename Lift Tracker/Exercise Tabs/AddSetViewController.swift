@@ -20,10 +20,16 @@ class AddSetViewController: ExerciseBaseTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadInLiftSets()
+    }
+    
+    func loadInLiftSets() {
         let existingSets = exercise.pastSets.filter({ $0.date == date })
+        //If there are no sets for today then make a new one
         if (existingSets.isEmpty) {
-            var newSets = DayLiftSets()
+            let newSets = DayLiftSets()
             liftSets = newSets.liftsets
+            exercise.pastSets.append(newSets)
         } else {
             let todaysSet = existingSets[0]
             liftSets = todaysSet.liftsets
@@ -60,9 +66,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
     }
 
     @IBAction func addExercise(_ sender: UIButton) {
-        var reps = Int(repTextField.text ?? "0") ?? 0
-        var weight = Double(weightTextField.text ?? "0") ?? 0.0
-        let liftSet = LiftSet(reps: reps, weight: weight, date: <#T##String#>)
+        let reps = Int(repTextField.text ?? "0") ?? 0
+        let weight = Double(weightTextField.text ?? "0") ?? 0.0
+        let liftSet = LiftSet(reps: reps, weight: weight, date: date.getStringDate())
+        liftSets.append(liftSet)
+        exerciseTableView.reloadData()
     }
     
     @IBAction func clearInputs(_ sender: UIButton) {
@@ -72,16 +80,29 @@ class AddSetViewController: ExerciseBaseTabViewController {
 }
 
 //Helper Methods
-extension AddSetViewController {
-    func didLoadViewSetup() {
-        if weightTextField.text!.isEmpty {
-//            addWeightButton.isEnabled = false
-//            minusWeightButton.isEnabled = false
-        }
+extension AddSetViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return liftSets.count
     }
-    func resetState() {
-        weightTextField.text = nil
-        repTextField.text = nil
-        didLoadViewSetup()
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepsSetsTableViewCell", for: indexPath) as! RepsSetsTableViewCell
+        
+        let item = self.liftSets[indexPath.row]
+        
+        cell.setContent(content: item)
+        return cell
+    }
+}
+
+class RepsSetsTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var repsSetsLabel: UILabel!
+    
+    func setContent(content: LiftSet) {
+        let reps = content.reps
+        let weight = content.weight
+        let repsSets = "Reps: \(reps) | Weight: \(weight)"
+        repsSetsLabel.text = repsSets
     }
 }
