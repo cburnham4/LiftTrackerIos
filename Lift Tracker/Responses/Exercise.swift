@@ -145,6 +145,9 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         super.init(json: json)
     }
 
+    init() {
+        self.dateString = date.getStringDate()
+    }
     
     override func setFields(json: JSON) {
         for dict in json.dictionaryValue {
@@ -180,6 +183,12 @@ class LiftSet: CoreResponse, CoreRequestObject {
     
     override init(json: JSON) {
         super.init(json: json)
+    }
+    
+    init(reps: Int, weight: Double, date: String) {
+        self.reps = reps
+        self.weight = weight
+        self.date = date
     }
     
     override func setFields(json: JSON) {

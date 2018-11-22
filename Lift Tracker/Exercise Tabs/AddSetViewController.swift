@@ -14,10 +14,20 @@ class AddSetViewController: ExerciseBaseTabViewController {
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var repTextField: UITextField!
     
+    var liftSets: [LiftSet]!
+    var date = Date()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let existingSets = exercise.pastSets.filter({ $0.date == date })
+        if (existingSets.isEmpty) {
+            var newSets = DayLiftSets()
+            liftSets = newSets.liftsets
+        } else {
+            let todaysSet = existingSets[0]
+            liftSets = todaysSet.liftsets
+        }
     }
     
     //MARK: Actions
@@ -50,8 +60,14 @@ class AddSetViewController: ExerciseBaseTabViewController {
     }
 
     @IBAction func addExercise(_ sender: UIButton) {
+        var reps = Int(repTextField.text ?? "0") ?? 0
+        var weight = Double(weightTextField.text ?? "0") ?? 0.0
+        let liftSet = LiftSet(reps: reps, weight: weight, date: <#T##String#>)
     }
+    
     @IBAction func clearInputs(_ sender: UIButton) {
+        repTextField.text = "0"
+        weightTextField.text = "0.0"
     }
 }
 
