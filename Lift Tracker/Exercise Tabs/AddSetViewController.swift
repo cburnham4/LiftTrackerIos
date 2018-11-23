@@ -73,6 +73,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
     @IBAction func addExercise(_ sender: UIButton) {
         let reps = Int(repTextField.text ?? "0") ?? 0
         let weight = Double(weightTextField.text ?? "0") ?? 0.0
+        guard reps != 0 && weight != 0 else {
+            AlertUtils.createAlert(view: self, title: "Enter Values", message: "Enter a postive value for both reps and weight")
+            return
+        }
+        
         let liftSet = LiftSet(reps: reps, weight: weight, date: date.getServerDateString())
         liftSets.append(liftSet)
         exerciseTableView.reloadData()
@@ -104,6 +109,7 @@ class AddSetViewController: ExerciseBaseTabViewController {
     func findNewMax(deltedSet: LiftSet) {
         let setMax = deltedSet.getMax()
         if (setMax == currentMax) {
+            currentMax = 0
             for set in liftSets {
                 let max = set.getMax()
                 if ( max > currentMax) {
