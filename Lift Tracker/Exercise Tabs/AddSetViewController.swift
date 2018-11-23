@@ -22,6 +22,7 @@ class AddSetViewController: ExerciseBaseTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hideKeyboardWhenTappedAround()
         loadInLiftSets()
         exerciseTableView.tableFooterView = UIView()
     }

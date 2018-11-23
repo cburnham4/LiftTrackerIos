@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E9CD9D220FEF84F86C2CE7C /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FD1CA0BA3D1B5A163A5A94 /* Pods_Lift_Tracker.framework */; };
+		E0065AB121A88C47006161EA /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0065AB021A88C47006161EA /* ViewControllerExtension.swift */; };
 		E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */; };
 		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
 		E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0333596219373B500982F00 /* MaxesGraphViewController.swift */; };
@@ -16,7 +17,6 @@
 		E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F33922162EDD2005043FF /* ExerciseTabViewController.swift */; };
 		E03F33952162EE6D005043FF /* Exercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03F33942162EE6D005043FF /* Exercise.storyboard */; };
 		E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */; };
-		E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */; };
 		E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C542106B2FC00E79A5A /* Assets.xcassets */; };
 		E04D7C582106B2FC00E79A5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */; };
 		E04D7C632106B2FC00E79A5A /* Lift_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C622106B2FC00E79A5A /* Lift_TrackerTests.swift */; };
@@ -65,6 +65,7 @@
 		48B08FD8D8435D3374C7DFC4 /* Pods-Lift Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		74245D200A15F9760F9583D7 /* Pods_Lift_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB9EF977C7DFDE97F868EC7 /* Pods-Lift Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		E0065AB021A88C47006161EA /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesViewController.swift; sourceTree = "<group>"; };
 		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
 		E0333596219373B500982F00 /* MaxesGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxesGraphViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		E03F33942162EE6D005043FF /* Exercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercise.storyboard; sourceTree = "<group>"; };
 		E04D7C482106B2FA00E79A5A /* Lift Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		E04D7C542106B2FC00E79A5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E04D7C572106B2FC00E79A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E04D7C592106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -209,7 +209,6 @@
 				E09E78ED2114FBD600031F19 /* Home Tabs */,
 				E04D7C812106CF7C00E79A5A /* Login */,
 				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
-				E04D7C4F2106B2FA00E79A5A /* SecondViewController.swift */,
 				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
 				E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */,
 				E04D7C592106B2FC00E79A5A /* Info.plist */,
@@ -251,6 +250,7 @@
 				E0D864F1216E2BBE0003800A /* ColorExtensions.swift */,
 				E05AD6A621A62238008B6957 /* NumberExtensions.swift */,
 				E05AD6A821A62AD3008B6957 /* DateUtils.swift */,
+				E0065AB021A88C47006161EA /* ViewControllerExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -591,12 +591,12 @@
 				E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */,
 				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
 				E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */,
+				E0065AB121A88C47006161EA /* ViewControllerExtension.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
 				E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
-				E04D7C502106B2FA00E79A5A /* SecondViewController.swift in Sources */,
 				E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */,
 				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
 				E05AD6A921A62AD3008B6957 /* DateUtils.swift in Sources */,
