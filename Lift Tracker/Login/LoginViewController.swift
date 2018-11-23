@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
         self.authUI = FUIAuth.defaultAuthUI()
         self.authUI?.delegate = self
         self.authUI?.providers = [FUIGoogleAuth()]
-        
+        self.authUI?.shouldHideCancelButton = true
         
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
             guard user != nil else {

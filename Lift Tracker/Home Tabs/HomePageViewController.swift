@@ -9,6 +9,7 @@
 import UIKit
 import Tabman
 import Pageboy
+import FirebaseAuth
 
 class HomePageViewController: TabmanViewController {
     
@@ -71,6 +72,16 @@ class HomePageViewController: TabmanViewController {
     
     @IBAction func logout(_ sender: Any) {
         print("logout")
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.present(loginVc, animated: true)
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
     }
 }
 
