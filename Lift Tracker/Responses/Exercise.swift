@@ -194,4 +194,30 @@ class LiftSet: CoreResponse, CoreRequestObject {
         
         return post
     }
+    
+    /* set the max based on the number of reps */
+    func getMax() -> Double {
+        switch reps {
+        case 1:
+            return weight
+        case 2:
+            return weight * 1.042
+        case 3:
+            return weight * 1.072
+        case 4:
+            return weight * 1.104
+        case 5:
+            return weight * 1.137
+        case 6:
+            return weight * 1.173
+        case 7:
+            return weight * 1.211
+        case 8:
+            return weight * 1.251
+        case 9:
+            return weight * 1.294
+        default:
+            return weight * 1.341
+        }
+    }
 }

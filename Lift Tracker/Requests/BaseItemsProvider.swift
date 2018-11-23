@@ -67,8 +67,6 @@ class BaseItemsProvider: Request {
                 case .muscles:
                     responseObjects.append(MuscleGroup(json: json))
                     break
-                default:
-                    cycle.requestFailed(requestKey: requestKey)
                 }
             }
 
@@ -82,8 +80,6 @@ class BaseItemsProvider: Request {
             case .muscles:
                 UserSession.instance.setMuscleGroups(muscles: responseObjects as! [MuscleGroup])
                 break
-            default:
-                cycle.requestFailed(requestKey: requestKey)
             }
             
             cycle.requestSuccess(requestKey: requestKey)

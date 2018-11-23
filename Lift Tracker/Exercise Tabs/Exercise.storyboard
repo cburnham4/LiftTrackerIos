@@ -33,7 +33,6 @@
         <!--Add Set View Controller-->
         <scene sceneID="m7t-az-CnK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u27-pZ-psU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AddSetViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="53Z-XW-wix" customClass="AddSetViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jJM-Dr-wUf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -76,7 +75,7 @@
                                                     <action selector="subtractFiveWeight:" destination="53Z-XW-wix" eventType="touchUpInside" id="F2d-qa-rGN"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" borderStyle="roundedRect" placeholder="10.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-hz-lXT" userLabel="Weight TextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5.0" borderStyle="roundedRect" placeholder="10.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-hz-lXT" userLabel="Weight TextField">
                                                 <rect key="frame" x="91" y="0.0" width="105" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -184,31 +183,27 @@
                                 <rect key="frame" x="16" y="225" width="343" height="438"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepsSetsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepsSetsTableViewCell" textLabel="uaF-Ha-kIx" detailTextLabel="Dzw-eh-grz" style="IBUITableViewCellStyleValue1" id="3sM-gt-63g" customClass="RepsSetsTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepsSetsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepsSetsTableViewCell" id="3sM-gt-63g" customClass="RepsSetsTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3sM-gt-63g" id="zsb-7v-fkC">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Reps: 4 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uaF-Ha-kIx">
-                                                    <rect key="frame" x="15" y="12" width="62.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Weight: 10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dzw-eh-grz">
-                                                    <rect key="frame" x="247" y="12" width="81" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9U-4z-VK6">
+                                                    <rect key="frame" x="16" y="12" width="42" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Q9U-4z-VK6" firstAttribute="leading" secondItem="zsb-7v-fkC" secondAttribute="leading" constant="16" id="dvj-NC-41g"/>
+                                                <constraint firstItem="Q9U-4z-VK6" firstAttribute="centerY" secondItem="zsb-7v-fkC" secondAttribute="centerY" id="ouC-fR-NVW"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="repsSetsLabel" destination="uaF-Ha-kIx" id="viJ-Sv-j4m"/>
+                                            <outlet property="repsSetsLabel" destination="Q9U-4z-VK6" id="xA1-gx-oLg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -236,6 +231,7 @@
                         <outlet property="weightTextField" destination="oOB-hz-lXT" id="Z40-Pe-0qD"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u27-pZ-psU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-275" y="-278"/>
         </scene>

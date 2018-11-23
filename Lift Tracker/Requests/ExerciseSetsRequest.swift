@@ -36,4 +36,16 @@ class ExerciseSetsRequest: Request {
             }
         }
     }
+    
+    static func deleteLiftSet(exerciseKey: String, date: String, liftSet: LiftSet, cycle: RequestCycle) {
+        let dbRef = getUserDatabaseReference()?.child(RequestItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)
+        
+        dbRef?.removeValue() { error, _ in
+            if error != nil {
+                cycle.requestFailed(requestKey: .update)
+            } else {
+                cycle.requestSuccess(requestKey: .update)
+            }
+        }
+    }
 }

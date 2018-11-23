@@ -9,7 +9,7 @@
 import UIKit
 
 class AddSetViewController: ExerciseBaseTabViewController {
-
+    // TODO move to MVVM
     @IBOutlet weak var exerciseTableView: UITableView!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var repTextField: UITextField!
@@ -80,10 +80,9 @@ class AddSetViewController: ExerciseBaseTabViewController {
         dayLiftSets.liftsets.append(liftSet)
         ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getServerDateString(), cycle: self)
         
-        let max = getMax(reps: reps, weight: weight)
+        let max = liftSet.getMax()
         if(max > currentMax) {
-            dayLiftSets.max = max
-            ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
+            updateMax(max: max)
         }
     }
     
@@ -92,30 +91,31 @@ class AddSetViewController: ExerciseBaseTabViewController {
         weightTextField.text = "10.0"
     }
     
-    /* set the max based on the number of reps */
-    func getMax(reps: Int, weight: Double) -> Double {
-        switch reps {
-        case 1:
-            return weight
-        case 2:
-            return weight * 1.042
-        case 3:
-            return weight * 1.072
-        case 4:
-            return weight * 1.104
-        case 5:
-            return weight * 1.137
-        case 6:
-            return weight * 1.173
-        case 7:
-            return weight * 1.211
-        case 8:
-            return weight * 1.251
-        case 9:
-            return weight * 1.294
-        default:
-            return weight * 1.341
+    
+    func deleteItem(item: LiftSet) {
+        liftSets = liftSets.filter({ $0.key != item.key })
+        ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getServerDateString(), liftSet: item, cycle: self)
+        exerciseTableView.reloadData()
+        
+    }
+    
+    func findNewMax(deltedSet: LiftSet) {
+        let setMax = deltedSet.getMax()
+        if (setMax == currentMax) {
+            for set in liftSets {
+                let max = set.getMax()
+                if ( max > currentMax) {
+                    currentMax = max
+                }
+            }
+            updateMax(max: currentMax)
         }
+    }
+    
+    func updateMax(max: Double) {
+        currentMax = max
+        dayLiftSets.max = max
+        ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
     }
 }
 
@@ -132,6 +132,27 @@ extension AddSetViewController: UITableViewDataSource {
         
         cell.setContent(content: item)
         return cell
+    }
+}
+
+extension AddSetViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = self.liftSets[indexPath.row]
+        // TODO Add Edit
+//        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
+//            self?.updateItem(item: item)
+//        })
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
+            guard let strongSelf = self else {
+                return
+            }
+            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
+                strongSelf.deleteItem(item: item)
+            })
+        })
+        // editAction.backgroundColor = .blue
+        deleteAction.backgroundColor = .red
+        return [deleteAction]
     }
 }
 
