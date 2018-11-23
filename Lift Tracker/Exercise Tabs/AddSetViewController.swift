@@ -94,11 +94,13 @@ class AddSetViewController: ExerciseBaseTabViewController {
     
     func deleteItem(item: LiftSet) {
         liftSets = liftSets.filter({ $0.key != item.key })
+        dayLiftSets.liftsets = liftSets
         ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getServerDateString(), liftSet: item, cycle: self)
         exerciseTableView.reloadData()
-        
+        findNewMax(deltedSet: item)
     }
     
+    /* Look for new max because the old max set could have been removed */
     func findNewMax(deltedSet: LiftSet) {
         let setMax = deltedSet.getMax()
         if (setMax == currentMax) {

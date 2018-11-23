@@ -19,11 +19,13 @@ class PastSetsViewController: ExerciseBaseTabViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        
-        //Add table view footer to avoid extra lines at the bottom
-        tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         pastDates = exercise.pastSets.filter({ $0.liftsets.count != 0 })
+        tableView.reloadData()
     }
 }
 

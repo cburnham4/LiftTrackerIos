@@ -36,7 +36,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     var timeIn6Month: Double?
     var timeInYear: Double?
     
-    var maxesAndDates: [MaxDate] = [MaxDate]()
+    var maxesAndDates: [MaxDate]!
     var selectedMaxDates: [MaxDate] = [MaxDate]()
     
     override func viewDidLoad() {
@@ -44,6 +44,11 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
 
         getDateTimes()
         setupGraph()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         gatherMaxesData()
         graphView.reload()
     }
@@ -60,10 +65,11 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     }
     
     func gatherMaxesData() {
-        if let exercise = exercise {
-            for pastDays in exercise.pastSets {
-                maxesAndDates.append(MaxDate(max: pastDays.max, date: pastDays.date))
-            }
+        maxesAndDates = [MaxDate]()
+        
+        let pastDates = exercise.pastSets.filter({ $0.liftsets.count != 0 && $0.max != 0 })
+        for pastDay in pastDates {
+            maxesAndDates.append(MaxDate(max: pastDay.max, date: pastDay.date))
         }
         maxesAndDates.reverse()
         selectedMaxDates = maxesAndDates

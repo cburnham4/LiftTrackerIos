@@ -47,7 +47,7 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
             self.pastSets.append(DayLiftSets(dateString: pastSetObject.key, json: pastSetObject.value))
         }
         
-        //pastSets.sort(by: { $0.date > $1.date })
+        pastSets.sort(by: { $0.date > $1.date })
     }
     
     func createRequestObject() -> [String: Any] {
@@ -147,15 +147,14 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         for dict in json.dictionaryValue {
             if (dict.key == "Max") {
                 self.max = dict.value.doubleValue
-            } else {
+            } else if dict.key != "date" { // make sure the key is not date due to bug that posted "date" on server
                 liftsets.append(LiftSet(json: dict.value))
             }
         }
     }
     
     func createRequestObject() -> [String : Any] {
-        let post = ["date" : self.dateString,
-                    "Max": self.max]
+        let post = ["Max": self.max]
         as [String: Any]
         
         return post
