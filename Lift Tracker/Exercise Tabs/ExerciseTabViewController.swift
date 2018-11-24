@@ -97,6 +97,8 @@ class ExerciseTabViewController: TabmanViewController {
         //TODO: How do I append my Controller without causing it to crash? Right now it is the base controller, should it be the base controller?
         
         viewControllers.append(UIViewController())
+
+        viewControllers.append(getViewController(withIdentifier: "AddSetViewController"))
         viewControllers.append(getViewController(withIdentifier: "PastSetsViewController"))
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
         
@@ -110,6 +112,10 @@ class ExerciseTabViewController: TabmanViewController {
         self.reloadPages()
     }
     @IBOutlet weak var repsTableView: UITableView!
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //Save the exercise on the viewWillDisappear
+    }
 }
 
 extension ExerciseTabViewController: PageboyViewControllerDataSource

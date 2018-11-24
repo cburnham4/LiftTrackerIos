@@ -11,12 +11,8 @@ import SwiftyJSON
 
 let DATE_FORMAT = "dd-MM-yyyy"
 
-class CoreResponse {
-    init(json: JSON) {
-        setFields(json: json)
-    }
-    
-    func setFields(json: JSON) -> Void {}
+protocol CoreResponse {
+    func setFields(json: JSON)
 }
 
 protocol SimpleListRowItem {
@@ -32,16 +28,15 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
     var muscleKey: String = ""
     var pastSets: [DayLiftSets] = [DayLiftSets]()
     
-    override init(json: JSON) {
-        super.init(json: json)
+    init(json: JSON) {
+        self.setFields(json: json)
     }
     
     init (name: String) {
-        super.init(json: JSON(""))
         self.name = name
     }
     
-    override func setFields(json: JSON) {
+    func setFields(json: JSON) {
         self.key = json["exerciseKey"].string ?? ""
         self.name = json["exerciseName"].string ?? ""
         self.muscleKey = json["muscleId"].string ?? ""
@@ -75,16 +70,15 @@ class Routine: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var name: String = ""
     var exerciseKeys: [String] = [String]()
     
-    override init(json: JSON) {
-        super.init(json: json)
+    init(json: JSON) {
+        setFields(json: json)
     }
     
     init (name: String) {
-        super.init(json: JSON(""))
         self.name = name
     }
     
-    override func setFields(json: JSON) {
+    func setFields(json: JSON) {
         self.key = json["routineId"].string ?? ""
         self.name = json["routineName"].string ?? ""
         self.exerciseKeys = json["exercises"].arrayObject as? [String] ?? [String]()
@@ -105,16 +99,15 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var name: String = ""
     var exerciseKeys: [String] = [String]()
     
-    override init(json: JSON) {
-        super.init(json: json)
+    init(json: JSON) {
+        setFields(json: json)
     }
     
     init (name: String) {
-        super.init(json: JSON(""))
         self.name = name
     }
     
-    override func setFields(json: JSON) {
+    func setFields(json: JSON) {
         self.key = json["muscleGroupId"].string ?? ""
         self.name = json["muscleGroupName"].string ?? ""
         self.exerciseKeys = json["exercises"].arrayObject as? [String] ?? [String]()
@@ -142,11 +135,15 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DATE_FORMAT
         self.date = dateFormatter.date(from: dateString) ?? Date()
-        super.init(json: json)
+        setFields(json: json)
+    }
+
+    init() {
+        self.dateString = date.getStringDate()
     }
 
     
-    override func setFields(json: JSON) {
+    func setFields(json: JSON) {
         for dict in json.dictionaryValue {
             if (dict.key == "Max") {
                 self.max = dict.value.doubleValue
@@ -178,11 +175,17 @@ class LiftSet: CoreResponse, CoreRequestObject {
     var reps: Int = 0
     var weight: Double = 0.0
     
-    override init(json: JSON) {
-        super.init(json: json)
+    init(json: JSON) {
+        setFields(json: json)
     }
     
-    override func setFields(json: JSON) {
+    init(reps: Int, weight: Double, date: String) {
+        self.reps = reps
+        self.weight = weight
+        self.date = date
+    }
+    
+    func setFields(json: JSON) {
         self.key = json["setId"].string ?? ""
         self.date = json["dateString"].string ?? ""
         self.reps = json["reps"].int ?? 0
