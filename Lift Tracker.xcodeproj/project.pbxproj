@@ -34,6 +34,7 @@
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
 		E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E073306C214581DB00D26E15 /* AlertUtils.swift */; };
 		E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0783BE6218945920080C80D /* RoutineExercise.storyboard */; };
+		E09D5CCC21A9FF4C0010CD7F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
@@ -97,6 +98,7 @@
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
 		E073306C214581DB00D26E15 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		E0783BE6218945920080C80D /* RoutineExercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoutineExercise.storyboard; sourceTree = "<group>"; };
+		E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		E04D7C6C2106B2FC00E79A5A /* Lift TrackerUITests */ = {
 			isa = PBXGroup;
 			children = (
+				E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */,
 				E04D7C6D2106B2FC00E79A5A /* Lift_TrackerUITests.swift */,
 				E04D7C6F2106B2FC00E79A5A /* Info.plist */,
 			);
@@ -627,6 +630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04D7C6E2106B2FC00E79A5A /* Lift_TrackerUITests.swift in Sources */,
+				E09D5CCC21A9FF4C0010CD7F /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
