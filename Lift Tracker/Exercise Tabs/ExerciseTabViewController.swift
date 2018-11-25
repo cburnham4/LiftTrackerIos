@@ -12,15 +12,20 @@ import Pageboy
 
 protocol ExerciseTabVC {
     var exercise: Exercise! { get set }
+    func editViewController()
 }
 
 class ExerciseBaseTabViewController: UIViewController, ExerciseTabVC {
     var exercise: Exercise!
+    
+    func editViewController() {
+        // Do Nothing
+    }
 }
 
 class ExerciseTabViewController: TabmanViewController {
     
-    var viewControllers: [UIViewController] = [UIViewController]()
+    var viewControllers: [ExerciseBaseTabViewController] = [ExerciseBaseTabViewController]()
     
     var exercise: Exercise!
     
@@ -49,6 +54,8 @@ class ExerciseTabViewController: TabmanViewController {
         
         self.automaticallyAdjustsChildViewInsets = true
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTableView))
+        
         setupTabs()
     }
     
@@ -69,8 +76,12 @@ class ExerciseTabViewController: TabmanViewController {
         })
     }
     
+    @objc func editTableView() {
+        viewControllers[currentIndex ?? 0].editViewController()
+    }
+    
     private func initializeViewControllers() {
-        var viewControllers = [UIViewController]()
+        var viewControllers = [ExerciseBaseTabViewController]()
         var barItems = [Item]()
 
         viewControllers.append(getViewController(withIdentifier: "AddSetViewController"))

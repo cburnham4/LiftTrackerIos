@@ -51,7 +51,7 @@ class RoutinesViewController: SingleItemListViewController {
     }
     
     override func editTableview() {
-        tableView.isEditing = true
+        tableView.isEditing = !tableView.isEditing
     }
 }
 

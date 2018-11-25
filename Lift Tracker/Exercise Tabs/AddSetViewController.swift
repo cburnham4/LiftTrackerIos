@@ -104,6 +104,8 @@ class AddSetViewController: ExerciseBaseTabViewController {
         ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getServerDateString(), liftSet: item, cycle: self)
         exerciseTableView.reloadData()
         findNewMax(deltedSet: item)
+        
+        exerciseTableView.isEditing = false
     }
     
     /* Look for new max because the old max set could have been removed */
@@ -125,6 +127,10 @@ class AddSetViewController: ExerciseBaseTabViewController {
         currentMax = max
         dayLiftSets.max = max
         ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
+    }
+    
+    override func editViewController() {
+        exerciseTableView.isEditing = !exerciseTableView.isEditing
     }
 }
 
