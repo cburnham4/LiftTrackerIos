@@ -67,7 +67,24 @@ class HomePageViewController: TabmanViewController {
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
-        viewControllers[self.currentIndex ?? 0].addItemClicked(sender)
+
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(title: "Edit Exercises", style: .default) { [weak self] _ in
+            self?.viewControllers[self?.currentIndex ?? 0].editTableview()
+            
+        }
+        let addAction = UIAlertAction(title: "Add Exercise", style: .default) { [weak self] _ in
+            self?.viewControllers[self?.currentIndex ?? 0].addItemClicked(sender)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        optionMenu.addAction(editAction)
+        optionMenu.addAction(addAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     @IBAction func logout(_ sender: Any) {

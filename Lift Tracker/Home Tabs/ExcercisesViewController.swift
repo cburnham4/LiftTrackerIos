@@ -28,6 +28,7 @@ class ExcercisesViewController: SingleItemListViewController {
         if let exercise = item as? Exercise {
             BaseItemsProvider.deleteItem(object: exercise, typeKey: .exercises, requestKey: .delete, cycle: self)
         }
+        tableView.isEditing = false
     }
     
     override func updateItem(item: SimpleListRowItem) {
@@ -38,6 +39,7 @@ class ExcercisesViewController: SingleItemListViewController {
                 BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: self)
             })
         }
+        tableView.isEditing = false
     }
     
     override func goToItemPage(item: SimpleListRowItem) {
@@ -45,6 +47,10 @@ class ExcercisesViewController: SingleItemListViewController {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
             super.homeVc?.navigationController?.pushViewController(exerciseTabsVc, animated: true)
         }
+    }
+    
+    override func editTableview() {
+        tableView.isEditing = true
     }
 }
 

@@ -28,6 +28,7 @@ class RoutinesViewController: SingleItemListViewController {
         if let routine = item as? Routine {
             BaseItemsProvider.deleteItem(object: routine, typeKey: .routines, requestKey: .delete, cycle: self)
         }
+        tableView.isEditing = false
     }
     
     override func updateItem(item: SimpleListRowItem) {
@@ -39,6 +40,7 @@ class RoutinesViewController: SingleItemListViewController {
                 BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .routines, requestKey: .update, cycle: strongSelf)
             })
         }
+        tableView.isEditing = false
     }
     
     override func goToItemPage(item: SimpleListRowItem) {
@@ -46,6 +48,10 @@ class RoutinesViewController: SingleItemListViewController {
             let vc = RoutineExercisesViewController.getInstance(routine: routine)
             super.homeVc?.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    override func editTableview() {
+        tableView.isEditing = true
     }
 }
 

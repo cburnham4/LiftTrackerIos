@@ -34,10 +34,15 @@ class MuscleGroupsViewController: SingleItemListViewController {
         if let muscleGroup = item as? MuscleGroup {
             BaseItemsProvider.deleteItem(object: muscleGroup, typeKey: .muscles, requestKey: .delete, cycle: self)
         }
+        tableView.isEditing = false
     }
     
     override func updateItem(item: SimpleListRowItem) {
-        
+        tableView.isEditing = false
+    }
+    
+    override func editTableview() {
+        tableView.isEditing = true
     }
 }
 

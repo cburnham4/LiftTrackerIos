@@ -12,6 +12,7 @@ protocol SingleItemListViewControllerProtocol {
     var singleListItems: [SimpleListRowItem]? { get set }
     
     func addItemClicked(_ sender: UIBarButtonItem)
+    func editTableview()
     func sendItemRequest()
     func logout(_ sender: Any)
     func goToItemPage(key: String)
@@ -25,6 +26,9 @@ class SingleItemListViewController: UIViewController {
     func goToItemPage(item: SimpleListRowItem) { fatalError("Must Override") }
     func deleteItem(item: SimpleListRowItem) { fatalError("Must Override") }
     func updateItem(item: SimpleListRowItem) { fatalError("Must Override") }
+    func editTableview() {
+        fatalError("Must Override")
+    }
     
     weak var homeVc: HomePageViewController?
     
@@ -44,6 +48,7 @@ class SingleItemListViewController: UIViewController {
     func requestFailedAlert() {
         AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")
     }
+    
 }
 
 /**

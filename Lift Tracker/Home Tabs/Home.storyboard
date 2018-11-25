@@ -166,7 +166,7 @@
                                 <action selector="logout:" destination="jGW-3O-x0P" id="Mga-FB-8Bb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fdq-k1-Sno">
+                        <barButtonItem key="rightBarButtonItem" title="..." id="Fdq-k1-Sno">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addItemAction:" destination="jGW-3O-x0P" id="L8A-Nr-JlH"/>
