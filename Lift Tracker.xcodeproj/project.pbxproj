@@ -99,6 +99,7 @@
 		E073306C214581DB00D26E15 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		E0783BE6218945920080C80D /* RoutineExercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoutineExercise.storyboard; sourceTree = "<group>"; };
 		E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lift Tracker.entitlements"; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcercisesViewController.swift; sourceTree = "<group>"; };
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -202,6 +203,7 @@
 		E04D7C4A2106B2FA00E79A5A /* Lift Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */,
 				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
 				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
@@ -365,6 +367,11 @@
 				TargetAttributes = {
 					E04D7C472106B2FA00E79A5A = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					E04D7C5D2106B2FC00E79A5A = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -782,6 +789,7 @@
 			baseConfigurationReference = DDB9EF977C7DFDE97F868EC7 /* Pods-Lift Tracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Info.plist";
@@ -801,6 +809,7 @@
 			baseConfigurationReference = 48B08FD8D8435D3374C7DFC4 /* Pods-Lift Tracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Info.plist";
