@@ -369,7 +369,7 @@
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -789,7 +789,6 @@
 			baseConfigurationReference = DDB9EF977C7DFDE97F868EC7 /* Pods-Lift Tracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Info.plist";
@@ -809,7 +808,6 @@
 			baseConfigurationReference = 48B08FD8D8435D3374C7DFC4 /* Pods-Lift Tracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Info.plist";
