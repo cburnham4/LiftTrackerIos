@@ -29,7 +29,7 @@ class AddSetViewController: ExerciseBaseTabViewController {
     }
     
     func loadInLiftSets() {
-        let existingSets = exercise.pastSets.filter({ $0.dateString == date.getServerDateString() })
+        let existingSets = exercise.pastSets.filter({ $0.dateString == date.getDashesDateString() })
         //If there are no sets for today then make a new one
         if (existingSets.isEmpty) {
             dayLiftSets = DayLiftSets()
@@ -80,12 +80,12 @@ class AddSetViewController: ExerciseBaseTabViewController {
             return
         }
         
-        let liftSet = LiftSet(reps: reps, weight: weight, date: date.getServerDateString())
+        let liftSet = LiftSet(reps: reps, weight: weight, date: date.getDashesDateString())
         liftSets.append(liftSet)
         exerciseTableView.reloadData()
         
         dayLiftSets.liftsets.append(liftSet)
-        ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getServerDateString(), cycle: self)
+        ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getDashesDateString(), cycle: self)
         
         let max = liftSet.getMax()
         if(max > currentMax) {
@@ -102,7 +102,7 @@ class AddSetViewController: ExerciseBaseTabViewController {
     func deleteItem(item: LiftSet) {
         liftSets = liftSets.filter({ $0.key != item.key })
         dayLiftSets.liftsets = liftSets
-        ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getServerDateString(), liftSet: item, cycle: self)
+        ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getDashesDateString(), liftSet: item, cycle: self)
         exerciseTableView.reloadData()
         findNewMax(deltedSet: item)
         

@@ -139,7 +139,7 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
     }
 
     init() {
-        self.dateString = date.getServerDateString()
+        self.dateString = date.getDashesDateString()
         self.key = dateString
     }
     
