@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import UIKit
+import LhHelpers
 
 class MuscleGroupsViewController: SingleItemListViewController {
     

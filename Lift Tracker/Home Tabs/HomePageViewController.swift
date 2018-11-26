@@ -10,6 +10,7 @@ import UIKit
 import Tabman
 import Pageboy
 import FirebaseAuth
+import LhHelpers
 
 class HomePageViewController: TabmanViewController {
     

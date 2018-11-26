@@ -82,6 +82,7 @@ PODS:
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
   - leveldb-library (1.20)
+  - LhHelpers (1.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseUI/Auth
   - FirebaseUI/Google
+  - LhHelpers (from `../lh-helpers`)
   - Pageboy (~> 2.6)
   - ScrollableGraphView
   - SwiftyJSON
@@ -129,6 +131,10 @@ SPEC REPOS:
     - SwiftyJSON
     - Tabman
 
+EXTERNAL SOURCES:
+  LhHelpers:
+    :path: "../lh-helpers"
+
 SPEC CHECKSUMS:
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
   Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
@@ -146,12 +152,13 @@ SPEC CHECKSUMS:
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  LhHelpers: d5f6971c3f4f74a7b52a238f07bec6ba6247309e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Pageboy: 1a5535f0d5a321045971cc2ddc6bcb53302392cb
   ScrollableGraphView: 4af35d4ea9ecdec665d34a74da51da161ddff8ac
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 382b7b44d2bdc597e72b032c4f7ae400e7b4c1e5
+PODFILE CHECKSUM: 5760b264e5fc3c805b3ad8505ed68608d6db9875
 
 COCOAPODS: 1.5.3

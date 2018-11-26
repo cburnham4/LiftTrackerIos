@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseUI
+import LhHelpers
 
 class ExcercisesViewController: SingleItemListViewController {
     
