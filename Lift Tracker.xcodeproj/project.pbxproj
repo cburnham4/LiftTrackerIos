@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E9CD9D220FEF84F86C2CE7C /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FD1CA0BA3D1B5A163A5A94 /* Pods_Lift_Tracker.framework */; };
-		E0065AB121A88C47006161EA /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0065AB021A88C47006161EA /* ViewControllerExtension.swift */; };
 		E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */; };
 		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
 		E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0333596219373B500982F00 /* MaxesGraphViewController.swift */; };
@@ -24,15 +23,12 @@
 		E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C7B2106B58700E79A5A /* Login.storyboard */; };
 		E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */; };
 		E05AD6A521A6097C008B6957 /* AddSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A421A6097C008B6957 /* AddSetViewController.swift */; };
-		E05AD6A721A62238008B6957 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A621A62238008B6957 /* NumberExtensions.swift */; };
-		E05AD6A921A62AD3008B6957 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6A821A62AD3008B6957 /* DateUtils.swift */; };
 		E05AD6AB21A711C6008B6957 /* ExerciseSetsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */; };
 		E061F55D219DFDA500FBAF2D /* PastSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061F55C219DFDA500FBAF2D /* PastSetsViewController.swift */; };
 		E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */; };
 		E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */; };
 		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
-		E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E073306C214581DB00D26E15 /* AlertUtils.swift */; };
 		E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0783BE6218945920080C80D /* RoutineExercise.storyboard */; };
 		E09D5CCC21A9FF4C0010CD7F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
@@ -40,7 +36,6 @@
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
 		E09E78F72115133500031F19 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F62115133500031F19 /* Request.swift */; };
 		E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* BaseItemsProvider.swift */; };
-		E0D864F2216E2BBE0003800A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D864F1216E2BBE0003800A /* ColorExtensions.swift */; };
 		EAD00616327D06B483EE189E /* Pods_Lift_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74245D200A15F9760F9583D7 /* Pods_Lift_TrackerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +61,6 @@
 		48B08FD8D8435D3374C7DFC4 /* Pods-Lift Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		74245D200A15F9760F9583D7 /* Pods_Lift_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB9EF977C7DFDE97F868EC7 /* Pods-Lift Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lift Tracker/Pods-Lift Tracker.debug.xcconfig"; sourceTree = "<group>"; };
-		E0065AB021A88C47006161EA /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesViewController.swift; sourceTree = "<group>"; };
 		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
 		E0333596219373B500982F00 /* MaxesGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxesGraphViewController.swift; sourceTree = "<group>"; };
@@ -88,15 +82,12 @@
 		E04D7C7B2106B58700E79A5A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E05AD6A421A6097C008B6957 /* AddSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetViewController.swift; sourceTree = "<group>"; };
-		E05AD6A621A62238008B6957 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
-		E05AD6A821A62AD3008B6957 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetsRequest.swift; sourceTree = "<group>"; };
 		E061F55C219DFDA500FBAF2D /* PastSetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSetsViewController.swift; sourceTree = "<group>"; };
 		E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
-		E073306C214581DB00D26E15 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		E0783BE6218945920080C80D /* RoutineExercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoutineExercise.storyboard; sourceTree = "<group>"; };
 		E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lift Tracker.entitlements"; sourceTree = "<group>"; };
@@ -105,7 +96,6 @@
 		E09E78F42114FD9B00031F19 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		E09E78F62115133500031F19 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		E09E78F82115138F00031F19 /* BaseItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseItemsProvider.swift; sourceTree = "<group>"; };
-		E0D864F1216E2BBE0003800A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E4FD1CA0BA3D1B5A163A5A94 /* Pods_Lift_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECDFBE3B67F8CE53466C5E6 /* Pods-Lift TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lift TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lift TrackerTests/Pods-Lift TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,7 +197,6 @@
 				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
 				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
-				E073306B214581CD00D26E15 /* Utils */,
 				E09E78F32114FD8800031F19 /* Responses */,
 				E09E78F22114FCC500031F19 /* Requests */,
 				E09E78ED2114FBD600031F19 /* Home Tabs */,
@@ -246,18 +235,6 @@
 				E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		E073306B214581CD00D26E15 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				E073306C214581DB00D26E15 /* AlertUtils.swift */,
-				E0D864F1216E2BBE0003800A /* ColorExtensions.swift */,
-				E05AD6A621A62238008B6957 /* NumberExtensions.swift */,
-				E05AD6A821A62AD3008B6957 /* DateUtils.swift */,
-				E0065AB021A88C47006161EA /* ViewControllerExtension.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		E09E78ED2114FBD600031F19 /* Home Tabs */ = {
@@ -601,19 +578,14 @@
 				E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */,
 				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
 				E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */,
-				E0065AB121A88C47006161EA /* ViewControllerExtension.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
 				E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */,
-				E073306D214581DB00D26E15 /* AlertUtils.swift in Sources */,
-				E05AD6A921A62AD3008B6957 /* DateUtils.swift in Sources */,
 				E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */,
 				E05AD6AB21A711C6008B6957 /* ExerciseSetsRequest.swift in Sources */,
-				E0D864F2216E2BBE0003800A /* ColorExtensions.swift in Sources */,
-				E05AD6A721A62238008B6957 /* NumberExtensions.swift in Sources */,
 				E05AD6A521A6097C008B6957 /* AddSetViewController.swift in Sources */,
 				E061F55D219DFDA500FBAF2D /* PastSetsViewController.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
