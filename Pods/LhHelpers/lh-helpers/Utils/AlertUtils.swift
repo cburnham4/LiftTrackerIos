@@ -7,23 +7,23 @@
 //
 import UIKit
 
-class AlertUtils {
-    static func createAlert(view: UIViewController, title: String, message: String, completion: @escaping (UIAlertAction) -> () = {_ in }){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: completion))
+public class AlertUtils {
+    public static func createAlert(view: UIViewController, title: String, message: String, completion: @escaping (UIAlertAction) -> () = {_ in }){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: completion))
         view.present(alert, animated: true, completion: nil)
     }
     
-    static func createAlertCallback(view: UIViewController, title: String, message: String, callback: @escaping (UIAlertAction) -> ()){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    public static func createAlertCallback(view: UIViewController, title: String, message: String, callback: @escaping (UIAlertAction) -> ()){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: callback))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: callback))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         view.present(alert, animated: true, completion: nil)
     }
     
-    static func createAlertTextCallback(view: UIViewController, title: String, message: String = "", placeholder: String, callback: @escaping (String) -> ()){
+    public static func createAlertTextCallback(view: UIViewController, title: String, message: String = "", placeholder: String, callback: @escaping (String) -> ()){
         //. Create the alert controller.
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -43,7 +43,7 @@ class AlertUtils {
         view.present(alert, animated: true, completion: nil)
     }
     
-    static func createAlertPicker (viewController: UIViewController, title: String, completion: @escaping (UIAlertAction) -> ()) {
+    public static func createAlertPicker (viewController: UIViewController, title: String, completion: @escaping (UIAlertAction) -> ()) {
         // Message is blank 6 lines to make room for pickerview
         let alert = UIAlertController(title: title, message: "\n\n\n\n\n\n", preferredStyle: .alert)
         alert.isModalInPopover = true

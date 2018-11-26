@@ -7,6 +7,7 @@
 //
 import UIKit
 import FirebaseUI
+import LhHelpers
 
 protocol SingleItemListViewControllerProtocol {
     var singleListItems: [SimpleListRowItem]? { get set }
