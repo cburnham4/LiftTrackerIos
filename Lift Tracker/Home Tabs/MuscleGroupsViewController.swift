@@ -12,56 +12,5 @@ import LhHelpers
 class MuscleGroupsViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
-
-    override func addItemClicked(_ sender: UIBarButtonItem) {
-        AlertUtils.createAlertTextCallback(view: self, title: "Add Muscle Group", placeholder: "Muscle Group", callback: { name in
-            var muscleGroup = MuscleGroup(name: name) as CoreRequestObject
-            BaseItemsProvider.sendPostRequest(object: &muscleGroup, typeKey: .muscles, requestKey: .post, cycle: self)
-        })
-    }
-    
-    override func sendItemRequest() {
-        BaseItemsProvider.sendGetMuscleGroupsRequest(cycle: self)
-    }
-    
-    override func goToItemPage(item: SimpleListRowItem) {
-        if let muscleGroup = item as? MuscleGroup {
-            // TODO: Go to VC
-        }
-    }
-    
-    override func deleteItem(item: SimpleListRowItem) {
-        if let muscleGroup = item as? MuscleGroup {
-            BaseItemsProvider.deleteItem(object: muscleGroup, typeKey: .muscles, requestKey: .delete, cycle: self)
-        }
-        tableView.isEditing = false
-    }
-    
-    override func updateItem(item: SimpleListRowItem) {
-        tableView.isEditing = false
-    }
-    
-    override func editTableview() {
-        tableView.isEditing = !tableView.isEditing
-    }
 }
 
-extension MuscleGroupsViewController: RequestCycle {
-    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
-        if let object = object as! MuscleGroup?, requestKey == .post {
-            singleListItems?.append(object)
-            UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if let object = object as! MuscleGroup?, requestKey == .delete {
-            self.singleListItems = singleListItems?.filter({ $0.key != object.key})
-            UserSession.instance.setMuscleGroups(muscles: singleListItems as! [MuscleGroup])
-        } else if requestKey == .get {
-            self.singleListItems = UserSession.instance.getMuscleGroups()
-        }
-        
-        self.tableView.reloadData()
-    }
-    
-    func requestFailed(requestKey: RequestType) {
-        super.requestFailedAlert()
-    }
-}

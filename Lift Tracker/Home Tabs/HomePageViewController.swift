@@ -15,13 +15,6 @@ import LhHelpers
 class HomePageViewController: TabmanViewController {
     
     var viewControllers: [SingleItemListViewController] = [SingleItemListViewController]()
-    
-    fileprivate func getViewController(withIdentifier identifier: String) -> SingleItemListViewController
-    {
-        let singleItemVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewController
-        singleItemVC.homeVc = self
-        return singleItemVC
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,26 +39,21 @@ class HomePageViewController: TabmanViewController {
     }
     
     private func initializeViewControllers() {
-        var viewControllers = [SingleItemListViewController]()
-        var barItems = [Item]()
-        
-        let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController")
-        viewControllers.append(exercisesVc)
-        
-//        let musclesVc = getViewController(withIdentifier: "MuscleGroupsViewController")
-//        viewControllers.append(musclesVc)
-        
-        let routinesVC = getViewController(withIdentifier: "RoutinesViewController")
-        viewControllers.append(routinesVC)
-        
-        barItems.append(Item(title: "Exercises"))
-        // barItems.append(Item(title: "Muscle Groups"))
-        barItems.append(Item(title: "Routines"))
-        
-        bar.items = barItems
-        self.viewControllers = viewControllers
+        let coordinator = SingleItemCoordinator()
         self.reloadPages()
     }
+    
+    private func getExerciseViewModel() {
+        let items = SingleItemsListViewModel(updateItem: <#T##(SimpleListRowItem) -> ()#>, goToItemPage: <#T##(SimpleListRowItem) -> ()#>, deleteItem: <#T##(SimpleListRowItem) -> ()#>)
+    }
+    
+    private func addItem(item: SimpleListRowItem) {
+        AlertUtils.createAlertTextCallback(view: self, title: "Add Exercise", placeholder: "Exercise", callback: { exerciseName in
+            var exercise = Exercise(name: exerciseName) as CoreRequestObject
+            BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: .exercises, requestKey: .post, cycle: self)
+        })
+    }
+
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
         let editAction = UIAlertAction(title: "Edit Exercises", style: .default) { [weak self] _ in
@@ -73,7 +61,7 @@ class HomePageViewController: TabmanViewController {
             
         }
         let addAction = UIAlertAction(title: "Add Exercise", style: .default) { [weak self] _ in
-            self?.viewControllers[self?.currentIndex ?? 0].addItemClicked(sender)
+            self?.viewControllers[self?.currentIndex ?? 0].viewModel.addItem()
         }
 
         let actions = [editAction, addAction]
