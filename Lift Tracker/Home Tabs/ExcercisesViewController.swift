@@ -20,7 +20,7 @@ class ExcercisesViewController: SingleItemListViewController {
     }
 
     
-    func editTableview() {
+    override func editTableview() {
         tableView.isEditing = !tableView.isEditing
     }
 }

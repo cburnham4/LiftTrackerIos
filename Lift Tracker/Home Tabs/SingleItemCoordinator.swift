@@ -49,17 +49,17 @@ class SingleItemCoordinator {
         return singleItemVC
     }
     
-    private func addItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
+    private func addItem(viewModel: SingleItemsListViewModel) {
         let title = "Add " + viewModel.itemType.rawValue
         
         switch viewModel.itemType {
         case .exercises:
-            AlertUtils.createAlertTextCallback(view: homeVc, title: title, placeholder: item.name, callback: { exerciseName in
+            AlertUtils.createAlertTextCallback(view: homeVc, title: title, placeholder: "Exercise", callback: { exerciseName in
                 var exercise = Exercise(name: exerciseName) as CoreRequestObject
                 BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: viewModel.itemType, requestKey: .post, cycle: viewModel)
             })
         case .routines:
-            AlertUtils.createAlertTextCallback(view: homeVc, title: title, placeholder: item.name, callback: { exerciseName in
+            AlertUtils.createAlertTextCallback(view: homeVc, title: title, placeholder: "Routine", callback: { exerciseName in
                 var item = Routine(name: exerciseName) as CoreRequestObject
                 BaseItemsProvider.sendPostRequest(object: &item, typeKey: viewModel.itemType, requestKey: .post, cycle: viewModel)
             })

@@ -38,33 +38,33 @@ class RoutineExercisesViewController: SingleItemListViewController {
         exercises = UserSession.instance.getExercises()
     }
     
-    @objc override func addItemClicked(_ sender: UIBarButtonItem) {
+    @objc func addItemClicked(_ sender: UIBarButtonItem) {
         AlertUtils.createAlertPicker(viewController: self, title: "Add Exercise to Routine", completion: { [weak self] _ in
             self?.exercisePicked()
         })
     }
     
-    override func sendItemRequest() {
+    func sendItemRequest() {
         if let exercises = UserSession.instance.getExercises(), let routine = routine {
             for exerciseKey in routine.exerciseKeys {
                 let exercisesList = exercises.filter({ $0.key == exerciseKey})
                 
                 if (exercisesList.count > 0) {
-                    singleListItems?.append(exercisesList[0] as SimpleListRowItem)
+                    //singleListItems?.append(exercisesList[0] as SimpleListRowItem)
                 }
             }
         }
         tableView.reloadData()
     }
     
-    override func deleteItem(item: SimpleListRowItem) {
+    func deleteItem(item: SimpleListRowItem) {
         if let exercise = item as? Exercise, let routine = routine {
             // TODO: remove item from routine
             routine.exerciseKeys = routine.exerciseKeys.filter({ $0 != exercise.key })
         }
     }
     
-    override func goToItemPage(item: SimpleListRowItem) {
+    func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
             self.navigationController?.pushViewController(exerciseTabsVc, animated: true)
@@ -74,7 +74,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
     func exercisePicked() {
         let index = self.selectedExerciseIndex
         if let selectedExercise = self.exercises?[index], let routine = routine {
-            singleListItems?.append(selectedExercise)
+            //singleListItems?.append(selectedExercise)
             tableView.reloadData()
             
             routine.exerciseKeys.append(selectedExercise.key)

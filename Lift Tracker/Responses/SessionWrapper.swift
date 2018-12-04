@@ -30,7 +30,7 @@ class UserSession: Session {
     override init() {}
     
     func getSingleListItems(type: ItemType) -> [SimpleListRowItem]? {
-        getSessionVariable(key: type.rawValue) as? [SimpleListRowItem]
+        return getSessionVariable(key: type.rawValue) as? [SimpleListRowItem]
     }
     
     func getExercises() -> [Exercise]? {

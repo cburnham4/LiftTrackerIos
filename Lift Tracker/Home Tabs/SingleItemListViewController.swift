@@ -11,14 +11,14 @@ import LhHelpers
 
 protocol SingleItemsListViewModelProtocol {
     var singleListItems: [SimpleListRowItem] { get set }
-    var addItem: (SingleItemsListViewModel, SimpleListRowItem) -> (){ get set }
+    var addItem: (SingleItemsListViewModel) -> (){ get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var goToItemPage: (SimpleListRowItem) -> () { get set }
 }
 
 class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, RequestCycle {
-    var addItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
+    var addItem: (SingleItemsListViewModel) -> ()
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
@@ -28,7 +28,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var itemType: ItemType
     
     
-    init(itemType: ItemType, addItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), goToItemPage: @escaping (SimpleListRowItem) -> ()) {
+    init(itemType: ItemType, addItem: @escaping (SingleItemsListViewModel) -> (), deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), goToItemPage: @escaping (SimpleListRowItem) -> ()) {
         self.itemType = itemType
         self.singleListItems = Observable([SimpleListRowItem]() )
         self.addItem = addItem
@@ -72,6 +72,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
 protocol SingleItemListViewControllerProtocol {
     var viewModel: SingleItemsListViewModel! { get }
     
+    func addItem()
     func editTableview ()
 }
 
@@ -80,6 +81,8 @@ class SingleItemListViewController: UIViewController, SingleItemListViewControll
     var viewModel: SingleItemsListViewModel!
     
     func editTableview() { fatalError("Must override") }
+    func addItem() { viewModel.addItem(viewModel) }
+    
     override func viewDidLoad() {
         viewModel.sendItemRequest()
     }
@@ -108,9 +111,9 @@ extension SingleItemsListViewModel: UITableViewDelegate {
             guard let strongSelf = self else {
                 return
             }
-//            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
-//                strongSelf.deleteItem(item: item)
-//            })
+            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
+                strongSelf.deleteItem(item: item)
+            })
         })
         editAction.backgroundColor = .blue
         deleteAction.backgroundColor = .red
