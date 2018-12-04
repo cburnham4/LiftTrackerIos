@@ -27,41 +27,39 @@ class UserSession: Session {
     
     static let instance = UserSession()
     
-    private let exerciseKey = "exercises"
-    
-    private let routinesKey = "routines"
-    
-    private let musclesKey = "muscles"
-    
     override init() {}
     
+    func getSingleListItems(type: ItemType) -> [SimpleListRowItem]? {
+        return getSessionVariable(key: type.rawValue) as? [SimpleListRowItem]
+    }
+    
     func getExercises() -> [Exercise]? {
-        return getSessionVariable(key: exerciseKey) as? [Exercise]
+        return getSessionVariable(key: ItemType.exercises.rawValue) as? [Exercise]
     }
     
     func setExercises(exercises: [Exercise]) {
-        addSessionVariable(key: exerciseKey, object: exercises)
+        addSessionVariable(key: ItemType.exercises.rawValue, object: exercises)
     }
     
     func deleteExercise(exercise: Exercise) {
         if let exercises = getExercises() {
-            addSessionVariable(key: exerciseKey, object: exercises.filter({ $0.key != exercise.key }))
+            addSessionVariable(key: ItemType.exercises.rawValue, object: exercises.filter({ $0.key != exercise.key }))
         }
     }
 
     func getRoutines() -> [Routine]? {
-        return getSessionVariable(key: routinesKey) as? [Routine]
+        return getSessionVariable(key: ItemType.routines.rawValue) as? [Routine]
     }
     
     func setRoutines(routines: [Routine]) {
-        addSessionVariable(key: routinesKey, object: routines)
+        addSessionVariable(key: ItemType.routines.rawValue, object: routines)
     }
     
     func getMuscleGroups() -> [MuscleGroup]? {
-        return getSessionVariable(key: musclesKey) as? [MuscleGroup]
+        return getSessionVariable(key: ItemType.muscles.rawValue) as? [MuscleGroup]
     }
     
     func setMuscleGroups(muscles: [MuscleGroup]) {
-        addSessionVariable(key: musclesKey, object: muscles)
+        addSessionVariable(key: ItemType.muscles.rawValue, object: muscles)
     }
 }

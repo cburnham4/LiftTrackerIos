@@ -15,7 +15,7 @@ import Firebase
 import FirebaseDatabase
 import SwiftyJSON
 
-enum RequestItemType: String {
+enum ItemType: String {
     case exercises = "Exercises"
     case routines = "Routines"
     case muscles = "MuscleGroups"
@@ -30,19 +30,11 @@ enum RequestType {
 
 class BaseItemsProvider: Request {
 
-    static func sendGetExerciseRequest(cycle: RequestCycle) {
-        sendGetRequest(listKey: .exercises, requestKey: .get, cycle: cycle)
+    static func sendGetItemsRequest(itemType: ItemType, cycle: RequestCycle) {
+        sendGetRequest(listKey: itemType, requestKey: .get, cycle: cycle)
     }
     
-    static func sendGetMuscleGroupsRequest(cycle: RequestCycle) {
-        sendGetRequest(listKey: .muscles, requestKey: .get, cycle: cycle)
-    }
-    
-    static func sendGetRoutinesRequest(cycle: RequestCycle) {
-        self.sendGetRequest(listKey: .routines, requestKey: .get, cycle: cycle)
-    }
-    
-    static func sendGetRequest(listKey: RequestItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func sendGetRequest(listKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
         var responseObjects = [CoreResponse]()

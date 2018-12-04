@@ -12,21 +12,21 @@ class ExerciseSetsRequest: Request {
     // TODO: MOve to struct and move request to non static functions
     
     static func createBlankDayLiftSet(exerciseKey: String, dayLiftSets: DayLiftSets, cycle: RequestCycle) {
-        let dbRef = getUserDatabaseReference()?.child(RequestItemType.exercises.rawValue).child(exerciseKey).child("LiftSets")
+        let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets")
         
         var requestObject = dayLiftSets as CoreRequestObject
         sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, cycle: cycle)
     }
     
     static func sendAddLiftSetRequest(exerciseKey: String, liftSet: LiftSet, date: String, cycle: RequestCycle) {
-        let dbRef = getUserDatabaseReference()?.child(RequestItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date)
+        let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date)
         
         var requestObject = liftSet as CoreRequestObject
         sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, cycle: cycle)
     }
     
     static func updateMaxRequest(exerciseKey: String, dayLiftSets: DayLiftSets, cycle: RequestCycle) {
-         let dbRef = getUserDatabaseReference()?.child(RequestItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(dayLiftSets.dateString)
+         let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(dayLiftSets.dateString)
         
         dbRef?.child("Max").setValue(dayLiftSets.max) { error, _ in
             if error != nil {
@@ -38,7 +38,7 @@ class ExerciseSetsRequest: Request {
     }
     
     static func deleteLiftSet(exerciseKey: String, date: String, liftSet: LiftSet, cycle: RequestCycle) {
-        let dbRef = getUserDatabaseReference()?.child(RequestItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)
+        let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)
         
         dbRef?.removeValue() { error, _ in
             if error != nil {

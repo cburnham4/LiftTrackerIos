@@ -54,13 +54,13 @@ extension Request {
         }
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, typeKey: RequestItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func sendPostRequest(object: inout CoreRequestObject, typeKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()?.child(typeKey.rawValue)
         
         sendPostRequest(object: &object, requestKey: requestKey, dbRef: dbRef, cycle: cycle)
     }
     
-    static func deleteItem(object: CoreRequestObject, typeKey: RequestItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func deleteItem(object: CoreRequestObject, typeKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
         let dbRef = self.getUserDatabaseReference()
         
         dbRef?.child(typeKey.rawValue).child(object.key).removeValue() {error, _ in
