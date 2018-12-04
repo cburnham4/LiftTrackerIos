@@ -14,8 +14,12 @@ class ExcercisesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    lazy var tableViewBond = {
+    lazy var tableViewDataBond = {
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
+    }()
+    
+    lazy var tableViewEditBond = {
+        return Bond<Bool>(valueChanged: self.editTableview)
     }()
     
     override func viewDidLoad() {
@@ -23,15 +27,15 @@ class ExcercisesViewController: SingleItemListViewController {
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
         
-        tableViewBond.bind(observable: viewModel.singleListItems)
+        tableViewDataBond.bind(observable: viewModel.singleListItems)
+        tableViewEditBond.bind(observable: viewModel.isEditingTable)
     }
     
     func reloadData(items: [SimpleListRowItem]) {
         self.tableView.reloadData()
     }
 
-    
-    override func editTableview() {
+    override func editTableview(edit: Bool) {
         tableView.isEditing = !tableView.isEditing
     }
 }

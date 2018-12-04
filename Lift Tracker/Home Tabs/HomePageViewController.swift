@@ -48,8 +48,7 @@ class HomePageViewController: TabmanViewController {
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
         let editAction = UIAlertAction(title: "Edit Exercises", style: .default) { [weak self] _ in
-            self?.viewControllers[self?.currentIndex ?? 0].editTableview()
-            
+            self?.viewControllers[self?.currentIndex ?? 0].editTableview(edit: false)
         }
         let addAction = UIAlertAction(title: "Add Exercise", style: .default) { [weak self] _ in
             self?.viewControllers[self?.currentIndex ?? 0].addItem()

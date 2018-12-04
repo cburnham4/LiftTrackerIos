@@ -73,6 +73,7 @@ class SingleItemCoordinator {
     func deleteItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
         AlertUtils.createAlertCallback(view: homeVc, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
              BaseItemsProvider.deleteItem(object: item as! CoreRequestObject, typeKey: viewModel.itemType, requestKey: .delete, cycle: viewModel)
+             viewModel.isEditingTable.value = false
         })
     }
     
@@ -82,12 +83,14 @@ class SingleItemCoordinator {
                 exercise.name = exerciseName
                 var requestObject = exercise as CoreRequestObject
                 BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: viewModel)
+                viewModel.isEditingTable.value = false
             })
         } else if let routine = item as? Routine {
             AlertUtils.createAlertTextCallback(view: homeVc, title: "Update Routine Name", placeholder: viewModel.itemType.rawValue, callback: { name in
                 routine.name = name
                 var requestObject = routine as CoreRequestObject
                 BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: viewModel)
+                viewModel.isEditingTable.value = false
             })
         }
     }

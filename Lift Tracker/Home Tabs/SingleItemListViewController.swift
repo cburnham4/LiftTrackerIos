@@ -27,7 +27,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     
     var singleListItems: Observable<[SimpleListRowItem]>
     var itemType: ItemType
-    
+    var isEditingTable: Observable<Bool> = Observable(false)
     
     init(itemType: ItemType, addItem: @escaping (SingleItemsListViewModel) -> (), deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), goToItemPage: @escaping (SimpleListRowItem) -> ()) {
         
@@ -52,6 +52,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
         } else if let object = object, requestKey == .delete {
             self.singleListItems.value = self.singleListItems.value.filter({$0.key != object.key})
         } else if simpleListItem != nil, requestKey == .update {
+            // TODO have view update based on this
             var item = self.singleListItems.value.filter{ $0.key == simpleListItem!.key }.first
             item?.name = simpleListItem!.name
         } else if requestKey == .get {
@@ -75,20 +76,20 @@ protocol SingleItemListViewControllerProtocol {
     var viewModel: SingleItemsListViewModel! { get }
     
     func addItem()
-    func editTableview ()
+    func editTableview (edit: Bool)
 }
 
 
 class SingleItemListViewController: UIViewController, SingleItemListViewControllerProtocol {
     var viewModel: SingleItemsListViewModel!
     
-    func editTableview() { fatalError("Must override") }
+    // TODO figure out a better way to do this
+    func editTableview(edit: Bool) { fatalError("Must override") }
     func addItem() { viewModel.addItem(viewModel) }
     
     override func viewDidLoad() {
         viewModel.sendItemRequest()
     }
-    
     
     func requestFailedAlert() {
         AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")

@@ -26,7 +26,8 @@ class RoutinesViewController: SingleItemListViewController {
     }
     
     
-    override func editTableview() {
+
+    override func editTableview(edit: Bool) {
         tableView.isEditing = !tableView.isEditing
     }
 }
