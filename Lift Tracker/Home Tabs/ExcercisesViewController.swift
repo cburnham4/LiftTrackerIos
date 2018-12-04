@@ -14,9 +14,20 @@ class ExcercisesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    lazy var tableViewBond = {
+        return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
+    }()
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
+        
+        tableViewBond.bind(observable: viewModel.singleListItems)
+    }
+    
+    func reloadData(items: [SimpleListRowItem]) {
+        self.tableView.reloadData()
     }
 
     

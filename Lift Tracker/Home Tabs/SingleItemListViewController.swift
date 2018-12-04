@@ -38,8 +38,6 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
         self.updateItem = updateItem
         self.goToItemPage = goToItemPage
         super.init()
-    
-        self.sendItemRequest()
     }
     
     func sendItemRequest() {
@@ -57,7 +55,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
             var item = self.singleListItems.value.filter{ $0.key == simpleListItem!.key }.first
             item?.name = simpleListItem!.name
         } else if requestKey == .get {
-            self.singleListItems.value = UserSession.instance.getSingleListItems(type: self.itemType)!
+            self.singleListItems.value = UserSession.instance.getSingleListItems(type: self.itemType) ?? [SimpleListRowItem]()
         }
     }
     

@@ -40,6 +40,9 @@ class HomePageViewController: TabmanViewController {
     
     private func initializeViewControllers() {
         let coordinator = SingleItemCoordinator(homeVc: self)
+        let tabInfo = coordinator.getTabsViewController()
+        self.bar.items = tabInfo.items
+        self.viewControllers = tabInfo.vcs
         self.reloadPages()
     }
     

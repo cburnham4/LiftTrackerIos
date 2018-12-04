@@ -31,6 +31,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        super.viewDidLoad()
         let addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action:  #selector(addItemClicked))
         addItemButton.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = addItemButton
@@ -55,20 +56,6 @@ class RoutineExercisesViewController: SingleItemListViewController {
             }
         }
         tableView.reloadData()
-    }
-    
-    func deleteItem(item: SimpleListRowItem) {
-        if let exercise = item as? Exercise, let routine = routine {
-            // TODO: remove item from routine
-            routine.exerciseKeys = routine.exerciseKeys.filter({ $0 != exercise.key })
-        }
-    }
-    
-    func goToItemPage(item: SimpleListRowItem) {
-        if let exercise = item as? Exercise {
-            let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
-            self.navigationController?.pushViewController(exerciseTabsVc, animated: true)
-        }
     }
     
     func exercisePicked() {

@@ -14,4 +14,19 @@ class RoutinesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = viewModel
+        tableView.dataSource = viewModel
+        
+        let tableViewBond = Bond<[SimpleListRowItem]>(valueChanged: { _ in
+            self.tableView.reloadData()
+        })
+        tableViewBond.bind(observable: viewModel.singleListItems)
+    }
+    
+    
+    override func editTableview() {
+        tableView.isEditing = !tableView.isEditing
+    }
 }
