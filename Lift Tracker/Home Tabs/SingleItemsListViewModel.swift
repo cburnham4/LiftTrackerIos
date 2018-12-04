@@ -54,6 +54,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
             // TODO have view update based on this
             var item = self.singleListItems.value.filter{ $0.key == simpleListItem!.key }.first
             item?.name = simpleListItem!.name
+            singleListItems.value = { return singleListItems.value }() // Force value didset
         } else if requestKey == .get {
             self.singleListItems.value = UserSession.instance.getSingleListItems(type: self.itemType) ?? [SimpleListRowItem]()
         }
