@@ -71,7 +71,9 @@ class SingleItemCoordinator {
     
     
     func deleteItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
-        BaseItemsProvider.deleteItem(object: item as! CoreRequestObject, typeKey: viewModel.itemType, requestKey: .delete, cycle: viewModel)
+        AlertUtils.createAlertCallback(view: homeVc, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
+             BaseItemsProvider.deleteItem(object: item as! CoreRequestObject, typeKey: viewModel.itemType, requestKey: .delete, cycle: viewModel)
+        })
     }
     
     func updateItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {

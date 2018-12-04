@@ -8,9 +8,10 @@
 import UIKit
 import FirebaseUI
 import LhHelpers
+import Foundation
 
 protocol SingleItemsListViewModelProtocol {
-    var singleListItems: [SimpleListRowItem] { get set }
+    var singleListItems: Observable<[SimpleListRowItem]> { get set }
     var addItem: (SingleItemsListViewModel) -> (){ get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
@@ -29,14 +30,16 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     
     
     init(itemType: ItemType, addItem: @escaping (SingleItemsListViewModel) -> (), deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), goToItemPage: @escaping (SimpleListRowItem) -> ()) {
+        
         self.itemType = itemType
-        self.singleListItems = Observable([SimpleListRowItem]() )
+        self.singleListItems = Observable([SimpleListRowItem]())
         self.addItem = addItem
         self.deleteItem = deleteItem
         self.updateItem = updateItem
         self.goToItemPage = goToItemPage
-        
-        sendItemRequest()
+        super.init()
+    
+        self.sendItemRequest()
     }
     
     func sendItemRequest() {
@@ -47,14 +50,14 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
         let simpleListItem = turnRequestObjectIntoSimpleItem(object: object)
         if simpleListItem != nil, requestKey == .post {
-            singleListItems.append(simpleListItem)
+            singleListItems.value.append(simpleListItem!)
         } else if let object = object, requestKey == .delete {
-            self.singleListItems = self.singleListItems.filter({$0.key != object.key})
+            self.singleListItems.value = self.singleListItems.value.filter({$0.key != object.key})
         } else if simpleListItem != nil, requestKey == .update {
-            var item = self.singleListItems.filter{ $0.key == object.key }.first
-            item?.name = simpleListItem.name
+            var item = self.singleListItems.value.filter{ $0.key == simpleListItem!.key }.first
+            item?.name = simpleListItem!.name
         } else if requestKey == .get {
-            self.singleListItems = UserSession.instance.getSingleListItems(type: self.itemType)()!
+            self.singleListItems.value = UserSession.instance.getSingleListItems(type: self.itemType)!
         }
     }
     
@@ -62,6 +65,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
         if let object = object as? Exercise { return object }
         if let object = object as? Routine { return object }
         if let object = object as? MuscleGroup { return object }
+        return nil
     }
     
     func requestFailed(requestKey: RequestType) {
@@ -98,22 +102,19 @@ class SingleItemListViewController: UIViewController, SingleItemListViewControll
  */
 extension SingleItemsListViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleItem = self.singleListItems[indexPath.row]
+        let singleItem = self.singleListItems.value[indexPath.row]
         self.goToItemPage(singleItem)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let item = singleListItems[indexPath.row]
+        let item = singleListItems.value[indexPath.row]
         let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
-            self?.updateItem(item)
+            guard let strongSelf = self else { return }
+            strongSelf.updateItem(strongSelf, item)
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
-            guard let strongSelf = self else {
-                return
-            }
-            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
-                strongSelf.deleteItem(item: item)
-            })
+            guard let strongSelf = self else { return }
+            strongSelf.deleteItem(strongSelf, item)
         })
         editAction.backgroundColor = .blue
         deleteAction.backgroundColor = .red
@@ -123,13 +124,13 @@ extension SingleItemsListViewModel: UITableViewDelegate {
 
 extension SingleItemsListViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return singleListItems.count
+        return singleListItems.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SingleItemTableViewCell", for: indexPath) as! SingleItemTableViewCell
         
-        let item = self.singleListItems[indexPath.row]
+        let item = self.singleListItems.value[indexPath.row]
         
         cell.setContent(listRowItem: item)
         return cell

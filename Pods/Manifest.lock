@@ -101,7 +101,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseUI/Auth
   - FirebaseUI/Google
-  - LhHelpers (= 1.2.0)
+  - LhHelpers (from `../lh-helpers`)
   - Pageboy (~> 2.6)
   - ScrollableGraphView
   - SwiftyJSON
@@ -125,12 +125,15 @@ SPEC REPOS:
     - GTMOAuth2
     - GTMSessionFetcher
     - leveldb-library
-    - LhHelpers
     - nanopb
     - Pageboy
     - ScrollableGraphView
     - SwiftyJSON
     - Tabman
+
+EXTERNAL SOURCES:
+  LhHelpers:
+    :path: "../lh-helpers"
 
 SPEC CHECKSUMS:
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
@@ -149,13 +152,13 @@ SPEC CHECKSUMS:
   GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  LhHelpers: 01940fce119d3f2293e87bc65c316933786384f9
+  LhHelpers: 6f2e6b5c5bf4102c7d1a57317e977714401937e7
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Pageboy: 1a5535f0d5a321045971cc2ddc6bcb53302392cb
   ScrollableGraphView: 4af35d4ea9ecdec665d34a74da51da161ddff8ac
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 25b614b1db5465c3ab143148f0790cba99d8357c
+PODFILE CHECKSUM: 5760b264e5fc3c805b3ad8505ed68608d6db9875
 
 COCOAPODS: 1.5.3
