@@ -93,6 +93,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcb-Vj-dYY">
+                                <rect key="frame" x="0.0" y="321.5" width="375" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwE-Yr-RrB">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,21 +145,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="Dcb-Vj-dYY" secondAttribute="trailing" id="1CJ-9z-ZCN"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
+                            <constraint firstItem="Dcb-Vj-dYY" firstAttribute="centerX" secondItem="zbn-Xn-u95" secondAttribute="centerX" id="Bpu-Z0-lXN"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="top" secondItem="7yU-zi-XoZ" secondAttribute="top" id="TvO-Ps-vRU"/>
+                            <constraint firstItem="Dcb-Vj-dYY" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="ZYm-4x-Hpo"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="vwE-Yr-RrB" secondAttribute="trailing" id="cvE-3i-abE"/>
+                            <constraint firstItem="Dcb-Vj-dYY" firstAttribute="centerY" secondItem="zbn-Xn-u95" secondAttribute="centerY" id="gtE-uB-77z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Lift Tracker" id="CSK-NR-ENc"/>
                     <connections>
+                        <outlet property="instructionLabel" destination="Dcb-Vj-dYY" id="f8d-jH-J18"/>
                         <outlet property="tableView" destination="vwE-Yr-RrB" id="2HF-wP-lRi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyJ-Su-Lgk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2625" y="-752"/>
+            <point key="canvasLocation" x="2624.8000000000002" y="-752.47376311844084"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="cNR-9d-god">

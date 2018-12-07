@@ -13,6 +13,7 @@ import LhHelpers
 class ExcercisesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var instructionLabel: UILabel!
     
     lazy var tableViewDataBond = {
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
@@ -29,6 +30,10 @@ class ExcercisesViewController: SingleItemListViewController {
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
         tableViewEditBond.bind(observable: viewModel.isEditingTable)
+        if viewModel.isEmpty {
+            tableView.isHidden = true
+            viewModel.displayNoExercisesSetup(instructionLabel)
+        }
     }
     
     func reloadData(items: [SimpleListRowItem]) {

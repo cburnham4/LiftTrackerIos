@@ -23,6 +23,13 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
     
+    var emptyExercises = "No Exercises Available \nAdd an Exercise by tapping the button in Top Right Corner"
+    var isEmpty: Bool {
+        return singleListItems.value.count == 0
+    }
+    func displayNoExercisesSetup(_ label: UILabel) {
+        label.text = emptyExercises
+    }
     
     var singleListItems: Observable<[SimpleListRowItem]>
     var itemType: ItemType
