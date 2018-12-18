@@ -17,6 +17,7 @@ struct TabBarVc {
     var items: [TabmanBar.Item]
 }
 
+// Coordinator to handle the view and view model interactions to keep the VM and view seperate
 class SingleItemCoordinator {
     var homeVc: HomePageViewController
     
@@ -67,8 +68,6 @@ class SingleItemCoordinator {
             break
         }
     }
-
-    
     
     func deleteItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
         AlertUtils.createAlertCallback(view: homeVc, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
