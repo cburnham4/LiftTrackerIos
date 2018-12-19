@@ -23,7 +23,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
     
-    var emptyExercises = "No Items Available \nAdd an item by tapping the button in Top Right Corner"
+    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner"
     var isEmpty: Bool {
         return singleListItems.value.count == 0
     }

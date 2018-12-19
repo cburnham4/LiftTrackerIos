@@ -47,11 +47,11 @@ class HomePageViewController: TabmanViewController {
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
-        let editAction = UIAlertAction(title: "Edit Exercises", style: .default) { [weak self] _ in
+        let editAction = UIAlertAction(title: "Edit List", style: .default) { [weak self] _ in
             self?.viewControllers[self?.currentIndex ?? 0].editTableview(edit: false)
         }
-        let addAction = UIAlertAction(title: "Add Exercise", style: .default) { [weak self] _ in
-            self?.viewControllers[self?.currentIndex ?? 0].addItem()
+        let addAction = UIAlertAction(title: "Logout", style: .default) { [weak self] _ in
+            self?.logout()
         }
 
         let actions = [editAction, addAction]
@@ -60,7 +60,7 @@ class HomePageViewController: TabmanViewController {
         self.present(actionMenu, animated: true, completion: nil)
     }
     
-    @IBAction func logout(_ sender: Any) {
+    func logout() {
         print("logout")
         let firebaseAuth = Auth.auth()
         do {
@@ -71,7 +71,10 @@ class HomePageViewController: TabmanViewController {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        
+    }
+    
+    @IBAction func addItem(_ sender: Any) {
+        viewControllers[self.currentIndex ?? 0].addItem()
     }
 }
 
