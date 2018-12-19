@@ -35,8 +35,10 @@ class ExcercisesViewController: SingleItemListViewController {
     func reloadData(items: [SimpleListRowItem]) {
         self.tableView.reloadData()
         
+        tableView.isHidden = viewModel.isEmpty
+        instructionLabel.isHidden = !viewModel.isEmpty
+        
         if viewModel.isEmpty {
-            tableView.isHidden = true
             viewModel.displayNoExercisesSetup(instructionLabel)
         }
     }
