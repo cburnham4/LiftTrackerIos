@@ -30,14 +30,15 @@ class ExcercisesViewController: SingleItemListViewController {
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
         tableViewEditBond.bind(observable: viewModel.isEditingTable)
-        if viewModel.isEmpty {
-            tableView.isHidden = true
-            viewModel.displayNoExercisesSetup(instructionLabel)
-        }
     }
     
     func reloadData(items: [SimpleListRowItem]) {
         self.tableView.reloadData()
+        
+        if viewModel.isEmpty {
+            tableView.isHidden = true
+            viewModel.displayNoExercisesSetup(instructionLabel)
+        }
     }
 
     override func editTableview(edit: Bool) {
