@@ -67,6 +67,7 @@ class HomePageViewController: TabmanViewController {
             try firebaseAuth.signOut()
             let storyBoard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            UserSession.instance.wipeData()
             self.present(loginVc, animated: true)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)

@@ -62,6 +62,7 @@ class RoutineExerciseViewModel: SingleItemsListViewModel {
     
     override func sendItemRequest() {
         self.exercises = UserSession.instance.getExercises() ?? []
+        singleListItems.value = []
         for exerciseKey in routine.exerciseKeys {
             let exercisesList = exercises.filter({ $0.key == exerciseKey})
             

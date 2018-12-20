@@ -10,7 +10,7 @@ import Foundation
 
 class Session {
     
-    private var sessionMap: [String: Any] = [String: Any]()
+    fileprivate var sessionMap: [String: Any] = [String: Any]()
     
     init() {}
     
@@ -68,5 +68,9 @@ class UserSession: Session {
     
     func setMuscleGroups(muscles: [MuscleGroup]) {
         addSessionVariable(key: ItemType.muscles.rawValue, object: muscles)
+    }
+    
+    func wipeData() {
+        sessionMap = [String: Any]()
     }
 }
