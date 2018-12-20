@@ -268,18 +268,29 @@
                                     <outlet property="delegate" destination="2bh-Xw-PPj" id="Dmn-zz-sSV"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7U-YQ-oGa">
+                                <rect key="frame" x="0.0" y="322" width="375" height="23.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="leading" secondItem="HyB-1k-KfY" secondAttribute="leading" id="KAp-C5-ieb"/>
+                            <constraint firstItem="Y7U-YQ-oGa" firstAttribute="centerX" secondItem="fFX-Uh-cz5" secondAttribute="centerX" id="LBL-sT-em9"/>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="top" secondItem="fFX-Uh-cz5" secondAttribute="top" id="TBT-LZ-tiV"/>
+                            <constraint firstItem="Y7U-YQ-oGa" firstAttribute="centerY" secondItem="fFX-Uh-cz5" secondAttribute="centerY" id="f9x-qM-fha"/>
+                            <constraint firstItem="Y7U-YQ-oGa" firstAttribute="leading" secondItem="HyB-1k-KfY" secondAttribute="leading" id="fwo-db-EaB"/>
                             <constraint firstItem="HyB-1k-KfY" firstAttribute="bottom" secondItem="Nnm-4y-YMC" secondAttribute="bottom" id="ixX-VI-CsW"/>
+                            <constraint firstItem="HyB-1k-KfY" firstAttribute="trailing" secondItem="Y7U-YQ-oGa" secondAttribute="trailing" id="vMh-Lc-ZI4"/>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="trailing" secondItem="HyB-1k-KfY" secondAttribute="trailing" id="wOp-i9-SZ3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HyB-1k-KfY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Muscle Groups" id="E3L-Wv-o0y"/>
                     <connections>
+                        <outlet property="instructionLabel" destination="Y7U-YQ-oGa" id="SqP-N5-Bv4"/>
                         <outlet property="tableView" destination="Nnm-4y-YMC" id="tIc-io-fEh"/>
                     </connections>
                 </viewController>

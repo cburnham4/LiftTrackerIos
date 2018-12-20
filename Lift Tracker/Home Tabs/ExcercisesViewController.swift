@@ -37,10 +37,7 @@ class ExcercisesViewController: SingleItemListViewController {
         
         tableView.isHidden = viewModel.isEmpty
         instructionLabel.isHidden = !viewModel.isEmpty
-        
-        if viewModel.isEmpty {
-            viewModel.displayNoExercisesSetup(instructionLabel)
-        }
+        instructionLabel.text = viewModel.emptyExercises
     }
 
     override func editTableview(edit: Bool) {

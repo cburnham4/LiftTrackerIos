@@ -13,59 +13,60 @@ class RoutineExercisesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var routine: Routine?
-    
-    var exercises: [Exercise]?
-    
     var selectedExerciseIndex: Int = 0
     
-    public static func getInstance(routine: Routine) -> RoutineExercisesViewController {
+    lazy var tableViewDataBond = {
+        return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
+    }()
+    
+    lazy var tableViewEditBond = {
+        return Bond<Bool>(valueChanged: self.editTableview)
+    }()
+    
+    public static func getInstance(viewModel: RoutineExerciseViewModel) -> RoutineExercisesViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "RoutineExercise", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "RoutineExercisesViewController") as! RoutineExercisesViewController
         
-        vc.routine = routine
-        
+        vc.viewModel = viewModel
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        super.viewDidLoad()
         let addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action:  #selector(addItemClicked))
         addItemButton.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = addItemButton
+        tableView.delegate = viewModel
+        tableView.dataSource = viewModel
         
-        exercises = UserSession.instance.getExercises()
+        tableViewDataBond.bind(observable: viewModel.singleListItems)
+        tableViewEditBond.bind(observable: viewModel.isEditingTable)
+    }
+    
+    func reloadData(items: [SimpleListRowItem]) {
+        self.tableView.reloadData()
+    }
+    
+    override func editTableview(edit: Bool) {
+        tableView.isEditing = !tableView.isEditing
     }
     
     @objc func addItemClicked(_ sender: UIBarButtonItem) {
+        // TODO change for it to take in the delegates separately
         AlertUtils.createAlertPicker(viewController: self, title: "Add Exercise to Routine", completion: { [weak self] _ in
             self?.exercisePicked()
         })
     }
     
-    func sendItemRequest() {
-        if let exercises = UserSession.instance.getExercises(), let routine = routine {
-            for exerciseKey in routine.exerciseKeys {
-                let exercisesList = exercises.filter({ $0.key == exerciseKey})
-                
-                if (exercisesList.count > 0) {
-                    //singleListItems?.append(exercisesList[0] as SimpleListRowItem)
-                }
-            }
-        }
-        tableView.reloadData()
-    }
-    
     func exercisePicked() {
         let index = self.selectedExerciseIndex
-        if let selectedExercise = self.exercises?[index], let routine = routine {
-            //singleListItems?.append(selectedExercise)
+        if let vm = viewModel as? RoutineExerciseViewModel, !vm.exercises.isEmpty {
+            let selectedExercise = vm.exercises[index]
+            vm.singleListItems.value.append(selectedExercise)
             tableView.reloadData()
             
-            routine.exerciseKeys.append(selectedExercise.key)
-            var routineObject = routine as CoreRequestObject
+            vm.routine.exerciseKeys.append(selectedExercise.key)
+            var routineObject = vm.routine as CoreRequestObject
             BaseItemsProvider.sendPostRequest(object: &routineObject, typeKey: .routines, requestKey: .update, cycle: self)
         }
     }
@@ -78,11 +79,18 @@ extension RoutineExercisesViewController: UIPickerViewDelegate, UIPickerViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exercises?.count ?? 0
+        if let vm = viewModel as? RoutineExerciseViewModel {
+            return vm.exercises.count
+        }
+        return 0
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return exercises?[row].name ?? ""
+        if let vm = viewModel as? RoutineExerciseViewModel {
+            return vm.exercises[row].name
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

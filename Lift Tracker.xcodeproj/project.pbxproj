@@ -12,6 +12,8 @@
 		E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */; };
 		E02506CD21B3248100E38D2C /* SingleItemCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02506CC21B3248100E38D2C /* SingleItemCoordinator.swift */; };
 		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
+		E02AF07C21CB0AD4000649FB /* RoutineExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */; };
+		E02AF07E21CB2EA2000649FB /* RoutineExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AF07D21CB2EA2000649FB /* RoutineExercisesRequest.swift */; };
 		E02D634C21B742F5004C9C64 /* SingleItemsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D634B21B742F5004C9C64 /* SingleItemsListViewModel.swift */; };
 		E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0333596219373B500982F00 /* MaxesGraphViewController.swift */; };
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
@@ -68,6 +70,8 @@
 		E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesViewController.swift; sourceTree = "<group>"; };
 		E02506CC21B3248100E38D2C /* SingleItemCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemCoordinator.swift; sourceTree = "<group>"; };
 		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
+		E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExerciseCoordinator.swift; sourceTree = "<group>"; };
+		E02AF07D21CB2EA2000649FB /* RoutineExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesRequest.swift; sourceTree = "<group>"; };
 		E02D634B21B742F5004C9C64 /* SingleItemsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemsListViewModel.swift; sourceTree = "<group>"; };
 		E0333596219373B500982F00 /* MaxesGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxesGraphViewController.swift; sourceTree = "<group>"; };
 		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			children = (
 				E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */,
 				E0783BE6218945920080C80D /* RoutineExercise.storyboard */,
+				E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */,
 			);
 			path = MuscleGroupsRoutines;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				E09E78F62115133500031F19 /* Request.swift */,
 				E09E78F82115138F00031F19 /* BaseItemsProvider.swift */,
 				E05AD6AA21A711C6008B6957 /* ExerciseSetsRequest.swift */,
+				E02AF07D21CB2EA2000649FB /* RoutineExercisesRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -602,6 +608,8 @@
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
+				E02AF07C21CB0AD4000649FB /* RoutineExerciseCoordinator.swift in Sources */,
+				E02AF07E21CB2EA2000649FB /* RoutineExercisesRequest.swift in Sources */,
 				E02D634C21B742F5004C9C64 /* SingleItemsListViewModel.swift in Sources */,
 				E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */,
 				E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */,

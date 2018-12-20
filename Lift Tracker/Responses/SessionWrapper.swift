@@ -41,6 +41,13 @@ class UserSession: Session {
         addSessionVariable(key: ItemType.exercises.rawValue, object: exercises)
     }
     
+    func addItem(item: SimpleListRowItem) {
+        if let exercise = item as? Exercise, var exercises = getExercises() {
+            exercises.append(exercise)
+            setExercises(exercises: exercises)
+        }
+    }
+    
     func deleteExercise(exercise: Exercise) {
         if let exercises = getExercises() {
             addSessionVariable(key: ItemType.exercises.rawValue, object: exercises.filter({ $0.key != exercise.key }))

@@ -67,8 +67,6 @@ class SingleItemCoordinator {
             break
         }
     }
-
-    
     
     func deleteItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
         AlertUtils.createAlertCallback(view: homeVc, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
@@ -99,9 +97,9 @@ class SingleItemCoordinator {
         if let exercise = item as? Exercise {
             let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
             homeVc.navigationController?.pushViewController(exerciseTabsVc, animated: true)
-        } else if let routine = item as? Routine {
-            let vc = RoutineExercisesViewController.getInstance(routine: routine)
-            homeVc.navigationController?.pushViewController(vc, animated: true)
+        } else if let routine = item as? Routine, let navController = homeVc.navigationController {
+            let routineCoordinator = RoutineExerciseCoordinator(routine: routine, navigationController: navController)
+            routineCoordinator.startFlow()
         } // TODO add muscle groups
     }
 }
