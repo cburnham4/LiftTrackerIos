@@ -10,7 +10,7 @@ import Foundation
 
 class Session {
     
-    private var sessionMap: [String: Any] = [String: Any]()
+    fileprivate var sessionMap: [String: Any] = [String: Any]()
     
     init() {}
     
@@ -41,6 +41,13 @@ class UserSession: Session {
         addSessionVariable(key: ItemType.exercises.rawValue, object: exercises)
     }
     
+    func addItem(item: SimpleListRowItem) {
+        if let exercise = item as? Exercise, var exercises = getExercises() {
+            exercises.append(exercise)
+            setExercises(exercises: exercises)
+        }
+    }
+    
     func deleteExercise(exercise: Exercise) {
         if let exercises = getExercises() {
             addSessionVariable(key: ItemType.exercises.rawValue, object: exercises.filter({ $0.key != exercise.key }))
@@ -61,5 +68,9 @@ class UserSession: Session {
     
     func setMuscleGroups(muscles: [MuscleGroup]) {
         addSessionVariable(key: ItemType.muscles.rawValue, object: muscles)
+    }
+    
+    func wipeData() {
+        sessionMap = [String: Any]()
     }
 }

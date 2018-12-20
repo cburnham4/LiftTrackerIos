@@ -9,12 +9,16 @@
 import Foundation
 import LhHelpers
 
-protocol SingleItemsListViewModelProtocol {
+protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var singleListItems: Observable<[SimpleListRowItem]> { get set }
+    var isEditingTable: Observable<Bool> { get set }
+    var isEmpty: Bool { get }
+    
     var addItem: (SingleItemsListViewModel) -> (){ get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var goToItemPage: (SimpleListRowItem) -> () { get set }
+    func sendItemRequest()
 }
 
 class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, RequestCycle {
@@ -23,12 +27,20 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
     
+    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner"
+    var isEmpty: Bool {
+        return singleListItems.value.count == 0
+    }
     
     var singleListItems: Observable<[SimpleListRowItem]>
     var itemType: ItemType
     var isEditingTable: Observable<Bool> = Observable(false)
     
-    init(itemType: ItemType, addItem: @escaping (SingleItemsListViewModel) -> (), deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (), goToItemPage: @escaping (SimpleListRowItem) -> ()) {
+    init(itemType: ItemType,
+         addItem: @escaping (SingleItemsListViewModel) -> (),
+         deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (),
+         updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (),
+         goToItemPage: @escaping (SimpleListRowItem) -> ()) {
         
         self.itemType = itemType
         self.singleListItems = Observable([SimpleListRowItem]())
@@ -48,6 +60,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
         let simpleListItem = turnRequestObjectIntoSimpleItem(object: object)
         if simpleListItem != nil, requestKey == .post {
             singleListItems.value.append(simpleListItem!)
+            UserSession.instance.addItem(item: simpleListItem!)
         } else if let object = object, requestKey == .delete {
             self.singleListItems.value = self.singleListItems.value.filter({$0.key != object.key})
         } else if simpleListItem != nil, requestKey == .update {
