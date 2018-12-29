@@ -1,5 +1,8 @@
 PODS:
   - AutoInsetter (1.3.0)
+  - Firebase/AdMob (5.8.1):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (~> 7.32)
   - Firebase/Auth (5.8.1):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.4)
@@ -39,6 +42,7 @@ PODS:
   - FirebaseUI/Google (5.2.2):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
+  - Google-Mobile-Ads-SDK (7.37.0)
   - GoogleAppMeasurement (5.1.4):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -96,6 +100,7 @@ PODS:
     - Pageboy (~> 2.6.0)
 
 DEPENDENCIES:
+  - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -118,6 +123,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseInstanceID
     - FirebaseUI
+    - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleToolboxForMac
@@ -142,6 +148,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
   FirebaseUI: 09519bf436a055cd696bf68687d624423150e4c0
+  Google-Mobile-Ads-SDK: d028682d7450749a1955679da050eaf70d997b3e
   GoogleAppMeasurement: 7d2552cea4e12d09ce737ef0441887a746585ff3
   GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
@@ -156,6 +163,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 7c90781d17255c8223c64039332ee411f8152248
+PODFILE CHECKSUM: 6bc8097ff5639a13f36035b32cfeb0a75a8366d9
 
 COCOAPODS: 1.5.3

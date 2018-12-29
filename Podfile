@@ -9,6 +9,7 @@ def shared_pods
     pod 'SwiftyJSON'
     # Pods for Lift Tracker
     pod 'Firebase/Core'
+    pod 'Firebase/AdMob'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
     pod 'FirebaseUI/Auth'
