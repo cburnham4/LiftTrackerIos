@@ -100,7 +100,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwE-Yr-RrB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="Egg-Tg-HfO" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
@@ -142,22 +142,33 @@
                                     <outlet property="delegate" destination="dua-tJ-KnL" id="pbb-7P-xfE"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJJ-Bk-1EM" customClass="GADBannerView">
+                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="0W4-wr-T1D"/>
+                                    <constraint firstAttribute="height" constant="50" id="lbh-ci-AIY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="Dcb-Vj-dYY" secondAttribute="trailing" id="1CJ-9z-ZCN"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="5MM-tf-p31"/>
-                            <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
+                            <constraint firstItem="xJJ-Bk-1EM" firstAttribute="centerX" secondItem="zbn-Xn-u95" secondAttribute="centerX" id="6CS-pE-Bup"/>
+                            <constraint firstItem="xJJ-Bk-1EM" firstAttribute="top" secondItem="vwE-Yr-RrB" secondAttribute="bottom" id="6qh-Z7-aBX"/>
                             <constraint firstItem="Dcb-Vj-dYY" firstAttribute="centerX" secondItem="zbn-Xn-u95" secondAttribute="centerX" id="Bpu-Z0-lXN"/>
                             <constraint firstItem="vwE-Yr-RrB" firstAttribute="top" secondItem="7yU-zi-XoZ" secondAttribute="top" id="TvO-Ps-vRU"/>
                             <constraint firstItem="Dcb-Vj-dYY" firstAttribute="leading" secondItem="7yU-zi-XoZ" secondAttribute="leading" id="ZYm-4x-Hpo"/>
                             <constraint firstItem="7yU-zi-XoZ" firstAttribute="trailing" secondItem="vwE-Yr-RrB" secondAttribute="trailing" id="cvE-3i-abE"/>
                             <constraint firstItem="Dcb-Vj-dYY" firstAttribute="centerY" secondItem="zbn-Xn-u95" secondAttribute="centerY" id="gtE-uB-77z"/>
+                            <constraint firstItem="7yU-zi-XoZ" firstAttribute="bottom" secondItem="xJJ-Bk-1EM" secondAttribute="bottom" id="oaM-2p-1q6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7yU-zi-XoZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Lift Tracker" id="CSK-NR-ENc"/>
                     <connections>
+                        <outlet property="bannerView" destination="xJJ-Bk-1EM" id="Ymn-on-2SV"/>
                         <outlet property="instructionLabel" destination="Dcb-Vj-dYY" id="f8d-jH-J18"/>
                         <outlet property="tableView" destination="vwE-Yr-RrB" id="2HF-wP-lRi"/>
                     </connections>
@@ -187,6 +198,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0e-xk-bGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Ple-ut-s3K">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="zNo-xU-V6x"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1575" y="-320"/>
         </scene>
@@ -226,7 +243,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nnm-4y-YMC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="gze-9a-QNh" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
@@ -274,15 +291,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfW-g2-MAi" customClass="GADBannerView">
+                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="4V7-Rv-zap"/>
+                                    <constraint firstAttribute="height" constant="50" id="NKr-UZ-I3H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="leading" secondItem="HyB-1k-KfY" secondAttribute="leading" id="KAp-C5-ieb"/>
                             <constraint firstItem="Y7U-YQ-oGa" firstAttribute="centerX" secondItem="fFX-Uh-cz5" secondAttribute="centerX" id="LBL-sT-em9"/>
+                            <constraint firstItem="DfW-g2-MAi" firstAttribute="centerX" secondItem="fFX-Uh-cz5" secondAttribute="centerX" id="OpB-Ig-jUh"/>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="top" secondItem="fFX-Uh-cz5" secondAttribute="top" id="TBT-LZ-tiV"/>
+                            <constraint firstItem="HyB-1k-KfY" firstAttribute="bottom" secondItem="DfW-g2-MAi" secondAttribute="bottom" id="TOZ-hH-MEU"/>
                             <constraint firstItem="Y7U-YQ-oGa" firstAttribute="centerY" secondItem="fFX-Uh-cz5" secondAttribute="centerY" id="f9x-qM-fha"/>
                             <constraint firstItem="Y7U-YQ-oGa" firstAttribute="leading" secondItem="HyB-1k-KfY" secondAttribute="leading" id="fwo-db-EaB"/>
-                            <constraint firstItem="HyB-1k-KfY" firstAttribute="bottom" secondItem="Nnm-4y-YMC" secondAttribute="bottom" id="ixX-VI-CsW"/>
+                            <constraint firstItem="DfW-g2-MAi" firstAttribute="top" secondItem="Nnm-4y-YMC" secondAttribute="bottom" id="ixX-VI-CsW"/>
                             <constraint firstItem="HyB-1k-KfY" firstAttribute="trailing" secondItem="Y7U-YQ-oGa" secondAttribute="trailing" id="vMh-Lc-ZI4"/>
                             <constraint firstItem="Nnm-4y-YMC" firstAttribute="trailing" secondItem="HyB-1k-KfY" secondAttribute="trailing" id="wOp-i9-SZ3"/>
                         </constraints>
@@ -290,6 +317,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Muscle Groups" id="E3L-Wv-o0y"/>
                     <connections>
+                        <outlet property="bannerView" destination="DfW-g2-MAi" id="4ek-o9-z0m"/>
                         <outlet property="instructionLabel" destination="Y7U-YQ-oGa" id="SqP-N5-Bv4"/>
                         <outlet property="tableView" destination="Nnm-4y-YMC" id="tIc-io-fEh"/>
                     </connections>

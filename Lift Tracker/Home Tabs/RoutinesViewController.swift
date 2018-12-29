@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import LhHelpers
+import GoogleMobileAds
 
 class RoutinesViewController: SingleItemListViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     lazy var tableViewDataBond = {
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
@@ -30,6 +32,13 @@ class RoutinesViewController: SingleItemListViewController {
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
         tableViewEditBond.bind(observable: viewModel.isEditingTable)
+        
+        bannerView.adUnitID = "ca-app-pub-8223005482588566/8638907734"
+        bannerView.rootViewController = self
+        
+        /* Request the new ad */
+        let request = GADRequest()
+        bannerView.load(request)
     }
     
     func reloadData(items: [SimpleListRowItem]) {
