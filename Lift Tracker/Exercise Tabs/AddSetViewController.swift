@@ -8,12 +8,14 @@
 
 import UIKit
 import LhHelpers
+import GoogleMobileAds
 
 class AddSetViewController: ExerciseBaseTabViewController {
     // TODO move to MVVM
     @IBOutlet weak var exerciseTableView: UITableView!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var repTextField: UITextField!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var dayLiftSets: DayLiftSets!
     var liftSets: [LiftSet]!
@@ -26,6 +28,16 @@ class AddSetViewController: ExerciseBaseTabViewController {
         self.hideKeyboardWhenTappedAround()
         loadInLiftSets()
         exerciseTableView.tableFooterView = UIView()
+        loadAd()
+    }
+    
+    func loadAd() {
+        bannerView.adUnitID = "ca-app-pub-8223005482588566/3085828576"
+        bannerView.rootViewController = self
+        
+        /* Request the new ad */
+        let request = GADRequest()
+        bannerView.load(request)
     }
     
     func loadInLiftSets() {

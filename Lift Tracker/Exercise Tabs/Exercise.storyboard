@@ -179,8 +179,16 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLB-mN-rLO" customClass="GADBannerView">
+                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9DO-LQ-knW"/>
+                                    <constraint firstAttribute="width" constant="320" id="Ldv-f1-nrL"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hzs-RQ-do5" userLabel="Reps Table">
-                                <rect key="frame" x="16" y="225" width="343" height="438"/>
+                                <rect key="frame" x="16" y="225" width="343" height="388"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepsSetsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepsSetsTableViewCell" id="3sM-gt-63g" customClass="RepsSetsTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
@@ -216,16 +224,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hzs-RQ-do5" firstAttribute="top" secondItem="8Vc-Lm-kqx" secondAttribute="bottom" constant="16" id="Brx-HQ-59T"/>
+                            <constraint firstItem="fLB-mN-rLO" firstAttribute="centerX" secondItem="jJM-Dr-wUf" secondAttribute="centerX" id="EbT-Is-3gM"/>
                             <constraint firstItem="Zwp-p0-Uxu" firstAttribute="trailing" secondItem="Hzs-RQ-do5" secondAttribute="trailing" constant="16" id="F5B-Ys-ta9"/>
                             <constraint firstItem="8Vc-Lm-kqx" firstAttribute="top" secondItem="Zwp-p0-Uxu" secondAttribute="top" constant="16" id="HYe-bA-oQC"/>
                             <constraint firstItem="8Vc-Lm-kqx" firstAttribute="leading" secondItem="Zwp-p0-Uxu" secondAttribute="leading" constant="44" id="Jbw-pm-q7n"/>
-                            <constraint firstItem="Zwp-p0-Uxu" firstAttribute="bottom" secondItem="Hzs-RQ-do5" secondAttribute="bottom" constant="4" id="NFn-ng-d13"/>
+                            <constraint firstItem="Zwp-p0-Uxu" firstAttribute="bottom" secondItem="fLB-mN-rLO" secondAttribute="bottom" id="LRA-XY-aDC"/>
+                            <constraint firstItem="fLB-mN-rLO" firstAttribute="top" secondItem="Hzs-RQ-do5" secondAttribute="bottom" constant="4" id="NFn-ng-d13"/>
                             <constraint firstAttribute="trailing" secondItem="8Vc-Lm-kqx" secondAttribute="trailing" constant="44" id="VCf-19-BhR"/>
                             <constraint firstItem="Hzs-RQ-do5" firstAttribute="leading" secondItem="Zwp-p0-Uxu" secondAttribute="leading" constant="16" id="e7Y-hz-YUh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zwp-p0-Uxu"/>
                     </view>
                     <connections>
+                        <outlet property="bannerView" destination="fLB-mN-rLO" id="tWX-hj-ga5"/>
                         <outlet property="exerciseTableView" destination="Hzs-RQ-do5" id="xmO-oq-cqa"/>
                         <outlet property="repTextField" destination="JML-61-671" id="kEG-ae-I6W"/>
                         <outlet property="weightTextField" destination="oOB-hz-lXT" id="Z40-Pe-0qD"/>
