@@ -165,6 +165,17 @@
 			path = MuscleGroupsRoutines;
 			sourceTree = "<group>";
 		};
+		E03A626221EBA06A00A7F5C3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E07330692144347400D26E15 /* SingleItemListViewController.swift */,
+				E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */,
+				E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */,
+				E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E03F33912162ECDF005043FF /* Exercise Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,13 +260,10 @@
 		E09E78ED2114FBD600031F19 /* Home Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				E03A626221EBA06A00A7F5C3 /* ViewControllers */,
 				E09E78EE2114FBF100031F19 /* Home.storyboard */,
-				E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */,
 				E03853252122106A009CE727 /* SingleItemTableViewCell.swift */,
-				E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */,
-				E07330692144347400D26E15 /* SingleItemListViewController.swift */,
 				E06D82DF2159A38D002F3ED0 /* HomePageViewController.swift */,
-				E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */,
 				E02506CC21B3248100E38D2C /* SingleItemCoordinator.swift */,
 				E02D634B21B742F5004C9C64 /* SingleItemsListViewModel.swift */,
 			);

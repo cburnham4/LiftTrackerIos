@@ -105,7 +105,7 @@ extension SingleItemsListViewModel: UITableViewDelegate {
             guard let strongSelf = self else { return }
             strongSelf.deleteItem(strongSelf, item)
         })
-        editAction.backgroundColor = .blue
+        editAction.backgroundColor = .gray
         deleteAction.backgroundColor = .red
         return [deleteAction, editAction]
     }
