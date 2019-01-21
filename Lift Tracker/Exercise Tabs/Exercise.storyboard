@@ -180,15 +180,15 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLB-mN-rLO" customClass="GADBannerView">
-                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <rect key="frame" x="27.5" y="567" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9DO-LQ-knW"/>
+                                    <constraint firstAttribute="height" constant="100" id="9DO-LQ-knW"/>
                                     <constraint firstAttribute="width" constant="320" id="Ldv-f1-nrL"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hzs-RQ-do5" userLabel="Reps Table">
-                                <rect key="frame" x="16" y="225" width="343" height="388"/>
+                                <rect key="frame" x="16" y="225" width="343" height="338"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepsSetsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepsSetsTableViewCell" id="3sM-gt-63g" customClass="RepsSetsTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
