@@ -38,7 +38,7 @@ class RoutineExerciseCoordinator {
     
     func deleteItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
         AlertUtils.createAlertCallback(view: navigationController, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { [weak self] _ in
-            if var routine = self?.routine {
+            if let routine = self?.routine {
                 let exerciseList = routine.exerciseKeys.filter({ $0 != item.key })
                 routine.exerciseKeys = exerciseList
                 var routineObject = routine as CoreRequestObject
