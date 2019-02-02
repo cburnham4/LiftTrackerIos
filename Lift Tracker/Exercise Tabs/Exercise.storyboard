@@ -331,27 +331,41 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shouldAdaptRange" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two or more days of sets are required before displaying graph" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymA-zN-kmx">
+                                <rect key="frame" x="32" y="313.5" width="311" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mjH-lO-qX7" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" id="7Qe-Fl-kId"/>
                             <constraint firstItem="tX1-oA-NuQ" firstAttribute="top" secondItem="UMW-JA-KzW" secondAttribute="top" constant="42" id="ACp-yV-77a"/>
                             <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="tX1-oA-NuQ" secondAttribute="trailing" constant="16" id="CAd-c0-wrv"/>
                             <constraint firstItem="J6X-OX-Kix" firstAttribute="top" secondItem="mjH-lO-qX7" secondAttribute="bottom" constant="6" id="DXz-mP-Cyd"/>
                             <constraint firstItem="mjH-lO-qX7" firstAttribute="top" secondItem="tX1-oA-NuQ" secondAttribute="bottom" constant="10" id="Ewv-Uo-JbS"/>
+                            <constraint firstItem="ymA-zN-kmx" firstAttribute="centerX" secondItem="UMW-JA-KzW" secondAttribute="centerX" id="KrQ-p1-kYJ"/>
                             <constraint firstItem="J6X-OX-Kix" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" constant="16" id="QMO-am-A2G"/>
+                            <constraint firstItem="ymA-zN-kmx" firstAttribute="centerY" secondItem="UMW-JA-KzW" secondAttribute="centerY" id="WCk-VG-wiR"/>
                             <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="mjH-lO-qX7" secondAttribute="trailing" id="jPD-U2-PF1"/>
                             <constraint firstItem="tX1-oA-NuQ" firstAttribute="leading" secondItem="y0z-BS-rUM" secondAttribute="leading" constant="16" id="oL5-ou-WzA"/>
                             <constraint firstItem="y0z-BS-rUM" firstAttribute="trailing" secondItem="J6X-OX-Kix" secondAttribute="trailing" constant="16" id="qOZ-Ww-RyO"/>
+                            <constraint firstItem="ymA-zN-kmx" firstAttribute="leading" secondItem="UMW-JA-KzW" secondAttribute="leading" constant="32" id="qxA-qs-7kv"/>
+                            <constraint firstAttribute="trailing" secondItem="ymA-zN-kmx" secondAttribute="trailing" constant="32" id="sp4-0a-jyh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y0z-BS-rUM"/>
                     </view>
                     <connections>
                         <outlet property="allTimeBtn" destination="4cB-HM-dzA" id="42c-eO-7Rh"/>
+                        <outlet property="graphTitle" destination="mjH-lO-qX7" id="hW3-Bp-mL2"/>
                         <outlet property="graphView" destination="J6X-OX-Kix" id="gbE-7n-Po0"/>
+                        <outlet property="noItemView" destination="ymA-zN-kmx" id="Nch-Wj-Bsv"/>
                         <outlet property="oneMonthBtn" destination="eSu-dV-3BB" id="ZtS-GL-fFg"/>
                         <outlet property="oneYearBtn" destination="Suk-ga-TbL" id="hza-Q9-wtO"/>
                         <outlet property="sixMonthBtn" destination="58g-31-VRy" id="RXB-zB-XlZ"/>
                         <outlet property="threeMonthBtn" destination="Lmn-tT-BLi" id="2Kj-Nn-Gu6"/>
+                        <outlet property="timeOptions" destination="tX1-oA-NuQ" id="BRJ-yv-8dC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3LB-lp-jds" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,17 +444,28 @@
                                     <outlet property="delegate" destination="Gyw-lP-h64" id="cEm-JM-xdE"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please add a lift set to view past sets here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8s3-2e-gOw">
+                                <rect key="frame" x="42" y="313.5" width="291" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pm7-8h-TTV" firstAttribute="trailing" secondItem="8s3-2e-gOw" secondAttribute="trailing" constant="42" id="PzI-iK-hIS"/>
+                            <constraint firstItem="8s3-2e-gOw" firstAttribute="leading" secondItem="pm7-8h-TTV" secondAttribute="leading" constant="42" id="UWg-ut-Hdj"/>
                             <constraint firstItem="bz7-j2-1Q9" firstAttribute="leading" secondItem="pm7-8h-TTV" secondAttribute="leading" constant="8" id="aAO-Wi-TcV"/>
                             <constraint firstItem="bz7-j2-1Q9" firstAttribute="top" secondItem="pm7-8h-TTV" secondAttribute="top" id="bt1-gN-BLa"/>
                             <constraint firstItem="pm7-8h-TTV" firstAttribute="trailing" secondItem="bz7-j2-1Q9" secondAttribute="trailing" constant="8" id="eFh-1I-OVJ"/>
+                            <constraint firstItem="8s3-2e-gOw" firstAttribute="centerY" secondItem="Rim-tA-HTW" secondAttribute="centerY" id="uKQ-M9-eiX"/>
                             <constraint firstItem="pm7-8h-TTV" firstAttribute="bottom" secondItem="bz7-j2-1Q9" secondAttribute="bottom" constant="8" id="w82-nc-KT6"/>
+                            <constraint firstItem="8s3-2e-gOw" firstAttribute="centerX" secondItem="Rim-tA-HTW" secondAttribute="centerX" id="z7u-Sz-0lO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pm7-8h-TTV"/>
                     </view>
                     <connections>
+                        <outlet property="noSetsLabel" destination="8s3-2e-gOw" id="iYy-Oj-UWP"/>
                         <outlet property="tableView" destination="bz7-j2-1Q9" id="MDO-oZ-QSY"/>
                     </connections>
                 </viewController>

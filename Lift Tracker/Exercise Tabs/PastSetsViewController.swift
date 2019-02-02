@@ -11,6 +11,7 @@ import UIKit
 class PastSetsViewController: ExerciseBaseTabViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noSetsLabel: UILabel!
     
     var pastDates: [DayLiftSets]?
     
@@ -26,6 +27,10 @@ class PastSetsViewController: ExerciseBaseTabViewController {
         
         pastDates = exercise.pastSets.filter({ $0.liftsets.count != 0 })
         tableView.reloadData()
+        
+        let hideTableView = pastDates?.isEmpty ?? false
+        tableView.isHidden = hideTableView
+        noSetsLabel.isHidden = !hideTableView
     }
 }
 

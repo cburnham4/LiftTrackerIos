@@ -29,6 +29,8 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     @IBOutlet weak var sixMonthBtn: UIButton!
     @IBOutlet weak var oneYearBtn: UIButton!
     @IBOutlet weak var allTimeBtn: UIButton!
+    @IBOutlet weak var timeOptions: UIStackView!
+    @IBOutlet weak var graphTitle: UILabel!
     
     var timeInDay: Double?
     var timeInMonth: Double?
@@ -38,6 +40,8 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     
     var maxesAndDates: [MaxDate]!
     var selectedMaxDates: [MaxDate] = [MaxDate]()
+    
+    @IBOutlet weak var noItemView: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +77,12 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
         }
         maxesAndDates.reverse()
         selectedMaxDates = maxesAndDates
+        
+        let hideTableView = maxesAndDates.count < 2
+        noItemView.isHidden = !hideTableView
+        graphView.isHidden = hideTableView
+        timeOptions.isHidden = hideTableView
+        graphTitle.isHidden = hideTableView
     }
     
     @IBAction func timeSectionSelected(_ sender: UIButton) {
