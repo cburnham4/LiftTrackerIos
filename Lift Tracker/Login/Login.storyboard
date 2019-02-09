@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o0G-kc-6u7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o0G-kc-6u7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,5 +25,36 @@
             </objects>
             <point key="canvasLocation" x="626" y="260"/>
         </scene>
+        <!--Custom Login View Controller-->
+        <scene sceneID="n56-7v-KHg">
+            <objects>
+                <viewController storyboardIdentifier="CustomLoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DKj-vo-Hig" customClass="CustomLoginViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fVl-Up-2Jc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="HIV-AP-Mw4">
+                                <rect key="frame" x="67.5" y="110" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HIV-AP-Mw4" secondAttribute="height" multiplier="1:1" id="8em-id-ktW"/>
+                                    <constraint firstAttribute="width" constant="240" id="nGa-GQ-iXs"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HIV-AP-Mw4" firstAttribute="centerX" secondItem="fVl-Up-2Jc" secondAttribute="centerX" id="SXj-bS-GXC"/>
+                            <constraint firstItem="HIV-AP-Mw4" firstAttribute="top" secondItem="4Ps-aA-RYC" secondAttribute="top" constant="90" id="TCV-Kd-rAS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Ps-aA-RYC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qem-gs-faf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1382" y="260"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="AppIcon" width="16" height="16"/>
+    </resources>
 </document>

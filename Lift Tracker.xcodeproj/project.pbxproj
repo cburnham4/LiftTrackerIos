@@ -35,6 +35,7 @@
 		E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */; };
 		E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07330692144347400D26E15 /* SingleItemListViewController.swift */; };
 		E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0783BE6218945920080C80D /* RoutineExercise.storyboard */; };
+		E07C933A220F2837009EAE4C /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07C9339220F2837009EAE4C /* CustomLoginViewController.swift */; };
 		E09D5CCC21A9FF4C0010CD7F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */; };
 		E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09E78EE2114FBF100031F19 /* Home.storyboard */; };
 		E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F02114FCB000031F19 /* ExcercisesViewController.swift */; };
@@ -99,6 +100,7 @@
 		E0733067214432C000D26E15 /* MuscleGroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupsViewController.swift; sourceTree = "<group>"; };
 		E07330692144347400D26E15 /* SingleItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemListViewController.swift; sourceTree = "<group>"; };
 		E0783BE6218945920080C80D /* RoutineExercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoutineExercise.storyboard; sourceTree = "<group>"; };
+		E07C9339220F2837009EAE4C /* CustomLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
 		E09D5CCB21A9FF4C0010CD7F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lift Tracker.entitlements"; sourceTree = "<group>"; };
 		E09E78EE2114FBF100031F19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				E04D7C7B2106B58700E79A5A /* Login.storyboard */,
 				E04D7C7F2106CF7400E79A5A /* LoginViewController.swift */,
+				E07C9339220F2837009EAE4C /* CustomLoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
 				E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
+				E07C933A220F2837009EAE4C /* CustomLoginViewController.swift in Sources */,
 				E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,

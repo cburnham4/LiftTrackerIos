@@ -41,8 +41,13 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
             
     private func login() {
         let authViewController = authUI?.authViewController();
-        
+//        let authViewController = storyboard?.instantiateViewController(withIdentifier: "CustomLoginViewController") as! CustomLoginViewController
+//
         self.present(authViewController!, animated: true, completion: nil)
+    }
+    
+    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+        return CustomLoginViewController(authUI: authUI)
     }
     
     private func goToHome(user: User) {
