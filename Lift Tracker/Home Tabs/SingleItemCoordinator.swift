@@ -78,17 +78,23 @@ class SingleItemCoordinator {
     
     func updateItem(viewModel: SingleItemsListViewModel, item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
-            AlertUtils.createAlertTextCallback(view: homeVc, title: "Update Exercise Name", placeholder: viewModel.itemType.rawValue, callback: { exerciseName in
-                exercise.name = exerciseName
-                var requestObject = exercise as CoreRequestObject
-                BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: viewModel)
-                viewModel.isEditingTable.value = false
-            })
+            AlertUtils.createAlertTextCallback(view: homeVc, title: "Update Exercise Name", placeholder: viewModel.itemType.rawValue,
+                                               callback: { exerciseName in
+                                                    exercise.name = exerciseName
+                                                    var requestObject = exercise as CoreRequestObject
+                                                    BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: viewModel)
+                                                    viewModel.isEditingTable.value = false
+                                                    },
+                                               cancelCallback: {
+                                                    viewModel.isEditingTable.value = false
+                                                })
         } else if let routine = item as? Routine {
             AlertUtils.createAlertTextCallback(view: homeVc, title: "Update Routine Name", placeholder: viewModel.itemType.rawValue, callback: { name in
                 routine.name = name
                 var requestObject = routine as CoreRequestObject
                 BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update, cycle: viewModel)
+                viewModel.isEditingTable.value = false
+            }, cancelCallback: {
                 viewModel.isEditingTable.value = false
             })
         }
