@@ -170,6 +170,7 @@
 		E032DAE42225F9AC0072815A /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */,
 				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
 				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
 				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
@@ -228,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				E032DAE42225F9AC0072815A /* Support */,
-				E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */,
 				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
 				E09E78F32114FD8800031F19 /* Responses */,
@@ -803,7 +803,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
-				INFOPLIST_FILE = "Lift Tracker/Info.plist";
+				INFOPLIST_FILE = "Lift Tracker/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -822,7 +822,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
-				INFOPLIST_FILE = "Lift Tracker/Info.plist";
+				INFOPLIST_FILE = "Lift Tracker/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
