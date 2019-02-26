@@ -167,6 +167,18 @@
 			path = MuscleGroupsRoutines;
 			sourceTree = "<group>";
 		};
+		E032DAE42225F9AC0072815A /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
+				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
+				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
+				E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */,
+				E04D7C592106B2FC00E79A5A /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		E03A626221EBA06A00A7F5C3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,18 +227,14 @@
 		E04D7C4A2106B2FA00E79A5A /* Lift Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				E032DAE42225F9AC0072815A /* Support */,
 				E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */,
 				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
-				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
 				E09E78F32114FD8800031F19 /* Responses */,
 				E09E78F22114FCC500031F19 /* Requests */,
 				E09E78ED2114FBD600031F19 /* Home Tabs */,
 				E04D7C812106CF7C00E79A5A /* Login */,
-				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
-				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
-				E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */,
-				E04D7C592106B2FC00E79A5A /* Info.plist */,
 			);
 			path = "Lift Tracker";
 			sourceTree = "<group>";
