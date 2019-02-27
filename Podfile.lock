@@ -85,6 +85,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
+  - Kingfisher (5.1.1)
   - leveldb-library (1.20)
   - LhHelpers (1.2.5)
   - nanopb (0.3.8):
@@ -106,6 +107,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseUI/Auth
   - FirebaseUI/Google
+  - Kingfisher
   - LhHelpers (= 1.2.5)
   - Pageboy (~> 2.6)
   - ScrollableGraphView
@@ -130,6 +132,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMOAuth2
     - GTMSessionFetcher
+    - Kingfisher
     - leveldb-library
     - LhHelpers
     - nanopb
@@ -155,6 +158,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  Kingfisher: 2558186963e5be42d98c5b110ccb3130148b77e4
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   LhHelpers: 6a112271f52f565cca688ff32658ee2dc1f44876
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -163,6 +167,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 36471109ff64f635853b236ce4f8df9a1f5bf2a8
+PODFILE CHECKSUM: 6d5395f3b3d196c133f87a4da35552e6d4d392e4
 
 COCOAPODS: 1.5.3

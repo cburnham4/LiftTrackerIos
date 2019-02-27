@@ -18,6 +18,7 @@ def shared_pods
     pod 'Pageboy', '~> 2.6'
     pod 'FirebaseUI/Google'
     pod 'ScrollableGraphView'
+    pod 'Kingfisher'
 end
 
 target 'Lift Tracker' do

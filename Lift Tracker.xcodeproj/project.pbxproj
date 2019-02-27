@@ -14,6 +14,9 @@
 		E02AF07C21CB0AD4000649FB /* RoutineExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */; };
 		E02AF07E21CB2EA2000649FB /* RoutineExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AF07D21CB2EA2000649FB /* RoutineExercisesRequest.swift */; };
 		E02D634C21B742F5004C9C64 /* SingleItemsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D634B21B742F5004C9C64 /* SingleItemsListViewModel.swift */; };
+		E032DAE7222601370072815A /* DownloadLifts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E032DAE6222601370072815A /* DownloadLifts.storyboard */; };
+		E032DAE9222601720072815A /* DownloadRoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E032DAE8222601720072815A /* DownloadRoutinesViewController.swift */; };
+		E032DAEB222604990072815A /* RoutineDownloadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E032DAEA222604990072815A /* RoutineDownloadsViewModel.swift */; };
 		E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0333596219373B500982F00 /* MaxesGraphViewController.swift */; };
 		E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038531E2121E4F5009CE727 /* SessionWrapper.swift */; };
 		E03853262122106A009CE727 /* SingleItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03853252122106A009CE727 /* SingleItemTableViewCell.swift */; };
@@ -73,6 +76,9 @@
 		E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExerciseCoordinator.swift; sourceTree = "<group>"; };
 		E02AF07D21CB2EA2000649FB /* RoutineExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesRequest.swift; sourceTree = "<group>"; };
 		E02D634B21B742F5004C9C64 /* SingleItemsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemsListViewModel.swift; sourceTree = "<group>"; };
+		E032DAE6222601370072815A /* DownloadLifts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DownloadLifts.storyboard; sourceTree = "<group>"; };
+		E032DAE8222601720072815A /* DownloadRoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRoutinesViewController.swift; sourceTree = "<group>"; };
+		E032DAEA222604990072815A /* RoutineDownloadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDownloadsViewModel.swift; sourceTree = "<group>"; };
 		E0333596219373B500982F00 /* MaxesGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxesGraphViewController.swift; sourceTree = "<group>"; };
 		E038531E2121E4F5009CE727 /* SessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWrapper.swift; sourceTree = "<group>"; };
 		E03853252122106A009CE727 /* SingleItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,6 +186,16 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		E032DAE5222600F90072815A /* DownloadRoutines */ = {
+			isa = PBXGroup;
+			children = (
+				E032DAE6222601370072815A /* DownloadLifts.storyboard */,
+				E032DAE8222601720072815A /* DownloadRoutinesViewController.swift */,
+				E032DAEA222604990072815A /* RoutineDownloadsViewModel.swift */,
+			);
+			path = DownloadRoutines;
+			sourceTree = "<group>";
+		};
 		E03A626221EBA06A00A7F5C3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +244,7 @@
 		E04D7C4A2106B2FA00E79A5A /* Lift Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				E032DAE5222600F90072815A /* DownloadRoutines */,
 				E032DAE42225F9AC0072815A /* Support */,
 				E02098482184EAD9001FA3C3 /* MuscleGroupsRoutines */,
 				E03F33912162ECDF005043FF /* Exercise Tabs */,
@@ -417,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E03F33952162EE6D005043FF /* Exercise.storyboard in Resources */,
+				E032DAE7222601370072815A /* DownloadLifts.storyboard in Resources */,
 				E04D7C7C2106B58700E79A5A /* Login.storyboard in Resources */,
 				E04D7C582106B2FC00E79A5A /* LaunchScreen.storyboard in Resources */,
 				E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */,
@@ -455,6 +473,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LhHelpers/LhHelpers.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
@@ -470,6 +489,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LhHelpers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
@@ -513,6 +533,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LhHelpers/LhHelpers.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
@@ -528,6 +549,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LhHelpers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
@@ -617,6 +639,7 @@
 				E07C933A220F2837009EAE4C /* CustomLoginViewController.swift in Sources */,
 				E0333597219373B500982F00 /* MaxesGraphViewController.swift in Sources */,
 				E09E78F12114FCB000031F19 /* ExcercisesViewController.swift in Sources */,
+				E032DAE9222601720072815A /* DownloadRoutinesViewController.swift in Sources */,
 				E0733068214432C000D26E15 /* MuscleGroupsViewController.swift in Sources */,
 				E038531F2121E4F5009CE727 /* SessionWrapper.swift in Sources */,
 				E06D82E02159A38D002F3ED0 /* HomePageViewController.swift in Sources */,
@@ -627,6 +650,7 @@
 				E061F55D219DFDA500FBAF2D /* PastSetsViewController.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
+				E032DAEB222604990072815A /* RoutineDownloadsViewModel.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,
 				E02AF07C21CB0AD4000649FB /* RoutineExerciseCoordinator.swift in Sources */,
 				E02AF07E21CB2EA2000649FB /* RoutineExercisesRequest.swift in Sources */,

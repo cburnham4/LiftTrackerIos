@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="7KQ-V3-mhy">
+            <objects>
+                <viewController id="LVy-0y-YU0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Tt-wU-dzh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="edu-YA-8jh">
+                                <rect key="frame" x="16" y="28" width="343" height="631"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sYG-4v-19g">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYG-4v-19g" id="xi3-tt-Vf8">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginScreenIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-Ry-S8h">
+                                                    <rect key="frame" x="8" y="4" width="35.5" height="35.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="kKv-Ry-S8h" secondAttribute="height" multiplier="1:1" id="bo6-gA-dhO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chest &amp; Biceps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yye-6R-MuF">
+                                                    <rect key="frame" x="55.5" y="12" width="117.5" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="kKv-Ry-S8h" secondAttribute="bottom" constant="4" id="0nR-qA-8wI"/>
+                                                <constraint firstItem="yye-6R-MuF" firstAttribute="leading" secondItem="kKv-Ry-S8h" secondAttribute="trailing" constant="12" id="6MD-3M-kSB"/>
+                                                <constraint firstItem="kKv-Ry-S8h" firstAttribute="leading" secondItem="xi3-tt-Vf8" secondAttribute="leading" constant="8" id="FR7-2d-9wn"/>
+                                                <constraint firstItem="kKv-Ry-S8h" firstAttribute="centerY" secondItem="xi3-tt-Vf8" secondAttribute="centerY" id="GSl-VQ-cgq"/>
+                                                <constraint firstItem="kKv-Ry-S8h" firstAttribute="top" secondItem="xi3-tt-Vf8" secondAttribute="top" constant="4" id="UQp-qZ-gCX"/>
+                                                <constraint firstItem="yye-6R-MuF" firstAttribute="centerY" secondItem="xi3-tt-Vf8" secondAttribute="centerY" id="wMn-hd-wjk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YFe-Lw-qwU" firstAttribute="bottom" secondItem="edu-YA-8jh" secondAttribute="bottom" constant="8" id="0xP-Bh-T7f"/>
+                            <constraint firstItem="YFe-Lw-qwU" firstAttribute="trailing" secondItem="edu-YA-8jh" secondAttribute="trailing" constant="16" id="Efu-xm-Cfl"/>
+                            <constraint firstItem="edu-YA-8jh" firstAttribute="leading" secondItem="YFe-Lw-qwU" secondAttribute="leading" constant="16" id="g5W-q2-01i"/>
+                            <constraint firstItem="edu-YA-8jh" firstAttribute="top" secondItem="YFe-Lw-qwU" secondAttribute="top" constant="8" id="rd5-pp-EbV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YFe-Lw-qwU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0m-QO-W4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1" y="144"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="loginScreenIcon" width="1024" height="1024"/>
+    </resources>
+</document>
