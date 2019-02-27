@@ -12,6 +12,8 @@ struct DownloadRoutine {
     
     let imageUrl: String
     
+    let routineName: String
+    
     let exerciseNames: [String]
 }
 
@@ -20,9 +22,7 @@ class RoutineDownloadsViewModel: NSObject {
     let routines: [DownloadRoutine]
 
     init(routines: [DownloadRoutine]) {
-        let imageUrl = "https://firebasestorage.googleapis.com/v0/b/lifttracker-5bca7.appspot.com/o/routine_images%2Fdumbbell_curl.png?alt=media&token=3a700031-f1ae-4d82-b78c-22920ad0c9c1"
-        self.routines = [DownloadRoutine(imageUrl: imageUrl, exerciseNames: ["Bench"])]
-
+        self.routines = routines
     }
 }
 
@@ -38,6 +38,12 @@ extension RoutineDownloadsViewModel: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RoutineCell", for: indexPath) as! RoutineCell
+        
+        let item = routines[indexPath.row]
+        
+        //unwrapped allowed here since if pastdates is null, this code will not be ran
+        cell.setContent(routine: item)
+        return cell
     }
 }
