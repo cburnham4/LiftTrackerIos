@@ -32,10 +32,8 @@ class SingleItemCoordinator {
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController", itemType: .exercises)
         viewControllers.append(exercisesVc)
         
-        
         let routinesVC = getViewController(withIdentifier: "RoutinesViewController", itemType: .routines)
         viewControllers.append(routinesVC)
-        
         
         barItems.append(TabmanBar.Item(title: "Exercises"))
         barItems.append(TabmanBar.Item(title: "Routines"))

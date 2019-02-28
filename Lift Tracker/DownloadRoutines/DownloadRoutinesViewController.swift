@@ -31,8 +31,6 @@ class DownloadRoutinesViewController: UIViewController {
         tableView.dataSource = viewModel
         tableView.rowHeight = UITableView.automaticDimension
     }
-    
-    
 }
 
 

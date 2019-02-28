@@ -25,7 +25,7 @@ class SingleItemListViewController: UIViewController, SingleItemListViewControll
     func editTableview(edit: Bool) { fatalError("Must override") }
     func addItem() { viewModel.addItem(viewModel) }
     
-    override func viewDidLoad() {
+    override func viewDidAppear(_ animated: Bool) {
         viewModel.sendItemRequest()
     }
     

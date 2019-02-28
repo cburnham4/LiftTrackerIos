@@ -38,7 +38,7 @@ extension Request {
         return Auth.auth().currentUser?.uid
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, requestKey: RequestType, dbRef: DatabaseReference?, cycle: RequestCycle) {
+    static func sendPostRequest(object: inout CoreRequestObject, requestKey: RequestType? = nil, dbRef: DatabaseReference?, cycle: RequestCycle? = nil) {
         
         if(object.key.isEmpty) {
             object.key = dbRef?.childByAutoId().key ?? ""
@@ -46,10 +46,12 @@ extension Request {
         
         let returnObject = object
         dbRef?.child(object.key).setValue(object.createRequestObject()) { error, _ in
-            if error != nil {
-                cycle.requestFailed(requestKey: requestKey)
-            } else {
-                cycle.requestSuccess(requestKey: requestKey, object: returnObject)
+            if let requestKey = requestKey {
+                if error != nil {
+                    cycle?.requestFailed(requestKey: requestKey)
+                } else {
+                    cycle?.requestSuccess(requestKey: requestKey, object: returnObject)
+                }
             }
         }
     }

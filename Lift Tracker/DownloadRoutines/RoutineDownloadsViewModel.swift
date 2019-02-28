@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 struct DownloadRoutine {
     
@@ -15,20 +16,35 @@ struct DownloadRoutine {
     let routineName: String
     
     let exerciseNames: [String]
+    
+    init(json: JSON) {
+        imageUrl = json["imageUrl"].string ?? ""
+        routineName = json["routineName"].string ?? "Error retrieving Routine"
+        exerciseNames = json["exerciseNames"].arrayObject as? [String] ?? []
+    }
+    
+    init(imageUrl: String, routineName: String, exerciseNames: [String]) {
+        self.imageUrl = imageUrl
+        self.routineName = routineName
+        self.exerciseNames = exerciseNames
+    }
 }
 
 class RoutineDownloadsViewModel: NSObject {
     
     let routines: [DownloadRoutine]
+    
+    let routineClicked: (DownloadRoutine) -> Void
 
-    init(routines: [DownloadRoutine]) {
+    init(routines: [DownloadRoutine], routineClicked: @escaping (DownloadRoutine) -> Void) {
         self.routines = routines
+        self.routineClicked = routineClicked
     }
 }
 
 extension RoutineDownloadsViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        routineClicked(routines[indexPath.row])
     }
 }
 

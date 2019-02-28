@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		153646E53BC377D98FF760B4 /* Pods_Lift_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BCEF4F3DF10F88CBB6B5B5 /* Pods_Lift_Tracker.framework */; };
 		E020984A2184EB3D001FA3C3 /* RoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */; };
+		E02126D0222753E4007E29C5 /* DownloadRoutineExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02126CF222753E4007E29C5 /* DownloadRoutineExercisesViewController.swift */; };
 		E02506CD21B3248100E38D2C /* SingleItemCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02506CC21B3248100E38D2C /* SingleItemCoordinator.swift */; };
 		E028E3E32183D58B00E78EA4 /* RoutinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */; };
 		E02AF07C21CB0AD4000649FB /* RoutineExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */; };
@@ -72,6 +73,7 @@
 		6F2C44DE56284BBCFD25A87B /* Pods_Lift_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70BCEF4F3DF10F88CBB6B5B5 /* Pods_Lift_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lift_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02098492184EB3D001FA3C3 /* RoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExercisesViewController.swift; sourceTree = "<group>"; };
+		E02126CF222753E4007E29C5 /* DownloadRoutineExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRoutineExercisesViewController.swift; sourceTree = "<group>"; };
 		E02506CC21B3248100E38D2C /* SingleItemCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleItemCoordinator.swift; sourceTree = "<group>"; };
 		E028E3E22183D58B00E78EA4 /* RoutinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesViewController.swift; sourceTree = "<group>"; };
 		E02AF07B21CB0AD4000649FB /* RoutineExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineExerciseCoordinator.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				E032DAE8222601720072815A /* DownloadRoutinesViewController.swift */,
 				E032DAEA222604990072815A /* RoutineDownloadsViewModel.swift */,
 				E032DAEC2226130B0072815A /* DownloadCoordinator.swift */,
+				E02126CF222753E4007E29C5 /* DownloadRoutineExercisesViewController.swift */,
 			);
 			path = DownloadRoutines;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04D7C802106CF7400E79A5A /* LoginViewController.swift in Sources */,
+				E02126D0222753E4007E29C5 /* DownloadRoutineExercisesViewController.swift in Sources */,
 				E073306A2144347400D26E15 /* SingleItemListViewController.swift in Sources */,
 				E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */,
 				E09E78F72115133500031F19 /* Request.swift in Sources */,
