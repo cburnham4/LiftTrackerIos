@@ -35,7 +35,7 @@ class DownloadCoordinator {
     }
     
     func downloadRoutine(routine: DownloadRoutine) {
-        DownloadCoordinator.uploadDownloadedRoutines(routine: routine)
+        DownloadCoordinator.uploadDownloadedRoutine(routine: routine)
     }
 }
 
@@ -62,14 +62,26 @@ extension DownloadCoordinator: Request, RequestCycle {
     
     // TODO check if exercise is already there
     static func uploadDownloadedRoutine(routine: DownloadRoutine) {
-        let dbRef = self.getUserDatabaseReference()
+        let dbRef = self.getUserDatabaseReference()?.child(ItemType.routines.rawValue)
         
         /* upload routine name */
         var routineItem = Routine(name: routine.routineName) as CoreRequestObject
-        sendPostRequest(object: &routineItem, dbRef: dbRef?.child(ItemType.routines.rawValue), cycle: self as? RequestCycle)
+        
+        if(routineItem.key.isEmpty) {
+            routineItem.key = dbRef?.childByAutoId().key ?? ""
+        }
+
+        dbRef?.child(routineItem.key).setValue(routineItem.createRequestObject()) { error, _ in
+            if error != nil {
+                // TODO
+            } else {
+                uploadRoutineExercises(routine: routineItem as! DownloadRoutine)
+            }
+        }
     }
     
-    func uploadRoutineExercises() {
+    static func uploadRoutineExercises(routine: DownloadRoutine) {
+        let dbRef = self.getUserDatabaseReference()
         
         let exerciseDbRef = dbRef?.child(ItemType.exercises.rawValue)
         for exerciseName in routine.exerciseNames {
