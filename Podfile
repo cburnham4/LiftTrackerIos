@@ -18,6 +18,7 @@ def shared_pods
     pod 'Pageboy', '~> 2.6'
     pod 'FirebaseUI/Google'
     pod 'ScrollableGraphView'
+    pod 'AmazonAd', '~> 2.2'
 end
 
 target 'Lift Tracker' do
