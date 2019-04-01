@@ -1,4 +1,5 @@
 PODS:
+  - AmazonAd (2.2.15.1)
   - AutoInsetter (1.3.0)
   - Firebase/AdMob (5.8.1):
     - Firebase/Core
@@ -100,6 +101,7 @@ PODS:
     - Pageboy (~> 2.6.0)
 
 DEPENDENCIES:
+  - AmazonAd (~> 2.2)
   - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
@@ -114,6 +116,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AmazonAd
     - AutoInsetter
     - Firebase
     - FirebaseAnalytics
@@ -139,6 +142,7 @@ SPEC REPOS:
     - Tabman
 
 SPEC CHECKSUMS:
+  AmazonAd: 9b7226322bc124343d279a98c28cdae26c48a0e7
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
   Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
   FirebaseAnalytics: 361594968a84a04d9598ef0f2e769d3735cd03de
@@ -163,6 +167,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 36471109ff64f635853b236ce4f8df9a1f5bf2a8
+PODFILE CHECKSUM: c1bad7f66b69d9ededaf769deec0248598145b27
 
 COCOAPODS: 1.5.3
