@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import LhHelpers
+import FirebaseAuth
 import FirebaseDatabase
 import SwiftyJSON
 
@@ -14,88 +16,213 @@ class DownloadCoordinator {
     
     let navigationController: UINavigationController
     
+    var currentDownloadingRoutine: Routine?
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let imageUrl = "https://firebasestorage.googleapis.com/v0/b/lifttracker-5bca7.appspot.com/o/routine_images%2Fdumbbell_curl.png?alt=media&token=3a700031-f1ae-4d82-b78c-22920ad0c9c1"
-        let routines = [DownloadRoutine(imageUrl: imageUrl, routineName: "Test Routine", exerciseNames: ["Bench", "Squats"])]
-        let viewModel = RoutineDownloadsViewModel(routines: routines, routineClicked: routineClicked)
-        let vc = DownloadRoutinesViewController.getInstance(viewModel: viewModel)
+        requestRoutinesToDownload()
+        let viewModel = RoutineDownloadsViewModel(routines: [], routineClicked: routineClicked)
+        let vc: DownloadRoutinesViewController = DownloadRoutinesViewController.viewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func routineClicked(routine: DownloadRoutine) {
-        let viewModel = DownloadExerciseViewModel(exerciseNames: routine.exerciseNames, downloadClicked: { [weak self] in
-            self?.downloadRoutine(routine: routine)
+    func routineClicked(downloadRoutine: DownloadRoutine) {
+        let viewModel = DownloadExerciseViewModel(exerciseNames: downloadRoutine.exerciseNames, downloadClicked: { [weak self] in
+            self?.downloadRoutine(downloadRoutine: downloadRoutine)
         })
         let vc = DownloadRoutineExercisesViewController.getInstance(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func downloadRoutine(routine: DownloadRoutine) {
-        DownloadCoordinator.uploadDownloadedRoutine(routine: routine)
-    }
-}
-
-extension DownloadCoordinator: Request, RequestCycle {
-
-    static func requestRoutines(requestKey: RequestType) {
-        let dbRef = Database.database().reference()
-        
-        let routines = "PresetRoutines"
-        
-        dbRef.child(routines).observeSingleEvent(of: .value, with: { (snapshot) in
-            let children = snapshot.children
+    func downloadRoutine(downloadRoutine: DownloadRoutine) {
+        /* upload routine name to the user's list of routines */
+        let routineItem = Routine(name: downloadRoutine.routineName)
+        // Upload the exercises for the routine first
+        uploadRoutineExercises(downloadRoutine: downloadRoutine) { [weak self] exercises in
+            routineItem.exerciseKeys = exercises.map { $0.key }
             
-            var routines: [DownloadRoutine] = []
-            while let snapshotItem = children.nextObject() as? DataSnapshot {
-                let json = JSON(snapshotItem.value!)
-                let routine = DownloadRoutine(json: json)
-                routines.append(routine)
+            // Once exercises are added to routine, post the routine
+            UserRoutinesRequest().makePostRequest(postObject: routineItem) { [weak self] result in
+                switch result {
+                case .success(let routineItem):
+                    UserSession.instance.addItem(item: routineItem as! SimpleListRowItem)
+                    break
+                case .failure(let error):
+                    // TODO
+                    break
+                }
             }
-        }) { (error) in
-            print(error.localizedDescription)
         }
     }
     
-    // TODO check if exercise is already there
-    static func uploadDownloadedRoutine(routine: DownloadRoutine) {
-        let dbRef = self.getUserDatabaseReference()?.child(ItemType.routines.rawValue)
+    
+    func uploadRoutineExercises(downloadRoutine: DownloadRoutine, callback: @escaping ([Exercise]) -> Void) {
+        let exerciseRequest = UserExerciseRequest()
+        var exercises = [Exercise]()
         
-        /* upload routine name */
-        var routineItem = Routine(name: routine.routineName) as CoreRequestObject
-        
-        if(routineItem.key.isEmpty) {
-            routineItem.key = dbRef?.childByAutoId().key ?? ""
-        }
+        let requestGroup = DispatchGroup()
+        for exerciseName in downloadRoutine.exerciseNames {
+            requestGroup.enter()
+            let existingExercise = UserSession.instance.getExercises()?.filter { $0.name.lowercased() == exerciseName.lowercased() }.first
+            
+            // If exercise already exists in user exercises then make add it to list
+            if let existingExercise = existingExercise {
+                exercises.append(existingExercise)
+                requestGroup.leave()
+                continue
+            }
 
-        dbRef?.child(routineItem.key).setValue(routineItem.createRequestObject()) { error, _ in
-            if error != nil {
+            let exercise = Exercise(name: exerciseName)
+            exercises.append(exercise)
+            
+            exerciseRequest.makePostRequest(postObject: exercise) { [weak self] result in
+                switch result {
+                case .success(let postObject):
+                    // Add items to user
+                    UserSession.instance.addItem(item: postObject as! SimpleListRowItem)
+                    break
+                case .failure(let error):
+                    // TODO
+                    break
+                }
+                requestGroup.leave()
+            }
+        }
+        
+        requestGroup.notify(queue: DispatchQueue.main) {
+            callback(exercises)
+        }
+    }
+    
+    func requestRoutinesToDownload() {
+        RoutineDownloadRequest().makeGetRequest { [weak self] result in
+            switch result {
+            case .success(let snapshot):
+                self?.parseDownloadRoutines(snapshot: snapshot)
+            case .failure(let error):
                 // TODO
-            } else {
-                uploadRoutineExercises(routine: routineItem as! DownloadRoutine)
+                break
             }
         }
     }
     
-    static func uploadRoutineExercises(routine: DownloadRoutine) {
-        let dbRef = self.getUserDatabaseReference()
-        
-        let exerciseDbRef = dbRef?.child(ItemType.exercises.rawValue)
-        for exerciseName in routine.exerciseNames {
-            var exercise = Exercise(name: exerciseName) as CoreRequestObject
-            
-            sendPostRequest(object: &exercise, dbRef: exerciseDbRef)
+    func parseDownloadRoutines(snapshot: DataSnapshot) {
+        let children = snapshot.children
+
+        var routines: [DownloadRoutine] = []
+        while let snapshotItem = children.nextObject() as? DataSnapshot {
+            let json = JSON(snapshotItem.value!)
+            let routine = DownloadRoutine(key: snapshotItem.key, json: json)
+            routines.append(routine)
         }
-    }
-    
-    func requestFailed(requestKey: RequestType) {
-        // TODO post error message
-    }
-    
-    func requestSuccess(requestKey: RequestType) {
+
+        guard let downloadableRoutinesVC = navigationController.viewControllers.first as? DownloadRoutinesViewController else {
+            return
+        }
         
+        downloadableRoutinesVC.activityIndicator.isHidden = true
+        downloadableRoutinesVC.viewModel.routines = routines
+        downloadableRoutinesVC.tableView.reloadData()
     }
 }
+
+struct UserExerciseRequest: LhFirebaseRequest {
+    var userId: String {
+        return Auth.auth().currentUser!.uid
+    }
+    
+    var requestItemKey: String? {
+        return ItemType.exercises.rawValue
+    }
+}
+
+struct UserRoutinesRequest: LhFirebaseRequest {
+    var userId: String {
+        return Auth.auth().currentUser!.uid
+    }
+    
+    var requestItemKey: String? {
+        return ItemType.routines.rawValue
+    }
+}
+
+struct RoutineDownloadRequest: LhFirebaseRequest {
+    var requestItemKey: String? = "PresetRoutines"
+    
+    var userId: String {
+        return Auth.auth().currentUser!.uid
+    }
+    
+    var databaseRef: DatabaseReference {
+        return Database.database().reference()
+    }
+}
+
+//extension DownloadCoordinator: Request, RequestCycle {
+
+    
+//    /// Retreive the downloadable routines from the server
+//    func requestRoutines(callback: @escaping ([DownloadRoutine]) -> Void) {
+//        let dbRef = Database.database().reference()
+//
+//        let routines = "PresetRoutines"
+//
+//        dbRef.child(routines).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let children = snapshot.children
+//
+//            var routines: [DownloadRoutine] = []
+//            while let snapshotItem = children.nextObject() as? DataSnapshot {
+//                let json = JSON(snapshotItem.value!)
+//                let routine = DownloadRoutine(json: json)
+//                routines.append(routine)
+//            }
+//            callback(routines)
+//        }) { (error) in
+//            print(error.localizedDescription)
+//        }
+//    }
+//
+//    // TODO check if exercise is already there
+//    func saveDownloadedRoutineToUser(downloadRoutine: DownloadRoutine) {
+//        let dbRef = userDatabaseRef?.child(ItemType.routines.rawValue)
+//
+//        /* upload routine name */
+//        var routineItem = Routine(name: downloadRoutine.routineName) as CoreRequestObject
+//
+//        if(routineItem.key.isEmpty) {
+//            routineItem.key = dbRef?.childByAutoId().key ?? ""
+//        }
+//        currentDownloadingRoutine = routineItem as! Routine
+//
+//        dbRef?.child(routineItem.key).setValue(routineItem.createRequestObject()) { error, _ in
+//            if error != nil {
+//                // TODO
+//            } else {
+//                uploadRoutineExercises(downloadRoutine: downloadRoutine)
+//            }
+//        }
+//    }
+//
+//    func uploadRoutineExercises(downloadRoutine: DownloadRoutine) {
+//        let exerciseDbRef = userDatabaseRef?.child(ItemType.exercises.rawValue)
+//        for exerciseName in downloadRoutine.exerciseNames {
+//            var exercise = Exercise(name: exerciseName) as CoreRequestObject
+//
+//            sendPostRequest(object: &exercise, requestKey: .post, dbRef: exerciseDbRef, cycle: self as? RequestCycle)
+//
+//        }
+//    }
+//
+//    func requestFailed(requestKey: RequestType) {
+//        // TODO post error message
+//    }
+//
+//    func requestSuccess(requestKey: RequestType, object: CoreRequestObject? = nil) {
+//        if object is Exercise {
+//
+//        }
+//    }
+//}

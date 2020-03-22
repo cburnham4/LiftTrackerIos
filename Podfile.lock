@@ -85,9 +85,9 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
-  - Kingfisher (5.1.1)
+  - Kingfisher (5.7.1)
   - leveldb-library (1.20)
-  - LhHelpers (1.2.5)
+  - LhHelpers (2.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -108,7 +108,7 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - Kingfisher
-  - LhHelpers (= 1.2.5)
+  - LhHelpers (~> 2.0.0)
   - Pageboy (~> 2.6)
   - ScrollableGraphView
   - SwiftyJSON
@@ -158,15 +158,15 @@ SPEC CHECKSUMS:
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
-  Kingfisher: 2558186963e5be42d98c5b110ccb3130148b77e4
+  Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  LhHelpers: 6a112271f52f565cca688ff32658ee2dc1f44876
+  LhHelpers: acc22d432a7d61f2eec4b16fafab0b0d16f61813
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Pageboy: 1a5535f0d5a321045971cc2ddc6bcb53302392cb
   ScrollableGraphView: 4af35d4ea9ecdec665d34a74da51da161ddff8ac
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 6d5395f3b3d196c133f87a4da35552e6d4d392e4
+PODFILE CHECKSUM: 89e565035900cd84b097d2a9ad3cadaf65c3710f
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

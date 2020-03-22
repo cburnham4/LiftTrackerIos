@@ -41,6 +41,7 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
             
     private func login() {
         let authViewController = authUI?.authViewController();
+        authViewController?.modalPresentationStyle = .fullScreen
 //        let authViewController = storyboard?.instantiateViewController(withIdentifier: "CustomLoginViewController") as! CustomLoginViewController
 //
         self.present(authViewController!, animated: true, completion: nil)
@@ -53,6 +54,7 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     private func goToHome(user: User) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "NavHomePageViewController") as! UINavigationController
+        secondViewController.modalPresentationStyle = .fullScreen
         self.present(secondViewController, animated: true, completion: nil)
     }
     

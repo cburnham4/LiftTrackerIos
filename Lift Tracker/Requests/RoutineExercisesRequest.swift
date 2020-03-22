@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RoutineExerciseRequest: Request {
+class RoutineExerciseRequest: LiftTrackerRequest {
     
     static func updateRoutineExercises(exerciseKey: String, date: String, liftSet: LiftSet, cycle: RequestCycle) {
         let dbRef = getUserDatabaseReference()?.child(ItemType.routines.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)

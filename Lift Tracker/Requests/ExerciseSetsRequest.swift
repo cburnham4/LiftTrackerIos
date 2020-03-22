@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ExerciseSetsRequest: Request {
+class ExerciseSetsRequest: LiftTrackerRequest {
     // TODO: MOve to struct and move request to non static functions
     
     static func createBlankDayLiftSet(exerciseKey: String, dayLiftSets: DayLiftSets, cycle: RequestCycle) {

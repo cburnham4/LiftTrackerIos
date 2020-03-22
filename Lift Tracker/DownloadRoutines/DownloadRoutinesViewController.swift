@@ -6,23 +6,19 @@
 //  Copyright © 2019 Carl Burnham. All rights reserved.
 //
 
-import UIKit
 import Kingfisher
+import LhHelpers
+import UIKit
 
-class DownloadRoutinesViewController: UIViewController {
+class DownloadRoutinesViewController: UIViewController, BaseViewController {
+    
+    static var storyboardName: String = "DownloadLifts"
+    static var viewControllerIdentifier: String = "DownloadRoutinesViewController"
     
     var viewModel: RoutineDownloadsViewModel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    static func getInstance(viewModel: RoutineDownloadsViewModel) -> DownloadRoutinesViewController {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "DownloadLifts", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "DownloadRoutinesViewController") as! DownloadRoutinesViewController
-        
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +28,6 @@ class DownloadRoutinesViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
     }
 }
-
 
 class RoutineCell: UITableViewCell {
     

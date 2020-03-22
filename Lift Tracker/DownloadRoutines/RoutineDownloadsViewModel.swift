@@ -11,19 +11,20 @@ import SwiftyJSON
 
 struct DownloadRoutine {
     
+    let key: String
     let imageUrl: String
-    
     let routineName: String
-    
     let exerciseNames: [String]
     
-    init(json: JSON) {
+    init(key: String, json: JSON) {
+        self.key = key
         imageUrl = json["imageUrl"].string ?? ""
         routineName = json["routineName"].string ?? "Error retrieving Routine"
         exerciseNames = json["exerciseNames"].arrayObject as? [String] ?? []
     }
     
     init(imageUrl: String, routineName: String, exerciseNames: [String]) {
+        self.key = ""
         self.imageUrl = imageUrl
         self.routineName = routineName
         self.exerciseNames = exerciseNames
@@ -32,7 +33,7 @@ struct DownloadRoutine {
 
 class RoutineDownloadsViewModel: NSObject {
     
-    let routines: [DownloadRoutine]
+    var routines: [DownloadRoutine]
     
     let routineClicked: (DownloadRoutine) -> Void
 

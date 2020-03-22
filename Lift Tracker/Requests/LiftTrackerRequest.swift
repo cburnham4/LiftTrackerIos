@@ -1,5 +1,5 @@
 //
-//  Request.swift
+//  LiftTrackerRequest.swift
 //  Lift Tracker
 //
 //  Created by Carl Burnham on 8/3/18.
@@ -22,9 +22,17 @@ extension RequestCycle {
     }
 }
 
-protocol Request {}
+protocol LiftTrackerRequest {}
 
-extension Request {
+extension LiftTrackerRequest {
+    
+    var userDatabaseRef: DatabaseReference? {
+        if let userId = Auth.auth().currentUser?.uid {
+            return  Database.database().reference().child(userId)
+        }
+        return nil
+    }
+    
     static func getUserDatabaseReference() -> DatabaseReference? {
         let userId = Auth.auth().currentUser?.uid
         
@@ -75,7 +83,7 @@ extension Request {
     }
 }
 
-protocol CoreRequestObject {
+protocol CoreRequestObject: class {
     var key: String { get set }
     func createRequestObject() -> [String: Any]
 }
