@@ -11,11 +11,13 @@ import FirebaseUI
 import LhHelpers
 import GoogleMobileAds
 
-class ExcercisesViewController: SingleItemListViewController {
+class ExcercisesViewController: UIViewController, SingleItemListViewControllerProtocol {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var bannerView: GADBannerView!
+    
+    var viewModel: SingleItemsListViewModel!
     
     lazy var tableViewDataBond = {
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
@@ -24,6 +26,11 @@ class ExcercisesViewController: SingleItemListViewController {
     lazy var tableViewEditBond = {
         return Bond<Bool>(valueChanged: self.editTableview)
     }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.sendItemRequest()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +57,7 @@ class ExcercisesViewController: SingleItemListViewController {
         instructionLabel.text = viewModel.emptyExercises
     }
 
-    override func editTableview(edit: Bool) {
+    func editTableview(edit: Bool) {
         tableView.isEditing = !tableView.isEditing
     }
 }

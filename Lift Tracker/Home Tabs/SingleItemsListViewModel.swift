@@ -14,7 +14,7 @@ protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataS
     var isEditingTable: Observable<Bool> { get set }
     var isEmpty: Bool { get }
     
-    var addItem: (SingleItemsListViewModel) -> (){ get set }
+    var addItem: (SingleItemsListViewModel) -> () { get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var goToItemPage: (SimpleListRowItem) -> () { get set }

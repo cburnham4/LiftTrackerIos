@@ -13,7 +13,7 @@ import Pageboy
 import LhHelpers
 
 struct TabBarVc {
-    var vcs: [SingleItemListViewController]
+    var vcs: [SingleItemListViewControllerProtocol]
     var items: [TabmanBar.Item]
 }
 
@@ -26,7 +26,7 @@ class SingleItemCoordinator {
     }
     
     func getTabsViewController() -> TabBarVc {
-        var viewControllers = [SingleItemListViewController]()
+        var viewControllers = [SingleItemListViewControllerProtocol]()
         var barItems = [TabmanBar.Item]()
         
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController", itemType: .exercises)
@@ -41,9 +41,9 @@ class SingleItemCoordinator {
         return TabBarVc(vcs: viewControllers, items: barItems)
     }
     
-    fileprivate func getViewController(withIdentifier identifier: String, itemType: ItemType) -> SingleItemListViewController
+    fileprivate func getViewController(withIdentifier identifier: String, itemType: ItemType) -> SingleItemListViewControllerProtocol
     {
-        let singleItemVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewController
+        let singleItemVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewControllerProtocol
         singleItemVC.viewModel = SingleItemsListViewModel(itemType: itemType, addItem: addItem, deleteItem: deleteItem, updateItem: updateItem, goToItemPage: goToItemPage)
         return singleItemVC
     }

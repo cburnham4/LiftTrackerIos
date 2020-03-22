@@ -14,7 +14,7 @@ import LhHelpers
 
 class HomePageViewController: TabmanViewController {
     
-    var viewControllers: [SingleItemListViewController] = [SingleItemListViewController]()
+    var viewControllers: [SingleItemListViewControllerProtocol] = [SingleItemListViewControllerProtocol]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,8 @@ class HomePageViewController: TabmanViewController {
             self?.logout()
         }
    
-        let actions = [downloadAction, editAction, addAction]
+        // TODO add back in download actions
+        let actions = [editAction, addAction]
         
         let actionMenu = AlertUtils.createActionSheet(actions: actions, showCancel: true, viewController: self)
         self.present(actionMenu, animated: true, completion: nil)

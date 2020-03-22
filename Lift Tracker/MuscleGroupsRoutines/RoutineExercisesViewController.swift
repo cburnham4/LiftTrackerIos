@@ -9,10 +9,14 @@
 import UIKit
 import LhHelpers
 
-class RoutineExercisesViewController: SingleItemListViewController {
+class RoutineExercisesViewController: UIViewController, SingleItemListViewControllerProtocol, BaseViewController {
+    
+    static var storyboardName: String = "RoutineExercise"
+    static var viewControllerIdentifier: String = "RoutineExercisesViewController"
     
     @IBOutlet var tableView: UITableView!
     
+    var viewModel: SingleItemsListViewModel!
     var selectedExerciseIndex: Int = 0
     
     lazy var tableViewDataBond = {
@@ -23,12 +27,9 @@ class RoutineExercisesViewController: SingleItemListViewController {
         return Bond<Bool>(valueChanged: self.editTableview)
     }()
     
-    public static func getInstance(viewModel: RoutineExerciseViewModel) -> RoutineExercisesViewController {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "RoutineExercise", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "RoutineExercisesViewController") as! RoutineExercisesViewController
-        
-        vc.viewModel = viewModel
-        return vc
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.sendItemRequest()
     }
     
     override func viewDidLoad() {
@@ -47,7 +48,7 @@ class RoutineExercisesViewController: SingleItemListViewController {
         self.tableView.reloadData()
     }
     
-    override func editTableview(edit: Bool) {
+    func editTableview(edit: Bool) {
         tableView.isEditing = !tableView.isEditing
     }
     
@@ -107,6 +108,6 @@ extension RoutineExercisesViewController: RequestCycle {
     }
     
     func requestFailed(requestKey: RequestType) {
-        super.requestFailedAlert()
+        requestFailedAlert()
     }
 }
