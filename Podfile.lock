@@ -37,6 +37,8 @@ PODS:
   - FirebaseInstanceID (3.2.1):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.2)
+  - FirebaseUI/Anonymous (5.2.2):
+    - FirebaseUI/Auth
   - FirebaseUI/Auth (5.2.2):
     - Firebase/Auth (~> 5.0)
   - FirebaseUI/Google (5.2.2):
@@ -105,6 +107,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - FirebaseUI/Anonymous
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - Kingfisher
@@ -115,7 +118,7 @@ DEPENDENCIES:
   - Tabman (~> 1.10)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AutoInsetter
     - Firebase
     - FirebaseAnalytics
@@ -167,6 +170,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: 1d8fef96c8e12d0f7919c8b5a5e2ed2955ee3cf5
 
-PODFILE CHECKSUM: 89e565035900cd84b097d2a9ad3cadaf65c3710f
+PODFILE CHECKSUM: 9359654cdc49ecf9b4384fae093468ac45f9d45a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

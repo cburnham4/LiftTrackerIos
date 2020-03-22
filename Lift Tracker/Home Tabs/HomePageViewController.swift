@@ -58,8 +58,7 @@ class HomePageViewController: TabmanViewController {
         let addAction = UIAlertAction(title: "Logout", style: .default) { [weak self] _ in
             self?.logout()
         }
-   
-        // TODO add back in download actions
+
         let actions = [editAction, addAction]
         
         let actionMenu = AlertUtils.createActionSheet(actions: actions, showCancel: true, viewController: self)
@@ -80,6 +79,7 @@ class HomePageViewController: TabmanViewController {
             try firebaseAuth.signOut()
             let storyBoard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            loginVc.modalPresentationStyle = .fullScreen
             UserSession.instance.wipeData()
             self.present(loginVc, animated: true)
         } catch let signOutError as NSError {

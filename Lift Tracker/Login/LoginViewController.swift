@@ -25,9 +25,8 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
         self.auth = Auth.auth()
         self.authUI = FUIAuth.defaultAuthUI()
         self.authUI?.delegate = self
-        self.authUI?.providers = [FUIGoogleAuth()]
+        self.authUI?.providers = [FUIGoogleAuth(), FUIAnonymousAuth()]
         self.authUI?.shouldHideCancelButton = true
-        
         
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
             guard user != nil else {
@@ -42,8 +41,6 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     private func login() {
         let authViewController = authUI?.authViewController();
         authViewController?.modalPresentationStyle = .fullScreen
-//        let authViewController = storyboard?.instantiateViewController(withIdentifier: "CustomLoginViewController") as! CustomLoginViewController
-//
         self.present(authViewController!, animated: true, completion: nil)
     }
     
@@ -55,6 +52,8 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "NavHomePageViewController") as! UINavigationController
         secondViewController.modalPresentationStyle = .fullScreen
+        
+        if presentedViewController != nil { dismiss(animated: false) }
         self.present(secondViewController, animated: true, completion: nil)
     }
     

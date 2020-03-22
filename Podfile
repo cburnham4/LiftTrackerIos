@@ -13,6 +13,7 @@ def shared_pods
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
     pod 'FirebaseUI/Auth'
+    pod 'FirebaseUI/Anonymous'
     
     pod 'Tabman', '~> 1.10'
     pod 'Pageboy', '~> 2.6'

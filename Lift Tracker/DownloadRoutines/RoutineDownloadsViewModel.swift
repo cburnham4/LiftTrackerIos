@@ -20,7 +20,7 @@ struct DownloadRoutine {
         self.key = key
         imageUrl = json["imageUrl"].string ?? ""
         routineName = json["routineName"].string ?? "Error retrieving Routine"
-        exerciseNames = json["exerciseNames"].arrayObject as? [String] ?? []
+        exerciseNames = json["exercises"].arrayObject as? [String] ?? []
     }
     
     init(imageUrl: String, routineName: String, exerciseNames: [String]) {
