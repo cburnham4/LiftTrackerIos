@@ -27,7 +27,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
     
-    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner"
+    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner\nOr tap the top right corner to download preset workout routines"
     var isEmpty: Bool {
         return singleListItems.value.count == 0
     }
