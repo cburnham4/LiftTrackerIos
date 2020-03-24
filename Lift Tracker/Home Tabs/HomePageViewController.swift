@@ -59,7 +59,7 @@ class HomePageViewController: TabmanViewController {
             self?.logout()
         }
 
-        let actions = [editAction, addAction]
+        let actions = [downloadAction, editAction, addAction]
         
         let actionMenu = AlertUtils.createActionSheet(actions: actions, showCancel: true, viewController: self)
         self.present(actionMenu, animated: true, completion: nil)

@@ -11,6 +11,8 @@ import UIKit
 class DownloadRoutineExercisesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var downloadRoutineButton: UIButton!
     
     var viewModel: DownloadExerciseViewModel!
     
@@ -31,6 +33,8 @@ class DownloadRoutineExercisesViewController: UIViewController {
     
     @IBAction func downloadExercises(_ sender: Any) {
         viewModel.downloadClicked()
+        activityIndicator.isHidden = false
+        downloadRoutineButton.isHidden = true
     }
 }
 

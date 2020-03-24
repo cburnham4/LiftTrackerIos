@@ -23,21 +23,28 @@ class DownloadCoordinator {
     }
     
     func start() {
-        requestRoutinesToDownload()
-        let viewModel = RoutineDownloadsViewModel(routines: [], routineClicked: routineClicked)
+        let viewModel = RoutineDownloadsViewModel(routineClicked: routineClicked)
         let vc: DownloadRoutinesViewController = DownloadRoutinesViewController.viewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: false)
+        requestRoutinesToDownload()
     }
     
     func routineClicked(downloadRoutine: DownloadRoutine) {
         let viewModel = DownloadExerciseViewModel(exerciseNames: downloadRoutine.exerciseNames, downloadClicked: { [weak self] in
-            self?.downloadRoutine(downloadRoutine: downloadRoutine)
+            self?.uploadRoutineToUser(downloadRoutine: downloadRoutine)
         })
         let vc = DownloadRoutineExercisesViewController.getInstance(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func downloadRoutine(downloadRoutine: DownloadRoutine) {
+    func uploadRoutineToUser(downloadRoutine: DownloadRoutine) {
+        let existingRoutine = UserSession.instance.getRoutines()?.first {
+            $0.name == downloadRoutine.routineName
+        }
+        guard existingRoutine == nil else {
+            AlertUtils.createAlert(view: navigationController, title: "Routine already exists", message: "This already exists in your list of routines")
+            return
+        }
         /* upload routine name to the user's list of routines */
         let routineItem = Routine(name: downloadRoutine.routineName)
         // Upload the exercises for the routine first
@@ -49,15 +56,25 @@ class DownloadCoordinator {
                 switch result {
                 case .success(let routineItem):
                     UserSession.instance.addItem(item: routineItem as! SimpleListRowItem)
+                    self?.routineItemUploaded()
                     break
-                case .failure(let error):
-                    // TODO
-                    break
+                case .failure:
+                    AlertUtils.createAlert(view: self!.navigationController, title: "Routine Download Failed", message: "Please try again.")
                 }
             }
         }
     }
     
+    func routineItemUploaded() {
+        guard let downloadableRoutinesVC = navigationController.topViewController as? DownloadRoutineExercisesViewController else {
+            return
+        }
+        
+        downloadableRoutinesVC.activityIndicator.isHidden = true
+        downloadableRoutinesVC.downloadRoutineButton.isHidden = false
+        
+        AlertUtils.createAlert(view: downloadableRoutinesVC, title: "Routine Downloaded", message: "Return to home tabs to view downloaded Routine")
+    }
     
     func uploadRoutineExercises(downloadRoutine: DownloadRoutine, callback: @escaping ([Exercise]) -> Void) {
         let exerciseRequest = UserExerciseRequest()
@@ -119,7 +136,7 @@ class DownloadCoordinator {
             routines.append(routine)
         }
 
-        guard let downloadableRoutinesVC = navigationController.viewControllers.first as? DownloadRoutinesViewController else {
+        guard let downloadableRoutinesVC = navigationController.topViewController as? DownloadRoutinesViewController else {
             return
         }
         

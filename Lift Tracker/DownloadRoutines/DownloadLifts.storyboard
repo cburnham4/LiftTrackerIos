@@ -62,9 +62,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="d4X-tH-EUU">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="d4X-tH-EUU">
                                 <rect key="frame" x="4" y="311" width="367" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,13 +144,19 @@
                                     <action selector="downloadExercises:" destination="4bg-jt-GPm" eventType="touchUpInside" id="1Lg-U9-LjN"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ycr-xx-YLO">
+                                <rect key="frame" x="177.5" y="578" width="20" height="20"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NHI-DL-LB2" firstAttribute="centerX" secondItem="oBc-LL-Rhe" secondAttribute="centerX" id="0vg-4z-Hia"/>
                             <constraint firstItem="WzL-4C-BCl" firstAttribute="bottom" secondItem="SyF-YL-tic" secondAttribute="bottom" constant="128" id="1mg-Yj-eee"/>
                             <constraint firstItem="SyF-YL-tic" firstAttribute="leading" secondItem="WzL-4C-BCl" secondAttribute="leading" id="EXH-AR-bKk"/>
+                            <constraint firstItem="Ycr-xx-YLO" firstAttribute="centerX" secondItem="oBc-LL-Rhe" secondAttribute="centerX" id="Kra-c2-vst"/>
                             <constraint firstItem="SyF-YL-tic" firstAttribute="trailing" secondItem="WzL-4C-BCl" secondAttribute="trailing" id="RCA-Po-hH1"/>
+                            <constraint firstItem="Ycr-xx-YLO" firstAttribute="centerY" secondItem="NHI-DL-LB2" secondAttribute="centerY" id="VI7-z2-tPJ"/>
                             <constraint firstItem="SyF-YL-tic" firstAttribute="top" secondItem="oBc-LL-Rhe" secondAttribute="top" id="nQU-Mw-1H9"/>
                             <constraint firstItem="WzL-4C-BCl" firstAttribute="bottom" secondItem="NHI-DL-LB2" secondAttribute="bottom" constant="64" id="uOT-5L-e3j"/>
                         </constraints>
@@ -157,6 +164,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Exercises" id="Z7V-hV-FrY"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Ycr-xx-YLO" id="3tt-tZ-umA"/>
+                        <outlet property="downloadRoutineButton" destination="NHI-DL-LB2" id="w3x-bi-rks"/>
                         <outlet property="tableView" destination="SyF-YL-tic" id="y4u-jp-2gu"/>
                     </connections>
                 </viewController>

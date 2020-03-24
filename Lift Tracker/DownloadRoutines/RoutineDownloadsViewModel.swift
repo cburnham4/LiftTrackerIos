@@ -33,12 +33,10 @@ struct DownloadRoutine {
 
 class RoutineDownloadsViewModel: NSObject {
     
-    var routines: [DownloadRoutine]
-    
+    var routines: [DownloadRoutine] = []
     let routineClicked: (DownloadRoutine) -> Void
 
-    init(routines: [DownloadRoutine], routineClicked: @escaping (DownloadRoutine) -> Void) {
-        self.routines = routines
+    init(routineClicked: @escaping (DownloadRoutine) -> Void) {
         self.routineClicked = routineClicked
     }
 }
