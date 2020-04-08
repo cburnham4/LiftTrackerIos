@@ -14,7 +14,7 @@ protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataS
     var isEditingTable: Observable<Bool> { get set }
     var isEmpty: Bool { get }
     
-    var addItem: (SingleItemsListViewModel) -> (){ get set }
+    var addItem: (SingleItemsListViewModel) -> () { get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var goToItemPage: (SimpleListRowItem) -> () { get set }
@@ -27,7 +27,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
     var goToItemPage: (SimpleListRowItem) -> ()
     
-    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner"
+    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner\nOr tap the top right corner to download preset workout routines"
     var isEmpty: Bool {
         return singleListItems.value.count == 0
     }

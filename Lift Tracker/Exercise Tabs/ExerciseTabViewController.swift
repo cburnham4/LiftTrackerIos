@@ -97,8 +97,6 @@ class ExerciseTabViewController: TabmanViewController {
         self.viewControllers = viewControllers
         self.reloadPages()
     }
-    
-
 }
 
 extension ExerciseTabViewController: PageboyViewControllerDataSource

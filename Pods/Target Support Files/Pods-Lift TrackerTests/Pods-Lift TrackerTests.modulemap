@@ -1,6 +1,0 @@
-framework module Pods_Lift_TrackerTests {
-  umbrella header "Pods-Lift TrackerTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

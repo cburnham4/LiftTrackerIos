@@ -28,7 +28,7 @@ enum RequestType {
     case update
 }
 
-class BaseItemsProvider: Request {
+class BaseItemsProvider: LiftTrackerRequest {
 
     static func sendGetItemsRequest(itemType: ItemType, cycle: RequestCycle) {
         sendGetRequest(listKey: itemType, requestKey: .get, cycle: cycle)

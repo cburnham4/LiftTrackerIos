@@ -14,7 +14,7 @@ import LhHelpers
 
 class HomePageViewController: TabmanViewController {
     
-    var viewControllers: [SingleItemListViewController] = [SingleItemListViewController]()
+    var viewControllers: [SingleItemListViewControllerProtocol] = [SingleItemListViewControllerProtocol]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +50,26 @@ class HomePageViewController: TabmanViewController {
         let editAction = UIAlertAction(title: "Edit List", style: .default) { [weak self] _ in
             self?.viewControllers[self?.currentIndex ?? 0].editTableview(edit: false)
         }
+        
+        let downloadAction = UIAlertAction(title: "Download Routines", style: .default) { [weak self] _ in
+            self?.goToDownloads()
+        }
+        
         let addAction = UIAlertAction(title: "Logout", style: .default) { [weak self] _ in
             self?.logout()
         }
 
-        let actions = [editAction, addAction]
+        let actions = [downloadAction, editAction, addAction]
         
         let actionMenu = AlertUtils.createActionSheet(actions: actions, showCancel: true, viewController: self)
         self.present(actionMenu, animated: true, completion: nil)
+    }
+    
+    func goToDownloads() {
+        if let navigationController = navigationController {
+            let coordinator = DownloadCoordinator(navigationController: navigationController)
+            coordinator.start()
+        }
     }
     
     func logout() {
@@ -67,6 +79,7 @@ class HomePageViewController: TabmanViewController {
             try firebaseAuth.signOut()
             let storyBoard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            loginVc.modalPresentationStyle = .fullScreen
             UserSession.instance.wipeData()
             self.present(loginVc, animated: true)
         } catch let signOutError as NSError {

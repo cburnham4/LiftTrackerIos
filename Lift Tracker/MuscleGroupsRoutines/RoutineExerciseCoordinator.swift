@@ -25,7 +25,7 @@ class RoutineExerciseCoordinator {
     func startFlow() {
         viewModel = RoutineExerciseViewModel(routine: routine, deleteItem: deleteItem, goToItemPage: goToItemPage)
         
-        let vc = RoutineExercisesViewController.getInstance(viewModel: viewModel)
+        let vc: RoutineExercisesViewController = RoutineExercisesViewController.viewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
     }
     

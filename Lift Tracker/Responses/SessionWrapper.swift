@@ -45,6 +45,9 @@ class UserSession: Session {
         if let exercise = item as? Exercise, var exercises = getExercises() {
             exercises.append(exercise)
             setExercises(exercises: exercises)
+        } else if let routine = item as? Routine, var routines = getRoutines() {
+            routines.append(routine)
+            setRoutines(routines: routines)
         }
     }
     

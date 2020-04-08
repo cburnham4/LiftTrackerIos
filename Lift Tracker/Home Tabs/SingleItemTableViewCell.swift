@@ -15,4 +15,8 @@ class SingleItemTableViewCell: UITableViewCell {
     func setContent(listRowItem: SimpleListRowItem) {
         nameLabel.text = listRowItem.name
     }
+    
+    func setContent(name: String) {
+        nameLabel.text = name
+    }
 }

@@ -9,8 +9,19 @@
 import UIKit
 import LhHelpers
 
-class MuscleGroupsViewController: SingleItemListViewController {
+class MuscleGroupsViewController: UIViewController, SingleItemListViewControllerProtocol {
+
+    var viewModel: SingleItemsListViewModel!
     
     @IBOutlet var tableView: UITableView!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.sendItemRequest()
+    }
+
+    func editTableview(edit: Bool) {
+        // TODO
+    }
+    
 }
 

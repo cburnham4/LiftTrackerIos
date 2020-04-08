@@ -11,7 +11,9 @@ import UIKit
 import LhHelpers
 import GoogleMobileAds
 
-class RoutinesViewController: SingleItemListViewController {
+class RoutinesViewController: UIViewController, SingleItemListViewControllerProtocol {
+    
+    var viewModel: SingleItemsListViewModel!
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var instructionLabel: UILabel!
@@ -24,6 +26,11 @@ class RoutinesViewController: SingleItemListViewController {
     lazy var tableViewEditBond = {
         return Bond<Bool>(valueChanged: self.editTableview)
     }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.sendItemRequest()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +57,7 @@ class RoutinesViewController: SingleItemListViewController {
         instructionLabel.text = viewModel.emptyExercises
     }
     
-    override func editTableview(edit: Bool) {
+    func editTableview(edit: Bool) {
         tableView.isEditing = !tableView.isEditing
     }
 }

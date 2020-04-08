@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Download Routines View Controller-->
+        <scene sceneID="7KQ-V3-mhy">
+            <objects>
+                <viewController storyboardIdentifier="DownloadRoutinesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LVy-0y-YU0" customClass="DownloadRoutinesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Tt-wU-dzh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="edu-YA-8jh">
+                                <rect key="frame" x="4" y="8" width="367" height="651"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RoutineCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoutineCell" id="sYG-4v-19g" customClass="RoutineCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="367" height="50.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYG-4v-19g" id="xi3-tt-Vf8">
+                                            <rect key="frame" x="0.0" y="0.0" width="367" height="50.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginScreenIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-Ry-S8h">
+                                                    <rect key="frame" x="16" y="5.5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="kKv-Ry-S8h" secondAttribute="height" multiplier="1:1" id="bo6-gA-dhO"/>
+                                                        <constraint firstAttribute="width" constant="40" id="eKc-JY-Nd5"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chest &amp; Biceps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yye-6R-MuF">
+                                                    <rect key="frame" x="68" y="15" width="117.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yye-6R-MuF" firstAttribute="leading" secondItem="kKv-Ry-S8h" secondAttribute="trailing" constant="12" id="6MD-3M-kSB"/>
+                                                <constraint firstItem="yye-6R-MuF" firstAttribute="top" secondItem="xi3-tt-Vf8" secondAttribute="topMargin" constant="4" id="AqM-ee-c0Y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yye-6R-MuF" secondAttribute="bottom" constant="4" id="CiS-Tz-HSP"/>
+                                                <constraint firstItem="kKv-Ry-S8h" firstAttribute="leading" secondItem="xi3-tt-Vf8" secondAttribute="leading" constant="16" id="FR7-2d-9wn"/>
+                                                <constraint firstItem="kKv-Ry-S8h" firstAttribute="centerY" secondItem="xi3-tt-Vf8" secondAttribute="centerY" id="GSl-VQ-cgq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="RoutineCell"/>
+                                        <connections>
+                                            <outlet property="routineImage" destination="kKv-Ry-S8h" id="bb1-bF-yEc"/>
+                                            <outlet property="routineName" destination="yye-6R-MuF" id="xYa-FQ-Es0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="d4X-tH-EUU">
+                                <rect key="frame" x="4" y="311" width="367" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YFe-Lw-qwU" firstAttribute="bottom" secondItem="edu-YA-8jh" secondAttribute="bottom" constant="8" id="0xP-Bh-T7f"/>
+                            <constraint firstItem="YFe-Lw-qwU" firstAttribute="trailing" secondItem="edu-YA-8jh" secondAttribute="trailing" constant="4" id="Efu-xm-Cfl"/>
+                            <constraint firstItem="edu-YA-8jh" firstAttribute="leading" secondItem="YFe-Lw-qwU" secondAttribute="leading" constant="4" id="g5W-q2-01i"/>
+                            <constraint firstItem="edu-YA-8jh" firstAttribute="top" secondItem="YFe-Lw-qwU" secondAttribute="top" constant="8" id="rd5-pp-EbV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YFe-Lw-qwU"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="d4X-tH-EUU" id="AsM-bI-AYK"/>
+                        <outlet property="tableView" destination="edu-YA-8jh" id="t9f-i5-Jg0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0m-QO-W4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="15"/>
+        </scene>
+        <!--DownloadRoutineExercisesViewController-->
+        <scene sceneID="15p-gk-tix">
+            <objects>
+                <viewController storyboardIdentifier="DownloadRoutineExercisesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4bg-jt-GPm" userLabel="DownloadRoutineExercisesViewController" customClass="DownloadRoutineExercisesViewController" customModule="Lift_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oBc-LL-Rhe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SyF-YL-tic">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SingleItemTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleItemTableViewCell" id="i7E-Iu-rns" customClass="SingleItemTableViewCell" customModule="Lift_Tracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i7E-Iu-rns" id="Ah0-e1-9lc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell_50" translatesAutoresizingMaskIntoConstraints="NO" id="32F-3B-R7l">
+                                                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="FhV-pR-Mmq"/>
+                                                        <constraint firstAttribute="height" constant="24" id="hQh-V3-S1z"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-QU-HhL">
+                                                    <rect key="frame" x="40" y="12" width="312" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="WVL-QU-HhL" secondAttribute="trailing" constant="8" id="PCM-MY-d0U"/>
+                                                <constraint firstItem="32F-3B-R7l" firstAttribute="leading" secondItem="Ah0-e1-9lc" secondAttribute="leading" constant="8" id="a8y-wa-zTt"/>
+                                                <constraint firstItem="32F-3B-R7l" firstAttribute="centerY" secondItem="Ah0-e1-9lc" secondAttribute="centerY" id="dvz-jL-bSV"/>
+                                                <constraint firstItem="WVL-QU-HhL" firstAttribute="centerY" secondItem="Ah0-e1-9lc" secondAttribute="centerY" id="dxc-Xa-4JG"/>
+                                                <constraint firstItem="WVL-QU-HhL" firstAttribute="leading" secondItem="32F-3B-R7l" secondAttribute="trailing" constant="8" id="hdR-5J-FPv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="WVL-QU-HhL" id="aXo-nK-aea"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4bg-jt-GPm" id="iw6-eR-jb5"/>
+                                    <outlet property="delegate" destination="4bg-jt-GPm" id="olQ-N9-Epz"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHI-DL-LB2">
+                                <rect key="frame" x="125" y="573" width="125" height="30"/>
+                                <state key="normal" title="Download Routine"/>
+                                <connections>
+                                    <action selector="downloadExercises:" destination="4bg-jt-GPm" eventType="touchUpInside" id="1Lg-U9-LjN"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ycr-xx-YLO">
+                                <rect key="frame" x="177.5" y="578" width="20" height="20"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NHI-DL-LB2" firstAttribute="centerX" secondItem="oBc-LL-Rhe" secondAttribute="centerX" id="0vg-4z-Hia"/>
+                            <constraint firstItem="WzL-4C-BCl" firstAttribute="bottom" secondItem="SyF-YL-tic" secondAttribute="bottom" constant="128" id="1mg-Yj-eee"/>
+                            <constraint firstItem="SyF-YL-tic" firstAttribute="leading" secondItem="WzL-4C-BCl" secondAttribute="leading" id="EXH-AR-bKk"/>
+                            <constraint firstItem="Ycr-xx-YLO" firstAttribute="centerX" secondItem="oBc-LL-Rhe" secondAttribute="centerX" id="Kra-c2-vst"/>
+                            <constraint firstItem="SyF-YL-tic" firstAttribute="trailing" secondItem="WzL-4C-BCl" secondAttribute="trailing" id="RCA-Po-hH1"/>
+                            <constraint firstItem="Ycr-xx-YLO" firstAttribute="centerY" secondItem="NHI-DL-LB2" secondAttribute="centerY" id="VI7-z2-tPJ"/>
+                            <constraint firstItem="SyF-YL-tic" firstAttribute="top" secondItem="oBc-LL-Rhe" secondAttribute="top" id="nQU-Mw-1H9"/>
+                            <constraint firstItem="WzL-4C-BCl" firstAttribute="bottom" secondItem="NHI-DL-LB2" secondAttribute="bottom" constant="64" id="uOT-5L-e3j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WzL-4C-BCl"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Exercises" id="Z7V-hV-FrY"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Ycr-xx-YLO" id="3tt-tZ-umA"/>
+                        <outlet property="downloadRoutineButton" destination="NHI-DL-LB2" id="w3x-bi-rks"/>
+                        <outlet property="tableView" destination="SyF-YL-tic" id="y4u-jp-2gu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lh1-Yd-rVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="15"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="dumbbell_50" width="25" height="25"/>
+        <image name="loginScreenIcon" width="341.33334350585938" height="341.33334350585938"/>
+    </resources>
+</document>
