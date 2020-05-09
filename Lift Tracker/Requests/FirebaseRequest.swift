@@ -7,7 +7,7 @@
 //
 
 import Firebase
-import LhHelpers
+import lh_helpers
 
 protocol LhFirebaseRequest {
     var userId: String { get }

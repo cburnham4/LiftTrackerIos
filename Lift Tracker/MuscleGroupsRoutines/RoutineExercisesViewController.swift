@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LhHelpers
+import lh_helpers
 
 class RoutineExercisesViewController: UIViewController, SingleItemListViewControllerProtocol, BaseViewController {
     
@@ -17,6 +17,7 @@ class RoutineExercisesViewController: UIViewController, SingleItemListViewContro
     @IBOutlet var tableView: UITableView!
     
     var viewModel: SingleItemsListViewModel!
+    var flowDelegate: Any? = nil
     var selectedExerciseIndex: Int = 0
     
     lazy var tableViewDataBond = {

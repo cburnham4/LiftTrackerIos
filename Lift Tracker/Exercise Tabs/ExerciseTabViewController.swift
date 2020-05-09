@@ -51,8 +51,7 @@ class ExerciseTabViewController: TabmanViewController {
         super.viewDidLoad()
         
         self.dataSource = self
-        
-        self.automaticallyAdjustsChildViewInsets = true
+        self.automaticallyAdjustsChildInsets = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTableView))
         
@@ -63,17 +62,17 @@ class ExerciseTabViewController: TabmanViewController {
         self.title = exercise?.name
         // configure the bar
         initializeViewControllers()
-        self.bar.style = .buttonBar
-        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            
-            // customize appearance here
-            let color = UIColor(rgb: 0x125688)
-            appearance.style.background = .solid(color: color)
-            appearance.text.font = .systemFont(ofSize: 16.0)
-            appearance.state.color = UIColor.white
-            appearance.state.selectedColor = UIColor.white
-            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
-        })
+//        self.bar.style = .buttonBar
+//        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
+//
+//            // customize appearance here
+//            let color = UIColor(rgb: 0x125688)
+//            appearance.style.background = .solid(color: color)
+//            appearance.text.font = .systemFont(ofSize: 16.0)
+//            appearance.state.color = UIColor.white
+//            appearance.state.selectedColor = UIColor.white
+//            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
+//        })
     }
     
     @objc func editTableView() {
@@ -82,25 +81,17 @@ class ExerciseTabViewController: TabmanViewController {
     
     private func initializeViewControllers() {
         var viewControllers = [ExerciseBaseTabViewController]()
-        var barItems = [Item]()
+        var barItems = [TMBarItem]()
 
         viewControllers.append(getViewController(withIdentifier: "AddSetViewController"))
         viewControllers.append(getViewController(withIdentifier: "PastSetsViewController"))
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
         
-        // TODO: Add Titles for VCs
-        barItems.append(Item(title: "Add Set"))
-        barItems.append(Item(title: "Past Lifts"))
-        barItems.append(Item(title: "Graph"))
-        
-        bar.items = barItems
         self.viewControllers = viewControllers
-        self.reloadPages()
     }
 }
 
-extension ExerciseTabViewController: PageboyViewControllerDataSource
-{
+extension ExerciseTabViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
@@ -109,8 +100,26 @@ extension ExerciseTabViewController: PageboyViewControllerDataSource
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
         return viewControllers[index]
     }
+
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil
     }
 }
+
+extension ExerciseTabViewController: TMBarDataSource {
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        switch index {
+        case 0:
+            return TMBarItem(title: "Add Set")
+        case 1:
+            return TMBarItem(title: "Past Lifts")
+        case 2:
+            return TMBarItem(title: "Graph")
+        default:
+            return TMBarItem(title: "")
+        }
+    }
+}
+
+

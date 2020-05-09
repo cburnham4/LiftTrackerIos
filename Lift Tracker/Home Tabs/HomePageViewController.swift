@@ -10,7 +10,7 @@ import UIKit
 import Tabman
 import Pageboy
 import FirebaseAuth
-import LhHelpers
+import lh_helpers
 
 class HomePageViewController: TabmanViewController {
     
@@ -21,29 +21,27 @@ class HomePageViewController: TabmanViewController {
 
         self.dataSource = self
         
-        self.automaticallyAdjustsChildViewInsets = true
+        self.automaticallyAdjustsChildInsets = true
         
         // configure the bar
         initializeViewControllers()
-        self.bar.style = .buttonBar
-        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            
-            // customize appearance here
-            let color = UIColor(rgb: 0x125688)
-            appearance.style.background = .solid(color: color)
-            appearance.text.font = .systemFont(ofSize: 16.0)
-            appearance.state.color = UIColor.white
-            appearance.state.selectedColor = UIColor.white
-            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
-        })
+//        self.bar.style = .buttonBar
+//        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
+//
+//            // customize appearance here
+//            let color = UIColor(rgb: 0x125688)
+//            appearance.style.background = .solid(color: color)
+//            appearance.text.font = .systemFont(ofSize: 16.0)
+//            appearance.state.color = UIColor.white
+//            appearance.state.selectedColor = UIColor.white
+//            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
+//        })
     }
     
     private func initializeViewControllers() {
         let coordinator = SingleItemCoordinator(homeVc: self)
         let tabInfo = coordinator.getTabsViewController()
-        self.bar.items = tabInfo.items
         self.viewControllers = tabInfo.vcs
-        self.reloadPages()
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
@@ -72,16 +70,17 @@ class HomePageViewController: TabmanViewController {
         }
     }
     
+    // TODO implement logout
     func logout() {
         print("logout")
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
             let storyBoard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-            let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            loginVc.modalPresentationStyle = .fullScreen
-            UserSession.instance.wipeData()
-            self.present(loginVc, animated: true)
+//            let loginVc = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            loginVc.modalPresentationStyle = .fullScreen
+//            UserSession.instance.wipeData()
+//            self.present(loginVc, animated: true)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
@@ -92,8 +91,7 @@ class HomePageViewController: TabmanViewController {
     }
 }
 
-extension HomePageViewController: PageboyViewControllerDataSource
-{
+extension HomePageViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
@@ -108,3 +106,15 @@ extension HomePageViewController: PageboyViewControllerDataSource
     }
 }
 
+extension HomePageViewController: TMBarDataSource {
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        switch index {
+        case 0:
+            return TMBarItem(title: "Exercises")
+        case 1:
+            return TMBarItem(title: "Routines")
+        default:
+            return TMBarItem(title: "")
+        }
+    }
+}

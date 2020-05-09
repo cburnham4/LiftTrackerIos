@@ -6,8 +6,7 @@
 //  Copyright © 2018 Carl Burnham. All rights reserved.
 //
 import UIKit
-import FirebaseUI
-import LhHelpers
+import lh_helpers
 import Foundation
 
 protocol SingleItemListViewControllerProtocol: UIViewController {
