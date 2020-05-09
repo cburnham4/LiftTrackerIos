@@ -48,6 +48,9 @@ class LiftTrackerCoordinator {
         let homeNavigationViewController = storyboard.instantiateViewController(withIdentifier: "NavHomePageViewController") as! UINavigationController
         homeNavigationViewController.modalPresentationStyle = .fullScreen
         
+        if let homeViewController = homeNavigationViewController.viewControllers.first as? HomePageViewController {
+            homeViewController.flowDelegate = self
+        }
         baseViewController.transition(to: homeNavigationViewController)
     }
 }
@@ -55,6 +58,12 @@ class LiftTrackerCoordinator {
 extension LiftTrackerCoordinator: LoginCoordinatorDelegate {
     func loginTapped(authUser: User) {
         goToHome(user: authUser)
+    }
+}
+
+extension LiftTrackerCoordinator: HomePageDelegate {
+    func logout() {
+        startLogin()
     }
 }
 //

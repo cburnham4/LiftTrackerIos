@@ -18,7 +18,9 @@ protocol SingleItemListViewControllerProtocol: UIViewController {
 
 extension SingleItemListViewControllerProtocol {
 
-    func addItem() { viewModel.addItem(viewModel) }
+    func addItem() {
+        viewModel.addItem(viewModel)
+    }
     
     func requestFailedAlert() {
         AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")

@@ -37,7 +37,7 @@ extension LiftTrackerRequest {
         let userId = Auth.auth().currentUser?.uid
         
         if userId != nil {
-            return  Database.database().reference().child(userId!)
+            return Database.database().reference().child(userId!)
         }
         return nil
     }
