@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import LhHelpers
+import lh_helpers
 
 class RoutineExerciseCoordinator {
     var navigationController: UINavigationController

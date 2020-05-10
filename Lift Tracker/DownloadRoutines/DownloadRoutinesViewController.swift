@@ -7,7 +7,7 @@
 //
 
 import Kingfisher
-import LhHelpers
+import lh_helpers
 import UIKit
 
 class DownloadRoutinesViewController: UIViewController, BaseViewController {
@@ -16,6 +16,7 @@ class DownloadRoutinesViewController: UIViewController, BaseViewController {
     static var viewControllerIdentifier: String = "DownloadRoutinesViewController"
     
     var viewModel: RoutineDownloadsViewModel!
+    var flowDelegate: Any? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var tableView: UITableView!

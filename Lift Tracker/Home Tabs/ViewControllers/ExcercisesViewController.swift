@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FirebaseUI
-import LhHelpers
+import lh_helpers
 import GoogleMobileAds
 
 class ExcercisesViewController: UIViewController, SingleItemListViewControllerProtocol {

@@ -10,11 +10,10 @@ import Foundation
 import UIKit
 import Tabman
 import Pageboy
-import LhHelpers
+import lh_helpers
 
 struct TabBarVc {
     var vcs: [SingleItemListViewControllerProtocol]
-    var items: [TabmanBar.Item]
 }
 
 // Coordinator to handle the view and view model interactions to keep the VM and view seperate
@@ -27,7 +26,6 @@ class SingleItemCoordinator {
     
     func getTabsViewController() -> TabBarVc {
         var viewControllers = [SingleItemListViewControllerProtocol]()
-        var barItems = [TabmanBar.Item]()
         
         let exercisesVc = getViewController(withIdentifier: "ExcercisesViewController", itemType: .exercises)
         viewControllers.append(exercisesVc)
@@ -35,10 +33,7 @@ class SingleItemCoordinator {
         let routinesVC = getViewController(withIdentifier: "RoutinesViewController", itemType: .routines)
         viewControllers.append(routinesVC)
         
-        barItems.append(TabmanBar.Item(title: "Exercises"))
-        barItems.append(TabmanBar.Item(title: "Routines"))
-        
-        return TabBarVc(vcs: viewControllers, items: barItems)
+        return TabBarVc(vcs: viewControllers)
     }
     
     fileprivate func getViewController(withIdentifier identifier: String, itemType: ItemType) -> SingleItemListViewControllerProtocol

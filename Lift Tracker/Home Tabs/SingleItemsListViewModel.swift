@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LhHelpers
+import lh_helpers
 
 protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var singleListItems: Observable<[SimpleListRowItem]> { get set }

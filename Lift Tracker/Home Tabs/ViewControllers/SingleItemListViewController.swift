@@ -6,8 +6,7 @@
 //  Copyright © 2018 Carl Burnham. All rights reserved.
 //
 import UIKit
-import FirebaseUI
-import LhHelpers
+import lh_helpers
 import Foundation
 
 protocol SingleItemListViewControllerProtocol: UIViewController {
@@ -19,7 +18,9 @@ protocol SingleItemListViewControllerProtocol: UIViewController {
 
 extension SingleItemListViewControllerProtocol {
 
-    func addItem() { viewModel.addItem(viewModel) }
+    func addItem() {
+        viewModel.addItem(viewModel)
+    }
     
     func requestFailedAlert() {
         AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")

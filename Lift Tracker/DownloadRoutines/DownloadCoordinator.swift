@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LhHelpers
+import lh_helpers
 import FirebaseAuth
 import FirebaseDatabase
 import SwiftyJSON
