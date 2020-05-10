@@ -57,6 +57,8 @@
 		E0E80677246730BC00E9C44F /* Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80674246730BC00E9C44F /* Login.framework */; };
 		E0E80678246730BC00E9C44F /* Login.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80674246730BC00E9C44F /* Login.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E0E8067A2467315F00E9C44F /* LiftTrackerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E806792467315F00E9C44F /* LiftTrackerCoordinator.swift */; };
+		E0F5823124684B650088A622 /* GoogleSignIn.bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E0F5822F24684B650088A622 /* GoogleSignIn.bundle.bundle */; };
+		E0F5823224684B650088A622 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E0F5823024684B650088A622 /* GoogleSignIn.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		E0E80674246730BC00E9C44F /* Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E806792467315F00E9C44F /* LiftTrackerCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiftTrackerCoordinator.swift; sourceTree = "<group>"; };
 		E0F581E82467471A0088A622 /* Lift Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lift Tracker.entitlements"; sourceTree = "<group>"; };
+		E0F5822F24684B650088A622 /* GoogleSignIn.bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle.bundle; sourceTree = "<group>"; };
+		E0F5823024684B650088A622 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +270,8 @@
 		E04D7C3F2106B2FA00E79A5A = {
 			isa = PBXGroup;
 			children = (
+				E0F5823024684B650088A622 /* GoogleSignIn.bundle */,
+				E0F5822F24684B650088A622 /* GoogleSignIn.bundle.bundle */,
 				E04D7C4A2106B2FA00E79A5A /* Lift Tracker */,
 				E04D7C612106B2FC00E79A5A /* Lift TrackerTests */,
 				E04D7C6C2106B2FC00E79A5A /* Lift TrackerUITests */,
@@ -507,6 +513,8 @@
 				E06F9FD82149CEB600841A35 /* GoogleService-Info.plist in Resources */,
 				E09E78EF2114FBF100031F19 /* Home.storyboard in Resources */,
 				E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */,
+				E0F5823124684B650088A622 /* GoogleSignIn.bundle.bundle in Resources */,
+				E0F5823224684B650088A622 /* GoogleSignIn.bundle in Resources */,
 				E0783BE7218945920080C80D /* RoutineExercise.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

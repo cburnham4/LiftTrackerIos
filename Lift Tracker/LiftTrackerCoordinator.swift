@@ -39,10 +39,9 @@ class LiftTrackerCoordinator: NSObject {
     }
     
     func startLogin() {
-        loginCoordinator = LoginCoordinator(baseViewController: baseViewController, appImage: UIImage(named: "loginScreenIcon")!, showGoogleLogin: true, flowDelegate: self, googleDelegate: self)
+        loginCoordinator = LoginCoordinator(baseViewController: baseViewController, appImage: UIImage(named: "loginScreenIcon")!, showGoogleLogin: true, flowDelegate: self)
         loginCoordinator?.start()
     }
-    
     
     private func goToHome(user: User) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
@@ -65,11 +64,5 @@ extension LiftTrackerCoordinator: LoginCoordinatorDelegate {
 extension LiftTrackerCoordinator: HomePageDelegate {
     func logout() {
         startLogin()
-    }
-}
-
-extension LiftTrackerCoordinator: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        print("here")
     }
 }
