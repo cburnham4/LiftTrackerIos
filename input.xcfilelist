@@ -17,3 +17,4 @@ $(SRCROOT)/../Carthage/Build/iOS/Tabman.framework
 $(SRCROOT)/../Carthage/Build/iOS/Pageboy.framework
 $(SRCROOT)/../Carthage/Build/iOS/SwiftyJSON.framework
 $(SRCROOT)/../Carthage/Build/iOS/ScrollableGraphView.framework
+$(SRCROOT)/../Carthage/Build/iOS/AppAuth.framework

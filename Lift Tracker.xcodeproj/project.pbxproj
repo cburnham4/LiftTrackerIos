@@ -44,23 +44,12 @@
 		E09E78F72115133500031F19 /* LiftTrackerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F62115133500031F19 /* LiftTrackerRequest.swift */; };
 		E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* BaseItemsProvider.swift */; };
 		E0E8063A246730A400E9C44F /* Pageboy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8061E246730A300E9C44F /* Pageboy.framework */; };
-		E0E8063C246730A400E9C44F /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8061F246730A300E9C44F /* FirebaseDatabase.framework */; };
-		E0E80644246730A400E9C44F /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80623246730A300E9C44F /* GTMSessionFetcher.framework */; };
 		E0E80646246730A400E9C44F /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80624246730A300E9C44F /* RxBlocking.framework */; };
 		E0E80648246730A400E9C44F /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80625246730A300E9C44F /* SwiftyJSON.framework */; };
-		E0E8064A246730A400E9C44F /* FirebaseCrashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80626246730A400E9C44F /* FirebaseCrashlytics.framework */; };
 		E0E8064C246730A400E9C44F /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80627246730A400E9C44F /* Kingfisher.framework */; };
-		E0E8064E246730A400E9C44F /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80628246730A400E9C44F /* GoogleMobileAds.framework */; };
 		E0E80650246730A400E9C44F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80629246730A400E9C44F /* RxSwift.framework */; };
-		E0E80652246730A400E9C44F /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8062A246730A400E9C44F /* FirebaseAnalytics.framework */; };
 		E0E80658246730A500E9C44F /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8062D246730A400E9C44F /* RxRelay.framework */; };
-		E0E8065A246730A500E9C44F /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8062E246730A400E9C44F /* nanopb.framework */; };
-		E0E8065C246730A500E9C44F /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E8062F246730A400E9C44F /* FirebaseInstallations.framework */; };
 		E0E80660246730A500E9C44F /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80631246730A400E9C44F /* RxCocoa.framework */; };
-		E0E80662246730A500E9C44F /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80632246730A400E9C44F /* PromisesObjC.framework */; };
-		E0E80664246730A500E9C44F /* GTMAppAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80633246730A400E9C44F /* GTMAppAuth.framework */; };
-		E0E80668246730A500E9C44F /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80635246730A400E9C44F /* leveldb-library.framework */; };
-		E0E8066C246730A600E9C44F /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80637246730A400E9C44F /* GoogleUtilities.framework */; };
 		E0E8066E246730A600E9C44F /* ScrollableGraphView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80638246730A400E9C44F /* ScrollableGraphView.framework */; };
 		E0E80670246730A600E9C44F /* Tabman.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80639246730A400E9C44F /* Tabman.framework */; };
 		E0E80675246730BC00E9C44F /* lh_helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80673246730BC00E9C44F /* lh_helpers.framework */; };
@@ -186,27 +175,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E8064C246730A400E9C44F /* Kingfisher.framework in Frameworks */,
-				E0E8064A246730A400E9C44F /* FirebaseCrashlytics.framework in Frameworks */,
 				E0E80648246730A400E9C44F /* SwiftyJSON.framework in Frameworks */,
-				E0E8064E246730A400E9C44F /* GoogleMobileAds.framework in Frameworks */,
-				E0E8065A246730A500E9C44F /* nanopb.framework in Frameworks */,
-				E0E80668246730A500E9C44F /* leveldb-library.framework in Frameworks */,
 				E0E80670246730A600E9C44F /* Tabman.framework in Frameworks */,
-				E0E8065C246730A500E9C44F /* FirebaseInstallations.framework in Frameworks */,
 				E0E80658246730A500E9C44F /* RxRelay.framework in Frameworks */,
-				E0E80664246730A500E9C44F /* GTMAppAuth.framework in Frameworks */,
 				E0E80660246730A500E9C44F /* RxCocoa.framework in Frameworks */,
 				E0E80646246730A400E9C44F /* RxBlocking.framework in Frameworks */,
-				E0E8063C246730A400E9C44F /* FirebaseDatabase.framework in Frameworks */,
 				E0E8066E246730A600E9C44F /* ScrollableGraphView.framework in Frameworks */,
 				E0E80650246730A400E9C44F /* RxSwift.framework in Frameworks */,
 				E0E80675246730BC00E9C44F /* lh_helpers.framework in Frameworks */,
-				E0E80644246730A400E9C44F /* GTMSessionFetcher.framework in Frameworks */,
 				E0E8063A246730A400E9C44F /* Pageboy.framework in Frameworks */,
-				E0E80652246730A400E9C44F /* FirebaseAnalytics.framework in Frameworks */,
-				E0E8066C246730A600E9C44F /* GoogleUtilities.framework in Frameworks */,
 				E0E80677246730BC00E9C44F /* Login.framework in Frameworks */,
-				E0E80662246730A500E9C44F /* PromisesObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +760,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.31;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "letshang.Lift-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -805,6 +787,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.31;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "letshang.Lift-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

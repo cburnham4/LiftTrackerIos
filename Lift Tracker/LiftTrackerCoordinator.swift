@@ -10,10 +10,11 @@ import UIKit
 import Login
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
 let usersKey = "Users"
 
-class LiftTrackerCoordinator {
+class LiftTrackerCoordinator: NSObject {
     
     var baseViewController: UIViewController
     var loginCoordinator: LoginCoordinator?
@@ -38,7 +39,7 @@ class LiftTrackerCoordinator {
     }
     
     func startLogin() {
-        loginCoordinator = LoginCoordinator(baseViewController: baseViewController, appImage: UIImage(named: "loginScreenIcon")!, showGoogleLogin: true, flowDelegate: self)
+        loginCoordinator = LoginCoordinator(baseViewController: baseViewController, appImage: UIImage(named: "loginScreenIcon")!, showGoogleLogin: true, flowDelegate: self, googleDelegate: self)
         loginCoordinator?.start()
     }
     
@@ -66,18 +67,9 @@ extension LiftTrackerCoordinator: HomePageDelegate {
         startLogin()
     }
 }
-//
-//extension LiftTrackerCoordinator: ChatCoordinatorDelegate {
-//    func logout() {
-//        do {
-//            try Auth.auth().signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out: %@", signOutError) // Show alert
-//            return
-//        }
-//
-//        startLogin()
-//        chatCoordinator = nil
-//    }
-//}
 
+extension LiftTrackerCoordinator: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        print("here")
+    }
+}

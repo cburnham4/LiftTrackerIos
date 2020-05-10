@@ -32,7 +32,7 @@ class ExerciseTabViewController: TabmanViewController {
     public static func getInstance(exercise: Exercise) -> ExerciseTabViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Exercise", bundle: nil)
         let exerciseTabVC = storyBoard.instantiateViewController(withIdentifier: "ExerciseTabViewController") as! ExerciseTabViewController
-
+        
         exerciseTabVC.exercise = exercise
         
         return exerciseTabVC
@@ -50,29 +50,32 @@ class ExerciseTabViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource = self
         self.automaticallyAdjustsChildInsets = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTableView))
         
         setupTabs()
+        self.dataSource = self
     }
     
     private func setupTabs() {
         self.title = exercise?.name
         // configure the bar
         initializeViewControllers()
-//        self.bar.style = .buttonBar
-//        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-//
-//            // customize appearance here
-//            let color = UIColor(rgb: 0x125688)
-//            appearance.style.background = .solid(color: color)
-//            appearance.text.font = .systemFont(ofSize: 16.0)
-//            appearance.state.color = UIColor.white
-//            appearance.state.selectedColor = UIColor.white
-//            appearance.indicator.color = UIColor(rgb: 0xC1D3E0)
-//        })
+        let bar = TMBar.ButtonBar()
+        
+        bar.layout.contentMode = .fit
+        bar.layout.transitionStyle = .progressive
+        bar.backgroundView.style = .flat(color: UIColor(rgb: 0x125688))
+        bar.indicator.tintColor = UIColor(rgb: 0xC1D3E0)
+        
+        bar.buttons.customize { button in
+            button.font = .systemFont(ofSize: 16.0)
+            button.selectedTintColor = .white
+            button.tintColor = .white
+        }
+        
+        addBar(bar, dataSource: self, at: .top)
     }
     
     @objc func editTableView() {
@@ -81,8 +84,7 @@ class ExerciseTabViewController: TabmanViewController {
     
     private func initializeViewControllers() {
         var viewControllers = [ExerciseBaseTabViewController]()
-        var barItems = [TMBarItem]()
-
+        
         viewControllers.append(getViewController(withIdentifier: "AddSetViewController"))
         viewControllers.append(getViewController(withIdentifier: "PastSetsViewController"))
         viewControllers.append(getViewController(withIdentifier: "MaxesGraphViewController"))
@@ -100,7 +102,6 @@ extension ExerciseTabViewController: PageboyViewControllerDataSource {
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
         return viewControllers[index]
     }
-
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil

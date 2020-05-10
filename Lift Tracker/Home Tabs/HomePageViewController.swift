@@ -85,9 +85,8 @@ class HomePageViewController: TabmanViewController {
     // TODO implement logout
     func logout() {
         print("logout")
-        let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth.signOut()
+            try Auth.auth().signOut()
             flowDelegate?.logout()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)

@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
         
         window = UIWindow(frame: UIScreen.main.bounds)
         mainAppCoordinator = LiftTrackerCoordinator(window: window)
@@ -34,23 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+    
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
-        -> Bool {
-            return GIDSignIn.sharedInstance().handle(url)
-    }
-}
-
-extension AppDelegate: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        guard error == nil else {
-            //createAlert(title: "Error with Google Sign In", message: error?.localizedDescription)
-            return
-        }
-        
-        //        guard let authentication = user.authentication else { return }
-        //        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-        //                                                          accessToken: authentication.accessToken)
-        //        loginFirebaseWithCred(credential: credential)
+      -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
     }
 }
