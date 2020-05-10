@@ -9,6 +9,7 @@
 import Foundation
 import Tabman
 import Pageboy
+import lh_helpers
 
 protocol ExerciseTabVC {
     var exercise: Exercise! { get set }
@@ -23,26 +24,26 @@ class ExerciseBaseTabViewController: UIViewController, ExerciseTabVC {
     }
 }
 
-class ExerciseTabViewController: TabmanViewController {
+struct ExerciseTabViewModel {
+    var exercise: Exercise
+    
+    var title: String {
+        return exercise.name
+    }
+}
+
+class ExerciseTabViewController: TabmanViewController, BaseViewController {
     
     var viewControllers: [ExerciseBaseTabViewController] = [ExerciseBaseTabViewController]()
     
-    var exercise: Exercise!
+    static var storyboardName: String = "Exercise"
+    var viewModel: ExerciseTabViewModel!
+    var flowDelegate: Any?
     
-    public static func getInstance(exercise: Exercise) -> ExerciseTabViewController {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Exercise", bundle: nil)
-        let exerciseTabVC = storyBoard.instantiateViewController(withIdentifier: "ExerciseTabViewController") as! ExerciseTabViewController
-        
-        exerciseTabVC.exercise = exercise
-        
-        return exerciseTabVC
-    }
-    
-    fileprivate func getViewController(withIdentifier identifier: String) -> ExerciseBaseTabViewController
-    {
+    fileprivate func getViewController(withIdentifier identifier: String) -> ExerciseBaseTabViewController {
         let viewController = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: identifier) as! ExerciseBaseTabViewController
         
-        viewController.exercise = exercise
+        viewController.exercise = viewModel.exercise
         
         return viewController
     }
@@ -59,7 +60,7 @@ class ExerciseTabViewController: TabmanViewController {
     }
     
     private func setupTabs() {
-        self.title = exercise?.name
+        self.title = viewModel.title
         // configure the bar
         initializeViewControllers()
         let bar = TMBar.ButtonBar()

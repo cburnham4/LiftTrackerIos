@@ -31,7 +31,8 @@ class RoutineExerciseCoordinator {
     
     func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
-            let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
+            let viewModel = ExerciseTabViewModel(exercise: exercise)
+            let exerciseTabsVc = ExerciseTabViewController.viewController(viewModel: viewModel)
             navigationController.pushViewController(exerciseTabsVc, animated: true)
         }
     }

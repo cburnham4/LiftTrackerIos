@@ -95,7 +95,8 @@ class SingleItemCoordinator {
     
     func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
-            let exerciseTabsVc = ExerciseTabViewController.getInstance(exercise: exercise)
+            let viewModel = ExerciseTabViewModel(exercise: exercise)
+            let exerciseTabsVc = ExerciseTabViewController.viewController(viewModel: viewModel)
             homeVc.navigationController?.pushViewController(exerciseTabsVc, animated: true)
         } else if let routine = item as? Routine, let navController = homeVc.navigationController {
             let routineCoordinator = RoutineExerciseCoordinator(routine: routine, navigationController: navController)

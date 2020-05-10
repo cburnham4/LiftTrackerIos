@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ScrollableGraphView
+import Charts
 
 struct MaxDate {
     var max: Double
@@ -22,7 +22,7 @@ struct MaxDate {
 
 class MaxesGraphViewController: ExerciseBaseTabViewController {
 
-    @IBOutlet weak var graphView: ScrollableGraphView!
+    @IBOutlet weak var lineChartView: LineChartView!
     
     @IBOutlet weak var oneMonthBtn: UIButton!
     @IBOutlet weak var threeMonthBtn: UIButton!
@@ -38,7 +38,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
     var timeIn6Month: Double?
     var timeInYear: Double?
     
-    var maxesAndDates: [MaxDate]!
+    var maxesAndDates: [MaxDate] = []
     var selectedMaxDates: [MaxDate] = [MaxDate]()
     
     @IBOutlet weak var noItemView: UILabel!
@@ -47,27 +47,17 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
         super.viewDidLoad()
 
         getDateTimes()
-        setupGraph()
+        //setupGraph()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         gatherMaxesData()
-        graphView.reload()
+        setupXAxis()
+        setupData()
     }
-    
-    func setupGraph() {
-        let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
-        let referenceLines = ReferenceLines()
-        
-        graphView.dataSource = self
-        graphView.dataPointSpacing = CGFloat(80)
-        graphView.rightmostPointPadding = CGFloat(32)
-        graphView.addPlot(plot: linePlot)
-        graphView.addReferenceLines(referenceLines: referenceLines)
-    }
-    
+
     func gatherMaxesData() {
         maxesAndDates = [MaxDate]()
         
@@ -80,7 +70,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
         
         let hideTableView = maxesAndDates.count < 2
         noItemView.isHidden = !hideTableView
-        graphView.isHidden = hideTableView
+        lineChartView.isHidden = hideTableView
         timeOptions.isHidden = hideTableView
         graphTitle.isHidden = hideTableView
     }
@@ -129,29 +119,55 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
             }
         }
 
-        graphView.layoutSubviews()
-        graphView.reload()
+        setupData()
+    }
+    
+    func setupXAxis() {
+        // Define chart xValues formatter
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        formatter.locale = Locale.current
+
+        let xValuesNumberFormatter = ChartXAxisFormatter(dateFormatter: formatter)
+        lineChartView.xAxis.valueFormatter = xValuesNumberFormatter
+        lineChartView.xAxisRenderer.
+    }
+    
+    func setupData() {
+        var lineChartEntry = [ChartDataEntry]()
+        for maxDatePoint in selectedMaxDates {
+            let timeInterval = maxDatePoint.date.timeIntervalSince1970
+            let xValue = timeInterval
+
+            let yValue = maxDatePoint.max
+            let entry = ChartDataEntry(x: xValue, y: yValue)
+            lineChartEntry.append(entry)
+        }
+        
+        let lineDataSet = LineChartDataSet(entries: lineChartEntry, label: "Max Weights")
+        let data = LineChartData()
+        data.addDataSet(lineDataSet)
+        
+        lineChartView.data = data
     }
 }
 
-extension MaxesGraphViewController: ScrollableGraphViewDataSource {
-    
-    func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
-        if(pointIndex >= selectedMaxDates.count) { return 0 }
-        // Return the data for each plot.
-        switch(plot.identifier) { 
-        case "line":
-            return selectedMaxDates[pointIndex].max
-        default:
-            return 0
-        }
+class ChartXAxisFormatter: NSObject {
+    fileprivate var dateFormatter: DateFormatter?
+
+    convenience init(dateFormatter: DateFormatter) {
+        self.init()
+        self.dateFormatter = dateFormatter
     }
-    
-    func label(atIndex pointIndex: Int) -> String {
-        return selectedMaxDates[pointIndex].getStringDate()
-    }
-    
-    func numberOfPoints() -> Int {
-        return selectedMaxDates.count
+}
+
+extension ChartXAxisFormatter: IAxisValueFormatter {
+
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        guard let dateFormatter = dateFormatter else { return "" }
+
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
     }
 }

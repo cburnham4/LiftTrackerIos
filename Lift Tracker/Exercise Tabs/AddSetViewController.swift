@@ -47,7 +47,7 @@ class AddSetViewController: ExerciseBaseTabViewController {
             dayLiftSets = DayLiftSets()
             ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
             liftSets = dayLiftSets.liftsets
-            exercise.pastSets.append(dayLiftSets)
+            exercise.pastSets.insert(dayLiftSets, at: 0)
         } else {
             dayLiftSets = existingSets[0]
             liftSets = dayLiftSets.liftsets
