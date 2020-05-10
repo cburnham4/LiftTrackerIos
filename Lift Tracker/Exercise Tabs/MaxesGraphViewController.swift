@@ -131,7 +131,6 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
 
         let xValuesNumberFormatter = ChartXAxisFormatter(dateFormatter: formatter)
         lineChartView.xAxis.valueFormatter = xValuesNumberFormatter
-        lineChartView.xAxisRenderer.
     }
     
     func setupData() {
