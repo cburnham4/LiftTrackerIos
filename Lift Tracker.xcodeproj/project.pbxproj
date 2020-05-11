@@ -409,7 +409,7 @@
 				E04D7C452106B2FA00E79A5A /* Frameworks */,
 				E04D7C462106B2FA00E79A5A /* Resources */,
 				E0E80672246730A600E9C44F /* Embed Frameworks */,
-				E0E8067B2467319C00E9C44F /* ShellScript */,
+				E0E8067B2467319C00E9C44F /* Embed Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,7 +538,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E0E8067B2467319C00E9C44F /* ShellScript */ = {
+		E0E8067B2467319C00E9C44F /* Embed Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -548,6 +548,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Embed Carthage Frameworks";
 			outputFileListPaths = (
 				"$(SRCROOT)/output.xcfilelist",
 			);
