@@ -77,6 +77,7 @@ class ExerciseTabViewController: TabmanViewController, BaseViewController {
         }
         
         addBar(bar, dataSource: self, at: .top)
+        isScrollEnabled = false
     }
     
     @objc func editTableView() {

@@ -46,6 +46,8 @@ class HomePageViewController: TabmanViewController {
             button.selectedTintColor = .white
             button.tintColor = .white
         }
+        
+        isScrollEnabled = false
 
         addBar(bar, dataSource: self, at: .top)
     }
