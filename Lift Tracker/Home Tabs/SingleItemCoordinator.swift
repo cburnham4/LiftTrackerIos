@@ -36,8 +36,7 @@ class SingleItemCoordinator {
         return TabBarVc(vcs: viewControllers)
     }
     
-    fileprivate func getViewController(withIdentifier identifier: String, itemType: ItemType) -> SingleItemListViewControllerProtocol
-    {
+    fileprivate func getViewController(withIdentifier identifier: String, itemType: ItemType) -> SingleItemListViewControllerProtocol {
         let singleItemVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: identifier) as! SingleItemListViewControllerProtocol
         singleItemVC.viewModel = SingleItemsListViewModel(itemType: itemType, addItem: addItem, deleteItem: deleteItem, updateItem: updateItem, goToItemPage: goToItemPage)
         return singleItemVC

@@ -18,10 +18,5 @@ class MuscleGroupsViewController: UIViewController, SingleItemListViewController
     override func viewDidAppear(_ animated: Bool) {
         viewModel.sendItemRequest()
     }
-
-    func editTableview(edit: Bool) {
-        // TODO
-    }
-    
 }
 

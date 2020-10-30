@@ -63,6 +63,7 @@ extension LiftTrackerCoordinator: LoginCoordinatorDelegate {
 
 extension LiftTrackerCoordinator: HomePageDelegate {
     func logout() {
+        UserSession.instance.wipeData()
         startLogin()
     }
 }

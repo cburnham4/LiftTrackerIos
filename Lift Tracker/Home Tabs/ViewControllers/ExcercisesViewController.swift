@@ -22,10 +22,6 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
     }()
     
-    lazy var tableViewEditBond = {
-        return Bond<Bool>(valueChanged: self.editTableview)
-    }()
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.sendItemRequest()
@@ -37,7 +33,6 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         tableView.dataSource = viewModel
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
-        tableViewEditBond.bind(observable: viewModel.isEditingTable)
         
         bannerView.adUnitID = "ca-app-pub-8223005482588566/9978364977"
         bannerView.rootViewController = self
@@ -54,9 +49,5 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         tableView.isHidden = viewModel.isEmpty
         instructionLabel.isHidden = !viewModel.isEmpty
         instructionLabel.text = viewModel.emptyExercises
-    }
-
-    func editTableview(edit: Bool) {
-        tableView.isEditing = !tableView.isEditing
     }
 }

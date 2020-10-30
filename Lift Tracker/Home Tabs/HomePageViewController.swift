@@ -59,10 +59,6 @@ class HomePageViewController: TabmanViewController {
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
-        let editAction = UIAlertAction(title: "Edit List", style: .default) { [weak self] _ in
-            self?.viewControllers[self?.currentIndex ?? 0].editTableview(edit: false)
-        }
-        
         let downloadAction = UIAlertAction(title: "Download Routines", style: .default) { [weak self] _ in
             self?.goToDownloads()
         }
@@ -71,7 +67,7 @@ class HomePageViewController: TabmanViewController {
             self?.logout()
         }
 
-        let actions = [downloadAction, editAction, addAction]
+        let actions = [downloadAction, addAction]
         
         let actionMenu = AlertUtils.createActionSheet(actions: actions, showCancel: true, viewController: self)
         self.present(actionMenu, animated: true, completion: nil)

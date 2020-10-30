@@ -13,7 +13,6 @@ protocol SingleItemListViewControllerProtocol: UIViewController {
     var viewModel: SingleItemsListViewModel! { get set }
     
     func addItem()
-    func editTableview (edit: Bool)
 }
 
 extension SingleItemListViewControllerProtocol {

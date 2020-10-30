@@ -24,10 +24,6 @@ class RoutineExercisesViewController: UIViewController, SingleItemListViewContro
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
     }()
     
-    lazy var tableViewEditBond = {
-        return Bond<Bool>(valueChanged: self.editTableview)
-    }()
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.sendItemRequest()
@@ -42,15 +38,10 @@ class RoutineExercisesViewController: UIViewController, SingleItemListViewContro
         tableView.dataSource = viewModel
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
-        tableViewEditBond.bind(observable: viewModel.isEditingTable)
     }
     
     func reloadData(items: [SimpleListRowItem]) {
         self.tableView.reloadData()
-    }
-    
-    func editTableview(edit: Bool) {
-        tableView.isEditing = !tableView.isEditing
     }
     
     @objc func addItemClicked(_ sender: UIBarButtonItem) {
