@@ -13,12 +13,19 @@ protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataS
     var singleListItems: Observable<[SimpleListRowItem]> { get set }
     var isEditingTable: Observable<Bool> { get set }
     var isEmpty: Bool { get }
+    var itemType: ItemType { get }
     
     var addItem: (SingleItemsListViewModel) -> () { get set }
     var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
     var goToItemPage: (SimpleListRowItem) -> () { get set }
     func sendItemRequest()
+}
+
+extension SingleItemsListViewModelProtocol {
+    var isEmpty: Bool {
+        return singleListItems.value.count == 0
+    }
 }
 
 class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, RequestCycle {
@@ -28,10 +35,7 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
     var goToItemPage: (SimpleListRowItem) -> ()
     
     var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner\nOr tap the top right corner to download preset workout routines"
-    var isEmpty: Bool {
-        return singleListItems.value.count == 0
-    }
-    
+
     var singleListItems: Observable<[SimpleListRowItem]>
     var itemType: ItemType
     var isEditingTable: Observable<Bool> = Observable(false)
@@ -50,12 +54,11 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
         self.goToItemPage = goToItemPage
         super.init()
     }
-    
+
     func sendItemRequest() {
         BaseItemsProvider.sendGetItemsRequest(itemType: itemType, cycle: self)
     }
-    
-    
+
     func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
         let simpleListItem = turnRequestObjectIntoSimpleItem(object: object)
         if simpleListItem != nil, requestKey == .post {
