@@ -43,9 +43,9 @@ class ExercisesViewModel: NSObject, SingleItemsListViewModelProtocol {
         }
     }
 
-    func updateItem(item: Exercise) {
-        var requestObject = item as CoreRequestObject // TODO move to viewmodel
-        BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update)  { [weak self] (result: RequestResult<Exercise>) in
+    func updateItem<T>(item: T) {
+        guard var exercise = item as? CoreRequestObject else { return }
+        BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: .exercises, requestKey: .update)  { [weak self] (result: RequestResult<Exercise>) in
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }
@@ -78,7 +78,7 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         super.viewDidLoad()
 
         dataSource = SingleItemListDataSource(viewModel: viewModel)
-        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, flowDelegate: flowDelegate)
+        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, viewController: self, flowDelegate: flowDelegate)
         tableView.dataSource = dataSource
         tableView.delegate = tableViewDelegate
         

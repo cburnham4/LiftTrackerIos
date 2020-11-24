@@ -9,7 +9,6 @@
 import UIKit
 import lh_helpers
 
-
 class RoutineExerciseViewModel: NSObject, SingleItemsListViewModelProtocol {
 
     var singleListItems: Observable<[SimpleListRowItem]> = Observable([])
@@ -33,7 +32,8 @@ class RoutineExerciseViewModel: NSObject, SingleItemsListViewModelProtocol {
         // TODO
     }
 
-    func deleteItem<T: SimpleListRowItem>(item: T) {
+    func deleteItem<T>(item: T) {
+        guard let item = item as? Exercise else { return } // TODO
         let exerciseList = routine.exerciseKeys.filter({ $0 != item.key })
         routine.exerciseKeys = exerciseList
         var routineObject = routine as CoreRequestObject
@@ -58,9 +58,6 @@ class RoutineExerciseViewModel: NSObject, SingleItemsListViewModelProtocol {
 }
 
 class RoutineExercisesViewController: UIViewController, SingleItemListViewControllerProtocol, BaseViewController {
-    typealias RowItem = Exercise
-    typealias ViewModel = RoutineExerciseViewModel
-
 
     static var storyboardName: String = "RoutineExercise"
     static var viewControllerIdentifier: String = "RoutineExercisesViewController"
@@ -91,7 +88,8 @@ class RoutineExercisesViewController: UIViewController, SingleItemListViewContro
         self.navigationItem.rightBarButtonItem = addItemButton
 
         dataSource = SingleItemListDataSource(viewModel: viewModel)
-        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, flowDelegate: flowDelegate)
+        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel,
+                                                        viewController: self, flowDelegate: flowDelegate)
         tableView.delegate = tableViewDelegate
         tableView.dataSource = dataSource
         

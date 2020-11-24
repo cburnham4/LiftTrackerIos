@@ -25,10 +25,13 @@ class RoutineExerciseCoordinator {
     func startFlow() {
         viewModel = RoutineExerciseViewModel(routine: routine)
     
-        let routineViewController = RoutineExercisesViewController.viewController(viewModel: viewModel)
+        let routineViewController = RoutineExercisesViewController.viewController(viewModel: viewModel, flowDelegate: self)
         navigationController.pushViewController(routineViewController, animated: true)
     }
-    
+}
+
+extension RoutineExerciseCoordinator: SingleItemListViewDelegate {
+
     func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
             let viewModel = ExerciseTabViewModel(exercise: exercise)

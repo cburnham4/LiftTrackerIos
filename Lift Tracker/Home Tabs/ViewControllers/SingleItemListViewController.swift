@@ -11,7 +11,6 @@ import Foundation
 
 protocol SingleItemListViewDelegate: class {
     func goToItemPage(item: SimpleListRowItem)
-    func tapDeleteItem(item: SimpleListRowItem)
 }
 
 protocol AddItemViewController {
@@ -19,7 +18,6 @@ protocol AddItemViewController {
 }
 
 protocol SingleItemListViewControllerProtocol: UIViewController, UITableViewDelegate, AddItemViewController {
-    associatedtype RowItem: SimpleListRowItem
     associatedtype ViewModel: SingleItemsListViewModelProtocol
 
     var viewModel: ViewModel! { get set }
@@ -28,7 +26,6 @@ protocol SingleItemListViewControllerProtocol: UIViewController, UITableViewDele
     var tableViewDelegate: SingleItemListTableDelegate! { get }
     
     func addItem()
-    func updateItem(item: RowItem)
 }
 
 extension SingleItemListViewControllerProtocol {
@@ -36,8 +33,6 @@ extension SingleItemListViewControllerProtocol {
     func requestFailedAlert() {
         AlertUtils.createAlert(view: self, title: "Error", message: "Unable to retrieve data from server")
     }
-
-    func updateItem(item: RowItem) { } // Optional func
 }
 
 
@@ -45,11 +40,14 @@ extension SingleItemListViewControllerProtocol {
 class SingleItemListTableDelegate: NSObject, UITableViewDelegate {
 
     let viewModel: SingleItemsListViewModelProtocol
+    let viewController: UIViewController
     weak var flowDelegate: SingleItemListViewDelegate?
 
     init(viewModel: SingleItemsListViewModelProtocol,
+         viewController: UIViewController,
          flowDelegate: SingleItemListViewDelegate?) {
         self.viewModel = viewModel
+        self.viewController = viewController
         self.flowDelegate = flowDelegate
     }
 
@@ -59,27 +57,33 @@ class SingleItemListTableDelegate: NSObject, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let item = viewModel.singleListItems.value[indexPath.row]
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var item = viewModel.singleListItems.value[indexPath.row]
 
-        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
+        let editAction = UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] action, indexPath, _ in
             guard let strongSelf = self else { return }
-            strongSelf.viewModel.updateItem(item: item) // TODO check if going to VC
+            AlertUtils.createAlertTextCallback(view: strongSelf.viewController, title: "Update Name", placeholder: "New Name", callback: { name in
+                item.name = name
+                self?.viewModel.updateItem(item: item)
+            }, cancelCallback: {
+                self?.viewModel.isEditingTable.value = false
+            })
         })
 
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { [weak self] action, indexPath, _  in
             guard let strongSelf = self else { return }
-            strongSelf.flowDelegate?.tapDeleteItem(item: item) // TODO check if going to VC
-//            AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item") { _ in
-//                strongSelf.viewModel.deleteItem(item: item)
-//            }
+            AlertUtils.createAlertCallback(view: strongSelf.viewController,
+                                           title: "Remove Item?",
+                                           message: "Please confirm if you would like to remove item") { _ in
+                self?.viewModel.deleteItem(item: item)
+            }
         })
 
         editAction.backgroundColor = .gray
         deleteAction.backgroundColor = .red
 
-        if viewModel.allowUpdateRow { return [deleteAction, editAction] }
-        return [deleteAction]
+        if viewModel.allowUpdateRow { return UISwipeActionsConfiguration(actions: [deleteAction, editAction]) }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 

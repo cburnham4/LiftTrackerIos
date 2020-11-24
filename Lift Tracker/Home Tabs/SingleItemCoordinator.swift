@@ -15,6 +15,7 @@ import lh_helpers
 // Coordinator to handle the view and view model interactions to keep the VM and view seperate
 class SingleItemCoordinator {
     var homeVc: HomePageViewController
+    var routineCoordinator: RoutineExerciseCoordinator?
     
     init(homeVc: HomePageViewController) {
         self.homeVc = homeVc
@@ -28,9 +29,6 @@ class SingleItemCoordinator {
 }
 
 extension SingleItemCoordinator: SingleItemListViewDelegate {
-    func tapDeleteItem(item: SimpleListRowItem) {
-        // TODO
-    }
 
     func goToItemPage(item: SimpleListRowItem) {
         if let exercise = item as? Exercise {
@@ -38,8 +36,8 @@ extension SingleItemCoordinator: SingleItemListViewDelegate {
             let exerciseTabsVc = ExerciseTabViewController.viewController(viewModel: viewModel)
             homeVc.navigationController?.pushViewController(exerciseTabsVc, animated: true)
         } else if let routine = item as? Routine, let navController = homeVc.navigationController {
-            let routineCoordinator = RoutineExerciseCoordinator(routine: routine, navigationController: navController)
-            routineCoordinator.startFlow()
+            routineCoordinator = RoutineExerciseCoordinator(routine: routine, navigationController: navController)
+            routineCoordinator?.startFlow()
         } // TODO add muscle groups
     }
 }

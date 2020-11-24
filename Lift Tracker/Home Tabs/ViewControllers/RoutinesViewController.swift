@@ -25,18 +25,19 @@ class RoutinesViewModel: NSObject, SingleItemsListViewModelProtocol {
         }
     }
 
-    func updateItem(item: Routine) {
-        var requestObject = item as CoreRequestObject
-        BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update)  { [weak self] (result: RequestResult<Routine>) in
+    func updateItem<T>(item: T) {
+        guard var routine = item as? CoreRequestObject else { return }
+        BaseItemsProvider.sendPostRequest(object: &routine, typeKey: itemType, requestKey: .update)  { [weak self] (result: RequestResult<Routine>) in
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }
         }
+        isEditingTable.value = false
     }
 
     func deleteItem<T>(item: T) {
         guard let routine = item as? CoreRequestObject else { return }
-        BaseItemsProvider.deleteItem(object: routine, typeKey: itemType, requestKey: .delete) { [weak self] (result: RequestResult<Exercise>) in
+        BaseItemsProvider.deleteItem(object: routine, typeKey: itemType, requestKey: .delete) { [weak self] (result: RequestResult<Routine>) in
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }
@@ -45,7 +46,7 @@ class RoutinesViewModel: NSObject, SingleItemsListViewModelProtocol {
     }
 
     func sendItemRequest() {
-        BaseItemsProvider.sendGetItemsRequest(itemType: itemType) { [weak self] (result: RequestResult<Exercise>) in
+        BaseItemsProvider.sendGetItemsRequest(itemType: itemType) { [weak self] (result: RequestResult<Routine>) in
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }
@@ -54,7 +55,6 @@ class RoutinesViewModel: NSObject, SingleItemsListViewModelProtocol {
 }
 
 class RoutinesViewController: UIViewController, SingleItemListViewControllerProtocol, BaseViewController {
-
     static var storyboardName: String = "Home"
     
     var flowDelegate: SingleItemListViewDelegate?
@@ -79,7 +79,7 @@ class RoutinesViewController: UIViewController, SingleItemListViewControllerProt
         super.viewDidLoad()
 
         dataSource = SingleItemListDataSource(viewModel: viewModel)
-        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, flowDelegate: flowDelegate)
+        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, viewController: self, flowDelegate: flowDelegate)
         tableView.dataSource = dataSource
         tableView.delegate = tableViewDelegate
         
@@ -106,18 +106,6 @@ class RoutinesViewController: UIViewController, SingleItemListViewControllerProt
         let title = "Add Routine"
         AlertUtils.createAlertTextCallback(view: self, title: title, placeholder: "Routine", callback: { routineName in
             self.viewModel.addItem(item: Routine(name: routineName))
-        })
-    }
-}
-
-extension RoutinesViewController {
-    func updateItem(item: Routine) {
-        AlertUtils.createAlertTextCallback(view: self, title: "Update Routine Name", placeholder: viewModel.itemType.rawValue, callback: { name in
-            item.name = name
-            self.viewModel.updateItem(item: item)
-            self.viewModel.isEditingTable.value = false
-        }, cancelCallback: {
-            self.viewModel.isEditingTable.value = false
         })
     }
 }

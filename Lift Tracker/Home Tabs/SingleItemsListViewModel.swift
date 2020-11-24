@@ -18,7 +18,7 @@ protocol SingleItemsListViewModelProtocol: UITableViewDelegate { // TODO remove 
     var allowUpdateRow: Bool { get }
     
     func addItem<T>(item: T)
-    func deleteItem<T: SimpleListRowItem>(item: T)
+    func deleteItem<T>(item: T)
     func updateItem<T>(item: T)
 
     func sendItemRequest()
