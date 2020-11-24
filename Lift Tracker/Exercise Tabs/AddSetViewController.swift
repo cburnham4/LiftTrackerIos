@@ -45,7 +45,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
         //If there are no sets for today then make a new one
         if (existingSets.isEmpty) {
             dayLiftSets = DayLiftSets()
-            ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
+            ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
+                if case .failure = result, let strongSelf = self {
+                    AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                }
+            }
             liftSets = dayLiftSets.liftsets
             exercise.pastSets.insert(dayLiftSets, at: 0)
         } else {
@@ -97,7 +101,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
         exerciseTableView.reloadData()
         
         dayLiftSets.liftsets.append(liftSet)
-        ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getDashesDateString(), cycle: self)
+        ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getDashesDateString()) { [weak self] result in
+            if case .failure = result, let strongSelf = self {
+                AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            }
+        }
         
         let max = liftSet.getMax()
         if(max > currentMax) {
@@ -114,7 +122,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
     func deleteItem(item: LiftSet) {
         liftSets = liftSets.filter({ $0.key != item.key })
         dayLiftSets.liftsets = liftSets
-        ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getDashesDateString(), liftSet: item, cycle: self)
+        ExerciseSetsRequest.deleteLiftSet(exerciseKey: exercise.key, date: date.getDashesDateString(), liftSet: item) { [weak self] result in
+            if case .failure = result, let strongSelf = self {
+                AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            }
+        }
         exerciseTableView.reloadData()
         findNewMax(deltedSet: item)
         
@@ -139,7 +151,11 @@ class AddSetViewController: ExerciseBaseTabViewController {
     func updateMax(max: Double) {
         currentMax = max
         dayLiftSets.max = max
-        ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets, cycle: self)
+        ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
+            if case .failure = result, let strongSelf = self {
+                AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            }
+        }
     }
     
     override func editViewController() {
@@ -170,6 +186,7 @@ extension AddSetViewController: UITableViewDelegate {
 //        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
 //            self?.updateItem(item: item)
 //        })
+
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
             guard let strongSelf = self else {
                 return
@@ -181,22 +198,6 @@ extension AddSetViewController: UITableViewDelegate {
         // editAction.backgroundColor = .blue
         deleteAction.backgroundColor = .red
         return [deleteAction]
-    }
-}
-
-extension AddSetViewController: RequestCycle {
-    func requestFailed(requestKey: RequestType) {
-        AlertUtils.createAlert(view: self, title: "Request Failed", message: "Exercise Sets were not able to be saved")
-    }
-    
-    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
-        if let object = object as? LiftSet, requestKey == .post {
-//            var exercise = self.singleListItems?.filter{ $0.key == object.key }.first
-//            exercise?.name = object.name
-//            UserSession.instance.setExercises(exercises: singleListItems as! [Exercise])
-        } else if let object = object as? LiftSet, requestKey == .post {
-        
-        }
     }
 }
 

@@ -18,7 +18,7 @@ protocol HomePageDelegate: class {
 
 class HomePageViewController: TabmanViewController {
     
-    var viewControllers: [SingleItemListViewControllerProtocol] = [SingleItemListViewControllerProtocol]()
+    var viewControllers: [UIViewController] = []
     
     weak var flowDelegate: HomePageDelegate?
     
@@ -54,8 +54,7 @@ class HomePageViewController: TabmanViewController {
     
     private func initializeViewControllers() {
         let coordinator = SingleItemCoordinator(homeVc: self)
-        let tabInfo = coordinator.getTabsViewController()
-        self.viewControllers = tabInfo.vcs
+        viewControllers = coordinator.getTabsViewController()
     }
     
     @IBAction func addItemAction(_ sender: UIBarButtonItem) {
@@ -92,7 +91,8 @@ class HomePageViewController: TabmanViewController {
     }
     
     @IBAction func addItem(_ sender: Any) {
-        viewControllers[self.currentIndex ?? 0].addItem()
+        guard let viewController = viewControllers[self.currentIndex ?? 0] as? AddItemViewController else { return }
+        viewController.addItem()
     }
 }
 

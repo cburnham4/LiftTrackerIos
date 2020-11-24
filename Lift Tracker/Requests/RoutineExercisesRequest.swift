@@ -10,14 +10,14 @@ import Foundation
 
 class RoutineExerciseRequest: LiftTrackerRequest {
     
-    static func updateRoutineExercises(exerciseKey: String, date: String, liftSet: LiftSet, cycle: RequestCycle) {
+    static func updateRoutineExercises(exerciseKey: String, date: String, liftSet: LiftSet, completion: @escaping (RequestResult<LiftSet>) -> Void) {
         let dbRef = getUserDatabaseReference()?.child(ItemType.routines.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)
         
         dbRef?.removeValue() { error, _ in
             if error != nil {
-                cycle.requestFailed(requestKey: .update)
+                completion(.failure(error: error.debugDescription))
             } else {
-                cycle.requestSuccess(requestKey: .update)
+                completion(.success(requestKey: .update))
             }
         }
     }

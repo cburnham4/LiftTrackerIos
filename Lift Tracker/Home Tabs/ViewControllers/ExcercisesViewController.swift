@@ -10,13 +10,60 @@ import UIKit
 import lh_helpers
 import GoogleMobileAds
 
-class ExcercisesViewController: UIViewController, SingleItemListViewControllerProtocol {
+class ExercisesViewModel: NSObject, SingleItemsListViewModelProtocol {
+
+    var singleListItems: Observable<[SimpleListRowItem]> = Observable([SimpleListRowItem]())
+    var itemType: ItemType = .exercises
+    var isEditingTable: Observable<Bool> = Observable(false)
+
+    func addItem<T>(item: T) {
+        guard var exercise = item as? CoreRequestObject else { return }
+        BaseItemsProvider.sendPostRequest(object: &exercise, typeKey: itemType, requestKey: .post) { [weak self] (result: RequestResult<Exercise>) in
+            if case let .success(requestKey, object) = result {
+                self?.requestSuccess(requestKey: requestKey, object: object)
+            }
+        }
+    }
     
+    func deleteItem<T>(item: T) {// TODO check
+        guard let exercise = item as? CoreRequestObject else { return }
+        BaseItemsProvider.deleteItem(object: exercise, typeKey: itemType, requestKey: .delete) { [weak self] (result: RequestResult<Exercise>) in
+            if case let .success(requestKey, object) = result {
+                self?.requestSuccess(requestKey: requestKey, object: object)
+            }
+        }
+        isEditingTable.value = false
+    }
+
+    func sendItemRequest() { // TODO implement individual viewmodels
+        BaseItemsProvider.sendGetItemsRequest(itemType: itemType) { [weak self] (result: RequestResult<Exercise>) in
+            if case let .success(requestKey, object) = result {
+                self?.requestSuccess(requestKey: requestKey, object: object)
+            }
+        }
+    }
+
+    func updateItem(item: Exercise) {
+        var requestObject = item as CoreRequestObject // TODO move to viewmodel
+        BaseItemsProvider.sendPostRequest(object: &requestObject, typeKey: .exercises, requestKey: .update)  { [weak self] (result: RequestResult<Exercise>) in
+            if case let .success(requestKey, object) = result {
+                self?.requestSuccess(requestKey: requestKey, object: object)
+            }
+        }
+    }
+}
+
+class ExcercisesViewController: UIViewController, SingleItemListViewControllerProtocol, BaseViewController {
+    static var storyboardName: String = "Home"
+
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var bannerView: GADBannerView!
     
-    var viewModel: SingleItemsListViewModel!
+    var viewModel: ExercisesViewModel!
+    var dataSource: SingleItemListDataSource!
+    var tableViewDelegate: SingleItemListTableDelegate!
+    weak var flowDelegate: SingleItemListViewDelegate?
     
     lazy var tableViewDataBond = {
         return Bond<[SimpleListRowItem]>(valueChanged: self.reloadData)
@@ -29,8 +76,11 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = viewModel
-        tableView.dataSource = viewModel
+
+        dataSource = SingleItemListDataSource(viewModel: viewModel)
+        tableViewDelegate = SingleItemListTableDelegate(viewModel: viewModel, flowDelegate: flowDelegate)
+        tableView.dataSource = dataSource
+        tableView.delegate = tableViewDelegate
         
         tableViewDataBond.bind(observable: viewModel.singleListItems)
         
@@ -48,6 +98,27 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         
         tableView.isHidden = viewModel.isEmpty
         instructionLabel.isHidden = !viewModel.isEmpty
-        instructionLabel.text = viewModel.emptyExercises
+        instructionLabel.text = viewModel.emptyItemsText
+    }
+
+    func addItem() {
+        let title = "Add Exercise"
+        AlertUtils.createAlertTextCallback(view: self, title: title, placeholder: "Exercise", callback: { exerciseName in
+            self.viewModel.addItem(item: Exercise(name: exerciseName))
+        })
+    }
+}
+
+extension ExcercisesViewController {
+    func updateItem(item: Exercise) {
+        AlertUtils.createAlertTextCallback(view: self, title: "Update Exercise Name", placeholder: viewModel.itemType.rawValue,
+                                           callback: { exerciseName in
+                                            item.name = exerciseName
+                                            self.viewModel.updateItem(item: item)
+                                            self.viewModel.isEditingTable.value = false
+                                           },
+                                           cancelCallback: {
+                                            self.viewModel.isEditingTable.value = false
+                                           })
     }
 }

@@ -9,54 +9,34 @@
 import Foundation
 import lh_helpers
 
-protocol SingleItemsListViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
+protocol SingleItemsListViewModelProtocol: UITableViewDelegate { // TODO remove delegate
     var singleListItems: Observable<[SimpleListRowItem]> { get set }
     var isEditingTable: Observable<Bool> { get set }
     var isEmpty: Bool { get }
     var itemType: ItemType { get }
+    var emptyItemsText: String { get }
+    var allowUpdateRow: Bool { get }
     
-    var addItem: (SingleItemsListViewModel) -> () { get set }
-    var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
-    var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> () { get set }
-    var goToItemPage: (SimpleListRowItem) -> () { get set }
+    func addItem<T>(item: T)
+    func deleteItem<T: SimpleListRowItem>(item: T)
+    func updateItem<T>(item: T)
+
     func sendItemRequest()
+    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?)
 }
 
 extension SingleItemsListViewModelProtocol {
+
+    var emptyItemsText: String {
+        return "No Items Available \nAdd an item by tapping the button in top left corner\nOr tap the top right corner to download preset workout routines"
+    }
+
     var isEmpty: Bool {
         return singleListItems.value.count == 0
     }
-}
 
-class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, RequestCycle {
-    var addItem: (SingleItemsListViewModel) -> ()
-    var deleteItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
-    var updateItem: (SingleItemsListViewModel, SimpleListRowItem) -> ()
-    var goToItemPage: (SimpleListRowItem) -> ()
-    
-    var emptyExercises = "No Items Available \nAdd an item by tapping the button in top left corner\nOr tap the top right corner to download preset workout routines"
-
-    var singleListItems: Observable<[SimpleListRowItem]>
-    var itemType: ItemType
-    var isEditingTable: Observable<Bool> = Observable(false)
-    
-    init(itemType: ItemType,
-         addItem: @escaping (SingleItemsListViewModel) -> (),
-         deleteItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (),
-         updateItem: @escaping (SingleItemsListViewModel, SimpleListRowItem) -> (),
-         goToItemPage: @escaping (SimpleListRowItem) -> ()) {
-        
-        self.itemType = itemType
-        self.singleListItems = Observable([SimpleListRowItem]())
-        self.addItem = addItem
-        self.deleteItem = deleteItem
-        self.updateItem = updateItem
-        self.goToItemPage = goToItemPage
-        super.init()
-    }
-
-    func sendItemRequest() {
-        BaseItemsProvider.sendGetItemsRequest(itemType: itemType, cycle: self)
+    var allowUpdateRow: Bool {
+        return true
     }
 
     func requestSuccess(requestKey: RequestType, object: CoreRequestObject?) {
@@ -75,56 +55,13 @@ class SingleItemsListViewModel: NSObject, SingleItemsListViewModelProtocol, Requ
             self.singleListItems.value = UserSession.instance.getSingleListItems(type: self.itemType) ?? [SimpleListRowItem]()
         }
     }
-    
+
     func turnRequestObjectIntoSimpleItem(object: CoreRequestObject?) -> SimpleListRowItem? {
         if let object = object as? Exercise { return object }
         if let object = object as? Routine { return object }
         if let object = object as? MuscleGroup { return object }
         return nil
     }
-    
-    func requestFailed(requestKey: RequestType) {
-        //super.requestFailedAlert()
-    }
-}
 
-/**
- * MARK: Table view functions
- */
-extension SingleItemsListViewModel: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleItem = self.singleListItems.value[indexPath.row]
-        self.goToItemPage(singleItem)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let item = singleListItems.value[indexPath.row]
-        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
-            guard let strongSelf = self else { return }
-            strongSelf.updateItem(strongSelf, item)
-        })
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
-            guard let strongSelf = self else { return }
-            strongSelf.deleteItem(strongSelf, item)
-        })
-        editAction.backgroundColor = .gray
-        deleteAction.backgroundColor = .red
-        return [deleteAction, editAction]
-    }
-}
-
-extension SingleItemsListViewModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return singleListItems.value.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SingleItemTableViewCell", for: indexPath) as! SingleItemTableViewCell
-        
-        let item = self.singleListItems.value[indexPath.row]
-        
-        cell.setContent(listRowItem: item)
-        return cell
-    }
+    func updateItem<T>(item: T) { } // Optional
 }

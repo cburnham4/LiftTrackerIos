@@ -11,40 +11,40 @@ import Foundation
 class ExerciseSetsRequest: LiftTrackerRequest {
     // TODO: MOve to struct and move request to non static functions
     
-    static func createBlankDayLiftSet(exerciseKey: String, dayLiftSets: DayLiftSets, cycle: RequestCycle) {
+    static func createBlankDayLiftSet(exerciseKey: String, dayLiftSets: DayLiftSets, completion: @escaping (RequestResult<DayLiftSets>) -> Void) {
         let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets")
         
         var requestObject = dayLiftSets as CoreRequestObject
-        sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, cycle: cycle)
+        sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, completion: completion)
     }
     
-    static func sendAddLiftSetRequest(exerciseKey: String, liftSet: LiftSet, date: String, cycle: RequestCycle) {
+    static func sendAddLiftSetRequest(exerciseKey: String, liftSet: LiftSet, date: String, completion: @escaping (RequestResult<LiftSet>) -> Void) {
         let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date)
         
         var requestObject = liftSet as CoreRequestObject
-        sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, cycle: cycle)
+        sendPostRequest(object: &requestObject, requestKey: .post, dbRef: dbRef, completion: completion)
     }
     
-    static func updateMaxRequest(exerciseKey: String, dayLiftSets: DayLiftSets, cycle: RequestCycle) {
+    static func updateMaxRequest(exerciseKey: String, dayLiftSets: DayLiftSets, completion: @escaping (RequestResult<DayLiftSets>) -> Void) {
          let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(dayLiftSets.dateString)
         
         dbRef?.child("Max").setValue(dayLiftSets.max) { error, _ in
             if error != nil {
-                cycle.requestFailed(requestKey: .update)
+                completion(.failure(error: error.debugDescription))
             } else {
-                cycle.requestSuccess(requestKey: .update)
+                completion(.success(requestKey: .update, object: nil))
             }
         }
     }
     
-    static func deleteLiftSet(exerciseKey: String, date: String, liftSet: LiftSet, cycle: RequestCycle) {
+    static func deleteLiftSet(exerciseKey: String, date: String, liftSet: LiftSet, completion: @escaping (RequestResult<LiftSet>) -> Void) {
         let dbRef = getUserDatabaseReference()?.child(ItemType.exercises.rawValue).child(exerciseKey).child("LiftSets").child(date).child(liftSet.key)
         
         dbRef?.removeValue() { error, _ in
             if error != nil {
-                cycle.requestFailed(requestKey: .update)
+                completion(.failure(error: error.debugDescription))
             } else {
-                cycle.requestSuccess(requestKey: .update)
+                completion(.success(requestKey: .update, object: nil))
             }
         }
     }

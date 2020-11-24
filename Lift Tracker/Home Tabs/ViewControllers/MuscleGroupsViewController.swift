@@ -9,14 +9,25 @@
 import UIKit
 import lh_helpers
 
-class MuscleGroupsViewController: UIViewController, SingleItemListViewControllerProtocol {
-
-    var viewModel: SingleItemsListViewModel!
-    
-    @IBOutlet var tableView: UITableView!
-    
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.sendItemRequest()
-    }
-}
+// TODO
+//class MuscleGroupsViewModel: NSObject, SingleItemsListViewModelProtocol {
+//
+//}
+//
+//class MuscleGroupsViewController: UIViewController, SingleItemListViewControllerProtocol {
+//    var delegate: SingleItemListViewDelegate?
+//
+//    func updateItem(item: SimpleListRowItem) {
+//        <#code#>
+//    }
+//
+//
+//    var viewModel: MuscleGroupsViewModel!
+//
+//    @IBOutlet var tableView: UITableView!
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        viewModel.sendItemRequest()
+//    }
+//}
 
