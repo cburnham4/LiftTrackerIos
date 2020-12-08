@@ -105,7 +105,6 @@ class RoutineExercisesViewController: UIViewController, SingleItemListViewContro
             self?.exercisePicked()
         })
     }
-
     
     @objc func addItemClicked(_ sender: UIBarButtonItem) {
         // TODO change for it to take in the delegates separately
