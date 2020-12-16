@@ -30,36 +30,25 @@ enum RequestType {
 
 class BaseItemsProvider: LiftTrackerRequest {
 
-    static func sendGetItemsRequest(itemType: ItemType, cycle: RequestCycle) {
-        sendGetRequest(listKey: itemType, requestKey: .get, cycle: cycle)
+    static func sendGetItemsRequest<T: CoreResponse>(itemType: ItemType, completion: @escaping (RequestResult<T>) -> Void) {
+        sendGetRequest(listKey: itemType, requestKey: .get, completion: completion)
     }
     
-    static func sendGetRequest(listKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func sendGetRequest<T: CoreResponse>(listKey: ItemType, requestKey: RequestType, completion: @escaping (RequestResult<T>) -> Void) {
         let dbRef = self.getUserDatabaseReference()
         
         var responseObjects = [CoreResponse]()
         
         dbRef?.child(listKey.rawValue).observeSingleEvent(of: .value, with: { (snapshot) in
             if(!snapshot.exists()){
-                cycle.requestSuccess(requestKey: requestKey)
+                completion(.success(requestKey: requestKey, object: nil))
                 return
             }
             
             let children = snapshot.children
             while let snapshotItem = children.nextObject() as? DataSnapshot {
                 let json = JSON(snapshotItem.value!)
-                
-                switch listKey {
-                case .exercises:
-                    responseObjects.append(Exercise(json: json))
-                    break
-                case .routines:
-                    responseObjects.append(Routine(json: json))
-                    break
-                case .muscles:
-                    responseObjects.append(MuscleGroup(json: json))
-                    break
-                }
+                responseObjects.append(T(json: json))
             }
 
             switch listKey {
@@ -74,10 +63,10 @@ class BaseItemsProvider: LiftTrackerRequest {
                 break
             }
             
-            cycle.requestSuccess(requestKey: requestKey)
+            completion(.success(requestKey: requestKey))
         }) { (error) in
             print(error.localizedDescription)
-            cycle.requestFailed(requestKey: requestKey)
+            completion(.success(requestKey: requestKey))
         }
     }
 }

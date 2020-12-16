@@ -12,6 +12,7 @@ import SwiftyJSON
 let DATE_FORMAT = "dd-MM-yyyy"
 
 protocol CoreResponse {
+    init(json: JSON)
     func setFields(json: JSON)
 }
 
@@ -27,9 +28,9 @@ class Exercise: CoreResponse, CoreRequestObject, SimpleListRowItem, Equatable {
     var name: String = ""
     var muscleKey: String = ""
     var pastSets: [DayLiftSets] = [DayLiftSets]()
-    
-    init(json: JSON) {
-        self.setFields(json: json)
+
+    required init(json: JSON) {
+        setFields(json: json)
     }
     
     init (name: String) {
@@ -68,8 +69,8 @@ class Routine: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()
-    
-    init(json: JSON) {
+
+    required init(json: JSON) {
         setFields(json: json)
     }
     
@@ -97,8 +98,8 @@ class MuscleGroup: CoreResponse, SimpleListRowItem, CoreRequestObject {
     var key: String = ""
     var name: String = ""
     var exerciseKeys: [String] = [String]()
-    
-    init(json: JSON) {
+
+    required init(json: JSON) {
         setFields(json: json)
     }
     
@@ -138,6 +139,10 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
         setFields(json: json)
     }
 
+    required init(json: JSON) {
+        setFields(json: json) // TODO checked if used
+    }
+
     init() {
         self.dateString = date.getDashesDateString()
         self.key = dateString
@@ -162,19 +167,20 @@ class DayLiftSets: CoreResponse, CoreRequestObject {
 }
 
 class LiftSet: CoreResponse, CoreRequestObject {
+
     var key: String = ""
     var date: String = ""
     var reps: Int = 0
     var weight: Double = 0.0
     
-    init(json: JSON) {
-        setFields(json: json)
-    }
-    
     init(reps: Int, weight: Double, date: String) {
         self.reps = reps
         self.weight = weight
         self.date = date
+    }
+
+    required init(json: JSON) {
+        setFields(json: json)
     }
     
     func setFields(json: JSON) {

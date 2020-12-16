@@ -11,15 +11,9 @@ import SwiftyJSON
 import Firebase
 import FirebaseDatabase
 
-protocol RequestCycle {
-    func requestSuccess(requestKey: RequestType, object: CoreRequestObject?)
-    func requestFailed(requestKey: RequestType)
-}
-
-extension RequestCycle {
-    func requestSuccess(requestKey: RequestType, object: CoreRequestObject? = nil) {
-        requestSuccess(requestKey: requestKey, object: object)
-    }
+enum RequestResult<T: CoreRequestObject> {
+    case success(requestKey: RequestType, object: T? = nil)
+    case failure(error: String)
 }
 
 protocol LiftTrackerRequest {}
@@ -46,38 +40,37 @@ extension LiftTrackerRequest {
         return Auth.auth().currentUser?.uid
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, requestKey: RequestType? = nil, dbRef: DatabaseReference?, cycle: RequestCycle? = nil) {
-        
+    static func sendPostRequest<T: CoreRequestObject>(object: inout CoreRequestObject, requestKey: RequestType? = nil, dbRef: DatabaseReference?, completion: @escaping (RequestResult<T>) -> Void) {
         if(object.key.isEmpty) {
             object.key = dbRef?.childByAutoId().key ?? ""
         }
         
-        let returnObject = object
+        let returnObject: CoreRequestObject = object
         dbRef?.child(object.key).setValue(object.createRequestObject()) { error, _ in
             if let requestKey = requestKey {
                 if error != nil {
-                    cycle?.requestFailed(requestKey: requestKey)
+                    completion(.failure(error: error.debugDescription))
                 } else {
-                    cycle?.requestSuccess(requestKey: requestKey, object: returnObject)
+                    completion(.success(requestKey: requestKey, object: returnObject as? T)) // TODO what the
                 }
             }
         }
     }
     
-    static func sendPostRequest(object: inout CoreRequestObject, typeKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func sendPostRequest<T: CoreRequestObject>(object: inout CoreRequestObject, typeKey: ItemType, requestKey: RequestType, completion: @escaping (RequestResult<T>) -> Void) {
         let dbRef = self.getUserDatabaseReference()?.child(typeKey.rawValue)
         
-        sendPostRequest(object: &object, requestKey: requestKey, dbRef: dbRef, cycle: cycle)
+        sendPostRequest(object: &object, requestKey: requestKey, dbRef: dbRef, completion: completion)
     }
     
-    static func deleteItem(object: CoreRequestObject, typeKey: ItemType, requestKey: RequestType, cycle: RequestCycle) {
+    static func deleteItem<T: CoreRequestObject>(object: CoreRequestObject, typeKey: ItemType, requestKey: RequestType, completion: @escaping (RequestResult<T>) -> Void) {
         let dbRef = self.getUserDatabaseReference()
         
         dbRef?.child(typeKey.rawValue).child(object.key).removeValue() {error, _ in
             if error != nil {
-                cycle.requestFailed(requestKey: requestKey)
+                completion(.failure(error: error.debugDescription))
             } else {
-                cycle.requestSuccess(requestKey: requestKey, object: object)
+                completion(.success(requestKey: requestKey, object: object as? T))
             }
         }
     }
