@@ -10,7 +10,6 @@ import UIKit
 import Login
 import FirebaseAuth
 import FirebaseDatabase
-import GoogleSignIn
 
 let usersKey = "Users"
 

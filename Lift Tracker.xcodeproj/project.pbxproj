@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,13 +43,20 @@
 		E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F42114FD9B00031F19 /* Exercise.swift */; };
 		E09E78F72115133500031F19 /* LiftTrackerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F62115133500031F19 /* LiftTrackerRequest.swift */; };
 		E09E78F92115138F00031F19 /* BaseItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E78F82115138F00031F19 /* BaseItemsProvider.swift */; };
-		E0DB549125DB08900004149B /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = E0DB549025DB08900004149B /* Charts */; };
+		E0DB549125DB08900004149B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = E0DB549025DB08900004149B /* DGCharts */; };
 		E0DB54E725DB164B0004149B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0DB54E625DB164B0004149B /* Kingfisher */; };
 		E0DB54F225DB16CA0004149B /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = E0DB54F125DB16CA0004149B /* Tabman */; };
 		E0DB54F725DB16EF0004149B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E0DB54F625DB16EF0004149B /* SwiftyJSON */; };
 		E0DC79D828AA9AD70001D454 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79D728AA9AD70001D454 /* RxCocoa */; };
 		E0DC79DA28AA9AD70001D454 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79D928AA9AD70001D454 /* RxRelay */; };
 		E0DC79DC28AA9AD70001D454 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79DB28AA9AD70001D454 /* RxSwift */; };
+		A0LT10010000000000000001 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10020000000000000001 /* FirebaseAnalytics */; };
+		A0LT10030000000000000001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10040000000000000001 /* FirebaseAuth */; };
+		A0LT10050000000000000001 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10060000000000000001 /* FirebaseDatabase */; };
+		A0LT10170000000000000001 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10180000000000000001 /* FirebaseCore */; };
+		A0LT10070000000000000001 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10080000000000000001 /* GoogleSignIn */; };
+		A0LT10090000000000000001 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10100000000000000001 /* GoogleMobileAds */; };
+		A0LT10110000000000000001 /* Pageboy in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10120000000000000001 /* Pageboy */; };
 		E0E80675246730BC00E9C44F /* lh_helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80673246730BC00E9C44F /* lh_helpers.framework */; };
 		E0E80676246730BC00E9C44F /* lh_helpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80673246730BC00E9C44F /* lh_helpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E0E80677246730BC00E9C44F /* Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E80674246730BC00E9C44F /* Login.framework */; };
@@ -151,9 +158,16 @@
 				E0DC79DC28AA9AD70001D454 /* RxSwift in Frameworks */,
 				E0DB54E725DB164B0004149B /* Kingfisher in Frameworks */,
 				E0DB54F225DB16CA0004149B /* Tabman in Frameworks */,
-				E0DB549125DB08900004149B /* Charts in Frameworks */,
+				E0DB549125DB08900004149B /* DGCharts in Frameworks */,
 				E0DC79D828AA9AD70001D454 /* RxCocoa in Frameworks */,
 				E0DB54F725DB16EF0004149B /* SwiftyJSON in Frameworks */,
+				A0LT10010000000000000001 /* FirebaseAnalytics in Frameworks */,
+				A0LT10030000000000000001 /* FirebaseAuth in Frameworks */,
+				A0LT10050000000000000001 /* FirebaseDatabase in Frameworks */,
+				A0LT10170000000000000001 /* FirebaseCore in Frameworks */,
+				A0LT10070000000000000001 /* GoogleSignIn in Frameworks */,
+				A0LT10090000000000000001 /* GoogleMobileAds in Frameworks */,
+				A0LT10110000000000000001 /* Pageboy in Frameworks */,
 				E0E80675246730BC00E9C44F /* lh_helpers.framework in Frameworks */,
 				E0DC79DA28AA9AD70001D454 /* RxRelay in Frameworks */,
 				E0E80677246730BC00E9C44F /* Login.framework in Frameworks */,
@@ -354,13 +368,20 @@
 			);
 			name = "Lift Tracker";
 			packageProductDependencies = (
-				E0DB549025DB08900004149B /* Charts */,
+				E0DB549025DB08900004149B /* DGCharts */,
 				E0DB54E625DB164B0004149B /* Kingfisher */,
 				E0DB54F125DB16CA0004149B /* Tabman */,
 				E0DB54F625DB16EF0004149B /* SwiftyJSON */,
 				E0DC79D728AA9AD70001D454 /* RxCocoa */,
 				E0DC79D928AA9AD70001D454 /* RxRelay */,
 				E0DC79DB28AA9AD70001D454 /* RxSwift */,
+				A0LT10020000000000000001 /* FirebaseAnalytics */,
+				A0LT10040000000000000001 /* FirebaseAuth */,
+				A0LT10060000000000000001 /* FirebaseDatabase */,
+				A0LT10180000000000000001 /* FirebaseCore */,
+				A0LT10080000000000000001 /* GoogleSignIn */,
+				A0LT10100000000000000001 /* GoogleMobileAds */,
+				A0LT10120000000000000001 /* Pageboy */,
 			);
 			productName = "Lift Tracker";
 			productReference = E04D7C482106B2FA00E79A5A /* Lift Tracker.app */;
@@ -445,6 +466,10 @@
 				E0DB54F025DB16CA0004149B /* XCRemoteSwiftPackageReference "Tabman" */,
 				E0DB54F525DB16EF0004149B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				E0DC79D628AA9AD70001D454 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A0LT10140000000000000001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				A0LT10150000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				A0LT10160000000000000001 /* XCRemoteSwiftPackageReference "Pageboy" */,
 			);
 			productRefGroup = E04D7C492106B2FA00E79A5A /* Products */;
 			projectDirPath = "";
@@ -489,7 +514,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
 
 /* Begin PBXSourcesBuildPhase section */
 		E04D7C442106B2FA00E79A5A /* Sources */ = {
@@ -622,7 +646,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -678,7 +702,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -694,22 +718,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Support/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.61;
+				MARKETING_VERSION = 1.62;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "letshang.Lift-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -720,22 +744,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Lift Tracker/Lift Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 56NQ7Z9L75;
 				INFOPLIST_FILE = "Lift Tracker/Support/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.61;
+				MARKETING_VERSION = 1.62;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "letshang.Lift-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -869,7 +893,7 @@
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.6.0;
+				minimumVersion = 5.1.0;
 			};
 		};
 		E0DB54E525DB164B0004149B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -904,13 +928,45 @@
 				version = 6.5.0;
 			};
 		};
+		A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 11.13.0;
+			};
+		};
+		A0LT10140000000000000001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		A0LT10150000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+		A0LT10160000000000000001 /* XCRemoteSwiftPackageReference "Pageboy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Pageboy";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E0DB549025DB08900004149B /* Charts */ = {
+		E0DB549025DB08900004149B /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E0DB548F25DB08900004149B /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
+			productName = DGCharts;
 		};
 		E0DB54E625DB164B0004149B /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -941,6 +997,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E0DC79D628AA9AD70001D454 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		A0LT10020000000000000001 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		A0LT10040000000000000001 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A0LT10060000000000000001 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		A0LT10180000000000000001 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A0LT10080000000000000001 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10140000000000000001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		A0LT10100000000000000001 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10150000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		A0LT10120000000000000001 /* Pageboy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT10160000000000000001 /* XCRemoteSwiftPackageReference "Pageboy" */;
+			productName = Pageboy;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

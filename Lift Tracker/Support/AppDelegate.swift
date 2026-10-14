@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import FirebaseDatabase
 import GoogleMobileAds
 import GoogleSignIn
 
@@ -26,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize the Google Mobile Ads SDK.
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        if let clientID = FirebaseApp.app()?.options.clientID {
+            GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         mainAppCoordinator = LiftTrackerCoordinator(window: window)
@@ -34,12 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url)
-    }
-    
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
-      return GIDSignIn.sharedInstance().handle(url)
+      return GIDSignIn.sharedInstance.handle(url)
     }
 }
