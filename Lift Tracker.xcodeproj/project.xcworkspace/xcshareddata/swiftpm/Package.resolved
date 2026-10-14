@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Charts",
+        "package": "DGCharts",
         "repositoryURL": "https://github.com/danielgindi/Charts.git",
         "state": {
           "branch": null,
-          "revision": "66546404a6739173b8e436ab6bc1f2897cd08594",
-          "version": "3.6.0"
+          "revision": "dd9c72e3d7e751e769971092a6bd72d39198ae63",
+          "version": "5.1.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "81dd1ce8401137637663046c7314e7c885bcc56d",
-          "version": "6.1.1"
+          "revision": "c92b84898e34ab46ff0dad86c02a0acbe2d87008",
+          "version": "8.8.0"
         }
       },
       {
@@ -24,8 +24,17 @@
         "repositoryURL": "https://github.com/uias/Pageboy",
         "state": {
           "branch": null,
-          "revision": "34ecb6e7c4e0e07494960ab2f7cc9a02293915a6",
-          "version": "3.6.2"
+          "revision": "af8fa81788b893205e1ff42ddd88c5b0b315d7c5",
+          "version": "3.7.0"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
+          "version": "6.5.0"
         }
       },
       {
@@ -33,8 +42,8 @@
         "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON",
         "state": {
           "branch": null,
-          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
-          "version": "5.0.0"
+          "revision": "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
+          "version": "5.0.2"
         }
       },
       {
@@ -42,8 +51,8 @@
         "repositoryURL": "https://github.com/uias/Tabman",
         "state": {
           "branch": null,
-          "revision": "2f01f14128c0762476d0a0c9b1bcf2bd52ed4e98",
-          "version": "2.10.0"
+          "revision": "4a4f7c755b875ffd4f9ef10d67a67883669d2465",
+          "version": "2.13.0"
         }
       }
     ]

@@ -10,9 +10,49 @@ import UIKit
 import Login
 import FirebaseAuth
 import FirebaseDatabase
-import GoogleSignIn
 
 let usersKey = "Users"
+
+enum LiftTrackerTheme {
+    /// Accent only (tab indicators). Nav bars use the system Liquid Glass material.
+    static let brandBlue = UIColor(red: 18 / 255, green: 86 / 255, blue: 136 / 255, alpha: 1)
+
+    /// Modern system navigation bar — no custom background (required for iOS 26 Liquid Glass).
+    static func applyNavigationBarStyle(to navigationBar: UINavigationBar? = nil) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+
+        let bars: [UINavigationBar]
+        if let navigationBar {
+            bars = [navigationBar]
+        } else {
+            bars = [UINavigationBar.appearance()]
+        }
+
+        for bar in bars {
+            bar.standardAppearance = appearance
+            bar.scrollEdgeAppearance = appearance
+            bar.compactAppearance = appearance
+            if #available(iOS 15.0, *) {
+                bar.compactScrollEdgeAppearance = appearance
+            }
+            bar.prefersLargeTitles = false
+            bar.isTranslucent = true
+            bar.barStyle = .default
+            // Clear legacy storyboard / opaque customizations that break Liquid Glass.
+            bar.tintColor = .label
+            bar.barTintColor = nil
+            bar.backgroundColor = nil
+            bar.setBackgroundImage(nil, for: .default)
+            bar.shadowImage = nil
+        }
+    }
+
+    static func prepareBarButtonItem(_ item: UIBarButtonItem) {
+        // Keep the system shared glass platter on iOS 26.
+        item.tintColor = .label
+    }
+}
 
 class LiftTrackerCoordinator: NSObject {
     
@@ -44,13 +84,10 @@ class LiftTrackerCoordinator: NSObject {
     }
     
     private func goToHome(user: User) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeNavigationViewController = storyboard.instantiateViewController(withIdentifier: "NavHomePageViewController") as! UINavigationController
+        let homeController = HomeHostingController(flowDelegate: self)
+        let homeNavigationViewController = UINavigationController(rootViewController: homeController)
         homeNavigationViewController.modalPresentationStyle = .fullScreen
-        
-        if let homeViewController = homeNavigationViewController.viewControllers.first as? HomePageViewController {
-            homeViewController.flowDelegate = self
-        }
+        LiftTrackerTheme.applyNavigationBarStyle(to: homeNavigationViewController.navigationBar)
         baseViewController.transition(to: homeNavigationViewController)
     }
 }

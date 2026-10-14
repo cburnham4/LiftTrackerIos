@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Firebase
+import FirebaseAuth
 import FirebaseDatabase
 
 enum RequestResult<T: CoreRequestObject> {

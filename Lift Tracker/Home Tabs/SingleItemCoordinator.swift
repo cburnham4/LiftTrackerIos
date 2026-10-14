@@ -8,36 +8,26 @@
 
 import Foundation
 import UIKit
-import Tabman
-import Pageboy
 import lh_helpers
 
-// Coordinator to handle the view and view model interactions to keep the VM and view seperate
+/// Pushes exercise / routine detail screens from the SwiftUI home list.
 class SingleItemCoordinator {
-    var homeVc: HomePageViewController
     var routineCoordinator: RoutineExerciseCoordinator?
-    
-    init(homeVc: HomePageViewController) {
-        self.homeVc = homeVc
-    }
-    
-    func getTabsViewController() -> [UIViewController] {
-        let exercisesVc = ExcercisesViewController.viewController(viewModel: ExercisesViewModel(), flowDelegate: self)
-        let routinesVC = RoutinesViewController.viewController(viewModel: RoutinesViewModel(), flowDelegate: self)
-        return [exercisesVc, routinesVC]
-    }
-}
-
-extension SingleItemCoordinator: SingleItemListViewDelegate {
+    var navigationControllerProvider: (() -> UINavigationController?)?
 
     func goToItemPage(item: SimpleListRowItem) {
+        guard let navigationController = navigationControllerProvider?() else { return }
+
         if let exercise = item as? Exercise {
             let viewModel = ExerciseTabViewModel(exercise: exercise)
             let exerciseTabsVc = ExerciseTabViewController.viewController(viewModel: viewModel)
-            homeVc.navigationController?.pushViewController(exerciseTabsVc, animated: true)
-        } else if let routine = item as? Routine, let navController = homeVc.navigationController {
-            routineCoordinator = RoutineExerciseCoordinator(routine: routine, navigationController: navController)
+            navigationController.pushViewController(exerciseTabsVc, animated: true)
+        } else if let routine = item as? Routine {
+            routineCoordinator = RoutineExerciseCoordinator(
+                routine: routine,
+                navigationController: navigationController
+            )
             routineCoordinator?.startFlow()
-        } // TODO add muscle groups
+        }
     }
 }

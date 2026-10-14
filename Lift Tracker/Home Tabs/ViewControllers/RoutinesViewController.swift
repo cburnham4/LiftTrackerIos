@@ -90,7 +90,7 @@ class RoutinesViewController: UIViewController, SingleItemListViewControllerProt
         
         /* Request the new ad */
         let request = GADRequest()
-        bannerView.adSize = kGADAdSizeBanner
+        bannerView.adSize = GADAdSizeBanner
         bannerView.load(request)
     }
     
