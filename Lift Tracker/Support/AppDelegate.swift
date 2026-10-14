@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let clientID = FirebaseApp.app()?.options.clientID {
             GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
         }
+
+        LiftTrackerTheme.applyNavigationBarStyle()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         mainAppCoordinator = LiftTrackerCoordinator(window: window)
