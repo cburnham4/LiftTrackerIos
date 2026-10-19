@@ -32,6 +32,7 @@ struct ExerciseTabViewModel {
     }
 }
 
+/// Legacy Tabman exercise shell (storyboard). Live navigation uses `ExerciseDetailHostingController`.
 class ExerciseTabViewController: TabmanViewController, BaseViewController {
     
     var viewControllers: [ExerciseBaseTabViewController] = [ExerciseBaseTabViewController]()
@@ -67,17 +68,20 @@ class ExerciseTabViewController: TabmanViewController, BaseViewController {
         
         bar.layout.contentMode = .fit
         bar.layout.transitionStyle = .progressive
-        bar.backgroundView.style = .flat(color: UIColor(rgb: 0x125688))
-        bar.indicator.tintColor = UIColor(rgb: 0xC1D3E0)
-        
+        bar.backgroundView.style = .clear
+        bar.indicator.tintColor = LiftTrackerTheme.brandBlue
         bar.buttons.customize { button in
-            button.font = .systemFont(ofSize: 16.0)
-            button.selectedTintColor = .white
-            button.tintColor = .white
+            button.font = .systemFont(ofSize: 16, weight: .semibold)
+            button.selectedTintColor = .label
+            button.tintColor = .secondaryLabel
         }
         
         addBar(bar, dataSource: self, at: .top)
         isScrollEnabled = false
+        LiftTrackerTheme.applyNavigationBarStyle(to: navigationController?.navigationBar)
+        if let editItem = navigationItem.rightBarButtonItem {
+            LiftTrackerTheme.prepareBarButtonItem(editItem)
+        }
     }
     
     @objc func editTableView() {
