@@ -89,7 +89,7 @@ class ExcercisesViewController: UIViewController, SingleItemListViewControllerPr
         
         /* Request the new ad */
         let request = GADRequest()
-        bannerView.adSize = kGADAdSizeBanner
+        bannerView.adSize = GADAdSizeBanner
         bannerView.load(request)
     }
     

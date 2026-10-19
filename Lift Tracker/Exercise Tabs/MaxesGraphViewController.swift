@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 struct MaxDate {
     var max: Double
@@ -145,10 +145,7 @@ class MaxesGraphViewController: ExerciseBaseTabViewController {
         }
         
         let lineDataSet = LineChartDataSet(entries: lineChartEntry, label: "Max Weights")
-        let data = LineChartData()
-        data.addDataSet(lineDataSet)
-        
-        lineChartView.data = data
+        lineChartView.data = LineChartData(dataSet: lineDataSet)
     }
 }
 
@@ -161,7 +158,7 @@ class ChartXAxisFormatter: NSObject {
     }
 }
 
-extension ChartXAxisFormatter: IAxisValueFormatter {
+extension ChartXAxisFormatter: AxisValueFormatter {
 
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         guard let dateFormatter = dateFormatter else { return "" }
