@@ -32,6 +32,7 @@ struct ExerciseTabViewModel {
     }
 }
 
+/// Legacy Tabman exercise shell (storyboard). Live navigation uses `ExerciseDetailHostingController`.
 class ExerciseTabViewController: TabmanViewController, BaseViewController {
     
     var viewControllers: [ExerciseBaseTabViewController] = [ExerciseBaseTabViewController]()

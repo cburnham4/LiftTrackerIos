@@ -19,9 +19,8 @@ class SingleItemCoordinator {
         guard let navigationController = navigationControllerProvider?() else { return }
 
         if let exercise = item as? Exercise {
-            let viewModel = ExerciseTabViewModel(exercise: exercise)
-            let exerciseTabsVc = ExerciseTabViewController.viewController(viewModel: viewModel)
-            navigationController.pushViewController(exerciseTabsVc, animated: true)
+            let detail = ExerciseDetailHostingController(exercise: exercise)
+            navigationController.pushViewController(detail, animated: true)
         } else if let routine = item as? Routine {
             routineCoordinator = RoutineExerciseCoordinator(
                 routine: routine,
