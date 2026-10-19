@@ -102,8 +102,13 @@ class AddSetViewController: ExerciseBaseTabViewController {
         
         dayLiftSets.liftsets.append(liftSet)
         ExerciseSetsRequest.sendAddLiftSetRequest(exerciseKey: exercise.key, liftSet: liftSet, date: date.getDashesDateString()) { [weak self] result in
-            if case .failure = result, let strongSelf = self {
+            guard let strongSelf = self else { return }
+            switch result {
+            case .failure:
                 AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            case .success:
+                // Happy path equivalent of sunrise’s successful times load: a set was saved.
+                AppStoreReviewPrompt.recordSuccessfulActionAndMaybeRequest(from: strongSelf)
             }
         }
         

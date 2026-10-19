@@ -15,6 +15,8 @@ import SwiftyJSON
 class DownloadCoordinator {
     
     let navigationController: UINavigationController
+    private let listModel = DownloadRoutinesScreenModel()
+    private weak var detailModel: DownloadRoutineDetailModel?
     
     var currentDownloadingRoutine: Routine?
     
@@ -23,18 +25,22 @@ class DownloadCoordinator {
     }
     
     func start() {
-        let viewModel = RoutineDownloadsViewModel(routineClicked: routineClicked)
-        let vc: DownloadRoutinesViewController = DownloadRoutinesViewController.viewController(viewModel: viewModel)
-        navigationController.pushViewController(vc, animated: false)
+        listModel.onSelect = { [weak self] routine in
+            self?.routineClicked(downloadRoutine: routine)
+        }
+        let vc = DownloadRoutinesHostingController(model: listModel)
+        navigationController.pushViewController(vc, animated: true)
         requestRoutinesToDownload()
     }
     
     func routineClicked(downloadRoutine: DownloadRoutine) {
-        let viewModel = DownloadExerciseViewModel(exerciseNames: downloadRoutine.exerciseNames, downloadClicked: { [weak self] in
+        let detail = DownloadRoutineDetailModel(routine: downloadRoutine)
+        detail.onDownload = { [weak self] in
             self?.uploadRoutineToUser(downloadRoutine: downloadRoutine)
-        })
-        let vc = DownloadRoutineExercisesViewController.getInstance(viewModel: viewModel)
-        navigationController.pushViewController(vc, animated: false)
+        }
+        detailModel = detail
+        let vc = DownloadRoutineDetailHostingController(model: detail)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func uploadRoutineToUser(downloadRoutine: DownloadRoutine) {
@@ -42,6 +48,7 @@ class DownloadCoordinator {
             $0.name == downloadRoutine.routineName
         }
         guard existingRoutine == nil else {
+            detailModel?.downloadFinished()
             AlertUtils.createAlert(view: navigationController, title: "Routine already exists", message: "This already exists in your list of routines")
             return
         }
@@ -57,23 +64,28 @@ class DownloadCoordinator {
                 case .success(let routineItem):
                     UserSession.instance.addItem(item: routineItem as! SimpleListRowItem)
                     self?.routineItemUploaded()
-                    break
                 case .failure:
-                    AlertUtils.createAlert(view: self!.navigationController, title: "Routine Download Failed", message: "Please try again.")
+                    self?.detailModel?.downloadFinished()
+                    if let navigationController = self?.navigationController {
+                        AlertUtils.createAlert(
+                            view: navigationController,
+                            title: "Routine Download Failed",
+                            message: "Please try again."
+                        )
+                    }
                 }
             }
         }
     }
     
     func routineItemUploaded() {
-        guard let downloadableRoutinesVC = navigationController.topViewController as? DownloadRoutineExercisesViewController else {
-            return
-        }
-        
-        downloadableRoutinesVC.activityIndicator.isHidden = true
-        downloadableRoutinesVC.downloadRoutineButton.isHidden = false
-        
-        AlertUtils.createAlert(view: downloadableRoutinesVC, title: "Routine Downloaded", message: "Return to home tabs to view downloaded Routine")
+        detailModel?.downloadFinished()
+        guard let top = navigationController.topViewController else { return }
+        AlertUtils.createAlert(
+            view: top,
+            title: "Routine Downloaded",
+            message: "Return to home tabs to view downloaded Routine"
+        )
     }
     
     func uploadRoutineExercises(downloadRoutine: DownloadRoutine, callback: @escaping ([Exercise]) -> Void) {
@@ -95,14 +107,12 @@ class DownloadCoordinator {
             let exercise = Exercise(name: exerciseName)
             exercises.append(exercise)
             
-            exerciseRequest.makePostRequest(postObject: exercise) { [weak self] result in
+            exerciseRequest.makePostRequest(postObject: exercise) { result in
                 switch result {
                 case .success(let postObject):
                     // Add items to user
                     UserSession.instance.addItem(item: postObject as! SimpleListRowItem)
-                    break
-                case .failure(let error):
-                    // TODO
+                case .failure:
                     break
                 }
                 requestGroup.leave()
@@ -119,9 +129,10 @@ class DownloadCoordinator {
             switch result {
             case .success(let snapshot):
                 self?.parseDownloadRoutines(snapshot: snapshot)
-            case .failure(let error):
-                // TODO
-                break
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.listModel.isLoading = false
+                }
             }
         }
     }
@@ -136,13 +147,10 @@ class DownloadCoordinator {
             routines.append(routine)
         }
 
-        guard let downloadableRoutinesVC = navigationController.topViewController as? DownloadRoutinesViewController else {
-            return
+        DispatchQueue.main.async { [weak self] in
+            self?.listModel.routines = routines
+            self?.listModel.isLoading = false
         }
-        
-        downloadableRoutinesVC.activityIndicator.isHidden = true
-        downloadableRoutinesVC.viewModel.routines = routines
-        downloadableRoutinesVC.tableView.reloadData()
     }
 }
 

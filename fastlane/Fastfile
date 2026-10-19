@@ -1,25 +1,37 @@
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
+  desc "Build Lift Tracker and upload to App Store Connect"
   lane :release do
-    build_app(scheme: "Lift Tracker",
-        include_bitcode: true)
-    upload_to_app_store  
+    build_app(
+      workspace: "../LetsHang.xcworkspace",
+      scheme: "Lift Tracker",
+      export_method: "app-store",
+      clean: true,
+      output_directory: "./build",
+      output_name: "LiftTracker.ipa"
+    )
+    upload_to_app_store(
+      skip_metadata: true,
+      skip_screenshots: true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: false,
+      force: true
+    )
+  end
+
+  desc "Upload an already-built IPA to TestFlight / App Store Connect"
+  lane :upload do
+    upload_to_app_store(
+      ipa: "./build/LiftTracker.ipa",
+      skip_metadata: true,
+      skip_screenshots: true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: false,
+      force: true
+    )
   end
 end
