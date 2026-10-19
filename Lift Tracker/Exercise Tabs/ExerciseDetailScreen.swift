@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-import Charts
+import DGCharts
 import lh_helpers
 
 enum ExerciseDetailTab: String, CaseIterable, Identifiable {
