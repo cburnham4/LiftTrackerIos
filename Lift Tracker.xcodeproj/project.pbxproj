@@ -25,6 +25,7 @@
 		E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F33922162EDD2005043FF /* ExerciseTabViewController.swift */; };
 		E03F33952162EE6D005043FF /* Exercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03F33942162EE6D005043FF /* Exercise.storyboard */; };
 		E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */; };
+		E0ADF25E13B42A1B2F16B0A1 /* AppStoreReviewPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ADF25E13B42A1B2F16B0A2 /* AppStoreReviewPrompt.swift */; };
 		E04D7C552106B2FC00E79A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C542106B2FC00E79A5A /* Assets.xcassets */; };
 		E04D7C582106B2FC00E79A5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */; };
 		E04D7C632106B2FC00E79A5A /* Lift_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D7C622106B2FC00E79A5A /* Lift_TrackerTests.swift */; };
@@ -111,6 +112,7 @@
 		E03F33942162EE6D005043FF /* Exercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercise.storyboard; sourceTree = "<group>"; };
 		E04D7C482106B2FA00E79A5A /* Lift Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E0ADF25E13B42A1B2F16B0A2 /* AppStoreReviewPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewPrompt.swift; sourceTree = "<group>"; };
 		E04D7C542106B2FC00E79A5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E04D7C572106B2FC00E79A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E04D7C592106B2FC00E79A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				E09D5CCD21AA23390010CD7F /* Lift Tracker.entitlements */,
 				E06F9FD72149CEB600841A35 /* GoogleService-Info.plist */,
 				E04D7C4B2106B2FA00E79A5A /* AppDelegate.swift */,
+				E0ADF25E13B42A1B2F16B0A2 /* AppStoreReviewPrompt.swift */,
 				E04D7C542106B2FC00E79A5A /* Assets.xcassets */,
 				E04D7C562106B2FC00E79A5A /* LaunchScreen.storyboard */,
 				E04D7C592106B2FC00E79A5A /* Info.plist */,
@@ -513,6 +516,7 @@
 				E05AD6A521A6097C008B6957 /* AddSetViewController.swift in Sources */,
 				E061F55D219DFDA500FBAF2D /* PastSetsViewController.swift in Sources */,
 				E04D7C4C2106B2FA00E79A5A /* AppDelegate.swift in Sources */,
+				E0ADF25E13B42A1B2F16B0A1 /* AppStoreReviewPrompt.swift in Sources */,
 				E03F33932162EDD2005043FF /* ExerciseTabViewController.swift in Sources */,
 				E032DAEB222604990072815A /* RoutineDownloadsViewModel.swift in Sources */,
 				E09E78F52114FD9B00031F19 /* Exercise.swift in Sources */,

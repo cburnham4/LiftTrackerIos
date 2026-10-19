@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         mainAppCoordinator = LiftTrackerCoordinator(window: window)
         mainAppCoordinator?.start()
+        AppStoreReviewPrompt.recordOpen()
         return true
     }
     
