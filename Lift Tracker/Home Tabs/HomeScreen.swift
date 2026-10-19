@@ -296,6 +296,8 @@ struct AdBannerView: UIViewRepresentable {
 final class HomeHostingController: UIHostingController<HomeScreen> {
     let model: HomeScreenModel
     private let itemCoordinator: SingleItemCoordinator
+    /// Retained for the lifetime of the download flow; otherwise async callbacks no-op.
+    private var downloadCoordinator: DownloadCoordinator?
     weak var homeFlowDelegate: HomePageDelegate?
 
     init(flowDelegate: HomePageDelegate?) {
@@ -332,7 +334,9 @@ extension HomeHostingController: HomeFlowHandling {
 
     func openDownloads() {
         guard let navigationController else { return }
-        DownloadCoordinator(navigationController: navigationController).start()
+        let coordinator = DownloadCoordinator(navigationController: navigationController)
+        downloadCoordinator = coordinator
+        coordinator.start()
     }
 
     func logout() {

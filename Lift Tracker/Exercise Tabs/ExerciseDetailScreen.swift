@@ -121,13 +121,16 @@ final class ExerciseDetailModel: ObservableObject {
             liftSet: liftSet,
             date: date.getDashesDateString()
         ) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .failure:
-                self.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
-            case .success:
-                if let presenter = self.presentingViewController {
-                    AppStoreReviewPrompt.recordSuccessfulActionAndMaybeRequest(from: presenter)
+            DispatchQueue.main.async {
+                guard let self else { return }
+                switch result {
+                case .failure:
+                    self.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                case .success:
+                    if let presenter = self.presentingViewController {
+                        AppStoreReviewPrompt.recordSuccessfulActionAndMaybeRequest(from: presenter)
+                    }
+                    self.refreshPastAndGraph()
                 }
             }
         }
@@ -153,8 +156,10 @@ final class ExerciseDetailModel: ObservableObject {
             date: date.getDashesDateString(),
             liftSet: item
         ) { [weak self] result in
-            if case .failure = result {
-                self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            DispatchQueue.main.async {
+                if case .failure = result {
+                    self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                }
             }
         }
         findNewMax(deletedSet: item)
@@ -175,8 +180,10 @@ final class ExerciseDetailModel: ObservableObject {
         if existingSets.isEmpty {
             dayLiftSets = DayLiftSets()
             ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
-                if case .failure = result {
-                    self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                DispatchQueue.main.async {
+                    if case .failure = result {
+                        self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                    }
                 }
             }
             todaysSets = dayLiftSets.liftsets
@@ -224,8 +231,10 @@ final class ExerciseDetailModel: ObservableObject {
         currentMax = max
         dayLiftSets.max = max
         ExerciseSetsRequest.updateMaxRequest(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
-            if case .failure = result {
-                self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+            DispatchQueue.main.async {
+                if case .failure = result {
+                    self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                }
             }
         }
     }
@@ -237,6 +246,17 @@ final class ExerciseDetailModel: ObservableObject {
             alertTitle = title
             alertMessage = message
         }
+    }
+}
+
+/// Stable identity for newly created `LiftSet`s (server key is often empty until POST returns).
+private struct IdentifiedLiftSet: Identifiable {
+    let id: ObjectIdentifier
+    let set: LiftSet
+
+    init(_ set: LiftSet) {
+        self.id = ObjectIdentifier(set)
+        self.set = set
     }
 }
 
@@ -356,11 +376,11 @@ private struct AddSetTabView: View {
                 Spacer()
             } else {
                 List {
-                    ForEach(Array(model.todaysSets.enumerated()), id: \.offset) { _, set in
-                        Text("Reps: \(set.reps) | Weight: \(String(format: "%.1f", set.weight))")
+                    ForEach(model.todaysSets.map(IdentifiedLiftSet.init)) { row in
+                        Text("Reps: \(row.set.reps) | Weight: \(String(format: "%.1f", row.set.weight))")
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button("Delete", role: .destructive) {
-                                    model.requestDeleteSet(set)
+                                    model.requestDeleteSet(row.set)
                                 }
                             }
                     }
@@ -439,9 +459,11 @@ private struct GraphTabView: View {
                 .padding(.horizontal, 16)
 
                 MaxLineChartView(points: model.graphPoints)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal, 8)
                     .padding(.bottom, 12)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }

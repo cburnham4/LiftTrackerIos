@@ -66,7 +66,13 @@ class DownloadCoordinator {
                     self?.routineItemUploaded()
                 case .failure:
                     self?.detailModel?.downloadFinished()
-                    AlertUtils.createAlert(view: self!.navigationController, title: "Routine Download Failed", message: "Please try again.")
+                    if let navigationController = self?.navigationController {
+                        AlertUtils.createAlert(
+                            view: navigationController,
+                            title: "Routine Download Failed",
+                            message: "Please try again."
+                        )
+                    }
                 }
             }
         }

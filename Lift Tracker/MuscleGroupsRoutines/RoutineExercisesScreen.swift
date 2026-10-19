@@ -62,7 +62,8 @@ final class RoutineExercisesScreenModel: ObservableObject {
     }
 
     func beginAddExercise() {
-        viewModel.sendItemRequest()
+        // Refresh picker source only — do not rebuild the on-screen list (avoids a flash).
+        viewModel.exercises = UserSession.instance.getExercises() ?? []
         guard !availableExercises.isEmpty else {
             if let presenter = presentingViewController {
                 AlertUtils.createAlert(
@@ -81,7 +82,10 @@ final class RoutineExercisesScreenModel: ObservableObject {
         let exercises = availableExercises
         guard exercises.indices.contains(selectedExerciseIndex) else { return }
         let selected = exercises[selectedExerciseIndex]
-        viewModel.singleListItems.value.append(selected)
+        // Assign through `value` so Observable/Bond notifies SwiftUI (in-place append does not).
+        var updated = viewModel.singleListItems.value
+        updated.append(selected)
+        viewModel.singleListItems.value = updated
         viewModel.routine.exerciseKeys.append(selected.key)
         var routineObject = viewModel.routine as CoreRequestObject
         BaseItemsProvider.sendPostRequest(
@@ -89,12 +93,14 @@ final class RoutineExercisesScreenModel: ObservableObject {
             typeKey: .routines,
             requestKey: .update
         ) { [weak self] (result: RequestResult<Exercise>) in
-            if case .failure = result, let presenter = self?.presentingViewController {
-                AlertUtils.createAlert(
-                    view: presenter,
-                    title: "Error",
-                    message: "Unable to retrieve data from server"
-                )
+            DispatchQueue.main.async {
+                if case .failure = result, let presenter = self?.presentingViewController {
+                    AlertUtils.createAlert(
+                        view: presenter,
+                        title: "Error",
+                        message: "Unable to retrieve data from server"
+                    )
+                }
             }
         }
         showAddPicker = false
@@ -124,7 +130,7 @@ struct RoutineExercisesScreen: View {
                             model.openItem(item)
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: "figure.strengthtraining.traditional")
+                                Image(systemName: "dumbbell")
                                     .foregroundStyle(.secondary)
                                 Text(item.name)
                                     .foregroundStyle(.primary)
