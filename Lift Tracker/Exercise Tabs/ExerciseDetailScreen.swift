@@ -69,6 +69,17 @@ final class ExerciseDetailModel: ObservableObject {
         allGraphPoints.count < 2
     }
 
+    /// Latest max in the selected range (rightmost point).
+    var graphLatestMax: Double? { graphPoints.last?.max }
+
+    /// Change from first to last point in the selected range.
+    var graphDelta: Double? {
+        guard let first = graphPoints.first?.max, let last = graphPoints.last?.max else { return nil }
+        return last - first
+    }
+
+    var graphPointCount: Int { graphPoints.count }
+
     private var allGraphPoints: [MaxDate] = []
 
     init(exercise: Exercise) {
@@ -429,71 +440,267 @@ private struct PastLiftsTabView: View {
 private struct GraphTabView: View {
     @ObservedObject var model: ExerciseDetailModel
 
-    var body: some View {
-        if model.graphNeedsMoreData {
-            VStack {
-                Spacer()
-                Text("Log at least two days of maxes to see the graph")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else {
-            VStack(spacing: 12) {
-                Text("Estimated Max Over Time")
-                    .font(.headline)
-                    .padding(.top, 8)
+    private var brand: Color { Color(uiColor: LiftTrackerTheme.brandBlue) }
 
-                Picker("Range", selection: Binding(
-                    get: { model.selectedTimeRange },
-                    set: { model.applyTimeRange($0) }
-                )) {
-                    ForEach(GraphTimeRange.allCases) { range in
-                        Text(range.rawValue).tag(range)
-                    }
-                }
-                .pickerStyle(.segmented)
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    brand.opacity(0.10),
+                    Color(.systemBackground),
+                    Color(.systemBackground)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+
+            if model.graphNeedsMoreData {
+                graphEmptyState
+            } else {
+                graphContent
+            }
+        }
+    }
+
+    private var graphEmptyState: some View {
+        VStack(spacing: 14) {
+            Spacer()
+            Image(systemName: "chart.xyaxis.line")
+                .font(.system(size: 44, weight: .light))
+                .foregroundStyle(brand.opacity(0.85))
+            Text("Not enough history yet")
+                .font(.title3.weight(.semibold))
+            Text("Log maxes on at least two different days to unlock your progress chart.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 36)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var graphContent: some View {
+        VStack(spacing: 16) {
+            graphHeader
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+
+            timeRangePicker
                 .padding(.horizontal, 16)
 
-                MaxLineChartView(points: model.graphPoints)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 12)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            MaxLineChartView(points: model.graphPoints)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal, 12)
+                .padding(.bottom, 8)
+                .padding(.top, 4)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var graphHeader: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Estimated max")
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.secondary)
+
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
+                Text(formattedWeight(model.graphLatestMax))
+                    .font(.system(size: 40, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color.primary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
+
+                if let delta = model.graphDelta {
+                    deltaBadge(delta)
+                }
+
+                Spacer(minLength: 0)
+            }
+
+            HStack(spacing: 16) {
+                Label("\(model.graphPointCount) sessions", systemImage: "calendar")
+                if let first = model.graphPoints.first, let last = model.graphPoints.last {
+                    Label(shortRangeLabel(from: first.date, to: last.date), systemImage: "arrow.left.and.right")
+                }
+            }
+            .font(.caption.weight(.medium))
+            .foregroundStyle(.secondary)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(Color(.secondarySystemBackground).opacity(0.92))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(brand.opacity(0.12), lineWidth: 1)
+        )
+    }
+
+    private var timeRangePicker: some View {
+        Picker("Range", selection: Binding(
+            get: { model.selectedTimeRange },
+            set: { model.applyTimeRange($0) }
+        )) {
+            ForEach(GraphTimeRange.allCases) { range in
+                Text(range.rawValue).tag(range)
+            }
+        }
+        .pickerStyle(.segmented)
+    }
+
+    @ViewBuilder
+    private func deltaBadge(_ delta: Double) -> some View {
+        let isUp = delta >= 0
+        let color: Color = delta == 0 ? .secondary : (isUp ? .green : .red)
+        HStack(spacing: 3) {
+            Image(systemName: delta == 0 ? "minus" : (isUp ? "arrow.up.right" : "arrow.down.right"))
+                .font(.caption.weight(.bold))
+            Text(formattedDelta(delta))
+                .font(.subheadline.weight(.semibold))
+        }
+        .foregroundStyle(color)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(color.opacity(0.12))
+        .clipShape(Capsule())
+    }
+
+    private func formattedWeight(_ value: Double?) -> String {
+        guard let value else { return "—" }
+        if value.rounded() == value {
+            return String(format: "%.0f", value)
+        }
+        return String(format: "%.1f", value)
+    }
+
+    private func formattedDelta(_ value: Double) -> String {
+        let sign = value > 0 ? "+" : ""
+        if value.rounded() == value {
+            return "\(sign)\(Int(value))"
+        }
+        return String(format: "%@%.1f", sign, value)
+    }
+
+    private func shortRangeLabel(from start: Date, to end: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        if Calendar.current.isDate(start, equalTo: end, toGranularity: .day) {
+            return formatter.string(from: start)
+        }
+        return "\(formatter.string(from: start)) – \(formatter.string(from: end))"
     }
 }
 
 struct MaxLineChartView: UIViewRepresentable {
     let points: [MaxDate]
 
+    private var brand: UIColor { LiftTrackerTheme.brandBlue }
+
     func makeUIView(context: Context) -> LineChartView {
         let chart = LineChartView()
-        chart.legend.enabled = true
+        chart.legend.enabled = false
+        chart.chartDescription.enabled = false
         chart.rightAxis.enabled = false
-        chart.xAxis.labelPosition = .bottom
+        chart.dragEnabled = true
+        chart.pinchZoomEnabled = false
+        chart.doubleTapToZoomEnabled = false
+        chart.scaleXEnabled = false
+        chart.scaleYEnabled = false
+        chart.highlightPerTapEnabled = true
+        chart.highlightPerDragEnabled = false
+        chart.minOffset = 8
+        chart.extraTopOffset = 8
+        chart.extraBottomOffset = 4
+        chart.extraLeftOffset = 4
+        chart.extraRightOffset = 10
+        chart.noDataText = "No data in this range"
+        chart.noDataFont = .systemFont(ofSize: 14, weight: .medium)
+        chart.noDataTextColor = .secondaryLabel
+
+        let xAxis = chart.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = false
+        xAxis.labelFont = .systemFont(ofSize: 11, weight: .medium)
+        xAxis.labelTextColor = .secondaryLabel
+        xAxis.granularityEnabled = true
+        xAxis.yOffset = 8
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        chart.xAxis.valueFormatter = ChartXAxisFormatter(dateFormatter: formatter)
+        formatter.dateFormat = "M/d"
+        formatter.locale = .current
+        xAxis.valueFormatter = ChartXAxisFormatter(dateFormatter: formatter)
+
+        let yAxis = chart.leftAxis
+        yAxis.drawAxisLineEnabled = false
+        yAxis.gridColor = UIColor.separator.withAlphaComponent(0.35)
+        yAxis.gridLineWidth = 0.8
+        yAxis.gridLineDashLengths = [4, 4]
+        yAxis.labelFont = .systemFont(ofSize: 11, weight: .medium)
+        yAxis.labelTextColor = .secondaryLabel
+        yAxis.xOffset = 6
+        yAxis.labelCount = 5
+        yAxis.forceLabelsEnabled = false
+
         return chart
     }
 
     func updateUIView(_ chart: LineChartView, context: Context) {
-        var entries: [ChartDataEntry] = []
-        for point in points {
-            entries.append(ChartDataEntry(x: point.date.timeIntervalSince1970, y: point.max))
+        guard !points.isEmpty else {
+            chart.data = nil
+            chart.notifyDataSetChanged()
+            return
         }
-        let dataSet = LineChartDataSet(entries: entries, label: "Max Weights")
-        dataSet.colors = [LiftTrackerTheme.brandBlue]
-        dataSet.circleColors = [LiftTrackerTheme.brandBlue]
-        dataSet.circleRadius = 3
+
+        let entries = points.map {
+            ChartDataEntry(x: $0.date.timeIntervalSince1970, y: $0.max)
+        }
+
+        let dataSet = LineChartDataSet(entries: entries, label: "Max")
+        dataSet.mode = .cubicBezier
+        dataSet.cubicIntensity = 0.12
+        dataSet.lineWidth = 2.75
+        dataSet.colors = [brand]
+        dataSet.circleColors = [brand]
+        dataSet.circleHoleColor = .systemBackground
+        dataSet.circleRadius = points.count > 24 ? 3.0 : 4.5
+        dataSet.circleHoleRadius = points.count > 24 ? 1.5 : 2.2
+        dataSet.drawCirclesEnabled = true
+        dataSet.drawCircleHoleEnabled = true
         dataSet.drawValuesEnabled = false
-        chart.data = LineChartData(dataSet: dataSet)
+        dataSet.drawFilledEnabled = true
+        dataSet.fillAlpha = 1
+        dataSet.fill = LinearGradientFill(
+            gradient: CGGradient(
+                colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                colors: [
+                    brand.withAlphaComponent(0.38).cgColor,
+                    brand.withAlphaComponent(0.02).cgColor
+                ] as CFArray,
+                locations: [0, 1]
+            )!,
+            angle: 270
+        )
+        dataSet.highlightColor = brand
+        dataSet.highlightLineWidth = 1
+        dataSet.drawHorizontalHighlightIndicatorEnabled = false
+        dataSet.drawVerticalHighlightIndicatorEnabled = true
+
+        let data = LineChartData(dataSet: dataSet)
+        chart.data = data
+
+        // Keep a little headroom so the peak doesn't kiss the top edge.
+        if let minY = points.map(\.max).min(), let maxY = points.map(\.max).max() {
+            let pad = max((maxY - minY) * 0.18, maxY * 0.06, 5)
+            chart.leftAxis.axisMinimum = max(0, minY - pad)
+            chart.leftAxis.axisMaximum = maxY + pad
+        }
+
+        chart.xAxis.labelCount = min(5, max(2, points.count))
+        chart.animate(xAxisDuration: 0.35, yAxisDuration: 0.45, easingOption: .easeInOutCubic)
         chart.notifyDataSetChanged()
     }
 }
