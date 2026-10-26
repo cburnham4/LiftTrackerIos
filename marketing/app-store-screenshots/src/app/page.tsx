@@ -230,9 +230,9 @@ const slides: SlideConfig[] = [
           style={{
             position: "absolute",
             left: "50%",
-            bottom: DESIGN_H * 0.02,
+            bottom: DESIGN_H * 0.04,
             transform: "translateX(-50%)",
-            width: PHONE_W,
+            width: PHONE_W * 0.88,
             zIndex: 3,
           }}
         >
@@ -261,11 +261,11 @@ const slides: SlideConfig[] = [
         <div
           style={{
             position: "absolute",
-            right: -DESIGN_W * 0.06,
-            bottom: DESIGN_H * 0.03,
-            width: PHONE_W * 0.95,
+            right: DESIGN_W * 0.05,
+            bottom: DESIGN_H * 0.05,
+            width: PHONE_W * 0.78,
             zIndex: 3,
-            transform: "rotate(3deg)",
+            transform: "rotate(2deg)",
           }}
         >
           <Phone mockupSrc={img("/mockup.png")} src={img("/screenshots/add-set.png")} alt="Add set" />
@@ -295,9 +295,9 @@ const slides: SlideConfig[] = [
           style={{
             position: "absolute",
             left: "50%",
-            bottom: DESIGN_H * 0.02,
+            bottom: DESIGN_H * 0.04,
             transform: "translateX(-50%)",
-            width: PHONE_W,
+            width: PHONE_W * 0.88,
             zIndex: 3,
           }}
         >
@@ -326,11 +326,11 @@ const slides: SlideConfig[] = [
         <div
           style={{
             position: "absolute",
-            left: -DESIGN_W * 0.06,
-            bottom: DESIGN_H * 0.03,
-            width: PHONE_W * 0.95,
+            left: DESIGN_W * 0.05,
+            bottom: DESIGN_H * 0.05,
+            width: PHONE_W * 0.78,
             zIndex: 3,
-            transform: "rotate(-3deg)",
+            transform: "rotate(-2deg)",
           }}
         >
           <Phone mockupSrc={img("/mockup.png")} src={img("/screenshots/past-lifts.png")} alt="Past lifts" />
@@ -360,9 +360,9 @@ const slides: SlideConfig[] = [
           style={{
             position: "absolute",
             left: "50%",
-            bottom: DESIGN_H * 0.02,
+            bottom: DESIGN_H * 0.04,
             transform: "translateX(-50%)",
-            width: PHONE_W,
+            width: PHONE_W * 0.88,
             zIndex: 3,
           }}
         >
@@ -381,33 +381,43 @@ const slides: SlideConfig[] = [
     render: (img) => {
       const CW = CREATIVE_W;
       const CH = CREATIVE_H;
-      const PHONE_CW = 298;
+      // Keep phone fully inside frame (rotation + shadow need margin)
+      const PHONE_CW = 250;
+      const phoneH = PHONE_CW * (MK_H / MK_W);
       return (
         <Slide bg={`linear-gradient(130deg, ${LT.blueDeep} 0%, ${LT.blueDark} 45%, ${LT.blue} 100%)`} w={CW} h={CH}>
           <Blob x={CW * 0.88} y={CH * 0.25} size={560} color={LT.blueGlow} opacity={0.24} />
           <Blob x={CW * 0.65} y={CH * 0.85} size={320} color="#5BA8D4" opacity={0.14} />
 
-          <div style={{ position: "absolute", left: CW * 0.05, top: CH * 0.1, width: CW * 0.52, zIndex: 2 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: CW * 0.018, marginBottom: CH * 0.07 }}>
+          <div
+            style={{
+              position: "absolute",
+              left: CW * 0.055,
+              top: CH * 0.12,
+              width: CW * 0.48,
+              zIndex: 2,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: CW * 0.016, marginBottom: CH * 0.05 }}>
               <img
                 src={img("/app-icon.png")}
                 alt="Lift Tracker"
-                style={{ width: CH * 0.14, height: CH * 0.14, borderRadius: CH * 0.028 }}
+                style={{ width: CH * 0.12, height: CH * 0.12, borderRadius: CH * 0.024 }}
               />
-              <span style={{ fontSize: CH * 0.07, fontWeight: 700, color: "rgba(255,255,255,0.9)" }}>
+              <span style={{ fontSize: CH * 0.062, fontWeight: 700, color: "rgba(255,255,255,0.9)" }}>
                 Lift Tracker
               </span>
             </div>
 
             <h2
               style={{
-                fontSize: CH * 0.148,
+                fontSize: CH * 0.125,
                 fontWeight: 800,
-                lineHeight: 0.92,
+                lineHeight: 0.95,
                 color: "#FFFFFF",
                 letterSpacing: "-0.03em",
                 margin: 0,
-                marginBottom: CH * 0.055,
+                marginBottom: CH * 0.04,
               }}
             >
               Track every
@@ -417,11 +427,11 @@ const slides: SlideConfig[] = [
 
             <p
               style={{
-                fontSize: CH * 0.066,
-                lineHeight: 1.38,
+                fontSize: CH * 0.052,
+                lineHeight: 1.35,
                 color: "rgba(255,255,255,0.62)",
                 margin: 0,
-                maxWidth: "90%",
+                maxWidth: "95%",
               }}
             >
               Log sets, watch your max climb,
@@ -433,12 +443,12 @@ const slides: SlideConfig[] = [
           <div
             style={{
               position: "absolute",
-              right: CW * 0.025,
-              top: (CH - PHONE_CW * (MK_H / MK_W)) / 2 - CH * 0.02,
+              right: CW * 0.05,
+              top: (CH - phoneH) / 2,
               width: PHONE_CW,
               zIndex: 3,
-              transform: "rotate(2.5deg)",
-              filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.55))",
+              transform: "rotate(2deg)",
+              filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.5))",
             }}
           >
             <Phone mockupSrc={img("/mockup.png")} src={img("/screenshots/graph.png")} alt="Progress graph" />
