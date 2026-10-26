@@ -1,7 +1,50 @@
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
+#
+# Prefer newer fastlane for deliver/submit:
+#   ~/.gem/ruby/4.0.0/bin/fastlane ios submit_lift_tracker submit:true
+
+ENV["LC_ALL"] = "en_US.UTF-8"
+ENV["LANG"] = "en_US.UTF-8"
+
+def asc_auth_options_for_upload
+  key_id = ENV["APP_STORE_CONNECT_KEY_ID"]
+  issuer_id = ENV["APP_STORE_CONNECT_ISSUER_ID"]
+  raw_path = ENV["APP_STORE_CONNECT_KEY_PATH"]
+  return {} if key_id.to_s.strip.empty? || issuer_id.to_s.strip.empty? || raw_path.to_s.strip.empty?
+
+  fastlane_dir = File.expand_path(__dir__)
+  repo_root = File.expand_path("..", __dir__)
+  path = File.expand_path(raw_path, fastlane_dir)
+  path = File.expand_path(raw_path, repo_root) unless File.file?(path)
+  # Parent workspace key (SunriseSunsetIos/AuthKey_*.p8) when running from monorepo
+  parent_root = File.expand_path("../..", __dir__)
+  path = File.expand_path(raw_path, parent_root) unless File.file?(path)
+  UI.user_error!("APP_STORE_CONNECT_KEY_PATH file not found: #{raw_path}") unless File.file?(path)
+
+  {
+    api_key: app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_filepath: path,
+      in_house: false
+    )
+  }
+end
+
+def project_version_and_build
+  pbx = File.expand_path("../Lift Tracker.xcodeproj/project.pbxproj", __dir__)
+  contents = File.read(pbx)
+  version = contents[/MARKETING_VERSION = ([^;]+);/, 1]&.strip
+  build = contents[/CURRENT_PROJECT_VERSION = ([^;]+);/, 1]&.strip
+  UI.user_error!("Could not read MARKETING_VERSION") if version.to_s.empty?
+  UI.user_error!("Could not read CURRENT_PROJECT_VERSION") if build.to_s.empty?
+  [version, build]
+end
 
 default_platform(:ios)
+
+APP_ID = "letshang.Lift-Tracker"
 
 platform :ios do
   desc "Build Lift Tracker and upload to App Store Connect"
@@ -33,5 +76,45 @@ platform :ios do
       submit_for_review: false,
       force: true
     )
+  end
+
+  desc "Create App Store version, attach build, upload metadata/screenshots, optionally submit"
+  desc "Options: submit:true, skip_screenshots:true"
+  lane :submit_lift_tracker do |options|
+    api_opts = asc_auth_options_for_upload
+    UI.user_error!("Configure APP_STORE_CONNECT_* in fastlane/.env") if api_opts.empty?
+
+    version, build = project_version_and_build
+    submit = options[:submit].to_s == "true" || options[:submit] == true
+    skip_sc = options.fetch(:skip_screenshots, true)
+    skip_sc = skip_sc.to_s == "true" || skip_sc == true
+
+    deliver(
+      app_identifier: APP_ID,
+      app_version: version,
+      build_number: build,
+      skip_binary_upload: true,
+      skip_screenshots: skip_sc,
+      overwrite_screenshots: !skip_sc,
+      metadata_path: "./fastlane/metadata",
+      screenshots_path: "./fastlane/screenshots",
+      submit_for_review: submit,
+      automatic_release: true,
+      force: true,
+      reject_if_possible: true,
+      run_precheck_before_submit: true,
+      precheck_include_in_app_purchases: false,
+      submission_information: {
+        export_compliance_uses_encryption: false,
+        add_id_info_uses_idfa: true
+      },
+      **api_opts
+    )
+
+    if submit
+      UI.success("✅ Version #{version} (#{build}) submitted for App Store review!")
+    else
+      UI.success("✅ Version #{version} (#{build}) prepared on App Store Connect.")
+    end
   end
 end
