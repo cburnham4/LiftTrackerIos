@@ -88,16 +88,14 @@ final class ExerciseDetailModel: ObservableObject {
 
     init(exercise: Exercise) {
         self.exercise = exercise
-        loadTodaysSets()
+        // Show cached sets immediately, then refresh from Firebase so other devices' lifts appear.
+        applyTodaysSetsFromPastSets(allowBlankDayWrite: false)
         refreshPastAndGraph()
+        syncLiftSetsFromServer()
     }
 
     func appear() {
-        refreshPastAndGraph()
-        if selectedTab == .addSet {
-            // Keep today's list in sync if returning from another tab after deletes.
-            todaysSets = dayLiftSets?.liftsets ?? todaysSets
-        }
+        syncLiftSetsFromServer()
     }
 
     // MARK: - Add Set
@@ -244,22 +242,67 @@ final class ExerciseDetailModel: ObservableObject {
 
     // MARK: - Private
 
-    private func loadTodaysSets() {
-        let existingSets = exercise.pastSets.filter { $0.dateString == date.getDashesDateString() }
-        if existingSets.isEmpty {
-            dayLiftSets = DayLiftSets()
-            ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
-                DispatchQueue.main.async {
-                    if case .failure = result {
-                        self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+    /// Pull LiftSets from RTDB (server-preferring) before treating today as blank.
+    private func syncLiftSetsFromServer() {
+        ExerciseSetsRequest.fetchLiftSets(exerciseKey: exercise.key) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                switch result {
+                case .success(let days):
+                    let merged = self.mergeLocalToday(into: days)
+                    self.exercise.pastSets = merged
+                    if let sessionExercise = UserSession.instance.getExercises()?.first(where: { $0.key == self.exercise.key }) {
+                        sessionExercise.pastSets = merged
+                    }
+                    self.applyTodaysSetsFromPastSets(allowBlankDayWrite: true)
+                    self.refreshPastAndGraph()
+                case .failure:
+                    // Offline / error: keep showing whatever we already have locally.
+                    if self.dayLiftSets == nil {
+                        self.applyTodaysSetsFromPastSets(allowBlankDayWrite: true)
+                        self.refreshPastAndGraph()
+                    } else if self.selectedTab == .addSet {
+                        self.todaysSets = self.dayLiftSets.liftsets
                     }
                 }
             }
+        }
+    }
+
+    /// Keep any sets added locally while the server fetch was in flight.
+    private func mergeLocalToday(into serverDays: [DayLiftSets]) -> [DayLiftSets] {
+        var merged = serverDays
+        let today = date.getDashesDateString()
+        guard let localDay = dayLiftSets, localDay.dateString == today, !localDay.liftsets.isEmpty else {
+            return merged
+        }
+        if let idx = merged.firstIndex(where: { $0.dateString == today }) {
+            let serverKeys = Set(merged[idx].liftsets.map(\.key).filter { !$0.isEmpty })
+            for set in localDay.liftsets where !set.key.isEmpty && !serverKeys.contains(set.key) {
+                merged[idx].liftsets.append(set)
+            }
+            merged[idx].max = max(merged[idx].max, localDay.max)
+        } else {
+            merged.insert(localDay, at: 0)
+        }
+        return merged
+    }
+
+    /// Bind today's UI from `exercise.pastSets`. Blank-day Firebase writes are skipped (no-op)
+    /// so other devices' sets cannot be wiped by opening an empty local day.
+    private func applyTodaysSetsFromPastSets(allowBlankDayWrite: Bool) {
+        let today = date.getDashesDateString()
+        let existingSets = exercise.pastSets.filter { $0.dateString == today }
+        if let existing = existingSets.first {
+            dayLiftSets = existing
+            todaysSets = existing.liftsets
+        } else {
+            dayLiftSets = DayLiftSets()
             todaysSets = dayLiftSets.liftsets
             exercise.pastSets.insert(dayLiftSets, at: 0)
-        } else {
-            dayLiftSets = existingSets[0]
-            todaysSets = dayLiftSets.liftsets
+            if allowBlankDayWrite {
+                ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { _ in }
+            }
         }
         currentMax = dayLiftSets.max
     }

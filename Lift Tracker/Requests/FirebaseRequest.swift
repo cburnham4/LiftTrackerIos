@@ -26,11 +26,17 @@ extension LhFirebaseRequest {
             result(.failure(error: "No request key supplied"))
             return
         }
-        
-        databaseRef.child(requestItemKey).observeSingleEvent(of: .value, with: { (snapshot) in
+
+        databaseRef.child(requestItemKey).getData { error, snapshot in
+            if let error = error {
+                result(.failure(error: error.localizedDescription))
+                return
+            }
+            guard let snapshot = snapshot else {
+                result(.failure(error: "No data returned"))
+                return
+            }
             result(.success(snapshot))
-        }) { (error) in
-            result(.failure(error: error.localizedDescription))
         }
     }
     
@@ -40,7 +46,8 @@ extension LhFirebaseRequest {
         }
         
         let localDatabaseRef = requestItemKey != nil ? databaseRef.child(requestItemKey!) : databaseRef
-        localDatabaseRef.child(postObject.key).setValue(postObject.createRequestObject()) { error, _ in
+        // Merge so nested children under existing keys are preserved.
+        localDatabaseRef.child(postObject.key).updateChildValues(postObject.createRequestObject()) { error, _ in
             if let error = error {
                 result(.failure(error: error.localizedDescription))
             } else {
