@@ -1,0 +1,19 @@
+Track every lift on the gym floor — without a notebook.
+
+Weight Lift Tracker is a fast strength log: add weight and reps in a few taps, see today’s sets, browse past lifts, and watch estimated max progress over time.
+
+WHAT YOU CAN DO
+• Log sets and reps quickly between rest periods
+• Rename or delete mistyped exercises, routines, and sets (long-press or swipe)
+• Follow routines so you know what to hit next
+• See estimated max climb on a clear progress graph
+• Keep history in the cloud so a new phone doesn’t wipe your log
+• Sign in with Google or continue as a guest
+
+BUILT FOR THE GYM
+No social feed. No complicated planning tools. Open the app, log the set, check your max, get back under the bar.
+
+PRIVACY & ADS
+Account sign-in uses Firebase so your lifts sync across devices. Banner ads (Google AdMob) help keep the app free. See the Privacy Policy and App Privacy labels for details on what is collected for account sync and advertising.
+
+Icons from icons8.com

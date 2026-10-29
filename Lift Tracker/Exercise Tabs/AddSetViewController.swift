@@ -137,6 +137,59 @@ class AddSetViewController: ExerciseBaseTabViewController {
         
         exerciseTableView.isEditing = false
     }
+
+    func updateItem(item: LiftSet) {
+        let alert = UIAlertController(title: "Edit Set", message: "Update weight and reps", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Weight"
+            textField.keyboardType = .decimalPad
+            textField.text = String(format: "%.1f", item.weight)
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "Reps"
+            textField.keyboardType = .numberPad
+            textField.text = String(item.reps)
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+            self?.exerciseTableView.isEditing = false
+        })
+        alert.addAction(UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            guard let self else { return }
+            let weight = Double(alert.textFields?[0].text ?? "") ?? 0
+            let reps = Int(alert.textFields?[1].text ?? "") ?? 0
+            guard weight > 0, reps > 0 else {
+                AlertUtils.createAlert(view: self, title: "Enter Values", message: "Enter a positive value for both reps and weight")
+                self.exerciseTableView.isEditing = false
+                return
+            }
+            item.weight = weight
+            item.reps = reps
+            ExerciseSetsRequest.updateLiftSet(
+                exerciseKey: self.exercise.key,
+                date: self.date.getDashesDateString(),
+                liftSet: item
+            ) { [weak self] result in
+                if case .failure = result, let self {
+                    AlertUtils.createAlert(view: self, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                }
+            }
+            self.recalculateDayMax()
+            self.exerciseTableView.reloadData()
+            self.exerciseTableView.isEditing = false
+        })
+        present(alert, animated: true)
+    }
+
+    private func recalculateDayMax() {
+        currentMax = 0
+        for set in liftSets {
+            let max = set.getMax()
+            if max > currentMax {
+                currentMax = max
+            }
+        }
+        updateMax(max: currentMax)
+    }
     
     /* Look for new max because the old max set could have been removed */
     func findNewMax(deltedSet: LiftSet) {
@@ -185,24 +238,29 @@ extension AddSetViewController: UITableViewDataSource {
 }
 
 extension AddSetViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = self.liftSets[indexPath.row]
-        // TODO Add Edit
-//        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { [weak self] action, indexPath in
-//            self?.updateItem(item: item)
-//        })
 
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { [weak self] action, indexPath in
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
+            self?.updateItem(item: item)
+            completion(true)
+        }
+        editAction.backgroundColor = .systemGray
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             guard let strongSelf = self else {
+                completion(false)
                 return
             }
             AlertUtils.createAlertCallback(view: strongSelf, title: "Remove Item?", message: "Please confirm if you would like to remove item", callback: { _ in
                 strongSelf.deleteItem(item: item)
             })
-        })
-        // editAction.backgroundColor = .blue
-        deleteAction.backgroundColor = .red
-        return [deleteAction]
+            completion(true)
+        }
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }
 

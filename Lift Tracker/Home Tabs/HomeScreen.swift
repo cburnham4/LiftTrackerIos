@@ -162,6 +162,8 @@ final class HomeScreenModel: ObservableObject {
 
 struct HomeScreen: View {
     @ObservedObject var model: HomeScreenModel
+    /// One-time tip so rename/delete aren't swipe-only.
+    @AppStorage("HomeScreen.editDiscoverabilityTipDismissed") private var editTipDismissed = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -173,6 +175,10 @@ struct HomeScreen: View {
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
+
+            if !editTipDismissed, !model.currentItems.isEmpty {
+                editDiscoverabilityTip
+            }
 
             Group {
                 if model.currentItems.isEmpty {
@@ -202,6 +208,18 @@ struct HomeScreen: View {
                                 .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
+                            .contextMenu {
+                                Button {
+                                    model.renameItem(item)
+                                } label: {
+                                    Label("Rename", systemImage: "pencil")
+                                }
+                                Button(role: .destructive) {
+                                    model.deleteItem(item)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", role: .destructive) {
                                     model.deleteItem(item)
@@ -248,6 +266,29 @@ struct HomeScreen: View {
         .onChange(of: model.selectedTab) { _ in
             model.refreshVisibleTab()
         }
+    }
+
+    private var editDiscoverabilityTip: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "hand.tap")
+                .foregroundStyle(Color(uiColor: LiftTrackerTheme.brandBlue))
+            Text("Long-press or swipe a row to rename or delete.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button {
+                editTipDismissed = true
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundStyle(.tertiary)
+            }
+            .accessibilityLabel("Dismiss tip")
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(Color(.secondarySystemBackground))
+        .padding(.horizontal, 16)
+        .padding(.bottom, 6)
     }
 }
 

@@ -1,4 +1,6 @@
 What's new in this update:
 
-- Refreshed App Store screenshots and promo artwork
-- Performance and stability improvements
+- Long-press or swipe to rename/delete exercises and routines
+- Edit set weight and reps when you mistype a log
+- Clearer tip so edit/delete is easy to find
+- Updated App Store listing copy

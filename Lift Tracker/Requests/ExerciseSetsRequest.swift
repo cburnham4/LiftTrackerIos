@@ -48,4 +48,20 @@ class ExerciseSetsRequest: LiftTrackerRequest {
             }
         }
     }
+
+    /// Overwrites an existing set (requires `liftSet.key`). Used for typo fixes on weight/reps.
+    static func updateLiftSet(exerciseKey: String, date: String, liftSet: LiftSet, completion: @escaping (RequestResult<LiftSet>) -> Void) {
+        guard !liftSet.key.isEmpty else {
+            completion(.failure(error: "Missing set key"))
+            return
+        }
+        let dbRef = getUserDatabaseReference()?
+            .child(ItemType.exercises.rawValue)
+            .child(exerciseKey)
+            .child("LiftSets")
+            .child(date)
+
+        var requestObject = liftSet as CoreRequestObject
+        sendPostRequest(object: &requestObject, requestKey: .update, dbRef: dbRef, completion: completion)
+    }
 }

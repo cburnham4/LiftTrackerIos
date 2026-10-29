@@ -52,6 +52,8 @@ final class ExerciseDetailModel: ObservableObject {
     @Published var alertMessage: String?
     @Published var pendingDeleteSet: LiftSet?
     @Published var showDeleteConfirm = false
+    /// When non-nil, weight/reps fields edit this set instead of adding a new one.
+    @Published var editingSet: LiftSet?
 
     let exercise: Exercise
     weak var presentingViewController: UIViewController?
@@ -64,6 +66,8 @@ final class ExerciseDetailModel: ObservableObject {
 
     var navigationTitle: String { exercise.name }
     var addSetAdUnit: String { addSetAdUnitID }
+    var isEditingSet: Bool { editingSet != nil }
+    var primarySetActionTitle: String { isEditingSet ? "Save Edit" : "Add Set" }
 
     var graphNeedsMoreData: Bool {
         allGraphPoints.count < 2
@@ -111,8 +115,28 @@ final class ExerciseDetailModel: ObservableObject {
     }
 
     func clearInputs() {
+        editingSet = nil
         repsText = "1"
         weightText = "10.0"
+    }
+
+    func beginEditSet(_ set: LiftSet) {
+        editingSet = set
+        weightText = String(format: "%.1f", set.weight)
+        repsText = String(set.reps)
+        selectedTab = .addSet
+    }
+
+    func cancelEditSet() {
+        clearInputs()
+    }
+
+    func submitSetAction() {
+        if isEditingSet {
+            saveEditedSet()
+        } else {
+            addSet()
+        }
     }
 
     func addSet() {
@@ -152,7 +176,41 @@ final class ExerciseDetailModel: ObservableObject {
         }
     }
 
+    func saveEditedSet() {
+        guard let set = editingSet else { return }
+        let reps = Int(repsText) ?? 0
+        let weight = Double(weightText) ?? 0
+        guard reps > 0, weight > 0 else {
+            presentAlert(title: "Enter Values", message: "Enter a positive value for both reps and weight")
+            return
+        }
+
+        set.reps = reps
+        set.weight = weight
+        // Force SwiftUI list refresh (LiftSet is a class; copy array identity).
+        todaysSets = Array(dayLiftSets.liftsets)
+        editingSet = nil
+
+        ExerciseSetsRequest.updateLiftSet(
+            exerciseKey: exercise.key,
+            date: date.getDashesDateString(),
+            liftSet: set
+        ) { [weak self] result in
+            DispatchQueue.main.async {
+                if case .failure = result {
+                    self?.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
+                }
+            }
+        }
+
+        recalculateDayMax()
+        refreshPastAndGraph()
+    }
+
     func requestDeleteSet(_ set: LiftSet) {
+        if editingSet === set {
+            cancelEditSet()
+        }
         pendingDeleteSet = set
         showDeleteConfirm = true
     }
@@ -228,6 +286,10 @@ final class ExerciseDetailModel: ObservableObject {
     private func findNewMax(deletedSet: LiftSet) {
         let setMax = deletedSet.getMax()
         guard setMax == currentMax else { return }
+        recalculateDayMax()
+    }
+
+    private func recalculateDayMax() {
         currentMax = 0
         for set in todaysSets {
             let max = set.getMax()
@@ -322,10 +384,22 @@ struct ExerciseDetailScreen: View {
 
 private struct AddSetTabView: View {
     @ObservedObject var model: ExerciseDetailModel
+    @AppStorage("AddSet.editDiscoverabilityTipDismissed") private var editTipDismissed = false
 
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 14) {
+                if model.isEditingSet {
+                    HStack {
+                        Image(systemName: "pencil.circle.fill")
+                            .foregroundStyle(Color(uiColor: LiftTrackerTheme.brandBlue))
+                        Text("Editing set — change weight/reps, then Save Edit.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Spacer(minLength: 0)
+                    }
+                }
+
                 HStack {
                     Text("Weight")
                         .foregroundStyle(.secondary)
@@ -369,15 +443,44 @@ private struct AddSetTabView: View {
                 }
 
                 HStack(spacing: 12) {
-                    Button("Clear") { model.clearInputs() }
-                        .buttonStyle(.bordered)
-                    Button("Add Set") { model.addSet() }
+                    Button(model.isEditingSet ? "Cancel" : "Clear") {
+                        if model.isEditingSet {
+                            model.cancelEditSet()
+                        } else {
+                            model.clearInputs()
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    Button(model.primarySetActionTitle) { model.submitSetAction() }
                         .buttonStyle(.borderedProminent)
                         .tint(Color(uiColor: LiftTrackerTheme.brandBlue))
                 }
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 12)
+
+            if !editTipDismissed, !model.todaysSets.isEmpty, !model.isEditingSet {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: "hand.tap")
+                        .foregroundStyle(Color(uiColor: LiftTrackerTheme.brandBlue))
+                    Text("Long-press or swipe a set to edit weight/reps or delete.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Button {
+                        editTipDismissed = true
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.tertiary)
+                    }
+                    .accessibilityLabel("Dismiss tip")
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(Color(.secondarySystemBackground))
+                .padding(.horizontal, 16)
+                .padding(.bottom, 6)
+            }
 
             if model.todaysSets.isEmpty {
                 Spacer()
@@ -389,10 +492,26 @@ private struct AddSetTabView: View {
                 List {
                     ForEach(model.todaysSets.map(IdentifiedLiftSet.init)) { row in
                         Text("Reps: \(row.set.reps) | Weight: \(String(format: "%.1f", row.set.weight))")
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            .contextMenu {
+                                Button {
+                                    model.beginEditSet(row.set)
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                Button(role: .destructive) {
+                                    model.requestDeleteSet(row.set)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", role: .destructive) {
                                     model.requestDeleteSet(row.set)
                                 }
+                                Button("Edit") {
+                                    model.beginEditSet(row.set)
+                                }
+                                .tint(.gray)
                             }
                     }
                 }

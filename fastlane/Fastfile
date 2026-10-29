@@ -80,6 +80,7 @@ platform :ios do
 
   desc "Create App Store version, attach build, upload metadata/screenshots, optionally submit"
   desc "Options: submit:true, skip_screenshots:true"
+  desc "Privacy Nutrition Labels are NOT uploaded by deliver — see fastlane/APP_PRIVACY.md and app_privacy_details.json"
   lane :submit_lift_tracker do |options|
     api_opts = asc_auth_options_for_upload
     UI.user_error!("Configure APP_STORE_CONNECT_* in fastlane/.env") if api_opts.empty?
