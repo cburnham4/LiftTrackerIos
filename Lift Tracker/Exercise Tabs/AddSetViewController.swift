@@ -41,17 +41,33 @@ class AddSetViewController: ExerciseBaseTabViewController {
     }
     
     func loadInLiftSets() {
-        let existingSets = exercise.pastSets.filter({ $0.dateString == date.getDashesDateString() })
-        //If there are no sets for today then make a new one
-        if (existingSets.isEmpty) {
-            dayLiftSets = DayLiftSets()
-            ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { [weak self] result in
-                if case .failure = result, let strongSelf = self {
-                    AlertUtils.createAlert(view: strongSelf, title: "Request Failed", message: "Exercise Sets were not able to be saved")
+        // Show cache first, then refresh from Firebase so other devices' sets appear.
+        applyLocalLiftSets()
+        ExerciseSetsRequest.fetchLiftSets(exerciseKey: exercise.key) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                if case .success(let days) = result {
+                    self.exercise.pastSets = days
+                    if let sessionExercise = UserSession.instance.getExercises()?.first(where: { $0.key == self.exercise.key }) {
+                        sessionExercise.pastSets = days
+                    }
+                    self.applyLocalLiftSets()
+                    self.exerciseTableView.reloadData()
                 }
             }
+        }
+    }
+
+    private func applyLocalLiftSets() {
+        let existingSets = exercise.pastSets.filter({ $0.dateString == date.getDashesDateString() })
+        if existingSets.isEmpty {
+            dayLiftSets = DayLiftSets()
+            // Blank-day write is a no-op (avoids wiping remote sets).
+            ExerciseSetsRequest.createBlankDayLiftSet(exerciseKey: exercise.key, dayLiftSets: dayLiftSets) { _ in }
             liftSets = dayLiftSets.liftsets
-            exercise.pastSets.insert(dayLiftSets, at: 0)
+            if !exercise.pastSets.contains(where: { $0.dateString == dayLiftSets.dateString }) {
+                exercise.pastSets.insert(dayLiftSets, at: 0)
+            }
         } else {
             dayLiftSets = existingSets[0]
             liftSets = dayLiftSets.liftsets

@@ -47,13 +47,27 @@ extension LiftTrackerRequest {
         }
         
         let returnObject: CoreRequestObject = object
-        dbRef?.child(object.key).setValue(object.createRequestObject()) { error, _ in
-            if let requestKey = requestKey {
-                if error != nil {
-                    completion(.failure(error: error.debugDescription))
-                } else {
-                    completion(.success(requestKey: requestKey, object: returnObject as? T)) // TODO what the
-                }
+        let values = object.createRequestObject()
+        let childRef = dbRef?.child(object.key)
+
+        let finish: (Error?) -> Void = { error in
+            guard let requestKey = requestKey else { return }
+            if error != nil {
+                completion(.failure(error: error.debugDescription))
+            } else {
+                completion(.success(requestKey: requestKey, object: returnObject as? T))
+            }
+        }
+
+        // Updates must merge so nested children (e.g. LiftSets) are not wiped.
+        // New posts can still replace the node — it should not have nested data yet.
+        if requestKey == .update {
+            childRef?.updateChildValues(values) { error, _ in
+                finish(error)
+            }
+        } else {
+            childRef?.setValue(values) { error, _ in
+                finish(error)
             }
         }
     }
