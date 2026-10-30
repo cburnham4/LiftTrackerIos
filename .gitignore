@@ -69,3 +69,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# App Store Connect API key (local only)
+fastlane/AuthKey_*.p8
+fastlane/.env
