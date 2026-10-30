@@ -1,1 +1,1 @@
-Log sets in seconds, watch estimated max climb on the progress graph, and keep every lift synced to the cloud — free.
+Gym-floor fast: log sets & reps in seconds, track estimated 1RM progress, and keep every lift synced in the cloud — free.
