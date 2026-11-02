@@ -15,6 +15,7 @@ protocol RoutineExercisesFlowHandling: AnyObject {
 
 final class RoutineExercisesScreenModel: ObservableObject {
     @Published var items: [SimpleListRowItem] = []
+    @Published var isLoading = false
     @Published var showAddPicker = false
     @Published var selectedExerciseIndex = 0
     @Published var showDeleteConfirm = false
@@ -25,6 +26,7 @@ final class RoutineExercisesScreenModel: ObservableObject {
     weak var presentingViewController: UIViewController?
 
     private var itemsBond: Bond<[SimpleListRowItem]>?
+    private var loadingBond: Bond<Bool>?
 
     var title: String { viewModel.routine.name }
 
@@ -37,7 +39,11 @@ final class RoutineExercisesScreenModel: ObservableObject {
         itemsBond = Bond { [weak self] items in
             self?.items = items
         }
+        loadingBond = Bond { [weak self] loading in
+            self?.isLoading = loading
+        }
         itemsBond?.bind(observable: viewModel.singleListItems)
+        loadingBond?.bind(observable: viewModel.isLoading)
     }
 
     func refresh() {
@@ -112,7 +118,17 @@ struct RoutineExercisesScreen: View {
 
     var body: some View {
         Group {
-            if model.items.isEmpty {
+            if model.isLoading && model.items.isEmpty {
+                VStack(spacing: 12) {
+                    Spacer()
+                    ProgressView()
+                    Text("Loading exercises…")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if model.items.isEmpty {
                 VStack {
                     Spacer()
                     Text("No exercises in this routine yet")

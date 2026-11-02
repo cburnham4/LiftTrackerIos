@@ -37,6 +37,8 @@ final class HomeScreenModel: ObservableObject {
     @Published var selectedTab: HomeTab = .exercises
     @Published var exerciseItems: [SimpleListRowItem] = []
     @Published var routineItems: [SimpleListRowItem] = []
+    @Published var isLoadingExercises = false
+    @Published var isLoadingRoutines = false
 
     let exercisesViewModel = ExercisesViewModel()
     let routinesViewModel = RoutinesViewModel()
@@ -46,9 +48,15 @@ final class HomeScreenModel: ObservableObject {
 
     private var exerciseBond: Bond<[SimpleListRowItem]>?
     private var routineBond: Bond<[SimpleListRowItem]>?
+    private var exerciseLoadingBond: Bond<Bool>?
+    private var routineLoadingBond: Bond<Bool>?
 
     var currentItems: [SimpleListRowItem] {
         selectedTab == .exercises ? exerciseItems : routineItems
+    }
+
+    var isLoadingCurrentTab: Bool {
+        selectedTab == .exercises ? isLoadingExercises : isLoadingRoutines
     }
 
     var emptyText: String {
@@ -64,8 +72,16 @@ final class HomeScreenModel: ObservableObject {
         routineBond = Bond { [weak self] items in
             self?.routineItems = items
         }
+        exerciseLoadingBond = Bond { [weak self] loading in
+            self?.isLoadingExercises = loading
+        }
+        routineLoadingBond = Bond { [weak self] loading in
+            self?.isLoadingRoutines = loading
+        }
         exerciseBond?.bind(observable: exercisesViewModel.singleListItems)
         routineBond?.bind(observable: routinesViewModel.singleListItems)
+        exerciseLoadingBond?.bind(observable: exercisesViewModel.isLoading)
+        routineLoadingBond?.bind(observable: routinesViewModel.isLoading)
     }
 
     func refreshVisibleTab() {
@@ -181,7 +197,17 @@ struct HomeScreen: View {
             }
 
             Group {
-                if model.currentItems.isEmpty {
+                if model.isLoadingCurrentTab && model.currentItems.isEmpty {
+                    VStack(spacing: 12) {
+                        Spacer()
+                        ProgressView()
+                        Text(model.selectedTab == .exercises ? "Loading exercises…" : "Loading routines…")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if model.currentItems.isEmpty {
                     VStack {
                         Spacer()
                         Text(model.emptyText)
@@ -232,6 +258,12 @@ struct HomeScreen: View {
                         }
                     }
                     .listStyle(.plain)
+                    .overlay(alignment: .top) {
+                        if model.isLoadingCurrentTab {
+                            ProgressView()
+                                .padding(.top, 8)
+                        }
+                    }
                 }
             }
 

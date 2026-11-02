@@ -15,6 +15,8 @@ class ExercisesViewModel: NSObject, SingleItemsListViewModelProtocol {
     var singleListItems: Observable<[SimpleListRowItem]> = Observable([SimpleListRowItem]())
     var itemType: ItemType = .exercises
     var isEditingTable: Observable<Bool> = Observable(false)
+    /// True while the initial/refetch list request is in flight.
+    var isLoading: Observable<Bool> = Observable(false)
 
     func addItem<T>(item: T) {
         guard var exercise = item as? CoreRequestObject else { return }
@@ -36,7 +38,13 @@ class ExercisesViewModel: NSObject, SingleItemsListViewModelProtocol {
     }
 
     func sendItemRequest() { // TODO implement individual viewmodels
+        isLoading.value = true
         BaseItemsProvider.sendGetItemsRequest(itemType: itemType) { [weak self] (result: RequestResult<Exercise>) in
+            defer {
+                DispatchQueue.main.async {
+                    self?.isLoading.value = false
+                }
+            }
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }
