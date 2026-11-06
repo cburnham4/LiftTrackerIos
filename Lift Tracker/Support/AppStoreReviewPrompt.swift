@@ -2,11 +2,12 @@
 //  AppStoreReviewPrompt.swift
 //  Lift Tracker
 //
-//  In-app App Store review prompt (StoreKit). Mirrors the intended sunrise/sunset
-//  pattern: count launches, require a happy-path action, prompt at most once per
-//  app version, with a short delay so the UI can settle.
+//  In-app App Store review prompt (StoreKit). Mirrors Sunrise & Sunset:
+//  count launches, require a happy-path action, show an enjoyment preask,
+//  then request a system review — with Firebase Analytics events for the funnel.
 //
 
+import FirebaseAnalytics
 import StoreKit
 import UIKit
 
@@ -26,13 +27,14 @@ enum AppStoreReviewPrompt {
         defaults.set(defaults.integer(forKey: openCountKey) + 1, forKey: openCountKey)
     }
 
-    /// Call after a user-visible success (e.g. a set saved). May request a review.
+    /// Call after a user-visible success (e.g. a set saved). May present the review preask.
     static func recordSuccessfulActionAndMaybeRequest(from viewController: UIViewController) {
         let defaults = UserDefaults.standard
         let actionCount = defaults.integer(forKey: successfulActionCountKey) + 1
         defaults.set(actionCount, forKey: successfulActionCountKey)
 
-        guard defaults.integer(forKey: openCountKey) >= minimumOpenCount,
+        let openCount = defaults.integer(forKey: openCountKey)
+        guard openCount >= minimumOpenCount,
               actionCount >= minimumSuccessfulActionCount else {
             return
         }
@@ -43,17 +45,86 @@ enum AppStoreReviewPrompt {
             return
         }
 
+        // Mark this version before presenting so we don't stack alerts on rapid successes.
         defaults.set(currentVersion, forKey: lastPromptedVersionKey)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + requestDelay) {
-            requestReview(from: viewController)
+            presentEnjoymentPreask(
+                from: viewController,
+                openCount: openCount,
+                actionCount: actionCount
+            )
         }
     }
 
-    private static func requestReview(from viewController: UIViewController) {
+    private static func presentEnjoymentPreask(
+        from viewController: UIViewController,
+        openCount: Int,
+        actionCount: Int
+    ) {
+        guard viewController.presentedViewController == nil else {
+            Analytics.logEvent("review_prompt_skipped", parameters: [
+                "reason": "presenter_busy",
+                "open_count": openCount as NSNumber,
+                "action_count": actionCount as NSNumber
+            ])
+            return
+        }
+
+        Analytics.logEvent("review_preask_shown", parameters: [
+            "open_count": openCount as NSNumber,
+            "action_count": actionCount as NSNumber
+        ])
+
+        let alert = UIAlertController(
+            title: "Enjoying Lift Tracker?",
+            message: "Your feedback helps us improve the app.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Not Really", style: .cancel) { _ in
+            Analytics.logEvent("review_preask_no", parameters: [
+                "open_count": openCount as NSNumber,
+                "action_count": actionCount as NSNumber
+            ])
+        })
+        alert.addAction(UIAlertAction(title: "Yes!", style: .default) { _ in
+            Analytics.logEvent("review_preask_yes", parameters: [
+                "open_count": openCount as NSNumber,
+                "action_count": actionCount as NSNumber
+            ])
+            requestSystemReview(from: viewController, openCount: openCount, actionCount: actionCount)
+        })
+        viewController.present(alert, animated: true)
+    }
+
+    private static func requestSystemReview(
+        from viewController: UIViewController,
+        openCount: Int,
+        actionCount: Int
+    ) {
+        Analytics.logEvent("review_prompt_requested", parameters: [
+            "open_count": openCount as NSNumber,
+            "action_count": actionCount as NSNumber
+        ])
+
         if #available(iOS 14.0, *),
-           let scene = viewController.view.window?.windowScene {
+           let scene = viewController.view.window?.windowScene
+            ?? UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive })
+            ?? UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene }).first {
+            // Apple may suppress the dialog; we still log that we asked the system.
             SKStoreReviewController.requestReview(in: scene)
+            return
+        }
+
+        if #available(iOS 14.0, *) {
+            Analytics.logEvent("review_prompt_skipped", parameters: [
+                "reason": "no_window_scene",
+                "open_count": openCount as NSNumber,
+                "action_count": actionCount as NSNumber
+            ])
         } else {
             SKStoreReviewController.requestReview()
         }
