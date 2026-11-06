@@ -15,6 +15,8 @@ class RoutinesViewModel: NSObject, SingleItemsListViewModelProtocol {
     var singleListItems: Observable<[SimpleListRowItem]> = Observable([])
     var isEditingTable: Observable<Bool> = Observable(false)
     var itemType: ItemType = .routines
+    /// True while the initial/refetch list request is in flight.
+    var isLoading: Observable<Bool> = Observable(false)
 
     func addItem<T>(item: T) {
         guard var routine = item as? CoreRequestObject else { return }
@@ -46,7 +48,13 @@ class RoutinesViewModel: NSObject, SingleItemsListViewModelProtocol {
     }
 
     func sendItemRequest() {
+        isLoading.value = true
         BaseItemsProvider.sendGetItemsRequest(itemType: itemType) { [weak self] (result: RequestResult<Routine>) in
+            defer {
+                DispatchQueue.main.async {
+                    self?.isLoading.value = false
+                }
+            }
             if case let .success(requestKey, object) = result {
                 self?.requestSuccess(requestKey: requestKey, object: object)
             }

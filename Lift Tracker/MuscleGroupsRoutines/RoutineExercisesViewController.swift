@@ -14,6 +14,7 @@ class RoutineExerciseViewModel: NSObject, SingleItemsListViewModelProtocol {
     var singleListItems: Observable<[SimpleListRowItem]> = Observable([])
     var itemType: ItemType = .routines
     var isEditingTable: Observable<Bool> = Observable(false)
+    var isLoading: Observable<Bool> = Observable(false)
 
     var allowUpdateRow: Bool {
         return false
@@ -45,15 +46,34 @@ class RoutineExerciseViewModel: NSObject, SingleItemsListViewModelProtocol {
     }
 
     func sendItemRequest() {
-        self.exercises = UserSession.instance.getExercises() ?? []
-        singleListItems.value = []
-        for exerciseKey in routine.exerciseKeys {
-            let exercisesList = exercises.filter({ $0.key == exerciseKey})
+        let cached = UserSession.instance.getExercises() ?? []
+        if !cached.isEmpty || routine.exerciseKeys.isEmpty {
+            applyExercises(cached)
+            return
+        }
 
-            if (exercisesList.count > 0) {
-                singleListItems.value.append(exercisesList[0] as SimpleListRowItem)
+        // Exercises not cached yet — fetch once so the routine list can resolve names.
+        isLoading.value = true
+        BaseItemsProvider.sendGetItemsRequest(itemType: .exercises) { [weak self] (result: RequestResult<Exercise>) in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.isLoading.value = false
+                if case .success = result {
+                    self.applyExercises(UserSession.instance.getExercises() ?? [])
+                } else {
+                    self.applyExercises([])
+                }
             }
         }
+    }
+
+    private func applyExercises(_ exercises: [Exercise]) {
+        self.exercises = exercises
+        // Build then assign once so SwiftUI doesn't flash an empty list mid-update.
+        let rows: [SimpleListRowItem] = routine.exerciseKeys.compactMap { key in
+            exercises.first(where: { $0.key == key })
+        }
+        singleListItems.value = rows
     }
 }
 
