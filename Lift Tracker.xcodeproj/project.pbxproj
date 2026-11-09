@@ -55,6 +55,16 @@
 		E0DC79D828AA9AD70001D454 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79D728AA9AD70001D454 /* RxCocoa */; };
 		E0DC79DA28AA9AD70001D454 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79D928AA9AD70001D454 /* RxRelay */; };
 		E0DC79DC28AA9AD70001D454 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0DC79DB28AA9AD70001D454 /* RxSwift */; };
+
+		A0LT102C0000000000000001 /* GULAppDelegateSwizzler in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT102D0000000000000001 /* GULAppDelegateSwizzler */; };
+		A0LT102E0000000000000001 /* GULMethodSwizzler in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT102F0000000000000001 /* GULMethodSwizzler */; };
+		A0LT10300000000000000001 /* GULNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10310000000000000001 /* GULNetwork */; };
+		A0LT10320000000000000001 /* GULNSData in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10330000000000000001 /* GULNSData */; };
+		A0LT10340000000000000001 /* GULEnvironment in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10350000000000000001 /* GULEnvironment */; };
+		A0LT10360000000000000001 /* GULLogger in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10370000000000000001 /* GULLogger */; };
+		A0LT10380000000000000001 /* GULReachability in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10390000000000000001 /* GULReachability */; };
+		A0LT103A0000000000000001 /* GULUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT103B0000000000000001 /* GULUserDefaults */; };
+		A0LT103C0000000000000001 /* nanopb in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT103D0000000000000001 /* nanopb */; };
 		A0LT10010000000000000001 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10020000000000000001 /* FirebaseAnalytics */; };
 		A0LT10030000000000000001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10040000000000000001 /* FirebaseAuth */; };
 		A0LT10050000000000000001 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A0LT10060000000000000001 /* FirebaseDatabase */; };
@@ -171,6 +181,15 @@
 				E0DB549125DB08900004149B /* DGCharts in Frameworks */,
 				E0DC79D828AA9AD70001D454 /* RxCocoa in Frameworks */,
 				E0DB54F725DB16EF0004149B /* SwiftyJSON in Frameworks */,
+				A0LT102C0000000000000001 /* GULAppDelegateSwizzler in Frameworks */,
+				A0LT102E0000000000000001 /* GULMethodSwizzler in Frameworks */,
+				A0LT10300000000000000001 /* GULNetwork in Frameworks */,
+				A0LT10320000000000000001 /* GULNSData in Frameworks */,
+				A0LT10340000000000000001 /* GULEnvironment in Frameworks */,
+				A0LT10360000000000000001 /* GULLogger in Frameworks */,
+				A0LT10380000000000000001 /* GULReachability in Frameworks */,
+				A0LT103A0000000000000001 /* GULUserDefaults in Frameworks */,
+				A0LT103C0000000000000001 /* nanopb in Frameworks */,
 				A0LT10010000000000000001 /* FirebaseAnalytics in Frameworks */,
 				A0LT10030000000000000001 /* FirebaseAuth in Frameworks */,
 				A0LT10050000000000000001 /* FirebaseDatabase in Frameworks */,
@@ -390,6 +409,15 @@
 				E0DC79D728AA9AD70001D454 /* RxCocoa */,
 				E0DC79D928AA9AD70001D454 /* RxRelay */,
 				E0DC79DB28AA9AD70001D454 /* RxSwift */,
+				A0LT102D0000000000000001 /* GULAppDelegateSwizzler */,
+				A0LT102F0000000000000001 /* GULMethodSwizzler */,
+				A0LT10310000000000000001 /* GULNetwork */,
+				A0LT10330000000000000001 /* GULNSData */,
+				A0LT10350000000000000001 /* GULEnvironment */,
+				A0LT10370000000000000001 /* GULLogger */,
+				A0LT10390000000000000001 /* GULReachability */,
+				A0LT103B0000000000000001 /* GULUserDefaults */,
+				A0LT103D0000000000000001 /* nanopb */,
 				A0LT10020000000000000001 /* FirebaseAnalytics */,
 				A0LT10040000000000000001 /* FirebaseAuth */,
 				A0LT10060000000000000001 /* FirebaseDatabase */,
@@ -481,6 +509,8 @@
 				E0DB54F025DB16CA0004149B /* XCRemoteSwiftPackageReference "Tabman" */,
 				E0DB54F525DB16EF0004149B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				E0DC79D628AA9AD70001D454 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */,
+				A0LT102B0000000000000001 /* XCRemoteSwiftPackageReference "nanopb" */,
 				A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A0LT10140000000000000001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				A0LT10150000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
@@ -948,6 +978,22 @@
 				version = 6.5.0;
 			};
 		};
+		A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleUtilities.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		A0LT102B0000000000000001 /* XCRemoteSwiftPackageReference "nanopb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/nanopb.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.30908.0;
+			};
+		};
 		A0LT10130000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1017,6 +1063,51 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E0DC79D628AA9AD70001D454 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		A0LT102D0000000000000001 /* GULAppDelegateSwizzler */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULAppDelegateSwizzler;
+		};
+		A0LT102F0000000000000001 /* GULMethodSwizzler */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULMethodSwizzler;
+		};
+		A0LT10310000000000000001 /* GULNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULNetwork;
+		};
+		A0LT10330000000000000001 /* GULNSData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULNSData;
+		};
+		A0LT10350000000000000001 /* GULEnvironment */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULEnvironment;
+		};
+		A0LT10370000000000000001 /* GULLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULLogger;
+		};
+		A0LT10390000000000000001 /* GULReachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULReachability;
+		};
+		A0LT103B0000000000000001 /* GULUserDefaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102A0000000000000001 /* XCRemoteSwiftPackageReference "GoogleUtilities" */;
+			productName = GULUserDefaults;
+		};
+		A0LT103D0000000000000001 /* nanopb */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0LT102B0000000000000001 /* XCRemoteSwiftPackageReference "nanopb" */;
+			productName = nanopb;
 		};
 		A0LT10020000000000000001 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
