@@ -9,6 +9,7 @@
 import UIKit
 import Login
 import FirebaseAuth
+import FirebaseCore
 import FirebaseDatabase
 
 let usersKey = "Users"
@@ -70,8 +71,15 @@ class LiftTrackerCoordinator: NSObject {
     }
     
     func start() {
-        // If user is already logged then get data from firebase and continue
-        if let authUser = Auth.auth().currentUser {
+        // Bind Auth to the app-configured FirebaseApp. Login.framework also
+        // links FirebaseAuth/Core; Auth.auth() alone can see an unconfigured
+        // default app from that separate link graph.
+        guard let app = FirebaseApp.app() else {
+            assertionFailure("FirebaseApp.configure() must run before LiftTrackerCoordinator.start()")
+            startLogin()
+            return
+        }
+        if let authUser = Auth.auth(app: app).currentUser {
             goToHome(user: authUser)
         } else {
             startLogin()
