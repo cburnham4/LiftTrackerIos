@@ -1,6 +1,6 @@
 What's new in this update:
 
-- Long-press or swipe to rename/delete exercises and routines
-- Edit set weight and reps when you mistype a log
-- Clearer tip so edit/delete is easy to find
-- Updated App Store listing copy
+- In-app review prompt with better feedback tracking
+- More reliable Firebase sign-in and sync
+- Loading states on Exercises and Routines
+- Stability fixes for simulator and device builds
