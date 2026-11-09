@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        guard FirebaseApp.app() != nil else {
+            assertionFailure("FirebaseApp.configure() did not create the default app")
+            return false
+        }
         Database.database().isPersistenceEnabled = true
         
         // Initialize the Google Mobile Ads SDK.
