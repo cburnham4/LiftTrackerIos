@@ -105,28 +105,37 @@ platform :ios do
     store_version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
     if store_version.nil?
       UI.message("Creating App Store version #{version}")
-      store_version = app.create_version!(platform: Spaceship::ConnectAPI::Platform::IOS, version_string: version)
+      Spaceship::ConnectAPI.post_app_store_version(
+        app_id: app.id,
+        attributes: {
+          versionString: version,
+          platform: Spaceship::ConnectAPI::Platform::IOS,
+          releaseType: Spaceship::ConnectAPI::AppStoreVersion::ReleaseType::AFTER_APPROVAL
+        }
+      )
+      store_version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
     elsif store_version.version_string != version
       store_version.update(attributes: { versionString: version })
       store_version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
     end
-    UI.user_error!("No editable App Store version") unless store_version
 
-    localizations = store_version.get_app_store_version_localizations
-    en = localizations.find { |l| l.locale == "en-US" } || localizations.first
-    en.update(attributes: { whatsNew: whats_new }) if en
+    if store_version
+      localizations = store_version.get_app_store_version_localizations
+      en = localizations.find { |l| l.locale == "en-US" } || localizations.first
+      en.update(attributes: { whatsNew: whats_new }) if en
 
-    if (app_info = app.fetch_edit_app_info) && (age = app_info.fetch_age_rating_declaration)
-      age.update(attributes: {
-        advertising: true,
-        healthOrWellnessTopics: true,
-        userGeneratedContent: false,
-        gunsOrOtherWeapons: Spaceship::ConnectAPI::AgeRatingDeclaration::Rating::NONE,
-        messagingAndChat: false,
-        ageAssurance: false,
-        parentalControls: false,
-        lootBox: false
-      })
+      if (app_info = app.fetch_edit_app_info) && (age = app_info.fetch_age_rating_declaration)
+        age.update(attributes: {
+          advertising: true,
+          healthOrWellnessTopics: true,
+          userGeneratedContent: false,
+          gunsOrOtherWeapons: Spaceship::ConnectAPI::AgeRatingDeclaration::Rating::NONE,
+          messagingAndChat: false,
+          ageAssurance: false,
+          parentalControls: false,
+          lootBox: false
+        })
+      end
     end
 
     deliver(
