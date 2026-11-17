@@ -327,35 +327,81 @@ struct HomeScreen: View {
 struct AdBannerView: UIViewRepresentable {
     let adUnitID: String
 
-    func makeUIView(context: Context) -> GADBannerView {
-        let banner = GADBannerView(adSize: GADAdSizeBanner)
-        banner.adUnitID = adUnitID
-        return banner
+    func makeUIView(context: Context) -> BannerHostView {
+        let host = BannerHostView()
+        host.adUnitID = adUnitID
+        return host
     }
 
-    func updateUIView(_ uiView: GADBannerView, context: Context) {
-        if uiView.adUnitID != adUnitID {
-            uiView.adUnitID = adUnitID
+    func updateUIView(_ uiView: BannerHostView, context: Context) {
+        uiView.adUnitID = adUnitID
+    }
+}
+
+/// Hosts a `GADBannerView` and loads once a window / root VC is available.
+/// SwiftUI can call `updateUIView` before the representable is in the hierarchy,
+/// so loading only there skips the first Exercises tab until a tab change.
+final class BannerHostView: UIView {
+    private let bannerView = GADBannerView(adSize: GADAdSizeBanner)
+    private var loadedUnitID: String?
+    private var pendingRootVCRetries = 0
+
+    var adUnitID: String = "" {
+        didSet {
+            guard adUnitID != oldValue else { return }
+            bannerView.adUnitID = adUnitID
+            loadIfPossible()
         }
-        if uiView.rootViewController == nil {
-            uiView.rootViewController = nearestViewController(from: uiView)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bannerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bannerView.topAnchor.constraint(equalTo: topAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        loadIfPossible()
+    }
+
+    private func loadIfPossible() {
+        guard window != nil, !adUnitID.isEmpty else { return }
+
+        if bannerView.rootViewController == nil {
+            bannerView.rootViewController = nearestViewController() ?? keyWindowRootViewController()
         }
-        if uiView.rootViewController != nil, context.coordinator.lastLoadedUnitID != adUnitID {
-            context.coordinator.lastLoadedUnitID = adUnitID
-            uiView.load(GADRequest())
+
+        guard bannerView.rootViewController != nil else {
+            // First SwiftUI updates often happen before the responder chain is ready.
+            guard pendingRootVCRetries < 5 else { return }
+            pendingRootVCRetries += 1
+            DispatchQueue.main.async { [weak self] in
+                self?.loadIfPossible()
+            }
+            return
         }
+
+        pendingRootVCRetries = 0
+        guard loadedUnitID != adUnitID else { return }
+        loadedUnitID = adUnitID
+        bannerView.adUnitID = adUnitID
+        bannerView.load(GADRequest())
     }
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    final class Coordinator {
-        var lastLoadedUnitID: String?
-    }
-
-    private func nearestViewController(from view: UIView) -> UIViewController? {
-        var responder: UIResponder? = view
+    private func nearestViewController() -> UIViewController? {
+        var responder: UIResponder? = self
         while let current = responder {
             if let viewController = current as? UIViewController {
                 return viewController
@@ -363,6 +409,14 @@ struct AdBannerView: UIViewRepresentable {
             responder = current.next
         }
         return nil
+    }
+
+    private func keyWindowRootViewController() -> UIViewController? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first { $0.isKeyWindow }?
+            .rootViewController
     }
 }
 
