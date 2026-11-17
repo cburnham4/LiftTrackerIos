@@ -267,9 +267,12 @@ struct HomeScreen: View {
                 }
             }
 
-            AdBannerView(adUnitID: model.selectedTab.adUnitID)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
+            AdBannerView(
+                adUnitID: model.selectedTab.adUnitID,
+                rootViewController: model.presentingViewController
+            )
+            .frame(height: 50)
+            .frame(maxWidth: .infinity)
         }
         .background(Color(.systemBackground))
         .navigationTitle("Lift Tracker")
@@ -326,43 +329,154 @@ struct HomeScreen: View {
 
 struct AdBannerView: UIViewRepresentable {
     let adUnitID: String
+    var rootViewController: UIViewController?
 
-    func makeUIView(context: Context) -> GADBannerView {
-        let banner = GADBannerView(adSize: GADAdSizeBanner)
-        banner.adUnitID = adUnitID
-        return banner
+    func makeUIView(context: Context) -> BannerHostView {
+        let host = BannerHostView()
+        host.rootViewController = rootViewController
+        host.adUnitID = adUnitID
+        return host
     }
 
-    func updateUIView(_ uiView: GADBannerView, context: Context) {
-        if uiView.adUnitID != adUnitID {
-            uiView.adUnitID = adUnitID
+    func updateUIView(_ uiView: BannerHostView, context: Context) {
+        uiView.rootViewController = rootViewController
+        uiView.adUnitID = adUnitID
+    }
+}
+
+/// Hosts a `GADBannerView` and loads once a presenting VC / window is ready.
+/// Previously we marked a unit ID "loaded" before AdMob was ready, so Exercises
+/// never retried until switching to Routines changed the unit ID.
+final class BannerHostView: UIView, GADBannerViewDelegate {
+    private let bannerView = GADBannerView(adSize: GADAdSizeBanner)
+    private var requestedUnitID: String?
+    private var successfullyLoadedUnitID: String?
+    private var retryWorkItem: DispatchWorkItem?
+    private var retryAttempt = 0
+
+    var rootViewController: UIViewController? {
+        didSet {
+            bannerView.rootViewController = resolvedRootViewController()
+            loadIfPossible()
         }
-        if uiView.rootViewController == nil {
-            uiView.rootViewController = nearestViewController(from: uiView)
+    }
+
+    var adUnitID: String = "" {
+        didSet {
+            guard adUnitID != oldValue else { return }
+            bannerView.adUnitID = adUnitID
+            successfullyLoadedUnitID = nil
+            requestedUnitID = nil
+            retryAttempt = 0
+            loadIfPossible()
         }
-        if uiView.rootViewController != nil, context.coordinator.lastLoadedUnitID != adUnitID {
-            context.coordinator.lastLoadedUnitID = adUnitID
-            uiView.load(GADRequest())
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        bannerView.delegate = self
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bannerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bannerView.topAnchor.constraint(equalTo: topAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        retryWorkItem?.cancel()
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        loadIfPossible()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if successfullyLoadedUnitID != adUnitID {
+            loadIfPossible()
         }
     }
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
+    private func loadIfPossible() {
+        guard window != nil, !adUnitID.isEmpty else {
+            scheduleRetry()
+            return
+        }
+
+        let presenter = resolvedRootViewController()
+        bannerView.rootViewController = presenter
+        guard presenter != nil else {
+            scheduleRetry()
+            return
+        }
+
+        // Already showing this unit successfully, or a request is in flight for it.
+        if successfullyLoadedUnitID == adUnitID || requestedUnitID == adUnitID {
+            return
+        }
+
+        retryWorkItem?.cancel()
+        retryWorkItem = nil
+        retryAttempt = 0
+        requestedUnitID = adUnitID
+        bannerView.adUnitID = adUnitID
+        bannerView.load(GADRequest())
     }
 
-    final class Coordinator {
-        var lastLoadedUnitID: String?
+    private func scheduleRetry() {
+        guard successfullyLoadedUnitID != adUnitID else { return }
+        guard retryAttempt < 8 else { return }
+        retryWorkItem?.cancel()
+        retryAttempt += 1
+        let delay = min(0.15 * Double(retryAttempt), 1.0)
+        let work = DispatchWorkItem { [weak self] in
+            self?.requestedUnitID = nil
+            self?.loadIfPossible()
+        }
+        retryWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: work)
     }
 
-    private func nearestViewController(from view: UIView) -> UIViewController? {
-        var responder: UIResponder? = view
+    private func resolvedRootViewController() -> UIViewController? {
+        if let rootViewController {
+            return rootViewController
+        }
+        var responder: UIResponder? = self
         while let current = responder {
             if let viewController = current as? UIViewController {
                 return viewController
             }
             responder = current.next
         }
-        return nil
+        return UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first { $0.isKeyWindow }?
+            .rootViewController
+    }
+
+    // MARK: - GADBannerViewDelegate
+
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        successfullyLoadedUnitID = bannerView.adUnitID
+        requestedUnitID = bannerView.adUnitID
+        retryWorkItem?.cancel()
+        retryWorkItem = nil
+        retryAttempt = 0
+    }
+
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        requestedUnitID = nil
+        scheduleRetry()
     }
 }
 
