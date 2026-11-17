@@ -68,13 +68,18 @@ platform :ios do
     build_app(
       workspace: WORKSPACE,
       scheme: SCHEME,
-      export_method: "app-store",
+      export_method: "app-store-connect",
       clean: true,
       output_directory: "./build",
       output_name: IPA_NAME,
       xcodebuild_formatter: "",
+      skip_profile_detection: true,
       xcargs: "-allowProvisioningUpdates",
-      export_xcargs: "-allowProvisioningUpdates"
+      export_xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        signingStyle: "automatic",
+        teamID: "56NQ7Z9L75"
+      }
     )
     ipa = File.expand_path("./build/#{IPA_NAME}", File.expand_path("..", __dir__))
     upload_ipa_via_altool(ipa)
@@ -98,11 +103,14 @@ platform :ios do
     UI.user_error!("App not found") unless app
 
     store_version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
-    UI.user_error!("No editable App Store version") unless store_version
-    if store_version.version_string != version
+    if store_version.nil?
+      UI.message("Creating App Store version #{version}")
+      store_version = app.create_version!(platform: Spaceship::ConnectAPI::Platform::IOS, version_string: version)
+    elsif store_version.version_string != version
       store_version.update(attributes: { versionString: version })
       store_version = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
     end
+    UI.user_error!("No editable App Store version") unless store_version
 
     localizations = store_version.get_app_store_version_localizations
     en = localizations.find { |l| l.locale == "en-US" } || localizations.first
