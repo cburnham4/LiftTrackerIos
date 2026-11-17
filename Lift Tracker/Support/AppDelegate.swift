@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAnalytics
 import FirebaseDatabase
 import GoogleMobileAds
 import GoogleSignIn
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        Analytics.setAnalyticsCollectionEnabled(true)
         guard FirebaseApp.app() != nil else {
             assertionFailure("FirebaseApp.configure() did not create the default app")
             return false
