@@ -28,7 +28,7 @@ enum AppStoreReviewPrompt {
     }
 
     /// Call after a user-visible success (e.g. a set saved). May present the review preask.
-    static func recordSuccessfulActionAndMaybeRequest(from viewController: UIViewController) {
+    static func recordSuccessfulActionAndMaybeRequest(from _: UIViewController) {
         let defaults = UserDefaults.standard
         let actionCount = defaults.integer(forKey: successfulActionCountKey) + 1
         defaults.set(actionCount, forKey: successfulActionCountKey)
@@ -48,21 +48,23 @@ enum AppStoreReviewPrompt {
         // Mark this version before presenting so we don't stack alerts on rapid successes.
         defaults.set(currentVersion, forKey: lastPromptedVersionKey)
 
+        // Delay, then present from whatever is topmost — the caller may have navigated away by then.
         DispatchQueue.main.asyncAfter(deadline: .now() + requestDelay) {
-            presentEnjoymentPreask(
-                from: viewController,
-                openCount: openCount,
-                actionCount: actionCount
-            )
+            presentEnjoymentPreask(openCount: openCount, actionCount: actionCount)
         }
     }
 
-    private static func presentEnjoymentPreask(
-        from viewController: UIViewController,
-        openCount: Int,
-        actionCount: Int
-    ) {
-        guard viewController.presentedViewController == nil else {
+    private static func presentEnjoymentPreask(openCount: Int, actionCount: Int) {
+        guard let presenter = topViewController() else {
+            Analytics.logEvent("review_prompt_skipped", parameters: [
+                "reason": "not_in_window_hierarchy",
+                "open_count": openCount as NSNumber,
+                "action_count": actionCount as NSNumber
+            ])
+            return
+        }
+
+        guard presenter.presentedViewController == nil else {
             Analytics.logEvent("review_prompt_skipped", parameters: [
                 "reason": "presenter_busy",
                 "open_count": openCount as NSNumber,
@@ -92,9 +94,34 @@ enum AppStoreReviewPrompt {
                 "open_count": openCount as NSNumber,
                 "action_count": actionCount as NSNumber
             ])
-            requestSystemReview(from: viewController, openCount: openCount, actionCount: actionCount)
+            requestSystemReview(from: presenter, openCount: openCount, actionCount: actionCount)
         })
-        viewController.present(alert, animated: true)
+        presenter.present(alert, animated: true)
+    }
+
+    /// Topmost visible view controller in the foreground key window.
+    private static func topViewController() -> UIViewController? {
+        let scene = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first(where: { $0.activationState == .foregroundActive })
+            ?? UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }.first
+        let window = scene?.windows.first(where: \.isKeyWindow) ?? scene?.windows.first
+        guard let root = window?.rootViewController else { return nil }
+        return topMost(from: root)
+    }
+
+    private static func topMost(from root: UIViewController) -> UIViewController {
+        if let presented = root.presentedViewController {
+            return topMost(from: presented)
+        }
+        if let nav = root as? UINavigationController {
+            return topMost(from: nav.visibleViewController ?? nav)
+        }
+        if let tab = root as? UITabBarController {
+            return topMost(from: tab.selectedViewController ?? tab)
+        }
+        return root
     }
 
     private static func requestSystemReview(

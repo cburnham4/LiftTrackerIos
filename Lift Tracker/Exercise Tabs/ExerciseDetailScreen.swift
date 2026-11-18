@@ -160,9 +160,7 @@ final class ExerciseDetailModel: ObservableObject {
                 case .failure:
                     self.presentAlert(title: "Request Failed", message: "Exercise Sets were not able to be saved")
                 case .success:
-                    if let presenter = self.presentingViewController {
-                        AppStoreReviewPrompt.recordSuccessfulActionAndMaybeRequest(from: presenter)
-                    }
+                    AppStoreReviewPrompt.recordSuccessfulActionAndMaybeRequest(from: self)
                     self.refreshPastAndGraph()
                 }
             }
